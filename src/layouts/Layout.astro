@@ -1,0 +1,37 @@
+---
+import '@styles/main.scss';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Astro description" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+	</head>
+	<body>
+		<slot />
+
+		<footer class="u-container u-flex u-justify-between u-py-fluid-xs">
+			<div>
+				&copy;{new Date().getFullYear()}
+			</div>
+
+			 <nav class="u-flex u-gap-gutter">
+				<a href="/">Index</a>
+				<a href="/about">About</a>
+			 </nav>
+		</footer>
+	</body>
+</html>
+
+<script src="../scripts/app.ts"></script>
