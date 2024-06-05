@@ -1,47 +1,47 @@
-import { toDash } from '@scripts/utils/string'
-import SwupHeadPlugin from '@swup/head-plugin'
-import SwupPreloadPlugin from '@swup/preload-plugin'
-import SwupScriptsPlugin from '@swup/scripts-plugin'
-import Swup from 'swup'
-import { Scroll } from './Scroll'
+import { toDash } from '@scripts/utils/string';
+import SwupHeadPlugin from '@swup/head-plugin';
+import SwupPreloadPlugin from '@swup/preload-plugin';
+import SwupScriptsPlugin from '@swup/scripts-plugin';
+import Swup from 'swup';
+import { Scroll } from './Scroll';
 
 export class Transitions {
-	static readonly READY_CLASS = 'is-ready'
-	static readonly TRANSITION_CLASS = 'is-transitioning'
+	static readonly READY_CLASS = 'is-ready';
+	static readonly TRANSITION_CLASS = 'is-transitioning';
 
-	private onVisitStartBind: any
-	private onContentReplaceBind: any
-	private beforeContentScrollBind: any
-	private onContentScrollBind: any
-	private onAnimationInEndBind: any
-	private onAnimationOutStartBind: any
+	private onVisitStartBind: any;
+	private onContentReplaceBind: any;
+	private beforeContentScrollBind: any;
+	private onContentScrollBind: any;
+	private onAnimationInEndBind: any;
+	private onAnimationOutStartBind: any;
 
-	private swup: Swup | undefined
+	private swup: Swup | undefined;
 
 	constructor() {
-		this.onVisitStartBind = this.onVisitStart.bind(this)
-		this.onContentReplaceBind = this.onContentReplace.bind(this)
-		this.beforeContentScrollBind = this.beforeContentScroll.bind(this)
-		this.onContentScrollBind = this.onContentScroll.bind(this)
-		this.onAnimationInEndBind = this.onAnimationInEnd.bind(this)
-		this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this)
+		this.onVisitStartBind = this.onVisitStart.bind(this);
+		this.onContentReplaceBind = this.onContentReplace.bind(this);
+		this.beforeContentScrollBind = this.beforeContentScroll.bind(this);
+		this.onContentScrollBind = this.onContentScroll.bind(this);
+		this.onAnimationInEndBind = this.onAnimationInEnd.bind(this);
+		this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this);
 
-		this.init()
+		this.init();
 	}
 
 	// =============================================================================
 	// Lifecycle
 	// =============================================================================
 	init() {
-		this.initSwup()
+		this.initSwup();
 
 		requestAnimationFrame(() => {
-			document.documentElement.classList.add(Transitions.READY_CLASS)
-		})
+			document.documentElement.classList.add(Transitions.READY_CLASS);
+		});
 	}
 
 	destroy() {
-		this.swup?.destroy()
+		this.swup?.destroy();
 	}
 
 	// =============================================================================
@@ -60,23 +60,23 @@ export class Transitions {
 				}),
 				new SwupScriptsPlugin()
 			]
-		})
+		});
 
-		this.swup.hooks.on('visit:start', this.onVisitStartBind)
-		this.swup.hooks.on('content:replace', this.onContentReplaceBind)
-		this.swup.hooks.before('content:scroll', this.beforeContentScrollBind)
-		this.swup.hooks.on('content:scroll', this.onContentScrollBind)
-		this.swup.hooks.on('animation:in:end', this.onAnimationInEndBind)
-		this.swup.hooks.on('animation:out:start', this.onAnimationOutStartBind)
+		this.swup.hooks.on('visit:start', this.onVisitStartBind);
+		this.swup.hooks.on('content:replace', this.onContentReplaceBind);
+		this.swup.hooks.before('content:scroll', this.beforeContentScrollBind);
+		this.swup.hooks.on('content:scroll', this.onContentScrollBind);
+		this.swup.hooks.on('animation:in:end', this.onAnimationInEndBind);
+		this.swup.hooks.on('animation:out:start', this.onAnimationOutStartBind);
 
 		this.swup.hooks.on('fetch:error', (e) => {
-			console.log('fetch:error:', e)
-			debugger
-		})
+			console.log('fetch:error:', e);
+			debugger;
+		});
 		this.swup.hooks.on('fetch:timeout', (e) => {
-			console.log('fetch:timeout:', e)
-			debugger
-		})
+			console.log('fetch:timeout:', e);
+			debugger;
+		});
 	}
 
 	/**
@@ -85,17 +85,17 @@ export class Transitions {
 	 * @param visit
 	 */
 	updateDocumentAttributes(visit: VisitType) {
-		if (visit.fragmentVisit) return
+		if (visit.fragmentVisit) return;
 
-		const parser = new DOMParser()
-		const nextDOM = parser.parseFromString(visit.to.html, 'text/html')
+		const parser = new DOMParser();
+		const nextDOM = parser.parseFromString(visit.to.html, 'text/html');
 		const newDataset = {
 			...nextDOM.querySelector('html')?.dataset
-		}
+		};
 
 		Object.entries(newDataset).forEach(([key, val]) => {
-			document.documentElement.setAttribute(`data-${toDash(key)}`, val ?? '')
-		})
+			document.documentElement.setAttribute(`data-${toDash(key)}`, val ?? '');
+		});
 	}
 
 	// =============================================================================
@@ -110,8 +110,8 @@ export class Transitions {
 	 * @param visit
 	 */
 	onVisitStart(visit: VisitType) {
-		document.documentElement.classList.add(Transitions.TRANSITION_CLASS)
-		document.documentElement.classList.remove(Transitions.READY_CLASS)
+		document.documentElement.classList.add(Transitions.TRANSITION_CLASS);
+		document.documentElement.classList.remove(Transitions.READY_CLASS);
 	}
 
 	/**
@@ -122,7 +122,7 @@ export class Transitions {
 	 * @param visit
 	 */
 	onContentReplace(visit: VisitType) {
-		this.updateDocumentAttributes(visit)
+		this.updateDocumentAttributes(visit);
 	}
 
 	/**
@@ -134,7 +134,7 @@ export class Transitions {
 	 */
 	beforeContentScroll(visit: VisitType) {
 		// Stopping locomotive-scroll before the scroll gets updated
-		Scroll.stop()
+		Scroll.stop();
 	}
 
 	/**
@@ -146,7 +146,7 @@ export class Transitions {
 	 */
 	onContentScroll(visit: VisitType) {
 		// Resuming locomotive-scroll after the scroll been updated
-		Scroll.start()
+		Scroll.start();
 	}
 
 	/**
@@ -166,7 +166,7 @@ export class Transitions {
 	 * @param visit
 	 */
 	onAnimationInEnd(visit: VisitType) {
-		document.documentElement.classList.remove(Transitions.TRANSITION_CLASS)
-		document.documentElement.classList.add(Transitions.READY_CLASS)
+		document.documentElement.classList.remove(Transitions.TRANSITION_CLASS);
+		document.documentElement.classList.add(Transitions.READY_CLASS);
 	}
 }

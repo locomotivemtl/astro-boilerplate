@@ -1,44 +1,44 @@
-import LocomotiveScroll from 'node_modules/locomotive-scroll'
+import LocomotiveScroll from 'node_modules/locomotive-scroll';
 
 import type {
 	ILenisScrollToOptions,
 	lenisTargetScrollTo
-} from 'node_modules/locomotive-scroll/dist/types/types'
+} from 'node_modules/locomotive-scroll/dist/types/types';
 
 export class Scroll {
-	static locomotiveScroll: LocomotiveScroll
+	static locomotiveScroll: LocomotiveScroll;
 
 	// =============================================================================
 	// Lifecycle
 	// =============================================================================
 	static init() {
-		this.locomotiveScroll = new LocomotiveScroll({})
+		this.locomotiveScroll = new LocomotiveScroll({});
 	}
 
 	static destroy() {
-		this.locomotiveScroll?.destroy()
+		this.locomotiveScroll?.destroy();
 	}
 
 	// =============================================================================
 	// Methods
 	// =============================================================================
 	static start() {
-		this.locomotiveScroll?.start()
+		this.locomotiveScroll?.start();
 	}
 
 	static stop() {
-		this.locomotiveScroll?.stop()
+		this.locomotiveScroll?.stop();
 	}
 
 	static addScrollElements(container: HTMLElement) {
-		this.locomotiveScroll?.addScrollElements(container)
+		this.locomotiveScroll?.addScrollElements(container);
 	}
 
 	static removeScrollElements(container: HTMLElement) {
-		this.locomotiveScroll?.removeScrollElements(container)
+		this.locomotiveScroll?.removeScrollElements(container);
 	}
 
 	static scrollTo(target: lenisTargetScrollTo, options?: ILenisScrollToOptions) {
-		this.locomotiveScroll?.scrollTo(target, options)
+		this.locomotiveScroll?.scrollTo(target, options);
 	}
 }

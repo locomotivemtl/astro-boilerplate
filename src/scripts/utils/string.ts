@@ -2,6 +2,6 @@ const toDash = (str: string) =>
 	str
 		.split(/(?=[A-Z])/)
 		.join('-')
-		.toLowerCase()
+		.toLowerCase();
 
-export { toDash }
+export { toDash };

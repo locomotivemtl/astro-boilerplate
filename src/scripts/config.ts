@@ -5,6 +5,6 @@ const config: Config = Object.freeze({
 		maxViewport: 1440,
 		rootSize: 16
 	}
-})
+});
 
-export default config
+export default config;
