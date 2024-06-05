@@ -2,47 +2,47 @@
 // MIXINS / HEADINGS
 // ==========================================================================
 @mixin -heading {
-    font-style: normal;
+	font-style: normal;
 }
 
 @mixin -h1 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h1;
-    line-height: 0.85;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h1;
+	line-height: 0.85;
 }
 
 @mixin -h2 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h2;
-    line-height: 1;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h2;
+	line-height: 1;
 }
 
 @mixin -h3 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h3;
-    line-height: 1;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h3;
+	line-height: 1;
 }
 
 @mixin -h4 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h4;
-    line-height: 1;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h4;
+	line-height: 1;
 }
 
 @mixin -h5 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h5;
-    line-height: 1;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h5;
+	line-height: 1;
 }
 
 @mixin -h6 {
-    @include -heading;
-    @apply u-font-serif;
-    @apply u-text-h6;
-    line-height: 1;
+	@include -heading;
+	@apply u-font-serif;
+	@apply u-text-h6;
+	line-height: 1;
 }

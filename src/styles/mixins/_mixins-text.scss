@@ -2,16 +2,16 @@
 // MIXINS / TEXTS
 // ==========================================================================
 @mixin -text {
-    font-style: normal;
+	font-style: normal;
 }
 
 @mixin -body {
-    @include -text;
-    font-weight: normal;
-    line-height: 1.35em;
+	@include -text;
+	font-weight: normal;
+	line-height: 1.35em;
 }
 
 @mixin -subtitle {
-    @include -text;
-    text-transform: uppercase;
+	@include -text;
+	text-transform: uppercase;
 }
