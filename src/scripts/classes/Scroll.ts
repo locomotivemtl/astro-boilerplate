@@ -8,7 +8,6 @@ import type {
 export class Scroll {
 	static locomotiveScroll: LocomotiveScroll
 	static isInit = false
-	static isHeaderHidden = false
 
 	// =============================================================================
 	// Lifecycle
@@ -19,7 +18,6 @@ export class Scroll {
 
 	static destroy() {
 		this.isInit = false
-		this.isHeaderHidden = false
 		this.locomotiveScroll?.destroy()
 	}
 
