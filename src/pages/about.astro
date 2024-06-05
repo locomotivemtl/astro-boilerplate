@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Image from '@components/Image/Image.astro';
 ---
 
 <Layout title="About">
@@ -8,6 +9,14 @@ import Layout from '../layouts/Layout.astro';
 	</header>
 
 	<div class="u-container u-mt-fluid-xl">
+		<div>
+			<Image
+				src="http://picsum.photos/800/600?v=1"
+				alt="Placeholder alt"
+				caption="Placeholder caption"
+				class="test"
+			/>
+		</div>
 		<div class="u-grid u-grid-cols-12 u-gap-gutter">
 			<div class="u-col-span-full u-text-body md:u-col-span-6">
 				<p>

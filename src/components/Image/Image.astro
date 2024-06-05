@@ -1,0 +1,53 @@
+---
+import { Image as AstroImage } from "astro:assets";
+
+export interface Props {
+    src: string;
+    alt?: string;
+    width?: string;
+    height?: string;
+    tag?: 'div' | 'figure';
+    caption?: string;
+    class?: string;
+    sizes?: string;
+    widths?: number[];
+    loading?: 'eager' | 'lazy';
+};
+
+const { 
+    src, 
+    alt = '',
+    tag = 'div',
+    width,
+    height,
+    caption,
+    class: propsClass,
+    widths,
+    sizes,
+    loading = 'lazy',
+} = Astro.props;
+
+const Tag = tag === 'figure' ? 'figure' : 'div';
+const CaptionTag = tag === 'figure' ? 'figcaption' : 'div';
+
+const onLoad = loading === "lazy" ? `this.closest('.c-image')?.classList?.add('is-loaded');` : undefined;
+---
+
+<Tag class:list={['c-image', propsClass, loading === 'lazy' && '-lazy-load']}>
+    <div class="c-image_inner">
+        <AstroImage
+            src={src}
+            inferSize={true}
+            widths={widths}
+            sizes={sizes}
+            alt={alt}
+            onload={onLoad}
+        />
+    </div>
+
+    {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
+</Tag>
+
+<script>
+
+</script>
