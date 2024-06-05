@@ -3,25 +3,26 @@ import SwupHeadPlugin from '@swup/head-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupScriptsPlugin from '@swup/scripts-plugin';
 import Swup from 'swup'; 
+import { Scroll } from './Scroll';
 
 export class Transitions {
     static readonly READY_CLASS = 'is-ready';
     static readonly TRANSITION_CLASS = 'is-transitioning';
-    static readonly HIDE_HEADER_CLASS = 'is-header-hidden';
-    static readonly SEAMLESS_CLASS = 'is-seamless';
 
     private onVisitStartBind: any;
-    private beforeContentReplaceBind: any;
     private onContentReplaceBind: any;
+    private beforeContentScrollBind: any;
+    private onContentScrollBind: any;
     private onAnimationInEndBind: any;
     private onAnimationOutStartBind: any;
 
     private swup: Swup | undefined;
 
     constructor() {
-        // Binding
         this.onVisitStartBind = this.onVisitStart.bind(this);
         this.onContentReplaceBind = this.onContentReplace.bind(this);
+        this.beforeContentScrollBind = this.beforeContentScroll.bind(this);
+        this.onContentScrollBind = this.onContentScroll.bind(this);
         this.onAnimationInEndBind = this.onAnimationInEnd.bind(this);
         this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this);        
 
@@ -35,8 +36,6 @@ export class Transitions {
         this.initSwup();
 
         requestAnimationFrame(() => {
-            console.log('Transitions ready');
-            
             document.documentElement.classList.add(Transitions.READY_CLASS);
         });
     }
@@ -65,6 +64,8 @@ export class Transitions {
 
         this.swup.hooks.on('visit:start', this.onVisitStartBind);
         this.swup.hooks.on('content:replace', this.onContentReplaceBind);
+        this.swup.hooks.before('content:scroll', this.beforeContentScrollBind);
+        this.swup.hooks.on('content:scroll', this.onContentScrollBind);
         this.swup.hooks.on('animation:in:end', this.onAnimationInEndBind);
         this.swup.hooks.on('animation:out:start', this.onAnimationOutStartBind);
 
@@ -88,13 +89,12 @@ export class Transitions {
 
         const parser = new DOMParser();
         const nextDOM = parser.parseFromString(visit.to.html, 'text/html');
-        const newDataset = Object.assign(
-            {},
-            nextDOM.querySelector('html')?.dataset
-        );
+        const newDataset = {
+            ...nextDOM.querySelector('html')?.dataset
+        };
 
         Object.entries(newDataset).forEach(([key, val]) => {
-            document.documentElement.setAttribute(`data-${toDash(key)}`, val || '');
+            document.documentElement.setAttribute(`data-${toDash(key)}`, val ?? '');
         });
     }
 
@@ -124,6 +124,30 @@ export class Transitions {
     onContentReplace(visit: VisitType) {
         this.updateDocumentAttributes(visit);
     }
+
+    /**
+     * On before:content:scroll
+     * Before the scroll position is reset after replacing the content.
+     * 
+     * @see https://swup.js.org/hooks/#content-scroll
+     * @param visit
+     */
+    beforeContentScroll(visit: VisitType) {
+        // Stopping locomotive-scroll before the scroll gets updated
+        Scroll.stop();
+    }
+
+    /**
+     * On content:scroll
+     * The scroll position is reset after replacing the content.
+     * 
+     * @see https://swup.js.org/hooks/#content-scroll
+     * @param visit
+     */
+    onContentScroll(visit: VisitType) {
+        // Resuming locomotive-scroll after the scroll been updated
+        Scroll.start();
+    }
     
     /**
      * On animation:out:start
@@ -145,7 +169,7 @@ export class Transitions {
     onAnimationInEnd(visit: VisitType) {        
         document.documentElement.classList.remove(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.add(Transitions.READY_CLASS);
-        document.documentElement.classList.remove(Transitions.HIDE_HEADER_CLASS);
-        document.documentElement.classList.remove(Transitions.SEAMLESS_CLASS);
+
+        Scroll.start();
     }
 }

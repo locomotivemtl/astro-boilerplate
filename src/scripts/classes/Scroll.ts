@@ -26,6 +26,10 @@ export class Scroll {
     // =============================================================================
     // Methods
     // =============================================================================
+    static start() {
+        this.locomotiveScroll?.start();
+    }
+
     static stop() {
         this.locomotiveScroll?.stop();
     }

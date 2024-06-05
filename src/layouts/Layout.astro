@@ -19,7 +19,11 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
-		<slot />
+		<main role="main" id="swup" class="transition-fade">
+			<div id="content">
+				<slot />
+			</div>
+		</main>
 
 		<footer class="u-container u-flex u-justify-between u-py-fluid-xs">
 			<div>
