@@ -12,6 +12,8 @@
 * Uses [Sass] for a feature rich superset of CSS.
 * Uses [Tailwind CSS] for a sane and scalable CSS architecture.
 * Uses [Locomotive Scroll] for smooth scrolling with parallax effects.
+* Uses [Swup] for versatile and extensible page transition.
+* Uses [Prettier] for a formatted and easy to maintain codebase.
 
 ## Getting started
 
@@ -89,17 +91,30 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `npm run format`          | Format files using prettier                      |
+
+## @todo
+
+- [ ] Integrate nanostores to manage the state of global classes
+- [ ] Add an `Image` component that uses `Image` from `astro:assets`, that support native lazy-loading with a callback that toggles a CSS class.
+- [ ] Add a basic accordion component
+- [ ] Add a basic WYSIWYG component
+- [ ] Add a linter
 
 ## Documentation
 
 * [Astro]
 * [Locomotive Scroll]
 * [Tailwind CSS]
+* [Swup]
+* [Prettier]
 
 [Astro]:             https://docs.astro.build/en/getting-started/
 [Tailwind CSS]:      https://tailwindcss.com/docs/installation
 [Locomotive Scroll]: https://scroll.locomotive.ca/docs
 [Sass]:              https://sass-lang.com/
+[Swup]:              https://swup.js.org/getting-started/
 [Node]:              https://nodejs.org/
 [NPM]:               https://npmjs.com/
 [NVM]:               https://github.com/nvm-sh/nvm
+[Prettier]:          https://prettier.io/
