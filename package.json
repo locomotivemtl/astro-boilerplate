@@ -21,7 +21,8 @@
         "start": "astro preferences disable devToolbar && astro dev --host",
         "build": "astro check && astro build",
         "preview": "astro preview",
-        "astro": "astro"
+        "astro": "astro",
+        "format": "prettier --write \"src/**/*.{astro,js,ts,css,scss}\""
     },
     "dependencies": {
         "@astrojs/check": "^0.7.0",
@@ -34,5 +35,10 @@
         "sass": "^1.77.4",
         "swup": "^4.6.1",
         "typescript": "^5.4.5"
+    },
+    "devDependencies": {
+        "prettier": "^3.3.1",
+        "prettier-plugin-astro": "^0.14.0",
+        "prettier-plugin-tailwindcss": "^0.6.1"
     }
 }
