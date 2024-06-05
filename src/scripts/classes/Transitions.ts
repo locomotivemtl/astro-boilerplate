@@ -168,7 +168,5 @@ export class Transitions {
 	onAnimationInEnd(visit: VisitType) {
 		document.documentElement.classList.remove(Transitions.TRANSITION_CLASS)
 		document.documentElement.classList.add(Transitions.READY_CLASS)
-
-		Scroll.start()
 	}
 }
