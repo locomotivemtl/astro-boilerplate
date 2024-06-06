@@ -8,13 +8,25 @@ import Image from '@components/Image/Image.astro';
 		<h1 class="u-heading-h1">About</h1>
 	</header>
 
+	<div class="w-full u-mt-fluid-xl u-h-[20vh] u-bg-black"></div>
+
 	<div class="u-container u-mt-fluid-xl">
 		<div>
 			<Image
-				src="http://picsum.photos/800/600?v=1"
+				src="https://fastly.picsum.photos/id/817/800/600.jpg?hmac=aEWNKHGSsc5B3rzhMQTnvGnxEpvJhCnD9m-e1qIZaUQ"
 				alt="Placeholder alt"
 				caption="Placeholder caption"
-				class="test"
+				loading='eager'
+			/>
+		</div>
+		<div>
+			<Image
+				src="https://fastly.picsum.photos/id/868/800/600.jpg?hmac=k_fK14cukIWaWI6NRAjnsPdCd8S33sdVR7-DbD--Ynk"
+				alt="Placeholder alt"
+				caption="Placeholder caption"
+				loading='lazy'
+				width='500'
+				height='100'
 			/>
 		</div>
 		<div class="u-grid u-grid-cols-12 u-gap-gutter">

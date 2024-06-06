@@ -22,25 +22,39 @@ const {
     height,
     caption,
     class: propsClass,
-    widths,
-    sizes,
+    widths = [720, 1440, 1800],
+    sizes = '(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px',
     loading = 'lazy',
 } = Astro.props;
 
+// Set the tag based on the prop
 const Tag = tag === 'figure' ? 'figure' : 'div';
 const CaptionTag = tag === 'figure' ? 'figcaption' : 'div';
 
-const onLoad = loading === "lazy" ? `this.closest('.c-image')?.classList?.add('is-loaded');` : undefined;
+// Set the onload event based on the loading prop
+const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');console.log('loaded');`;
+
+const classes = [
+    'c-image', 
+    propsClass, 
+    loading === 'lazy' && '-lazy-load',
+    width && height && '-cover',
+];
 ---
 
-<Tag class:list={['c-image', propsClass, loading === 'lazy' && '-lazy-load']}>
+<Tag 
+    class:list={classes}
+    style={{ '--width': width, '--height': height }}
+>
     <div class="c-image_inner">
         <AstroImage
+            class="c-image_img"
             src={src}
             inferSize={true}
             widths={widths}
             sizes={sizes}
             alt={alt}
+            loading={loading}
             onload={onLoad}
         />
     </div>
@@ -48,6 +62,6 @@ const onLoad = loading === "lazy" ? `this.closest('.c-image')?.classList?.add('i
     {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
 </Tag>
 
-<script>
-
-</script>
+<style is:global>
+    @import 'Image.scss';
+</style>
