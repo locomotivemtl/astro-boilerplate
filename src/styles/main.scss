@@ -23,13 +23,13 @@
 // Fonts imports
 // ==========================================================================
 @layer base {
-	// @font-face {
-	//     font-family: 'IBM Plex Mono';
-	//     src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
-	//     font-weight: normal;
-	//     font-style: normal;
-	//     font-display: swap;
-	// }
+    // @font-face {
+    //     font-family: 'IBM Plex Mono';
+    //     src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+    //     font-weight: normal;
+    //     font-style: normal;
+    //     font-display: swap;
+    // }
 }
 
 // ==========================================================================
@@ -52,31 +52,31 @@
 // Global styles
 // ==========================================================================
 :root {
-	--color-primary: theme('colors.black');
-	--color-secondary: theme('colors.white');
+    --color-primary: theme('colors.black');
+    --color-secondary: theme('colors.white');
 }
 
 html {
-	font-family: theme('fontFamily.sans');
+    font-family: theme('fontFamily.sans');
 }
 
 body {
-	background: var(--color-secondary);
-	color: var(--color-primary);
+    background: var(--color-secondary);
+    color: var(--color-primary);
 }
 
 ::selection {
-	background-color: var(--color-primary);
-	color: var(--color-secondary);
-	text-shadow: none;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
+    text-shadow: none;
 }
 
 /* Define a transition duration during page visits */
 html.is-changing .transition-fade {
-	transition: opacity 0.25s;
-	opacity: 1;
+    transition: opacity 0.25s;
+    opacity: 1;
 }
 /* Define the styles for the unloaded pages */
 html.is-animating .transition-fade {
-	opacity: 0;
+    opacity: 0;
 }

@@ -2,17 +2,17 @@
 // MIXINS / CONTAINERS
 // ==========================================================================
 @mixin -container-commons {
-	--container-margin: theme('margin.containerMarginMobile');
-	margin-right: auto;
-	margin-left: auto;
+    --container-margin: theme('margin.containerMarginMobile');
+    margin-right: auto;
+    margin-left: auto;
 
-	@screen sm {
-		--container-margin: theme('margin.containerMargin');
-	}
+    @screen sm {
+        --container-margin: theme('margin.containerMargin');
+    }
 }
 
 @mixin -container {
-	@include -container-commons;
-	padding-left: var(--container-margin);
-	padding-right: var(--container-margin);
+    @include -container-commons;
+    padding-left: var(--container-margin);
+    padding-right: var(--container-margin);
 }

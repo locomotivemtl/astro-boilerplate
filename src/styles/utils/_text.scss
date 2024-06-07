@@ -2,11 +2,11 @@
 // Utilities / Texts
 // ==========================================================================
 @layer utilities {
-	.u-text-body {
-		@include -body;
-	}
+    .u-text-body {
+        @include -body;
+    }
 
-	.u-text-subtitle {
-		@include -subtitle;
-	}
+    .u-text-subtitle {
+        @include -subtitle;
+    }
 }

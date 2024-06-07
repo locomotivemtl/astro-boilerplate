@@ -1,5 +1,5 @@
 ---
-import { Image as AstroImage } from "astro:assets";
+import { Image as AstroImage } from 'astro:assets';
 
 export interface Props {
     src: string;
@@ -12,10 +12,10 @@ export interface Props {
     sizes?: string;
     widths?: number[];
     loading?: 'eager' | 'lazy';
-};
+}
 
-const { 
-    src, 
+const {
+    src,
     alt = '',
     tag = 'div',
     width,
@@ -24,7 +24,7 @@ const {
     class: propsClass,
     widths = [720, 1440, 1800],
     sizes = '(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px',
-    loading = 'lazy',
+    loading = 'lazy'
 } = Astro.props;
 
 // Set the tag based on the prop
@@ -35,17 +35,14 @@ const CaptionTag = tag === 'figure' ? 'figcaption' : 'div';
 const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');console.log('loaded');`;
 
 const classes = [
-    'c-image', 
-    propsClass, 
+    'c-image',
+    propsClass,
     loading === 'lazy' && '-lazy-load',
-    width && height && '-cover',
+    width && height && '-cover'
 ];
 ---
 
-<Tag 
-    class:list={classes}
-    style={{ '--width': width, '--height': height }}
->
+<Tag class:list={classes} style={{ '--width': width, '--height': height }}>
     <div class="c-image_inner">
         <AstroImage
             class="c-image_img"

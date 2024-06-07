@@ -1,5 +1,4 @@
 .c-image {
-
 }
 
 .c-image_inner {
@@ -13,19 +12,21 @@
 
     .c-image.-cover & {
         object-fit: cover;
-        aspect-ratio: var(--width)/var(--height);
+        aspect-ratio: var(--width) / var(--height);
     }
 
-    &[loading="lazy"] {
+    &[loading='lazy'] {
         .c-image.-lazy-load & {
             opacity: 0;
             transform: scale(var(1.1), var(1.1));
-            transition: transform theme('transitionDuration.slow') theme('transitionTimingFunction.default'), opacity theme('transitionDuration.slow') theme('transitionTimingFunction.default');
+            transition:
+                transform theme('transitionDuration.slow') theme('transitionTimingFunction.default'),
+                opacity theme('transitionDuration.slow') theme('transitionTimingFunction.default');
         }
 
         .c-image.is-loaded & {
             opacity: 1;
-            transform: scale(1.0, 1.0);
+            transform: scale(1, 1);
         }
     }
 }

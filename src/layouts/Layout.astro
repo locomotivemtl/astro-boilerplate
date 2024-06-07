@@ -2,7 +2,7 @@
 import '@styles/main.scss';
 
 interface Props {
-	title: string;
+    title: string;
 }
 
 const { title } = Astro.props;
@@ -10,47 +10,47 @@ const { title } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Astro description" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="generator" content={Astro.generator} />
+        <title>{title}</title>
 
-		<!-- <link
+        <!-- <link
 			rel="preload"
 			href="/fonts/IBMPlexMono-Regular.woff2"
 			as="font"
 			type="font/woff2"
 			crossorigin
 		/> -->
-	</head>
-	<body>
-		<div class="u-container">
-			<nav class="u-flex u-gap-gutter u-py-fluid-xs">
-				<a href="/">Index</a>
-				<a href="/about">About</a>
-			</nav>
-		</div>
+    </head>
+    <body>
+        <div class="u-container">
+            <nav class="u-flex u-gap-gutter u-py-fluid-xs">
+                <a href="/">Index</a>
+                <a href="/about">About</a>
+            </nav>
+        </div>
 
-		<main role="main" id="swup" class="transition-fade">
-			<div id="content">
-				<slot />
-			</div>
-		</main>
+        <main role="main" id="swup" class="transition-fade">
+            <div id="content">
+                <slot />
+            </div>
+        </main>
 
-		<footer class="u-container u-flex u-justify-between u-py-fluid-xs">
-			<div>
-				&copy;{new Date().getFullYear()}
-			</div>
+        <footer class="u-container u-flex u-justify-between u-py-fluid-xs">
+            <div>
+                &copy;{new Date().getFullYear()}
+            </div>
 
-			<nav class="u-flex u-gap-gutter">
-				<a href="/">Index</a>
-				<a href="/about">About</a>
-			</nav>
-		</footer>
-	</body>
+            <nav class="u-flex u-gap-gutter">
+                <a href="/">Index</a>
+                <a href="/about">About</a>
+            </nav>
+        </footer>
+    </body>
 </html>
 
 <script src="../scripts/app.ts"></script>
