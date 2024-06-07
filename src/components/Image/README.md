@@ -11,9 +11,9 @@ The Image component provides a flexible and powerful way to manage images in you
 | `width`    | `string`                       | No       | N/A                                                        | The width of the image.                               |
 | `height`   | `string`                       | No       | N/A                                                        | The height of the image.                              |
 | `tag`      | `'div' \| 'figure'`            | No       | `'div'`                                                    | HTML tag to wrap the image.                           |
-| `caption`  | `string`                       | No       | N/A                                                        | Caption text for the image. Only applicable if `tag` is `'figure'`. |
+| `caption`  | `string`                       | No       | N/A                                                        | Caption text for the image.                           |
 | `class`    | `string`                       | No       | N/A                                                        | Additional class names to style the component.        |
-| `sizes`    | `string`                       | No       | `'(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px'` | Sizes attribute for responsive images.                |
+| `sizes`    | `string`                       | No       | `'(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px'` | Sizes attribute for responsive images.          |
 | `widths`   | `number[]`                     | No       | `[720, 1440, 1800]`                                        | Array of widths for responsive images.                |
 | `loading`  | `'eager' \| 'lazy'`            | No       | `'lazy'`                                                   | Image loading strategy.                               |
 
