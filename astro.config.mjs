@@ -9,6 +9,9 @@ export default defineConfig({
             applyBaseStyles: false,
         }),
     ],
+    devToolbar: {
+        enabled: false
+    },
     image: {
         domains: ['locomotive.ca'],
         remotePatterns: [{ protocol: 'https' }],

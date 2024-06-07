@@ -17,8 +17,8 @@
         "homepage": "https://locomotive.ca"
     },
     "scripts": {
-        "dev": "astro preferences disable devToolbar && astro dev --host",
-        "start": "astro preferences disable devToolbar && astro dev --host",
+        "dev": "astro dev --host",
+        "start": "astro dev --host",
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
