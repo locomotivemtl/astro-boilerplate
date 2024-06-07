@@ -1,18 +1,19 @@
 # Image Component
 
-Build on top of Astro's [`<Image />` (`astro:assets`)](https://docs.astro.build/en/guides/images/#image--astroassets), the Image component provides a flexible and powerful way to manage images in your Astro project. With support for various HTML tags, responsive sizes, and lazy loading, it helps ensure your images are optimized and accessible.
 
-## Props
+The Image component extends Astro’s built-in [`<Image />` (`astro:assets`)](https://docs.astro.build/en/guides/images/#image--astroassets) component with sensible defaults and wraps the image in a container with support for captioning.
+
+## Property
 
 | Prop       | Type                           | Required | Default                                                    | Description                                           |
 |------------|--------------------------------|----------|------------------------------------------------------------|-------------------------------------------------------|
-| `src`      | `string`                       | Yes      | N/A                                                        | The source path of the image.                         |
+| `src`      | `string`                       | Yes      | None                                                        | The source path of the image.                         |
 | `alt`      | `string`                       | No       | `''`                                                       | Alternative text for the image.                       |
-| `width`    | `number`                       | No       | N/A                                                        | The width of the image.                               |
-| `height`   | `number`                       | No       | N/A                                                        | The height of the image.                              |
+| `width`    | `number`                       | No       | None                                                        | The width of the image.                               |
+| `height`   | `number`                       | No       | None                                                        | The height of the image.                              |
 | `tag`      | `'div' \| 'figure'`            | No       | `'div'`                                                    | HTML tag to wrap the image.                           |
-| `caption`  | `string`                       | No       | N/A                                                        | Caption text for the image.                           |
-| `class`    | `string`                       | No       | N/A                                                        | Additional class names to style the component.        |
+| `caption`  | `string`                       | No       | None                                                        | Caption text for the image.                           |
+| `class`    | `string`                       | No       | None                                                        | Additional class names to style the component.        |
 | `sizes`    | `string`                       | No       | `'(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px'` | Sizes attribute for responsive images.          |
 | `widths`   | `number[]`                     | No       | `[720, 1440, 1800]`                                        | Array of widths for responsive images.                |
 | `loading`  | `'eager' \| 'lazy'`            | No       | `'lazy'`                                                   | Image loading strategy.                               |
