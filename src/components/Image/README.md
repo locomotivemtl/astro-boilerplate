@@ -1,6 +1,6 @@
 # Image Component
 
-The Image component provides a flexible and powerful way to manage images in your Astro project. With support for various HTML tags, responsive sizes, and lazy loading, it helps ensure your images are optimized and accessible.
+Build on top of Astro's [`<Image />` (`astro:assets`)](https://docs.astro.build/en/guides/images/#image--astroassets), the Image component provides a flexible and powerful way to manage images in your Astro project. With support for various HTML tags, responsive sizes, and lazy loading, it helps ensure your images are optimized and accessible.
 
 ## Props
 
