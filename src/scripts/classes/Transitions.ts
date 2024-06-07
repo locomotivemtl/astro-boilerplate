@@ -10,9 +10,8 @@ export class Transitions {
     static readonly TRANSITION_CLASS = 'is-transitioning';
 
     private onVisitStartBind: any;
+    private beforeContentReplaceBind: any;
     private onContentReplaceBind: any;
-    private beforeContentScrollBind: any;
-    private onContentScrollBind: any;
     private onAnimationInEndBind: any;
     private onAnimationOutStartBind: any;
 
@@ -20,9 +19,8 @@ export class Transitions {
 
     constructor() {
         this.onVisitStartBind = this.onVisitStart.bind(this);
+        this.beforeContentReplaceBind = this.beforeContentReplace.bind(this);
         this.onContentReplaceBind = this.onContentReplace.bind(this);
-        this.beforeContentScrollBind = this.beforeContentScroll.bind(this);
-        this.onContentScrollBind = this.onContentScroll.bind(this);
         this.onAnimationInEndBind = this.onAnimationInEnd.bind(this);
         this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this);
 
@@ -63,9 +61,8 @@ export class Transitions {
         });
 
         this.swup.hooks.on('visit:start', this.onVisitStartBind);
+        this.swup.hooks.before('content:replace', this.beforeContentReplaceBind);
         this.swup.hooks.on('content:replace', this.onContentReplaceBind);
-        this.swup.hooks.before('content:scroll', this.beforeContentScrollBind);
-        this.swup.hooks.on('content:scroll', this.onContentScrollBind);
         this.swup.hooks.on('animation:in:end', this.onAnimationInEndBind);
         this.swup.hooks.on('animation:out:start', this.onAnimationOutStartBind);
 
@@ -115,6 +112,17 @@ export class Transitions {
     }
 
     /**
+     * On before:content:replace
+     * The old content of the page is replaced by the new content.
+     *
+     * @see https://swup.js.org/hooks/#content-replace
+     * @param visit
+     */
+    beforeContentReplace(visit: VisitType) {
+        Scroll?.destroy();
+    }
+
+    /**
      * On content:replace
      * The old content of the page is replaced by the new content.
      *
@@ -122,31 +130,8 @@ export class Transitions {
      * @param visit
      */
     onContentReplace(visit: VisitType) {
+        Scroll?.init();
         this.updateDocumentAttributes(visit);
-    }
-
-    /**
-     * On before:content:scroll
-     * Before the scroll position is reset after replacing the content.
-     *
-     * @see https://swup.js.org/hooks/#content-scroll
-     * @param visit
-     */
-    beforeContentScroll(visit: VisitType) {
-        // Stopping locomotive-scroll before the scroll gets updated
-        Scroll.stop();
-    }
-
-    /**
-     * On content:scroll
-     * The scroll position is reset after replacing the content.
-     *
-     * @see https://swup.js.org/hooks/#content-scroll
-     * @param visit
-     */
-    onContentScroll(visit: VisitType) {
-        // Resuming locomotive-scroll after the scroll been updated
-        Scroll.start();
     }
 
     /**
