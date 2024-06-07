@@ -8,8 +8,8 @@ Build on top of Astro's [`<Image />` (`astro:assets`)](https://docs.astro.build/
 |------------|--------------------------------|----------|------------------------------------------------------------|-------------------------------------------------------|
 | `src`      | `string`                       | Yes      | N/A                                                        | The source path of the image.                         |
 | `alt`      | `string`                       | No       | `''`                                                       | Alternative text for the image.                       |
-| `width`    | `string`                       | No       | N/A                                                        | The width of the image.                               |
-| `height`   | `string`                       | No       | N/A                                                        | The height of the image.                              |
+| `width`    | `number`                       | No       | N/A                                                        | The width of the image.                               |
+| `height`   | `number`                       | No       | N/A                                                        | The height of the image.                              |
 | `tag`      | `'div' \| 'figure'`            | No       | `'div'`                                                    | HTML tag to wrap the image.                           |
 | `caption`  | `string`                       | No       | N/A                                                        | Caption text for the image.                           |
 | `class`    | `string`                       | No       | N/A                                                        | Additional class names to style the component.        |

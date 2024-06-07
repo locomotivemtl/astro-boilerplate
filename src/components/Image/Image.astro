@@ -4,8 +4,8 @@ import { Image as AstroImage } from 'astro:assets';
 export interface Props {
     src: string;
     alt?: string;
-    width?: string;
-    height?: string;
+    width?: number;
+    height?: number;
     tag?: 'div' | 'figure';
     caption?: string;
     class?: string;
@@ -51,6 +51,8 @@ const classes = [
             inferSize={true}
             widths={widths}
             sizes={sizes}
+            width={width}
+            height={height}
             alt={alt}
             loading={loading}
             onload={onLoad}
