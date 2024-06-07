@@ -1,0 +1,50 @@
+// ===================================================================
+// Global Variables for button styles
+// ===================================================================
+:root {
+    // Metrics
+    --button-height: auto;
+    --button-width: auto;
+    --button-radius: 0px;
+    --button-font-size: #{theme('fontSize.cta')};
+    --button-padding: 15px 28px;
+    --button-gap: 25px;
+
+    // Idle state - Default styles
+    --button-color: #{theme('colors.white')};
+    --button-background: #{theme('colors.black')};
+    --button-stroke-color: transparent;
+
+    // Hover state - Default styles
+    --button-color-hover: #{theme('colors.white')};
+    --button-background-hover: grey;
+
+    // Active state - Default styles
+    --button-color-active: #{theme('colors.black')};
+    --button-background-active: #{theme('colors.white')};
+}
+
+.c-button {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: var(--button-height);
+    width: var(--button-width);
+    color: var(--button-color);
+    border-radius: var(--button-radius);
+    padding: var(--button-padding);
+    font-size: var(--button-font-size);
+    background-color: var(--button-background);
+    border: 1px solid var(--button-stroke-color);
+    transition: background-color theme('transitionDuration.default')
+        theme('transitionTimingFunction.default');
+
+    // Hover
+    @media (hover: hover) {
+        .u-button-hover:hover &,
+        &:hover {
+            background-color: var(--button-background-hover);
+            color: var(--button-color-hover);
+        }
+    }
+}

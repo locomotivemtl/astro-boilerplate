@@ -1,0 +1,49 @@
+---
+interface Props {
+    href?: string;
+    type?: 'button' | 'submit';
+    target?: string;
+    class?: string;
+    tabIndex?: string;
+    isStatic?: boolean;
+    ariaHidden?: boolean;
+}
+
+const {
+    href,
+    type,
+    target,
+    class: propsClass,
+    tabIndex,
+    isStatic = false,
+    ariaHidden = false,
+    ...rest
+} = Astro.props;
+
+const Tag = isStatic ? 'div' : href ? 'a' : 'button';
+const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+const computedHref = Tag === 'a' ? href : undefined;
+const computedType = Tag === 'button' ? type || 'button' : undefined;
+const computedTabIndex = tabIndex ?? undefined;
+---
+
+<Tag
+    class:list={['c-button', propsClass]}
+    href={computedHref}
+    rel={rel}
+    type={computedType}
+    tabindex={computedTabIndex}
+    aria-hidden={ariaHidden}
+    {...rest}
+>
+    <span class="c-button_inner">
+        <span class="c-button_label">
+            <slot />
+        </span>
+        {Tag === 'a' && target === '_blank' && <span>&#x2197;</span>}
+    </span>
+</Tag>
+
+<style is:global>
+    @import 'Button.scss';
+</style>
