@@ -4,6 +4,7 @@
 .c-image_inner {
     .c-image.-lazy-load & {
         background-color: grey;
+        overflow: hidden;
     }
 }
 
@@ -18,7 +19,7 @@
     &[loading='lazy'] {
         .c-image.-lazy-load & {
             opacity: 0;
-            transform: scale(var(1.1), var(1.1));
+            transform: scale(1.1, 1.1);
             transition:
                 transform theme('transitionDuration.slow') theme('transitionTimingFunction.default'),
                 opacity theme('transitionDuration.slow') theme('transitionTimingFunction.default');
