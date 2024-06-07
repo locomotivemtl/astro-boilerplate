@@ -9,4 +9,8 @@ export default defineConfig({
             applyBaseStyles: false,
         }),
     ],
+    image: {
+        domains: ['locomotive.ca'],
+        remotePatterns: [{ protocol: 'https' }],
+    }
 });

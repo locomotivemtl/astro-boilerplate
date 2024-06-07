@@ -24,7 +24,14 @@
                 opacity theme('transitionDuration.slow') theme('transitionTimingFunction.default');
         }
 
-        .c-image.is-loaded & {
+        // Image is loaded
+        .c-image:not([data-scroll]).is-loaded & {
+            opacity: 1;
+            transform: scale(1, 1);
+        }
+
+        // Image is loaded and respond to locomotive-scroll in-view class
+        .c-image[data-scroll].is-loaded.is-inview & {
             opacity: 1;
             transform: scale(1, 1);
         }

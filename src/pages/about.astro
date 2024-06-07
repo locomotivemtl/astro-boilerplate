@@ -13,21 +13,35 @@ import Image from '@components/Image/Image.astro';
     <div class="u-container u-mt-fluid-xl">
         <div>
             <Image
-                src="https://fastly.picsum.photos/id/817/800/600.jpg?hmac=aEWNKHGSsc5B3rzhMQTnvGnxEpvJhCnD9m-e1qIZaUQ"
+                src="https://locomotive.ca/uploads/careers/fullscreen-image-footer-2000w.jpg"
                 alt="Placeholder alt"
-                caption="Placeholder caption"
+                caption="Loading eager"
                 loading="eager"
             />
         </div>
-        <div>
-            <Image
-                src="https://fastly.picsum.photos/id/868/800/600.jpg?hmac=k_fK14cukIWaWI6NRAjnsPdCd8S33sdVR7-DbD--Ynk"
-                alt="Placeholder alt"
-                caption="Placeholder caption"
-                loading="lazy"
-                width="500"
-                height="100"
-            />
+        <div class="u-grid u-gap-gutter u-grid-cols-2">
+            <div>
+                <Image
+                    src="https://locomotive.ca/uploads/careers/pltropics-2000w.jpg"
+                    alt="Placeholder alt"
+                    caption="Loading lazy native"
+                    loading="lazy"
+                    width="500"
+                    height="500"
+                />
+            </div>
+            <div>
+                <Image
+                    src="https://locomotive.ca/uploads/careers/fullscreen-image-2000w.jpg"
+                    alt="Placeholder alt"
+                    caption="Loading lazy native + locomotive-scroll inview anim"
+                    loading="lazy"
+                    width="500"
+                    height="500"
+                    data-scroll
+                    data-scroll-repeat
+                />
+            </div>
         </div>
         <div class="u-grid u-grid-cols-12 u-gap-gutter">
             <div class="u-col-span-full u-text-body md:u-col-span-6">

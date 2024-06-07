@@ -24,7 +24,8 @@ const {
     class: propsClass,
     widths = [720, 1440, 1800],
     sizes = '(max-width: 720px) 720px, (max-width: 1440px) 1440px, 1800px',
-    loading = 'lazy'
+    loading = 'lazy',
+    ...rest
 } = Astro.props;
 
 // Set the tag based on the prop
@@ -42,7 +43,7 @@ const classes = [
 ];
 ---
 
-<Tag class:list={classes} style={{ '--width': width, '--height': height }}>
+<Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
     <div class="c-image_inner">
         <AstroImage
             class="c-image_img"
