@@ -33,13 +33,13 @@ const Tag = tag === 'figure' ? 'figure' : 'div';
 const CaptionTag = tag === 'figure' ? 'figcaption' : 'div';
 
 // Set the onload event based on the loading prop
-const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');console.log('loaded');`;
+const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');`;
 
 const classes = [
     'c-image',
-    propsClass,
+    width && height && '-cover',
     loading === 'lazy' && '-lazy-load',
-    width && height && '-cover'
+    propsClass,
 ];
 ---
 
