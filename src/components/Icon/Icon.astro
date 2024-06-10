@@ -1,0 +1,24 @@
+---
+interface Props {
+    name?: string;
+}
+
+const { name, ...rest } = Astro.props;
+
+const className = `svg-${name}`;
+const xlink = `/assets/images/sprite.svg#${name}`;
+---
+
+<span class="c-icon" {...rest}>
+    <svg
+        class={className}
+        aria-hidden="true"
+        focusable="false"
+    >
+        <use xlink:href={xlink}></use>
+    </svg>
+</span>
+
+<style is:global>
+    @import 'Icon.scss';
+</style>
