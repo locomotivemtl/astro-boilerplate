@@ -1,6 +1,6 @@
-import { map } from "nanostores";
-import { $screen } from "./screen";
-import { normalize, roundToDecimals } from "@scripts/utils/maths";
+import { map } from 'nanostores';
+import { $screen } from './screen';
+import { normalize, roundToDecimals } from '@scripts/utils/maths';
 
 export interface IMouseState {
     x: number;
@@ -95,4 +95,4 @@ const hasMouseStopped = (smoothX: number, smoothY: number): boolean => {
 };
 
 /* Events */
-window.addEventListener("mousemove", onMouseMove);
+window.addEventListener('mousemove', onMouseMove);

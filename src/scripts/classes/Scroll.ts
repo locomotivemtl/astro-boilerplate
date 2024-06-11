@@ -20,9 +20,9 @@ export class Scroll {
                     limit,
                     velocity,
                     direction,
-                    progress,
+                    progress
                 });
-            },
+            }
         });
     }
 

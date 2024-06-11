@@ -1,15 +1,15 @@
-import { atom } from 'nanostores'
+import { atom } from 'nanostores';
 
 const motionQuery: MediaQueryList = matchMedia('(prefers-reduced-motion)');
 
-const $prefersReducedMotion = atom(motionQuery.matches)
+const $prefersReducedMotion = atom(motionQuery.matches);
 
 motionQuery.addEventListener('change', () => {
     if (motionQuery.matches) {
-        $prefersReducedMotion.set(true)
+        $prefersReducedMotion.set(true);
     } else {
-        $prefersReducedMotion.set(false)
+        $prefersReducedMotion.set(false);
     }
 });
 
-export { $prefersReducedMotion }
+export { $prefersReducedMotion };

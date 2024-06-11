@@ -1,5 +1,5 @@
-import { debounce } from "@scripts/utils/debounce";
-import { map } from "nanostores";
+import { map } from 'nanostores';
+import { debounce } from 'ts-debounce';
 
 export interface IScreenValues {
     width: number;
@@ -13,24 +13,21 @@ export interface IScreenDebounceValues {
 
 export const $screen = map<IScreenValues>({
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: window.innerHeight
 });
 
 export const $screenDebounce = map<IScreenDebounceValues>({
     width: window.innerWidth,
-    height: window.innerHeight,
+    height: window.innerHeight
 });
 
-
-window.addEventListener("resize", () => {
-    $screen.setKey("width", window.innerWidth);
-    $screen.setKey("height", window.innerHeight);
+window.addEventListener('resize', () => {
+    $screen.setKey('width', window.innerWidth);
+    $screen.setKey('height', window.innerHeight);
 });
 
-window.addEventListener(
-    "resize",
-    debounce(() => {
-        $screenDebounce.setKey("width", window.innerWidth);
-        $screenDebounce.setKey("height", window.innerHeight);
-    }, 200)
-);
+const debouncedFunction: any = () => {
+    $screenDebounce.setKey('width', window.innerWidth);
+    $screenDebounce.setKey('height', window.innerHeight);
+};
+window.addEventListener('resize', debounce(debouncedFunction, 200));

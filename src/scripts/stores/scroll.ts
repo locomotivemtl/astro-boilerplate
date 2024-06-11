@@ -1,11 +1,11 @@
-import { map } from 'nanostores'
+import { map } from 'nanostores';
 
 export interface IScrollValues {
-    scroll: number
-    limit: number
-    velocity: number
-    direction: number
-    progress: number
+    scroll: number;
+    limit: number;
+    velocity: number;
+    direction: number;
+    progress: number;
 }
 
 export const $scroll = map<IScrollValues>({
@@ -14,4 +14,4 @@ export const $scroll = map<IScrollValues>({
     velocity: 0,
     direction: 0,
     progress: 0
-})
+});
