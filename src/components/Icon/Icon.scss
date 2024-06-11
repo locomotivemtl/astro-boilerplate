@@ -1,0 +1,24 @@
+// ===================================================================
+// Component — Icon
+// ===================================================================
+
+@use 'sass:math';
+
+.c-icon {
+    display: inline-block;
+    vertical-align: middle;
+
+    svg {
+        --icon-height: calc(var(--icon-width, var(--_icon-width)) * (1 / (var(--icon-ratio))));
+
+        display: block;
+        width: var(--icon-width, var(--_icon-width));
+        height: var(--icon-height);
+        fill: currentColor;
+    }
+}
+
+.svg-logo {
+    --_icon-width: 32px;
+    --icon-ratio: #{math.div(925, 302)};
+}

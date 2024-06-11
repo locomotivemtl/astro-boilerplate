@@ -1,5 +1,6 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
+import svgSprite from 'astro-svg-sprite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -21,6 +22,9 @@ export default defineConfig({
     integrations: [
         tailwind({
             applyBaseStyles: false,
+        }),
+        svgSprite({
+            include: './src/assets/svgs',
         }),
     ],
     devToolbar: {
