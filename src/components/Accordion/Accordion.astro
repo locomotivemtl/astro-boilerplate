@@ -8,6 +8,7 @@ const { label, class: propsClass, ...rest } = Astro.props;
 
 const classes = ['c-accordion', propsClass];
 ---
+
 <c-accordion class:list={classes} {...rest}>
     <details class="c-accordion_details" aria-expanded="false">
         <summary class="c-accordion_summary">

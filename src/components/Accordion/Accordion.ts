@@ -1,5 +1,4 @@
 export default class Accordion extends HTMLElement {
-
     static DURATION = 300;
     static CLASS_OPEN = 'is-open';
     private onClickBind: any;
@@ -15,54 +14,53 @@ export default class Accordion extends HTMLElement {
         super();
 
         // Binding
-        this.onClickBind = this.onClick.bind(this)
+        this.onClickBind = this.onClick.bind(this);
 
         // UI
         this.$root = this.querySelector('details.c-accordion_details')!;
         this.$summary = this.$root.querySelector('summary.c-accordion_summary')!;
         this.$content = this.$root.querySelector('.c-accordion_content')!;
-        this.$parent = this.closest('[data-accordion-parent]') || null
+        this.$parent = this.closest('[data-accordion-parent]') || null;
 
         // Data
-        this.animation = null
-        this.isClosing = false
-        this.isExpanding = false
+        this.animation = null;
+        this.isClosing = false;
+        this.isExpanding = false;
     }
 
     ///////////////
     // Lifecyle
     ///////////////
     connectedCallback() {
-        this.bindEvents()
+        this.bindEvents();
     }
 
     disconnectedCallback() {
-        this.unbindEvents()
+        this.unbindEvents();
     }
 
     ///////////////
     // Events
     ///////////////
     bindEvents() {
-        this.$summary.addEventListener('click', this.onClickBind)
+        this.$summary.addEventListener('click', this.onClickBind);
     }
     unbindEvents() {
-        this.$summary.removeEventListener('click', this.onClickBind)
+        this.$summary.removeEventListener('click', this.onClickBind);
     }
 
     ///////////////
     // Callbacks
     ///////////////
     onClick(e: Event) {
-        e.preventDefault()
+        e.preventDefault();
 
-        this.$root.style.overflow = 'hidden'
+        this.$root.style.overflow = 'hidden';
 
         if (this.isClosing || !this.$root.open) {
-            this.start()
-
+            this.start();
         } else if (this.isExpanding || this.$root.open) {
-            this.shrink()
+            this.shrink();
         }
     }
 
@@ -71,13 +69,13 @@ export default class Accordion extends HTMLElement {
     ///////////////
 
     shrink() {
-        this.isClosing = true
-        this.$root.classList.remove(Accordion.CLASS_OPEN)
+        this.isClosing = true;
+        this.$root.classList.remove(Accordion.CLASS_OPEN);
 
-        if (this.$parent) this.$parent.classList.remove(Accordion.CLASS_OPEN)
+        if (this.$parent) this.$parent.classList.remove(Accordion.CLASS_OPEN);
 
-        const startHeight = `${this.$root.offsetHeight}px`
-        const endHeight = `${this.$summary.offsetHeight}px`
+        const startHeight = `${this.$root.offsetHeight}px`;
+        const endHeight = `${this.$summary.offsetHeight}px`;
 
         if (this.animation) {
             this.animation.cancel();
@@ -94,7 +92,7 @@ export default class Accordion extends HTMLElement {
             }
         );
 
-        if(this.animation) {
+        if (this.animation) {
             this.animation.onfinish = () => this.onAnimationFinish(false);
             this.animation.oncancel = () => {
                 this.isClosing = false;
@@ -104,21 +102,19 @@ export default class Accordion extends HTMLElement {
     }
 
     start() {
-        this.$root.style.height = `${this.$root.offsetHeight}px`
+        this.$root.style.height = `${this.$root.offsetHeight}px`;
 
-        window.requestAnimationFrame(() => this.expand())
+        window.requestAnimationFrame(() => this.expand());
     }
 
     expand() {
-        this.isExpanding = true
-        this.$root.classList.add(Accordion.CLASS_OPEN)
+        this.isExpanding = true;
+        this.$root.classList.add(Accordion.CLASS_OPEN);
 
-        if (this.$parent) this.$parent.classList.add(Accordion.CLASS_OPEN)
+        if (this.$parent) this.$parent.classList.add(Accordion.CLASS_OPEN);
 
-        const startHeight = `${this.$root.offsetHeight}px`
-        const endHeight = `${
-            this.$summary.offsetHeight + this.$content.offsetHeight
-        }px`
+        const startHeight = `${this.$root.offsetHeight}px`;
+        const endHeight = `${this.$summary.offsetHeight + this.$content.offsetHeight}px`;
 
         if (this.animation) {
             this.animation?.cancel();
@@ -134,7 +130,7 @@ export default class Accordion extends HTMLElement {
             }
         );
 
-        if(this.animation) {
+        if (this.animation) {
             this.animation.onfinish = () => this.onAnimationFinish(true);
             this.animation.oncancel = () => {
                 this.isExpanding = false;
@@ -144,15 +140,15 @@ export default class Accordion extends HTMLElement {
     }
 
     onAnimationFinish(open: boolean) {
-        this.$root.open = open
-        this.$root.setAttribute('aria-expanded', `${open}`)
+        this.$root.open = open;
+        this.$root.setAttribute('aria-expanded', `${open}`);
 
-        this.animation = null
+        this.animation = null;
 
-        this.isClosing = false
-        this.isExpanding = false
+        this.isClosing = false;
+        this.isExpanding = false;
 
-        this.$root.style.height = this.$root.style.overflow = ''
+        this.$root.style.height = this.$root.style.overflow = '';
     }
 }
 

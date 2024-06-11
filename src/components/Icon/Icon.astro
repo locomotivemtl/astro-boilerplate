@@ -4,16 +4,9 @@ interface Props {
     class?: string;
 }
 
-const {
-    name,
-    class: propsClass,
-    ...rest
-} = Astro.props;
+const { name, class: propsClass, ...rest } = Astro.props;
 
-const classes = [
-    'c-icon',
-    propsClass
-];
+const classes = ['c-icon', propsClass];
 
 const className = `svg-${name}`;
 const xlink = `/assets/images/sprite.svg#${name}`;
