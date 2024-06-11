@@ -43,8 +43,8 @@ const onMouseMove = (event: MouseEvent): void => {
 
     $mouse.setKey('x', clientX);
     $mouse.setKey('y', clientY);
-    $mouse.setKey('normalizedX', normalize(0, $screen!.value!.width, clientX));
-    $mouse.setKey('normalizedY', normalize(0, $screen!.value!.height, clientY));
+    $mouse.setKey('normalizedX', normalize(0, $screen.value!.width, clientX));
+    $mouse.setKey('normalizedY', normalize(0, $screen.value!.height, clientY));
 
     play();
 };
