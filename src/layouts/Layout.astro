@@ -54,3 +54,20 @@ const { title } = Astro.props;
 </html>
 
 <script src="../scripts/app.ts"></script>
+<script>
+    import { setViewportSize } from '@scripts/utils/setViewportSize';
+    import { debounce } from 'ts-debounce';
+    import { CUSTOM_EVENTS } from '@scripts/config';
+
+    // Set viewport size
+    setViewportSize();
+
+    // Debounce resize event
+    const resizeEndEvent = new CustomEvent(CUSTOM_EVENTS.RESIZE_END);
+    const debouncedFunction: any = () => {
+        setViewportSize();
+        window.dispatchEvent(resizeEndEvent);
+    };
+
+    window.addEventListener('resize', debounce(debouncedFunction, 200));
+</script>

@@ -1,7 +1,7 @@
 // © Andy Bell - https://buildexcellentwebsit.es/
 // https://utopia.fyi/
 
-import config from '../config';
+import { config } from '../config';
 
 /**
  * Utopia Clamp Function.

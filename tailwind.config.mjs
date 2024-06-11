@@ -1,5 +1,5 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
-import { utopiaClamp } from './src/scripts/utils';
+import { utopiaClamp } from './src/scripts/utils/utopiaClamp';
 
 /** @type {import('tailwindcss').Config} */
 export default {

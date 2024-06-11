@@ -7,4 +7,13 @@ const config: Config = Object.freeze({
     }
 });
 
-export default config;
+const CUSTOM_EVENTS: {
+    RESIZE_END: string;
+} = Object.freeze({
+    RESIZE_END: 'loco.resizeEnd',
+})
+
+export {
+    config,
+    CUSTOM_EVENTS,
+};
