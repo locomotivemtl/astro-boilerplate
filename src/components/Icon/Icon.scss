@@ -2,7 +2,7 @@
 // Component — Icon
 // ===================================================================
 
-@use "sass:math";
+@use 'sass:math';
 
 .c-icon {
     display: inline-block;
@@ -19,6 +19,6 @@
 }
 
 .svg-logo {
-    --_icon-width:  32px;
-    --icon-ratio:   #{math.div(925, 302)};
+    --_icon-width: 32px;
+    --icon-ratio: #{math.div(925, 302)};
 }
