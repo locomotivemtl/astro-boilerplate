@@ -27,7 +27,6 @@
     "dependencies": {
         "@astrojs/check": "^0.7.0",
         "@astrojs/tailwind": "^5.1.0",
-        "@nanostores/persistent": "^0.10.1",
         "@swup/head-plugin": "^2.2.0",
         "@swup/preload-plugin": "^3.2.10",
         "@swup/scripts-plugin": "^2.1.0",
