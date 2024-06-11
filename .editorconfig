@@ -11,6 +11,3 @@ trim_trailing_whitespace = true
 
 [*.{md,markdown}]
 trim_trailing_whitespace = false
-
-[*.{ms,mustache}]
-insert_final_newline = false
