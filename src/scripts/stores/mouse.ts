@@ -17,8 +17,8 @@ export interface ISmoothMouseState {
     lerp: number;
 }
 
-const HALF_SCREEN_WIDTH = $screen!.value!.width * 0.5;
-const HALF_SCREEN_HEIGHT = $screen!.value!.height * 0.5;
+const HALF_SCREEN_WIDTH = $screen.value!.width * 0.5;
+const HALF_SCREEN_HEIGHT = $screen.value!.height * 0.5;
 
 export const $mouse = map<IMouseState>({
     x: HALF_SCREEN_WIDTH,
@@ -50,16 +50,16 @@ const onMouseMove = (event: MouseEvent): void => {
 };
 
 const onUpdate = (): void => {
-    const { x, y } = $mouse!.value!;
-    const { smoothX, smoothY, lerp } = $smoothMouse!.value!;
+    const { x, y } = $mouse.value!;
+    const { smoothX, smoothY, lerp } = $smoothMouse.value!;
 
     const updatedSmoothX = smoothX + (x - smoothX) * lerp;
     const updatedSmoothY = smoothY + (y - smoothY) * lerp;
 
     const roundedSmoothX = updatedSmoothX;
     const roundedSmoothY = updatedSmoothY;
-    const roundedSmoothNormalizedX = normalize(0, $screen!.value!.width, updatedSmoothX);
-    const roundedSmoothNormalizedY = normalize(0, $screen!.value!.height, updatedSmoothY);
+    const roundedSmoothNormalizedX = normalize(0, $screen.value!.width, updatedSmoothX);
+    const roundedSmoothNormalizedY = normalize(0, $screen.value!.height, updatedSmoothY);
 
     if (hasMouseStopped(roundedSmoothX, roundedSmoothY) && isPlaying) {
         return pause();
@@ -91,7 +91,7 @@ const pause = (): void => {
 };
 
 const hasMouseStopped = (smoothX: number, smoothY: number): boolean => {
-    return smoothX + smoothY === $smoothMouse!.value!.smoothX + $smoothMouse!.value!.smoothY;
+    return smoothX + smoothY === $smoothMouse.value!.smoothX + $smoothMouse.value!.smoothY;
 };
 
 /* Events */
