@@ -1,3 +1,4 @@
+import { $scroll } from '@scripts/stores/scroll';
 import LocomotiveScroll from 'node_modules/locomotive-scroll';
 
 import type {
@@ -12,7 +13,17 @@ export class Scroll {
     // Lifecycle
     // =============================================================================
     static init() {
-        this.locomotiveScroll = new LocomotiveScroll({});
+        this.locomotiveScroll = new LocomotiveScroll({
+            scrollCallback({ scroll, limit, velocity, direction, progress }) {
+                $scroll.set({
+                    scroll,
+                    limit,
+                    velocity,
+                    direction,
+                    progress,
+                });
+            },
+        });
     }
 
     static destroy() {
