@@ -1,0 +1,45 @@
+// ===================================================================
+// Component — Accordion
+// ===================================================================
+
+$accordion-summary-padding-x: 0;
+$accordion-summary-padding-y: 12px;
+
+.c-accordion {
+    position: relative;
+}
+
+.c-accordion_summary {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: theme('gap.gutter');
+    padding: $accordion-summary-padding-y $accordion-summary-padding-x;
+    user-select: none;
+    cursor: pointer;
+    transition: opacity theme('transitionDuration.default') theme('transitionTimingFunction.default');
+
+    &::marker {
+        display: none;
+    }
+
+    @media (hover: hover) {
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+}
+
+.c-accordion_icon {
+    flex-shrink: 0;
+    transform: rotateX(0);
+    transition: transform theme('transitionDuration.default') theme('transitionTimingFunction.default');
+
+    .c-accordion[open] & {
+        transform: rotateX(180deg);
+    }
+}
+
+.c-accordion_content {
+}

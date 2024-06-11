@@ -1,15 +1,25 @@
 ---
 interface Props {
     name: string;
+    class?: string;
 }
 
-const { name, ...rest } = Astro.props;
+const {
+    name,
+    class: propsClass,
+    ...rest
+} = Astro.props;
+
+const classes = [
+    'c-icon',
+    propsClass
+];
 
 const className = `svg-${name}`;
 const xlink = `/assets/images/sprite.svg#${name}`;
 ---
 
-<span class="c-icon" {...rest}>
+<span class:list={classes} {...rest}>
     <svg class={className} aria-hidden="true" focusable="false">
         <use xlink:href={xlink}></use>
     </svg>

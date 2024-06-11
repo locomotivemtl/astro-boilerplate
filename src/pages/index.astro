@@ -1,6 +1,7 @@
 ---
 import Button from '@components/Button/Button.astro';
 import Icon from '@components/Icon/Icon.astro';
+import Accordion from '@components/Accordion/Accordion.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -39,6 +40,14 @@ import Layout from '../layouts/Layout.astro';
                 </p>
             </div>
         </div>
+
+        <Accordion
+            label="Accordion summary"
+        >
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt
+            laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates
+            nam voluptatum, assumenda, atque nesciunt debitis?
+        </Accordion>
 
         <!-- Placeholder -->
         <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black"></div>

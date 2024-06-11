@@ -97,7 +97,7 @@ All commands are run from the root of the project, from a terminal:
 
 - [ ] Integrate nanostores to manage the state of global classes
 - [x] Add an `Image` component that uses `Image` from `astro:assets`, that support native lazy-loading with a callback that toggles a CSS class.
-- [ ] Add a basic accordion component
+- [x] Add a basic accordion component
 - [ ] Add a basic WYSIWYG component
 - [ ] Add a linter
 

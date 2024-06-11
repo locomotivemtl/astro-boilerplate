@@ -1,0 +1,142 @@
+---
+interface Props {
+    label: string;
+    class?: string;
+}
+
+const { label, class: propsClass, ...rest } = Astro.props;
+
+const classes = ['c-accordion', propsClass];
+---
+
+<details class:list={classes}>
+    <summary class="c-accordion_summary">
+        <span>{label}</span>
+        <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
+    </summary>
+    <div class="c-accordion_content">
+        <slot />
+    </div>
+</details>
+
+<style is:global>
+    @import 'Accordion.scss';
+</style>
+
+<script>
+    const $accordions = document.querySelectorAll('details.c-accordion');
+
+    // Handle clicks on each button.
+    $accordions.forEach(($accordion) => {
+        init($accordion);
+    });
+
+    function init($accordion: any) {
+        // UI
+        const $summary = $accordion.querySelector('summary');
+        const $content = $accordion.querySelector('.c-accordion_content');
+
+        // Data
+        let animation = null;
+        let isClosing = false;
+        let isExpanding = false;
+
+        const onClick = (e: Event) => {
+            e.preventDefault();
+
+            $accordion.style.overflow = 'hidden';
+
+            if (isClosing || !$accordion.open) {
+                open();
+            } else if (isExpanding || $accordion.open) {
+                shrink();
+            }
+        };
+
+        const shrink = () => {
+            isClosing = true;
+            $accordion.classList.remove('is-active');
+
+            const startHeight = `${$accordion.offsetHeight}px`;
+            const endHeight = `${$summary.offsetHeight}px`;
+
+            if (animation) {
+                animation.cancel();
+            }
+
+            animation = $accordion.animate(
+                {
+                    height: [startHeight, endHeight]
+                },
+                {
+                    duration: 300,
+
+                    easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
+                }
+            );
+
+            animation.onfinish = () => onAnimationFinish(false);
+            animation.oncancel = () => {
+                isClosing = false;
+                $accordion.classList.add('is-active');
+            };
+
+            // onShrink?.($accordion);
+        };
+
+        const open = () => {
+            $accordion.style.height = `${$accordion.offsetHeight}px`;
+            $accordion.open = true;
+
+            window.requestAnimationFrame(() => expand());
+
+            // onOpen?.($accordion);
+        };
+
+        const expand = () => {
+            isExpanding = true;
+            $accordion.classList.add('is-active');
+
+            const startHeight = `${$accordion.offsetHeight}px`;
+            const endHeight = `${$summary.offsetHeight + $content.offsetHeight}px`;
+
+            if (animation) {
+                animation.cancel();
+            }
+
+            animation = $accordion.animate(
+                {
+                    height: [startHeight, endHeight]
+                },
+                {
+                    duration: 300,
+                    easing: 'linear'
+                }
+            );
+
+            animation.onfinish = () => onAnimationFinish(true);
+            animation.oncancel = () => {
+                isExpanding = false;
+                $accordion.classList.remove('is-active');
+            };
+        };
+
+        const onAnimationFinish = (open: boolean) => {
+            $accordion.open = open;
+
+            animation = null;
+
+            isClosing = false;
+            isExpanding = false;
+
+            $accordion.style.height = $accordion.style.overflow = '';
+        };
+
+        $summary.addEventListener('click', onClick);
+    }
+
+    // // TODO: unbind events on unmounted
+    // const destroy = () => {
+    //     // $summary.removeEventListener('click', onClick);
+    // };
+</script>

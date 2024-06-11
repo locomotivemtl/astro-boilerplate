@@ -4,6 +4,12 @@
         "baseUrl": ".",
         "moduleResolution": "Bundler",
         "paths": {
+            "@root/*": [
+                "./*"
+            ],
+            "@src/*": [
+                "./src/*"
+            ],
             "@components/*": [
                 "./src/components/*"
             ],
