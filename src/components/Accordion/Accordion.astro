@@ -9,7 +9,7 @@ const { label, class: propsClass, ...rest } = Astro.props;
 const classes = ['c-accordion', propsClass];
 ---
 
-<details class:list={classes}>
+<details class:list={classes} {...rest}>
     <summary class="c-accordion_summary">
         <span>{label}</span>
         <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
@@ -37,7 +37,7 @@ const classes = ['c-accordion', propsClass];
         const $content = $accordion.querySelector('.c-accordion_content');
 
         // Data
-        let animation = null;
+        let animation: Animation | null;
         let isClosing = false;
         let isExpanding = false;
 
@@ -75,11 +75,13 @@ const classes = ['c-accordion', propsClass];
                 }
             );
 
-            animation.onfinish = () => onAnimationFinish(false);
-            animation.oncancel = () => {
-                isClosing = false;
-                $accordion.classList.add('is-active');
-            };
+            if(animation) {
+                animation.onfinish = () => onAnimationFinish(false);
+                animation.oncancel = () => {
+                    isClosing = false;
+                    $accordion.classList.add('is-active');
+                };
+            }
 
             // onShrink?.($accordion);
         };
@@ -101,7 +103,7 @@ const classes = ['c-accordion', propsClass];
             const endHeight = `${$summary.offsetHeight + $content.offsetHeight}px`;
 
             if (animation) {
-                animation.cancel();
+                animation?.cancel();
             }
 
             animation = $accordion.animate(
@@ -114,11 +116,13 @@ const classes = ['c-accordion', propsClass];
                 }
             );
 
-            animation.onfinish = () => onAnimationFinish(true);
-            animation.oncancel = () => {
-                isExpanding = false;
-                $accordion.classList.remove('is-active');
-            };
+            if(animation) {
+                animation.onfinish = () => onAnimationFinish(true);
+                animation.oncancel = () => {
+                    isExpanding = false;
+                    $accordion.classList.remove('is-active');
+                };
+            }
         };
 
         const onAnimationFinish = (open: boolean) => {
