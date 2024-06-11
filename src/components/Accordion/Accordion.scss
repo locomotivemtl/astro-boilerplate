@@ -36,7 +36,7 @@ $accordion-summary-padding-y: 12px;
     transform: rotateX(0);
     transition: transform theme('transitionDuration.default') theme('transitionTimingFunction.default');
 
-    .c-accordion[open] & {
+    .c-accordion_details[open] & {
         transform: rotateX(180deg);
     }
 }
