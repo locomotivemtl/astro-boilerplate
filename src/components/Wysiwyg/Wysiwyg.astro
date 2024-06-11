@@ -1,0 +1,31 @@
+---
+interface Props {
+    tag?: 'div' | 'article',
+    body?: string;
+}
+
+const {
+    tag = 'div',
+    body = null,
+    class: propsClass,
+    ...rest
+} = Astro.props;
+
+const Tag = tag || 'div'
+const classes = [
+    'c-wysiwyg',
+    propsClass
+];
+---
+
+{body &&
+    <Tag
+        class:list={classes}
+        set:html={body}
+        {...rest}
+    ></Tag>
+}
+
+<style is:global>
+    @import 'Wysiwyg.scss';
+</style>

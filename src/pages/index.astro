@@ -1,6 +1,7 @@
 ---
 import Button from '@components/Button/Button.astro';
 import Icon from '@components/Icon/Icon.astro';
+import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -13,30 +14,25 @@ import Layout from '../layouts/Layout.astro';
     <div class="u-container u-mt-fluid-xl">
         <div class="u-grid u-grid-cols-12 u-gap-gutter">
             <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg
+                    body="<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>"
+                />
 
                 <Button href="/about" class="u-mt-fluid-s"> Learn More </Button>
             </div>
             <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg
+                    tag="article"
+                    body="<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>"
+                />
                 <Button href="https://google.ca" target="_blank" class="u-mt-fluid-s">
                     Visit Us
                 </Button>
             </div>
             <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg
+                    body="<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>"
+                />
             </div>
         </div>
 
