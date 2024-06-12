@@ -21,19 +21,15 @@ export default {
                 ],
             },
             fontSize: {
-                h1: utopiaClamp(82, 124),
-                h2: utopiaClamp(58, 92),
-                h3: utopiaClamp(42, 52),
-                h4: utopiaClamp(20, 36),
-                h5: utopiaClamp(16, 22),
-                h6: utopiaClamp(12, 14),
-                body: utopiaClamp(14, 14),
-                subtitle: utopiaClamp(12, 12),
-                cta: utopiaClamp(12, 12),
+                h1: utopiaClamp(60, 120),
+                h2: utopiaClamp(40, 80),
+                body: utopiaClamp(14, 16),
+                button: '14px',
             },
             colors: {
-                black: '#000000',
-                white: '#ffffff',
+                black:      '#000000',
+                white:      '#ffffff',
+                primary:    '#312dfb',
             },
             screens: {
                 'to-2xs':   { 'max': '339px' },
@@ -78,55 +74,58 @@ export default {
                 default:    '0.4s',
                 slow:       '0.6s',
                 slower:     '0.8s',
-                long:       '1s',
+                slowest:    '1s',
             },
             transitionTimingFunction: {
-                default:        'cubic-bezier(0.600, 0.000, 0.300, 1.000)',
-                power1: {
-                    in:         'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
-                    out:        'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
-                    inOut:      'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
-                },
-                power2: {
-                    in:         'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
-                    out:        'cubic-bezier(0.215, 0.610, 0.355, 1.000)',
-                    inOut:      'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
-                },
-                power3: {
-                    in:         'cubic-bezier(0.895, 0.030, 0.685, 0.220)',
-                    out:        'cubic-bezier(0.165, 0.840, 0.440, 1.000)',
-                    inOut:      'cubic-bezier(0.770, 0.000, 0.175, 1.000)',
-                },
-                power4: {
-                    in:         'cubic-bezier(0.755, 0.050, 0.855, 0.060)',
-                    out:        'cubic-bezier(0.230, 1.000, 0.320, 1.000)',
-                    inOut:      'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
-                },
-                expo: {
-                    in:         'cubic-bezier(0.950, 0.050, 0.795, 0.035)',
-                    out:        'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
-                    inOut:      'cubic-bezier(1.000, 0.000, 0.000, 1.000)',
-                },
-                back: {
-                    in:         'cubic-bezier(0.600, -0.280, 0.735, 0.045)',
-                    out:        'cubic-bezier(0.175, 00.885, 0.320, 1.275)',
-                    inOut:      'cubic-bezier(0.680, -0.550, 0.265, 1.550)',
-                },
-                sine: {
-                    in:         'cubic-bezier(0.470, 0.000, 0.745, 0.715)',
-                    out:        'cubic-bezier(0.390, 0.575, 0.565, 1.000)',
-                    inOut:      'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
-                },
-                circ: {
-                    in:         'cubic-bezier(0.600, 0.040, 0.980, 0.335)',
-                    out:        'cubic-bezier(0.075, 0.820, 0.165, 1.000)',
-                    inOut:      'cubic-bezier(0.785, 0.135, 0.150, 0.860)',
-                },
-                slow: {
-                    out:        'cubic-bezier(.04,1.15,0.4,.99)',
-                },
-                bounce:         'cubic-bezier(0.17, 0.67, 0.3, 1.33)',
-                smooth:         'cubic-bezier(0.380, 0.005, 0.215, 1)',
+                // Smooth
+                default:        'cubic-bezier(0.380, 0.005, 0.215, 1)',
+
+                // // Common easings
+                // power1: {
+                //     in:         'cubic-bezier(0.550, 0.085, 0.680, 0.530)',
+                //     out:        'cubic-bezier(0.250, 0.460, 0.450, 0.940)',
+                //     inOut:      'cubic-bezier(0.455, 0.030, 0.515, 0.955)',
+                // },
+                // power2: {
+                //     in:         'cubic-bezier(0.550, 0.055, 0.675, 0.190)',
+                //     out:        'cubic-bezier(0.215, 0.610, 0.355, 1.000)',
+                //     inOut:      'cubic-bezier(0.645, 0.045, 0.355, 1.000)',
+                // },
+                // power3: {
+                //     in:         'cubic-bezier(0.895, 0.030, 0.685, 0.220)',
+                //     out:        'cubic-bezier(0.165, 0.840, 0.440, 1.000)',
+                //     inOut:      'cubic-bezier(0.770, 0.000, 0.175, 1.000)',
+                // },
+                // power4: {
+                //     in:         'cubic-bezier(0.755, 0.050, 0.855, 0.060)',
+                //     out:        'cubic-bezier(0.230, 1.000, 0.320, 1.000)',
+                //     inOut:      'cubic-bezier(0.860, 0.000, 0.070, 1.000)',
+                // },
+                // expo: {
+                //     in:         'cubic-bezier(0.950, 0.050, 0.795, 0.035)',
+                //     out:        'cubic-bezier(0.190, 1.000, 0.220, 1.000)',
+                //     inOut:      'cubic-bezier(1.000, 0.000, 0.000, 1.000)',
+                // },
+                // back: {
+                //     in:         'cubic-bezier(0.600, -0.280, 0.735, 0.045)',
+                //     out:        'cubic-bezier(0.175, 00.885, 0.320, 1.275)',
+                //     inOut:      'cubic-bezier(0.680, -0.550, 0.265, 1.550)',
+                // },
+                // sine: {
+                //     in:         'cubic-bezier(0.470, 0.000, 0.745, 0.715)',
+                //     out:        'cubic-bezier(0.390, 0.575, 0.565, 1.000)',
+                //     inOut:      'cubic-bezier(0.445, 0.050, 0.550, 0.950)',
+                // },
+                // circ: {
+                //     in:         'cubic-bezier(0.600, 0.040, 0.980, 0.335)',
+                //     out:        'cubic-bezier(0.075, 0.820, 0.165, 1.000)',
+                //     inOut:      'cubic-bezier(0.785, 0.135, 0.150, 0.860)',
+                // },
+                // slow: {
+                //     out:        'cubic-bezier(.04,1.15,0.4,.99)',
+                // },
+                // bounce:         'cubic-bezier(0.17, 0.67, 0.3, 1.33)',
+                // smooth:         'cubic-bezier(0.380, 0.005, 0.215, 1)',
             },
             zIndex: {
                 modal:    '200',
