@@ -7,6 +7,4 @@ const config: Config = Object.freeze({
     }
 });
 
-const CUSTOM_EVENTS: {} = Object.freeze({});
-
-export { config, CUSTOM_EVENTS };
+export { config };
