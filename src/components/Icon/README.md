@@ -7,7 +7,8 @@ The Icon component renders a `<span>` to display an icon from the sprite. The sp
 
 | Prop         | Type     | Required | Default | Description                                           |
 |--------------|----------|----------|---------|-------------------------------------------------------|
-| `name`       | `string` | True     | Null    | The name of the Icon to display                        |
+| `name`       | `string` | True     | Null    | The name of the Icon to display                       |
+| `class`      | `string` | No       | None    | Additional class names to style the component.        |
 
 ## Example Usage
 
