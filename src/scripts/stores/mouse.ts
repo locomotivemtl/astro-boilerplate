@@ -1,5 +1,5 @@
 import { map } from 'nanostores';
-import { $screen } from './screen';
+import { $screen } from '@scripts/stores/screen';
 import { normalize, roundToDecimals } from '@scripts/utils/maths';
 
 export interface IMouseState {
