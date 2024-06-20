@@ -3,7 +3,7 @@ import SwupHeadPlugin from '@swup/head-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupScriptsPlugin from '@swup/scripts-plugin';
 import Swup from 'swup';
-import { Scroll } from './Scroll';
+import { Scroll } from '@scripts/classes/Scroll';
 
 export class Transitions {
     static readonly READY_CLASS = 'is-ready';

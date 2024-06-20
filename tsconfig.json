@@ -25,12 +25,9 @@
             "@styles/*": [
                 "./src/styles/*"
             ],
-            "@utils/*": [
-                "./src/scripts/utils/*"
-            ],
             "@types/*": [
                 "types/*"
-            ],
+            ]
         }
     }
 }
