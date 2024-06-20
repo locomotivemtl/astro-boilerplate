@@ -13,15 +13,11 @@ const {
 } = Astro.props;
 
 const Tag = tag || 'div'
-const classes = [
-    'c-wysiwyg',
-    propsClass
-];
 ---
 
 {body &&
     <Tag
-        class:list={classes}
+        class:list={['c-wysiwyg', propsClass]}
         set:html={body}
         {...rest}
     ></Tag>
