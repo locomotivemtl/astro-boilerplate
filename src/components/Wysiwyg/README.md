@@ -1,7 +1,7 @@
 # Wysiwyg Component
 
 
-The Wysiwyg component renders a `<span>` to display an Wysiwyg from the sprite. The sprite is generated with the `.svg`files located in `./src/assets/svgs/`.
+This component renders rich text content with a specified HTML tag, allowing for custom styling and flexibility.
 
 ## Property
 
@@ -18,9 +18,13 @@ To use the Wysiwyg component, include it in your Astro project and pass the desi
 
 ```astro
 ---
-const rawHTMLString = "Hello <strong>World</strong>"
+const rawHTMLString = 'Hello <strong>World</strong>'
 ---
-<Wysiwyg tag="article" body="{rawHTMLString}" />
+<Wysiwyg
+    tag="article"
+    body={rawHTMLString}
+    class="c-custom-class"
+/>
 ```
 
 ## To Do
