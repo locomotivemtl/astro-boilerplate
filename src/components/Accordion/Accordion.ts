@@ -1,6 +1,6 @@
 export default class Accordion extends HTMLElement {
-    static DURATION = 300;
-    static CLASS_OPEN = 'is-open';
+    static readonly DURATION = 300;
+    static readonly CLASS_OPEN = 'is-open';
     private onClickBind: any;
     private $root: HTMLDetailsElement;
     private $summary: HTMLElement;
@@ -28,9 +28,9 @@ export default class Accordion extends HTMLElement {
         this.isExpanding = false;
     }
 
-    ///////////////
-    // Lifecyle
-    ///////////////
+    // =============================================================================
+    // Lifecycle
+    // =============================================================================
     connectedCallback() {
         this.bindEvents();
     }
@@ -39,9 +39,9 @@ export default class Accordion extends HTMLElement {
         this.unbindEvents();
     }
 
-    ///////////////
+    // =============================================================================
     // Events
-    ///////////////
+    // =============================================================================
     bindEvents() {
         this.$summary.addEventListener('click', this.onClickBind);
     }
@@ -49,9 +49,9 @@ export default class Accordion extends HTMLElement {
         this.$summary.removeEventListener('click', this.onClickBind);
     }
 
-    ///////////////
+    // =============================================================================
     // Callbacks
-    ///////////////
+    // =============================================================================
     onClick(e: Event) {
         e.preventDefault();
 
@@ -64,10 +64,9 @@ export default class Accordion extends HTMLElement {
         }
     }
 
-    ///////////////
+    // =============================================================================
     // Methods
-    ///////////////
-
+    // =============================================================================
     shrink() {
         this.isClosing = true;
         this.$root.classList.remove(Accordion.CLASS_OPEN);
