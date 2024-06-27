@@ -51,18 +51,19 @@ import Wysiwyg from '../components/Wysiwyg/Wysiwyg.astro';
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
                     />
                 </Wysiwyg>
-                <div class="u-col-span-full u-text-body md:u-col-span-6">
-                    <Wysiwyg>
-                        <Fragment
-                            set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
-                        />
-                    </Wysiwyg>
-                </div>
+            </div>
 
-                <!-- Placeholder -->
-                <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
-                <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
+            <div class="u-col-span-full u-text-body md:u-col-span-6">
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
             </div>
         </div>
+
+        <!-- Placeholder -->
+        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
+        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
     </div>
 </Layout>
