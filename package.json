@@ -2,7 +2,7 @@
     "name": "@locomotivemtl/astro-boilerplate",
     "title": "Locomotive Boilerplate",
     "type": "module",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "engines": {
         "node": "20.x",
         "npm": ">=8.0"
