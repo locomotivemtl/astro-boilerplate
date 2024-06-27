@@ -7,11 +7,9 @@
 // @param {Number} $number Number to remove unit from
 // @return {function<number>}
 @function strip-unit($value) {
-    @if type-of($value) !="number" {
+    @if type-of($value) != 'number' {
         @error "Invalid `#{type-of($value)}` type. Choose a number type instead.";
-    }
-
-    @else if type-of($value)=="number" and not is-unitless($value) {
+    } @else if type-of($value) == 'number' and not is-unitless($value) {
         @return math.div($value, $value * 0 + 1);
     }
 
@@ -48,9 +46,7 @@
         @for $i from 1 through $exp {
             $value: $value * $number;
         }
-    }
-
-    @else if $exp < 0 {
+    } @else if $exp < 0 {
         @for $i from 1 through -$exp {
             $value: math.div($value, $number);
         }

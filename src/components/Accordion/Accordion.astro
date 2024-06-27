@@ -1,0 +1,28 @@
+---
+interface Props {
+    label: string;
+    class?: string;
+}
+
+const { label, class: propsClass, ...rest } = Astro.props;
+
+const classes = ['c-accordion', propsClass];
+---
+
+<c-accordion class:list={classes} {...rest}>
+    <details class="c-accordion_details" aria-expanded="false">
+        <summary class="c-accordion_summary">
+            <span>{label}</span>
+            <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
+        </summary>
+        <div class="c-accordion_content">
+            <slot />
+        </div>
+    </details>
+</c-accordion>
+
+<style is:global>
+    @import 'Accordion.scss';
+</style>
+
+<script src="./Accordion.ts"></script>

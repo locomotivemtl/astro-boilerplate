@@ -12,8 +12,8 @@ export default defineConfig({
                     additionalData: `
                         @use "sass:math";
                         @use "sass:list";
-                        @import "@styles/tools/maths";
-                        @import "@styles/tools/functions";
+                        @use "@styles/tools/maths" as *;
+                        @use "@styles/tools/functions" as *;
                     `
                 }
             }
