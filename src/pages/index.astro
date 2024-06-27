@@ -1,7 +1,9 @@
 ---
 import Button from '@components/Button/Button.astro';
 import Icon from '@components/Icon/Icon.astro';
+import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 import Accordion from '@components/Accordion/Accordion.astro';
+
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -14,41 +16,43 @@ import Layout from '../layouts/Layout.astro';
     <div class="u-container u-mt-fluid-xl">
         <div class="u-grid u-grid-cols-12 u-gap-gutter">
             <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
 
                 <Button href="/about" class="u-mt-fluid-s"> Learn More </Button>
-            </div>
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
-                <Button href="https://google.ca" target="_blank" class="u-mt-fluid-s">
-                    Visit Us
-                </Button>
-            </div>
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <div class="u-col-span-full u-text-body md:u-col-span-4">
+                    <Wysiwyg tag="article">
+                        <Fragment
+                            set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                        />
+                        <Button href="https://google.ca" target="_blank" class="u-mt-fluid-s">
+                            Visit Us
+                        </Button>
+                    </Wysiwyg>
+                    <div class="u-col-span-full u-text-body md:u-col-span-4">
+                        <Wysiwyg>
+                            <Fragment
+                                set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                            />
+                        </Wysiwyg>
+                    </div>
+
+                    <Accordion label="Accordion summary">
+                        <Wysiwyg>
+                            <Fragment
+                                set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                            />
+                        </Wysiwyg>
+
+                        <!-- Placeholder -->
+                        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
+                        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
+                    </Accordion>
+                </div>
             </div>
         </div>
-
-        <Accordion label="Accordion summary">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt
-            laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates
-            nam voluptatum, assumenda, atque nesciunt debitis?
-        </Accordion>
-
-        <!-- Placeholder -->
-        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
-        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
     </div>
 </Layout>
