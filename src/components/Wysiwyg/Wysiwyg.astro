@@ -15,12 +15,14 @@ const {
 const Tag = tag || 'div';
 ---
 
-{body &&
+{Astro.slots.has('default') &&
     <Tag
         class:list={['c-wysiwyg', propsClass]}
         set:html={body}
         {...rest}
-    ></Tag>
+    >
+        <slot/>
+    </Tag>
 }
 
 <style is:global>

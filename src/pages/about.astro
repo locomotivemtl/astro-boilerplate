@@ -1,6 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Image from '@components/Image/Image.astro';
+import Wysiwyg from '../components/Wysiwyg/Wysiwyg.astro';
 ---
 
 <Layout title="About">
@@ -45,18 +46,14 @@ import Image from '@components/Image/Image.astro';
         </div>
         <div class="u-grid u-grid-cols-12 u-gap-gutter">
             <div class="u-col-span-full u-text-body md:u-col-span-6">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg>
+                    <Fragment set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}/>
+                <Wysiwyg/>
             </div>
             <div class="u-col-span-full u-text-body md:u-col-span-6">
-                <p>
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis
-                    sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus
-                    voluptates nam voluptatum, assumenda, atque nesciunt debitis?
-                </p>
+                <Wysiwyg>
+                    <Fragment set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}/>
+                <Wysiwyg/>
             </div>
         </div>
 
