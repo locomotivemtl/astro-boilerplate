@@ -1,28 +1,20 @@
 ---
 interface Props {
-    tag?: 'div' | 'article',
-    body?: string;
+    tag?: 'div' | 'article';
     class?: string;
 }
 
-const {
-    tag = 'div',
-    body = null,
-    class: propsClass,
-    ...rest
-} = Astro.props;
+const { tag = 'div', class: propsClass, ...rest } = Astro.props;
 
 const Tag = tag || 'div';
 ---
 
-{Astro.slots.has('default') &&
-    <Tag
-        class:list={['c-wysiwyg', propsClass]}
-        set:html={body}
-        {...rest}
-    >
-        <slot/>
-    </Tag>
+{
+    Astro.slots.has('default') && (
+        <Tag class:list={['c-wysiwyg', propsClass]} {...rest}>
+            <slot />
+        </Tag>
+    )
 }
 
 <style is:global>
