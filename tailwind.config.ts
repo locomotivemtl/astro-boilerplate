@@ -58,7 +58,7 @@ export default {
                 containerMargin: '20px',
                 containerMarginMobile: '10px',
                 'fluid-xs': utopiaClamp(8, 10),
-                'fluid-s': utopiaClamp(16, 24),
+                'fluid-sm': utopiaClamp(16, 24),
                 'fluid-md': utopiaClamp(24, 32),
                 'fluid-lg': utopiaClamp(32, 40),
                 'fluid-xl': utopiaClamp(40, 56),
