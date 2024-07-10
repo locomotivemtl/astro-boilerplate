@@ -150,7 +150,10 @@ export default class Example {
     unbindScreenListener: () => void;
     unbindMouseListener: () => void;
     
-    constructor() {}
+    constructor() {
+        this.onResize = this.onResize.bind(this)
+        this.onMouseChange = this.onMouseChange.bind(this)
+    }
 
     // =============================================================================
     // Lifecycle
@@ -167,8 +170,8 @@ export default class Example {
     // Events
     // =============================================================================
     bindEvents() {
-        this.unbindScreenListener = $screen.listen(this.onResize.bind(this));
-        this.unbindMouseListener = $mouse.subscribe(this.onMouseChange.bind(this));
+        this.unbindScreenListener = $screen.listen(this.onResize);
+        this.unbindMouseListener = $mouse.subscribe(this.onMouseChange);
     }
 
     unbindEvents() {
