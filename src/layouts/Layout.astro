@@ -1,11 +1,14 @@
 ---
 import '@styles/main.scss';
+import { SEO } from 'astro-seo';
+import { defaultSeo } from '@data/seo';
 
 interface Props {
     title: string;
+    seo?: Seo;
 }
 
-const { title } = Astro.props;
+const { title, seo } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,7 +19,39 @@ const { title } = Astro.props;
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <meta name="generator" content={Astro.generator} />
-        <title>{title}</title>
+
+        <SEO
+            title={seo?.title || title || defaultSeo.title}
+            description={seo?.description || defaultSeo.description}
+            openGraph={{
+                basic: {
+                    type: 'website',
+                    title: seo?.social?.facebook?.title || defaultSeo.social.facebook.title,
+                    image: seo?.social?.facebook?.image?.url || defaultSeo.social.facebook.image.url
+                }
+            }}
+            twitter={{
+                creator: seo?.social?.twitter?.creator || defaultSeo.social.twitter.creator,
+                image: seo?.social?.twitter?.image?.url || defaultSeo.social.twitter.image.url,
+                title: seo?.social?.twitter?.title || defaultSeo.social.twitter.title,
+                description:
+                    seo?.social?.twitter?.description || defaultSeo.social.twitter.description
+            }}
+            canonical={seo?.advanced?.canonical || defaultSeo.advanced.canonical}
+            noindex={seo?.advanced?.robots?.includes('noindex') ||
+                defaultSeo?.advanced?.robots?.includes('noindex')}
+            nofollow={seo?.advanced?.robots?.includes('nofollow') ||
+                defaultSeo?.advanced?.robots?.includes('noindex')}
+            extend={{
+                meta: [
+                    {
+                        name: 'robots',
+                        content:
+                            seo?.advanced?.robots?.join(',') || defaultSeo.advanced.robots.join(',')
+                    }
+                ]
+            }}
+        />
 
         <!-- <link
 			rel="preload"
@@ -28,7 +63,7 @@ const { title } = Astro.props;
     </head>
     <body>
         <div class="u-container">
-            <nav class="u-flex u-gap-gutter u-py-fluid-s">
+            <nav class="u-py-fluid-s u-flex u-gap-gutter">
                 <a href="/">Index</a>
                 <a href="/about">About</a>
             </nav>
@@ -50,18 +85,17 @@ const { title } = Astro.props;
                 <a href="/about">About</a>
             </nav>
         </footer>
+        <script src="../scripts/app.ts"></script>
+        <script>
+            import { setViewportSize } from '@scripts/utils/setViewportSize';
+            import { $screenDebounce, type IScreenDebounceValues } from '@scripts/stores/screen';
+
+            // Set viewport size
+            setViewportSize();
+
+            $screenDebounce.subscribe(({ width, height }: IScreenDebounceValues) => {
+                setViewportSize();
+            });
+        </script>
     </body>
 </html>
-
-<script src="../scripts/app.ts"></script>
-<script>
-    import { setViewportSize } from '@scripts/utils/setViewportSize';
-    import { $screenDebounce, type IScreenDebounceValues } from '@scripts/stores/screen';
-
-    // Set viewport size
-    setViewportSize();
-
-    $screenDebounce.subscribe(({ width, height }: IScreenDebounceValues) => {
-        setViewportSize();
-    });
-</script>
