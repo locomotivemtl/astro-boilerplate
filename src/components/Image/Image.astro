@@ -2,7 +2,7 @@
 import { Image as AstroImage } from 'astro:assets';
 
 export interface Props {
-    src: string;
+    src: any;
     alt?: string;
     width?: number;
     height?: number;
@@ -43,24 +43,26 @@ const classes = [
 ];
 ---
 
-<Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
-    <div class="c-image_inner">
-        <AstroImage
-            class="c-image_img"
-            src={src}
-            inferSize={true}
-            widths={widths}
-            sizes={sizes}
-            width={width}
-            height={height}
-            alt={alt}
-            loading={loading}
-            onload={onLoad}
-        />
-    </div>
+{src &&
+    <Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
+        <div class="c-image_inner">
+            <AstroImage
+                class="c-image_img"
+                inferSize={typeof src === 'string'}
+                src={src}
+                widths={widths}
+                sizes={sizes}
+                width={width}
+                height={height}
+                alt={alt}
+                loading={loading}
+                onload={onLoad}
+            />
+        </div>
 
-    {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
-</Tag>
+        {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
+    </Tag>
+}
 
 <style is:global>
     @import 'Image.scss';

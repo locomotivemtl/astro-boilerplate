@@ -14,10 +14,12 @@ import Wysiwyg from '../components/Wysiwyg/Wysiwyg.astro';
     <div class="u-container u-mt-fluid-xl">
         <div>
             <Image
-                src="https://locomotive.ca/uploads/careers/fullscreen-image-footer-2000w.jpg"
+                src={import('../assets/images/printer.jpg')}
                 alt="Placeholder alt"
-                caption="Loading eager"
+                caption="Static image & Loading eager"
                 loading="eager"
+                width={500}
+                height={200}
             />
         </div>
         <div class="u-grid u-grid-cols-2 u-gap-gutter">
