@@ -16,6 +16,9 @@
             "@layouts/*": [
                 "./src/layouts/*"
             ],
+            "@images/*": [
+                "./src/assets/images/*"
+            ],
             "@pages/*": [
                 "./src/pages/*"
             ],
