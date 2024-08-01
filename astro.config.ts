@@ -1,6 +1,8 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import svgSprite from 'astro-svg-sprite';
+import tailwindConfig from './tailwind.config';
+import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 
 // https://astro.build/config
 export default defineConfig({
@@ -16,6 +18,11 @@ export default defineConfig({
                         @use "@styles/tools/functions" as *;
                     `
                 }
+            },
+            postcss: {
+                plugins: [
+                    postcssTailwindShortcuts(tailwindConfig.theme),
+                ],
             }
         }
     },
