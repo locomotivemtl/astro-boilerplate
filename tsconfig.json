@@ -16,6 +16,9 @@
             "@layouts/*": [
                 "./src/layouts/*"
             ],
+            "@images/*": [
+                "./src/assets/images/*"
+            ],
             "@pages/*": [
                 "./src/pages/*"
             ],
@@ -27,6 +30,12 @@
             ],
             "@types/*": [
                 "types/*"
+            ],
+            "@images/*": [
+                "./src/assets/images/*"
+            ],
+            "@data/*": [
+                "./src/data/*"
             ]
         }
     }

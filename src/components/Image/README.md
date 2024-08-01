@@ -7,7 +7,7 @@ The Image component extends Astro’s built-in [`<Image />` (`astro:assets`)](ht
 
 | Prop       | Type                           | Required | Default                                                    | Description                                           |
 |------------|--------------------------------|----------|------------------------------------------------------------|-------------------------------------------------------|
-| `src`      | `string`                       | Yes      | None                                                        | The source path of the image.                         |
+| `src`      | `any`                          | Yes      | None                                                        | The source path of the image.                         |
 | `alt`      | `string`                       | No       | `''`                                                       | Alternative text for the image.                       |
 | `width`    | `number`                       | No       | None                                                        | The width of the image.                               |
 | `height`   | `number`                       | No       | None                                                        | The height of the image.                              |
@@ -26,7 +26,7 @@ The Image component extends Astro’s built-in [`<Image />` (`astro:assets`)](ht
 Image will render with its original ratio and take the full width of the parent.
 
 ```astro
-<Image src="/images/photo.jpg" alt="A beautiful scenery" />
+<Image src={import('@images/printer.jpg')} alt="A beautiful scenery" />
 ```
 
 ### Using a Figure Tag with Caption
@@ -35,7 +35,7 @@ Wraps the image in a `<figure>` tag and includes a caption(`<figcaption>`) below
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     tag="figure" 
     caption="This is a beautiful scenery" 
@@ -48,7 +48,7 @@ Specifies custom [sizes and widths](https://docs.astro.build/en/guides/images/#w
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     sizes="(max-width: 800px) 100vw, 800px" 
     widths={[400, 800, 1200]} 
@@ -61,7 +61,7 @@ Adds custom CSS classes to the image component for additional styling, concatena
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     class="c-custom-class -a-modifier" 
 />
@@ -73,7 +73,7 @@ Sets specific width and height for the image, ensuring it maintains these dimens
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     width="800" 
     height="600" 
@@ -86,7 +86,7 @@ Uses lazy loading to defer the loading of the image until it is near the viewpor
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     loading="lazy" 
 />
@@ -98,12 +98,23 @@ Integrates the image with Locomotive Scroll, providing smooth scrolling effects.
 
 ```astro
 <Image 
-    src="/images/photo.jpg" 
+    src={import('@images/printer.jpg')}
     alt="A beautiful scenery" 
     data-scroll
 />
 ```
 
-## To Do
+### Static images
 
-- [ ] Add focal point support
+Use this approach to include static images in your project. Images are imported with JavaScript using and import alias (`@images`). KWe recommend that local images are kept in src/ when possible so that Astro can transform, optimize and bundle them. Files in the /public directory are always served or copied into the build folder as-is, with no processing.
+
+```astro
+<Image
+    src={import('@images/printer.jpg')}
+    alt="Placeholder alt"
+    caption="Static image & Loading eager"
+    loading="eager"
+    width={500}
+    height={200}
+/>
+```
