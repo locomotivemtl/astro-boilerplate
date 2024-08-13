@@ -6,15 +6,15 @@ export const getSeo = (seo: ISeo, defaultSeo: ISeo, pageTitle: string | null = n
     return {
         title,
         description,
-        openGraph:{
+        openGraph: {
             basic: {
                 type: 'website',
-                title: seo?.social?.facebook?.title || defaultSeo.social?.facebook?.title || title,
+                title: seo?.social?.facebook?.title || defaultSeo.social?.facebook?.title || title || '',
                 description: seo?.social?.facebook?.description || defaultSeo.social?.facebook?.description || description,
-                image: seo?.social?.facebook?.image?.url || defaultSeo.social?.facebook?.image?.url
+                image: seo?.social?.facebook?.image?.url || defaultSeo.social?.facebook?.image?.url || ''
             }
         },
-        twitter:{
+        twitter: {
             creator: seo?.social?.twitter?.creator || defaultSeo.social?.twitter?.creator,
             image: seo?.social?.twitter?.image?.url || defaultSeo.social?.twitter?.image?.url,
             title: seo?.social?.twitter?.title || defaultSeo.social?.twitter?.title || title,
@@ -23,7 +23,7 @@ export const getSeo = (seo: ISeo, defaultSeo: ISeo, pageTitle: string | null = n
         canonical: seo?.advanced?.canonical || defaultSeo.advanced?.canonical,
         noindex: seo?.advanced?.robots?.includes('noindex') || defaultSeo?.advanced?.robots?.includes('noindex'),
         nofollow: seo?.advanced?.robots?.includes('nofollow') || defaultSeo?.advanced?.robots?.includes('noindex'),
-        extend:{
+        extend: {
             meta: [
                 {
                     name: 'robots',
