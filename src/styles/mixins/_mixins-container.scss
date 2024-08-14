@@ -1,18 +1,15 @@
 // ==========================================================================
 // MIXINS / CONTAINERS
 // ==========================================================================
-@mixin -container-commons {
+@mixin -container {
     --container-margin: theme('margin.containerMarginMobile');
+
     margin-right: auto;
     margin-left: auto;
-
-    @screen sm {
-        --container-margin: theme('margin.containerMargin');
-    }
-}
-
-@mixin -container {
-    @include -container-commons;
     padding-left: var(--container-margin);
     padding-right: var(--container-margin);
+
+    @media (screen(sm)) {
+        --container-margin: theme('margin.containerMargin');
+    }
 }
