@@ -11,17 +11,17 @@
     --button-gap: 25px;
 
     // Idle state - Default styles
-    --button-color: #{theme('colors.white')};
-    --button-background: #{theme('colors.black')};
+    --button-color: #{color('white')};
+    --button-background: #{color('black')};
     --button-stroke-color: transparent;
 
     // Hover state - Default styles
-    --button-color-hover: #{theme('colors.white')};
+    --button-color-hover: #{color('white')};
     --button-background-hover: grey;
 
     // Active state - Default styles
-    --button-color-active: #{theme('colors.black')};
-    --button-background-active: #{theme('colors.white')};
+    --button-color-active: #{color('black')};
+    --button-background-active: #{color('white')};
 }
 
 .c-button {
@@ -36,8 +36,7 @@
     font-size: var(--button-font-size);
     background-color: var(--button-background);
     border: 1px solid var(--button-stroke-color);
-    transition: background-color theme('transitionDuration.default')
-        theme('transitionTimingFunction.default');
+    transition: background-color speed() ease();
 
     // Hover
     @media (hover: hover) {
