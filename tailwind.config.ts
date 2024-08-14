@@ -24,7 +24,7 @@ export default {
             fontSize: {
                 h1: utopiaClamp(60, 120),
                 h2: utopiaClamp(40, 80),
-                body: utopiaClamp(14, 16),
+                'body-reg': utopiaClamp(14, 16),
                 button: '14px',
             },
             colors: {
