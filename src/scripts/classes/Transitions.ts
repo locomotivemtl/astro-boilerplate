@@ -23,8 +23,6 @@ export class Transitions {
         this.onContentReplaceBind = this.onContentReplace.bind(this);
         this.onAnimationInEndBind = this.onAnimationInEnd.bind(this);
         this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this);
-
-        this.init();
     }
 
     // =============================================================================
@@ -54,7 +52,8 @@ export class Transitions {
                     awaitAssets: true
                 }),
                 new SwupPreloadPlugin({
-                    preloadHoveredLinks: true
+                    preloadHoveredLinks: true,
+                    preloadInitialPage: !import.meta.env.DEV
                 }),
                 new SwupScriptsPlugin()
             ]
@@ -79,7 +78,7 @@ export class Transitions {
     /**
      * Retrieve HTML dataset on next container and update our real html element dataset accordingly
      *
-     * @param visit
+     * @param visit: VisitType
      */
     updateDocumentAttributes(visit: VisitType) {
         if (visit.fragmentVisit) return;
@@ -104,9 +103,9 @@ export class Transitions {
      * Transition to a new page begins
      *
      * @see https://swup.js.org/hooks/#visit-start
-     * @param visit
+     * @param visit: VisitType
      */
-    onVisitStart(visit: VisitType) {
+    onVisitStart() {
         document.documentElement.classList.add(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.remove(Transitions.READY_CLASS);
     }
@@ -116,9 +115,9 @@ export class Transitions {
      * The old content of the page is replaced by the new content.
      *
      * @see https://swup.js.org/hooks/#content-replace
-     * @param visit
+     * @param visit: VisitType
      */
-    beforeContentReplace(visit: VisitType) {
+    beforeContentReplace() {
         Scroll?.destroy();
     }
 
@@ -127,7 +126,7 @@ export class Transitions {
      * The old content of the page is replaced by the new content.
      *
      * @see https://swup.js.org/hooks/#content-replace
-     * @param visit
+     * @param visit: VisitType
      */
     onContentReplace(visit: VisitType) {
         Scroll?.init();
@@ -139,18 +138,18 @@ export class Transitions {
      * Current content starts animating out. Class `.is-animating` is added.
      *
      * @see https://swup.js.org/hooks/#animation-out-start
-     * @param visit
+     * @param visit: VisitType
      */
-    onAnimationOutStart(visit: VisitType) {}
+    onAnimationOutStart() {}
 
     /**
      * On animation:in:end
      * New content finishes animating out.
      *
      * @see https://swup.js.org/hooks/#animation-in-end
-     * @param visit
+     * @param visit: VisitType
      */
-    onAnimationInEnd(visit: VisitType) {
+    onAnimationInEnd() {
         document.documentElement.classList.remove(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.add(Transitions.READY_CLASS);
     }

@@ -96,12 +96,10 @@ const FONTS: string[] = [
         <script src="../scripts/app.ts"></script>
         <script>
             import { setViewportSize } from '@scripts/utils/setViewportSize';
-            import { $screenDebounce, type IScreenDebounceValues } from '@scripts/stores/screen';
+            import { $screenDebounce } from '@scripts/stores/screen';
 
             // Set viewport size
-            setViewportSize();
-
-            $screenDebounce.subscribe(({ width, height }: IScreenDebounceValues) => {
+            $screenDebounce.subscribe(() => {
                 setViewportSize();
             });
         </script>
