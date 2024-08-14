@@ -55,8 +55,8 @@
 // Global styles
 // ==========================================================================
 :root {
-    --color-primary: theme('colors.black');
-    --color-secondary: theme('colors.white');
+    --color-primary: color('black');
+    --color-secondary: color('white');
 }
 
 html {
