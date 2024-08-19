@@ -1,6 +1,6 @@
 import metaImage from '@images/meta.png';
 
-export const defaultSeo: ISeo = {
+export const defaultSeo: Seo = {
     title: 'Astro boilerplate',
     description: 'Boilerplate for Astro',
     social: {

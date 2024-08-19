@@ -1,4 +1,4 @@
-interface ISeo {
+interface Seo {
     title?: string;
     description?: string;
     social?: {

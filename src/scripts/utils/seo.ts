@@ -1,4 +1,4 @@
-export const getSeo = (seo: ISeo, defaultSeo: ISeo, pageTitle: string | null = null) => {
+export const getSeo = (seo: Seo, defaultSeo: Seo, pageTitle: string | null = null) => {
 
     const title = seo?.title || pageTitle || defaultSeo.title
     const description = seo?.description || defaultSeo.description
