@@ -6,7 +6,7 @@ import { getSeo } from '@scripts/utils/seo';
 
 interface Props {
     title: string;
-    seo?: ISeo;
+    seo?: Seo;
 }
 
 const { title, seo = {} } = Astro.props;
@@ -68,12 +68,12 @@ const FONTS: string[] = [
         <script src="../scripts/app.ts"></script>
         <script>
             import { setViewportSize } from '@scripts/utils/setViewportSize';
-            import { $screenDebounce, type IScreenDebounceValues } from '@scripts/stores/screen';
+            import { $screenDebounce, type ScreenDebounceValues } from '@scripts/stores/screen';
 
             // Set viewport size
             setViewportSize();
 
-            $screenDebounce.subscribe(({ width, height }: IScreenDebounceValues) => {
+            $screenDebounce.subscribe(({ width, height }: ScreenDebounceValues) => {
                 setViewportSize();
             });
         </script>
