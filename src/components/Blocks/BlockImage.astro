@@ -1,0 +1,25 @@
+---
+import Image from '@components/Image/Image.astro';
+import type { Props as ImageProps } from '@components/Image/Image.astro';
+
+interface Props extends ImageProps {
+    // imported from Image.astro
+}
+
+const { src = '', caption, alt, width, height } = Astro.props;
+---
+
+{src && (
+    <div class="u-my-fluid-xl">
+        <Image
+            src={src}
+            alt={alt}
+            caption={caption}
+            width={width}
+            height={height}
+            loading="lazy"
+            data-scroll
+            data-scroll-repeat
+        />
+    </div>
+)}
