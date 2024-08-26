@@ -2,15 +2,16 @@
 interface Props {
     label: string;
     class?: string;
+    name?: string; // Used for a11y @see https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/
 }
 
-const { label, class: propsClass, ...rest } = Astro.props;
+const { label, name, class: propsClass, ...rest } = Astro.props;
 
 const classes = ['c-accordion', propsClass];
 ---
 
 <c-accordion class:list={classes} {...rest}>
-    <details class="c-accordion_details" aria-expanded="false">
+    <details class="c-accordion_details" name={name}>
         <summary class="c-accordion_summary">
             <span>{label}</span>
             <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
