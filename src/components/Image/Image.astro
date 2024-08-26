@@ -43,25 +43,27 @@ const classes = [
 ];
 ---
 
-{src &&
-    <Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
-        <div class="c-image_inner">
-            <AstroImage
-                class="c-image_img"
-                inferSize={typeof src === 'string'}
-                src={src}
-                widths={widths}
-                sizes={sizes}
-                width={width}
-                height={height}
-                alt={alt}
-                loading={loading}
-                onload={onLoad}
-            />
-        </div>
+{
+    src && (
+        <Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
+            <div class="c-image_inner">
+                <AstroImage
+                    class="c-image_img"
+                    inferSize={typeof src === 'string'}
+                    src={src}
+                    widths={widths}
+                    sizes={sizes}
+                    width={width}
+                    height={height}
+                    alt={alt}
+                    loading={loading}
+                    onload={onLoad}
+                />
+            </div>
 
-        {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
-    </Tag>
+            {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}
+        </Tag>
+    )
 }
 
 <style is:global>

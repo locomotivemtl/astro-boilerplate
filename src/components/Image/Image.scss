@@ -20,7 +20,9 @@
         .c-image.-lazy-load & {
             opacity: 0;
             transform: scale(1.1, 1.1);
-            transition: transform speed(slow) ease(), opacity speed(slow) ease();
+            transition:
+                transform speed(slow) ease(),
+                opacity speed(slow) ease();
         }
 
         // Image is loaded

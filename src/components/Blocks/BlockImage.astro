@@ -9,17 +9,19 @@ interface Props extends ImageProps {
 const { src = '', caption, alt, width, height } = Astro.props;
 ---
 
-{src && (
-    <div class="u-my-fluid-xl">
-        <Image
-            src={src}
-            alt={alt}
-            caption={caption}
-            width={width}
-            height={height}
-            loading="lazy"
-            data-scroll
-            data-scroll-repeat
-        />
-    </div>
-)}
+{
+    src && (
+        <div class="u-my-fluid-xl">
+            <Image
+                src={src}
+                alt={alt}
+                caption={caption}
+                width={width}
+                height={height}
+                loading="lazy"
+                data-scroll
+                data-scroll-repeat
+            />
+        </div>
+    )
+}
