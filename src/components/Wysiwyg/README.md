@@ -7,7 +7,7 @@ This component renders rich text content with a specified HTML tag, allowing for
 
 | Prop         | Type     | Required | Default | Description                                           |
 |--------------|----------|----------|---------|-------------------------------------------------------|
-| `tag`        | `string` | No       | `'div'` | The container tag                                     |
+| `tag`        | `string` | No       | `'div'` | The container tag.                                    |
 | `class`      | `string` | No       | None    | Additional class names to style the component.        |
 
 ## Example Usage
