@@ -13,7 +13,7 @@ const { title, seo } = Astro.props;
 const FONTS: string[] = [
     // 'WebfontRegular.woff2',
     // 'WebfontBold.woff2',
-]
+];
 ---
 
 <!doctype html>
@@ -58,16 +58,17 @@ const FONTS: string[] = [
         />
 
         <!-- Fonts -->
-        {FONTS.map(font =>
-            <link
-                rel="preload"
-                href={`/fonts/${font}`}
-                as="font"
-                type="font/woff2"
-                crossorigin
-            />
-        )}
-
+        {
+            FONTS.map((font) => (
+                <link
+                    rel="preload"
+                    href={`/fonts/${font}`}
+                    as="font"
+                    type="font/woff2"
+                    crossorigin
+                />
+            ))
+        }
     </head>
     <body>
         <div class="u-container">

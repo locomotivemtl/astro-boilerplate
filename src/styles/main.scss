@@ -86,7 +86,9 @@ html.is-animating .transition-fade {
 
 .shortcut-functions {
     background-color: color('primary');
-    transition: opacity speed(fast) ease() speed(fast), opacity speed(fast) ease() speed(slow);
+    transition:
+        opacity speed(fast) ease() speed(fast),
+        opacity speed(fast) ease() speed(slow);
     transition-duration: speed(slow);
     padding: spacing('fluid-sm');
     z-index: z();

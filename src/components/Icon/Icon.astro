@@ -2,19 +2,29 @@
 interface Props {
     name: string;
     class?: string;
+    ariaLabel?: string;
 }
 
-const { name, class: propsClass, ...rest } = Astro.props;
+const { name, ariaLabel, class: propsClass, ...rest } = Astro.props;
+
+const computedAriaLabel = ariaLabel ?? undefined;
+const computedArialHidden = computedAriaLabel ? 'false' : 'true';
+const computedFocusable = computedAriaLabel ? 'true' : 'false';
 
 const classes = ['c-icon', propsClass];
 
-const className = `svg-${name}`;
-const xlink = `/assets/images/sprite.svg#${name}`;
+const svgClassName = `svg-${name}`;
+const link = `/assets/images/sprite.svg#${name}`;
 ---
 
 <span class:list={classes} {...rest}>
-    <svg class={className} aria-hidden="true" focusable="false">
-        <use xlink:href={xlink}></use>
+    <svg
+        class={svgClassName}
+        aria-label={computedAriaLabel}
+        aria-hidden={computedArialHidden}
+        focusable={computedFocusable}
+    >
+        <use href={link}></use>
     </svg>
 </span>
 
