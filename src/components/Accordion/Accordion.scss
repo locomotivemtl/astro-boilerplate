@@ -7,6 +7,7 @@ $accordion-summary-padding-y: 12px;
 
 .c-accordion {
     position: relative;
+    display: block;
 }
 
 .c-accordion_summary {
@@ -18,7 +19,8 @@ $accordion-summary-padding-y: 12px;
     padding: $accordion-summary-padding-y $accordion-summary-padding-x;
     user-select: none;
     cursor: pointer;
-    transition: opacity speed() ease();
+    transition: opacity theme('transitionDuration.default')
+        theme('transitionTimingFunction.default');
 
     &::marker {
         display: none;
@@ -34,7 +36,8 @@ $accordion-summary-padding-y: 12px;
 .c-accordion_icon {
     flex-shrink: 0;
     transform: rotateX(0);
-    transition: transform speed() ease();
+    transition: transform theme('transitionDuration.default')
+        theme('transitionTimingFunction.default');
 
     .c-accordion_details[open] & {
         transform: rotateX(180deg);
