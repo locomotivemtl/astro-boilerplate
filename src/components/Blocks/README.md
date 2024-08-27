@@ -4,9 +4,9 @@ This component renders a series of content blocks. The component uses a switch s
 
 ## Properties
 
-| Prop    | Type       | Required | Default | Description                                                           |
-|---------|------------|----------|---------|-----------------------------------------------------------------------|
-| `blocks` | `Block[]` | Yes      | None    | An array of block objects, each containing a type and associated data.|
+| Prop    | Type       | Required | Default | Description                                                            |
+|---------|------------|----------|---------|------------------------------------------------------------------------|
+| `blocks` | `Block[]` | Yes      | None    | An array of block objects, each containing a type and associated data. |
 
 ## Block Object Structure
 
