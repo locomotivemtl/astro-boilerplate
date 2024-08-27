@@ -37,7 +37,22 @@ To use the Button component, include it in your Astro project and pass the desir
 <Button href="https://example.com" target="_blank">Go to Example</Button>
 ```
 
+### External Link Button that applies [WCAG 2.2 G201]
+
+The objective of this technique is to provide a warning before automatically opening a new window or tab.
+
+```astro
+<body>
+    ...
+    <Button href="https://example.com/" target="_blank" aria-describedby="new-win-desc">Go to Example</Button>
+	...
+	<div id="new-win-desc" hidden>opens in a new window</div>
+</body>
+```
+
 ## To Do
 
 - [ ] Integrate icons
 - [ ] Separate logic of "external" VS "_blank".
+
+[WCAG 2.2 G201]: https://www.w3.org/WAI/WCAG22/Techniques/general/G201
