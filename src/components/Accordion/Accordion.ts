@@ -1,31 +1,31 @@
 export default class Accordion extends HTMLElement {
-
-    private $el: HTMLDetailsElement;
+    static readonly DURATION = 300;
+    static readonly CLASS_OPEN = 'is-open';
+    private onClickBind: any;
+    private $root: HTMLDetailsElement;
     private $summary: HTMLElement;
     private $content: HTMLElement;
     private $parent: HTMLElement | null;
-
     private animation: Animation | null;
-    private isOpen: boolean;
-
-    static readonly DURATION = 300;
-    static readonly CLASS_OPEN = 'is-open';
+    private isClosing: boolean;
+    private isExpanding: boolean;
 
     constructor() {
         super();
 
+        // Binding
+        this.onClickBind = this.onClick.bind(this);
+
         // UI
-        this.$el = this.querySelector('details.c-accordion_details')!;
-        this.$summary = this.$el.querySelector('summary.c-accordion_summary')!;
-        this.$content = this.$el.querySelector('.c-accordion_content')!;
+        this.$root = this.querySelector('details.c-accordion_details')!;
+        this.$summary = this.$root.querySelector('summary.c-accordion_summary')!;
+        this.$content = this.$root.querySelector('.c-accordion_content')!;
         this.$parent = this.closest('[data-accordion-parent]') || null;
 
         // Data
         this.animation = null;
-        this.isOpen = this.$el.open;
-
-        // Binding
-        this.onClick = this.onClick.bind(this);
+        this.isClosing = false;
+        this.isExpanding = false;
     }
 
     // =============================================================================
@@ -43,10 +43,10 @@ export default class Accordion extends HTMLElement {
     // Events
     // =============================================================================
     bindEvents() {
-        this.$summary.addEventListener('click', this.onClick);
+        this.$summary.addEventListener('click', this.onClickBind);
     }
     unbindEvents() {
-        this.$summary.removeEventListener('click', this.onClick);
+        this.$summary.removeEventListener('click', this.onClickBind);
     }
 
     // =============================================================================
@@ -55,12 +55,12 @@ export default class Accordion extends HTMLElement {
     onClick(e: Event) {
         e.preventDefault();
 
-        this.$el.style.overflow = 'hidden';
+        this.$root.style.overflow = 'hidden';
 
-        if (this.isOpen) {
+        if (this.isClosing || !this.$root.open) {
+            this.start();
+        } else if (this.isExpanding || this.$root.open) {
             this.shrink();
-        } else {
-            this.expand();
         }
     }
 
@@ -68,26 +68,25 @@ export default class Accordion extends HTMLElement {
     // Methods
     // =============================================================================
     shrink() {
-        this.isOpen = false;
-        this.$el.classList.remove(Accordion.CLASS_OPEN);
+        this.isClosing = true;
+        this.$root.classList.remove(Accordion.CLASS_OPEN);
 
-        if (this.$parent) {
-            this.$parent.classList.remove(Accordion.CLASS_OPEN);
-        }
+        if (this.$parent) this.$parent.classList.remove(Accordion.CLASS_OPEN);
 
-        const startHeight = `${this.$el.offsetHeight}px`;
+        const startHeight = `${this.$root.offsetHeight}px`;
         const endHeight = `${this.$summary.offsetHeight}px`;
 
         if (this.animation) {
             this.animation.cancel();
         }
 
-        this.animation = this.$el.animate(
+        this.animation = this.$root.animate(
             {
                 height: [startHeight, endHeight]
             },
             {
                 duration: Accordion.DURATION,
+
                 easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
             }
         );
@@ -95,60 +94,60 @@ export default class Accordion extends HTMLElement {
         if (this.animation) {
             this.animation.onfinish = () => this.onAnimationFinish(false);
             this.animation.oncancel = () => {
-                this.$el.classList.add(Accordion.CLASS_OPEN);
+                this.isClosing = false;
+                this.$root.classList.add(Accordion.CLASS_OPEN);
             };
         }
     }
 
     start() {
+        this.$root.style.height = `${this.$root.offsetHeight}px`;
+
+        window.requestAnimationFrame(() => this.expand());
     }
 
     expand() {
-        this.isOpen = true;
-        this.$el.style.height = `${this.$el.offsetHeight}px`;
+        this.isExpanding = true;
+        this.$root.classList.add(Accordion.CLASS_OPEN);
 
-        window.requestAnimationFrame(() => {
+        if (this.$parent) this.$parent.classList.add(Accordion.CLASS_OPEN);
 
-            this.$el.classList.add(Accordion.CLASS_OPEN);
+        const startHeight = `${this.$root.offsetHeight}px`;
+        const endHeight = `${this.$summary.offsetHeight + this.$content.offsetHeight}px`;
 
-            if (this.$parent) {
-                this.$parent.classList.add(Accordion.CLASS_OPEN);
+        if (this.animation) {
+            this.animation?.cancel();
+        }
+
+        this.animation = this.$root.animate(
+            {
+                height: [startHeight, endHeight]
+            },
+            {
+                duration: Accordion.DURATION,
+                easing: 'linear'
             }
+        );
 
-            const startHeight = `${this.$el.offsetHeight}px`;
-            const endHeight = `${this.$summary.offsetHeight + this.$content.offsetHeight}px`;
-
-            if (this.animation) {
-                this.animation?.cancel();
-            }
-
-            this.$el.open = true;
-
-            this.animation = this.$el.animate(
-                {
-                    height: [startHeight, endHeight]
-                },
-                {
-                    duration: Accordion.DURATION,
-                    easing: 'linear'
-                }
-            );
-
-            if (this.animation) {
-                this.animation.onfinish = () => this.onAnimationFinish(true);
-                this.animation.oncancel = () => {
-                    this.$el.classList.remove(Accordion.CLASS_OPEN);
-                };
-            }
-        });
+        if (this.animation) {
+            this.animation.onfinish = () => this.onAnimationFinish(true);
+            this.animation.oncancel = () => {
+                this.isExpanding = false;
+                this.$root.classList.remove(Accordion.CLASS_OPEN);
+            };
+        }
     }
 
     onAnimationFinish(open: boolean) {
-        this.$el.open = open;
-        this.$el.setAttribute('aria-expanded', `${open}`);
+        this.$root.open = open;
+        this.$root.setAttribute('aria-expanded', `${open}`);
 
         this.animation = null;
-        this.$el.style.height = this.$el.style.overflow = '';
+
+        this.isClosing = false;
+        this.isExpanding = false;
+
+        this.$root.style.height = this.$root.style.overflow = '';
     }
 }
 
