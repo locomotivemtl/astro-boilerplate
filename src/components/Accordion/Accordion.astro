@@ -2,7 +2,7 @@
 interface Props {
     label: string;
     class?: string;
-    name?: string; // Used for a11y @see https://developer.mozilla.org/en-US/blog/html-details-exclusive-accordions/
+    name?: string;
 }
 
 const { label, name, class: propsClass, ...rest } = Astro.props;
