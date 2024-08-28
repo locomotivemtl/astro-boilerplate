@@ -5,6 +5,9 @@ import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 import Accordion from '@components/Accordion/Accordion.astro';
 
 import Layout from '../layouts/Layout.astro';
+
+// @warn This page is not prerendered. It is required for authentication.
+export const prerender = false;
 ---
 
 <Layout title="Welcome to the Locomotive Astro Boilerplate.">
