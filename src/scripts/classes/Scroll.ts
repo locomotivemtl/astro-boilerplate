@@ -1,10 +1,6 @@
 import { $scroll } from '@scripts/stores/scroll';
-import LocomotiveScroll from 'node_modules/locomotive-scroll';
 
-import type {
-    ILenisScrollToOptions,
-    lenisTargetScrollTo
-} from 'node_modules/locomotive-scroll/dist/types/types';
+import LocomotiveScroll, {type lenisTargetScrollTo, type ILenisScrollToOptions }  from 'locomotive-scroll';
 
 export class Scroll {
     static locomotiveScroll: LocomotiveScroll;
