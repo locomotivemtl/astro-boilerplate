@@ -102,17 +102,19 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 })
 ```
 
-## Prefers reduced motion
+## Device Status
 
-### $prefersReducedMotion
+### $mediaStatus
 
-| Type      | Description                                              |
-| --------- | -------------------------------------------------------- |
-| `boolean` | Returns `true` if the user has enabled reduced motion preferences, otherwise returns `false` |
+| Prop              | Type      | Description                                                                                                      |
+| ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------- |
+| `isReducedMotion` | `boolean` | Returns `true` if the user has enabled reduced motion preferences, otherwise returns `false`                     |
+| `isTouchScreen`   | `boolean` | Returns `true` if the condition match with the touchscreen mediaquery, otherwise returns `false`                 |
+| `isTouchOrSmall`  | `boolean` | Returns `true` if the condition match with the touchscreen or small screen mediaquery, otherwise returns `false` |
 
 ```ts
-$prefersReducedMotion.subscribe((reducedMotion: boolean) => {
-    console.log('Reduced motion:', reducedMotion);
+subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
+    console.log(value);
 })
 ```
 
