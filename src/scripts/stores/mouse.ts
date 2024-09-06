@@ -2,14 +2,14 @@ import { map } from 'nanostores';
 import { $screen } from '@scripts/stores/screen';
 import { normalize, roundToDecimals } from '@scripts/utils/maths';
 
-export interface IMouseState {
+export type MouseState = {
     x: number;
     y: number;
     normalizedX: number;
     normalizedY: number;
 }
 
-export interface ISmoothMouseState {
+export type SmoothMouseState = {
     smoothX: number;
     smoothY: number;
     smoothNormalizedX: number;
@@ -20,14 +20,14 @@ export interface ISmoothMouseState {
 const HALF_SCREEN_WIDTH = $screen.value!.width * 0.5;
 const HALF_SCREEN_HEIGHT = $screen.value!.height * 0.5;
 
-export const $mouse = map<IMouseState>({
+export const $mouse = map<MouseState>({
     x: HALF_SCREEN_WIDTH,
     y: HALF_SCREEN_HEIGHT,
     normalizedX: 0,
     normalizedY: 0
 });
 
-export const $smoothMouse = map<ISmoothMouseState>({
+export const $smoothMouse = map<SmoothMouseState>({
     smoothX: HALF_SCREEN_WIDTH,
     smoothY: HALF_SCREEN_HEIGHT,
     smoothNormalizedX: 0,

@@ -1,4 +1,4 @@
-type Seo = {
+interface Seo {
     title?: string;
     description?: string;
     social?: {
