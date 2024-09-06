@@ -28,7 +28,7 @@ export type MediaQueries = {
 export const $mediaQueries = map<MediaQueries>({
     reducedMotion: `(prefers-reduced-motion: reduce)`,
     touchScreen: `(hover: none)`,
-    touchOrSmall: `(max-width: ${$breakpoints.value?.sm}), (hover: none)`
+    touchOrSmall: `(max-width: ${Number($breakpoints.value?.sm.replace('px', '')) - 1}px), (hover: none)`
 });
 
 // =============================================================================
