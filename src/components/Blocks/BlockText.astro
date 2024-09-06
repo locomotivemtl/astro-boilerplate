@@ -1,0 +1,17 @@
+---
+import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
+
+interface Props {
+    body?: string;
+}
+
+const { body } = Astro.props;
+---
+
+{
+    body && (
+        <Wysiwyg class="u-mx-auto u-my-fluid-xl u-max-w-3xl">
+            <Fragment set:html={body} />
+        </Wysiwyg>
+    )
+}

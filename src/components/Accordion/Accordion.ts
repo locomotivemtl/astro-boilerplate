@@ -140,7 +140,6 @@ export default class Accordion extends HTMLElement {
 
     onAnimationFinish(open: boolean) {
         this.$root.open = open;
-        this.$root.setAttribute('aria-expanded', `${open}`);
 
         this.animation = null;
 

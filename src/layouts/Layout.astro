@@ -16,7 +16,7 @@ const seoData = getSeo(seo, defaultSeo, title)
 const FONTS: string[] = [
     // 'WebfontRegular.woff2',
     // 'WebfontBold.woff2',
-]
+];
 ---
 
 <!doctype html>
@@ -30,22 +30,24 @@ const FONTS: string[] = [
         <SEO {...seoData} />
 
         <!-- Fonts -->
-        {FONTS.map(font =>
-            <link
-                rel="preload"
-                href={`/fonts/${font}`}
-                as="font"
-                type="font/woff2"
-                crossorigin
-            />
-        )}
-
+        {
+            FONTS.map((font) => (
+                <link
+                    rel="preload"
+                    href={`/fonts/${font}`}
+                    as="font"
+                    type="font/woff2"
+                    crossorigin
+                />
+            ))
+        }
     </head>
     <body>
         <div class="u-container">
             <nav class="u-flex u-gap-gutter u-py-fluid-md">
                 <a href="/">Index</a>
                 <a href="/about">About</a>
+                <a href="/post">The post</a>
             </nav>
         </div>
 
@@ -68,12 +70,10 @@ const FONTS: string[] = [
         <script src="../scripts/app.ts"></script>
         <script>
             import { setViewportSize } from '@scripts/utils/setViewportSize';
-            import { $screenDebounce, type ScreenDebounceValues } from '@scripts/stores/screen';
+            import { $screenDebounce } from '@scripts/stores/screen';
 
             // Set viewport size
-            setViewportSize();
-
-            $screenDebounce.subscribe(({ width, height }: ScreenDebounceValues) => {
+            $screenDebounce.subscribe(() => {
                 setViewportSize();
             });
         </script>

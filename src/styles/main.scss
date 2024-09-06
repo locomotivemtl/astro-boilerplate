@@ -35,7 +35,7 @@
 // ==========================================================================
 // Vendors
 // ==========================================================================
-@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import 'locomotive-scroll/dist/locomotive-scroll';
 
 // ==========================================================================
 // Local files imports
@@ -55,8 +55,8 @@
 // Global styles
 // ==========================================================================
 :root {
-    --color-primary: theme('colors.black');
-    --color-secondary: theme('colors.white');
+    --color-primary: color('black');
+    --color-secondary: color('white');
 }
 
 html {
@@ -86,7 +86,9 @@ html.is-animating .transition-fade {
 
 .shortcut-functions {
     background-color: color('primary');
-    transition: opacity speed(fast) ease() speed(fast), opacity speed(fast) ease() speed(slow);
+    transition:
+        opacity speed(fast) ease() speed(fast),
+        opacity speed(fast) ease() speed(slow);
     transition-duration: speed(slow);
     padding: spacing('fluid-sm');
     z-index: z();

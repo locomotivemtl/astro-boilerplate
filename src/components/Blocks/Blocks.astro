@@ -1,0 +1,30 @@
+---
+import BlockText from './BlockText.astro';
+import BlockImage from './BlockImage.astro';
+
+export interface Block {
+    type: string;
+    data: any;
+}
+
+export interface Props {
+    blocks: Block[];
+}
+
+const { blocks } = Astro.props;
+---
+
+<div>
+    {
+        blocks.map((block) => {
+            switch (block.type) {
+                case 'text':
+                    return <BlockText {...block.data} />;
+                case 'image':
+                    return <BlockImage {...block.data} />;
+                default:
+                    return null;
+            }
+        })
+    }
+</div>
