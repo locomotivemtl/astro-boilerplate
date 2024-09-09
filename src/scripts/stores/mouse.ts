@@ -7,7 +7,7 @@ export type MouseState = {
     y: number;
     normalizedX: number;
     normalizedY: number;
-}
+};
 
 export type SmoothMouseState = {
     smoothX: number;
@@ -15,7 +15,7 @@ export type SmoothMouseState = {
     smoothNormalizedX: number;
     smoothNormalizedY: number;
     lerp: number;
-}
+};
 
 const HALF_SCREEN_WIDTH = $screen.value!.width * 0.5;
 const HALF_SCREEN_HEIGHT = $screen.value!.height * 0.5;
