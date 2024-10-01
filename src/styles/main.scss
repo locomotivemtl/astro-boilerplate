@@ -57,6 +57,15 @@
 :root {
     --color-primary: color('black');
     --color-secondary: color('white');
+
+    --grid-columns: 4;
+    --grid-gutter: theme('gap.2');
+    --grid-margin: theme('margin.containerMargin');
+
+    @media (screen(sm)) {
+        --grid-columns: 12;
+        --grid-gutter: theme('gap.4');
+    }
 }
 
 html {

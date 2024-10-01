@@ -6,7 +6,7 @@ export type ScrollValues = {
     velocity: number;
     direction: number;
     progress: number;
-}
+};
 
 export const $scroll = map<ScrollValues>({
     scroll: window.scrollY,

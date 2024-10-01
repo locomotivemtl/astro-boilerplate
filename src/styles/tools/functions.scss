@@ -58,3 +58,25 @@
 @function vw($number) {
     @return calc(#{$number} * var(--vw, 1vw));
 }
+
+// Returns calculation of a percentage of the grid cell width
+// with optional inset of grid gutter.
+//
+// ```scss
+// .c-box {
+//     width: grid-space(math.div(6, 12));
+//     margin-left: grid-space(math.div(1, 12), 1);
+// }
+// ```
+//
+// @param  {number} $number - The percentage number
+// @param  {number} $inset  - The grid gutter inset
+// @return {function<number>}
+@function grid-space($number, $inset: 0) {
+    @return calc(
+        #{$number} * (#{vw(100)} - 2 * var(--grid-margin, 0px)) - (1 - #{$number}) * var(
+                --grid-gutter,
+                0px
+            ) + #{$inset} * var(--grid-gutter, 0px)
+    );
+}
