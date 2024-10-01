@@ -4,6 +4,8 @@ import svgSprite from 'astro-svg-sprite';
 import tailwindConfig from './tailwind.config';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 
+const isProd = import.meta.env.PROD;
+
 // https://astro.build/config
 export default defineConfig({
     site: 'https://locomotive-astro-boilerplate.vercel.app',
@@ -24,6 +26,9 @@ export default defineConfig({
                     postcssTailwindShortcuts(tailwindConfig.theme),
                 ],
             }
+        },
+        esbuild: {
+            drop: isProd ? ['console', 'debugger'] : [],
         }
     },
     integrations: [

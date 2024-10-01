@@ -4,12 +4,12 @@ import { debounce } from 'ts-debounce';
 export type ScreenValues = {
     width: number;
     height: number;
-}
+};
 
 export type ScreenDebounceValues = {
     width: number;
     height: number;
-}
+};
 
 export const $screen = map<ScreenValues>({
     width: window.innerWidth,
