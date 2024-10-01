@@ -17,4 +17,4 @@ if (import.meta.env.MODE === 'development') {
         gutterWidth: `var(--grid-gutter, ${tailwindConfig?.theme?.extend?.gap?.gutter})`,
         marginWidth: `var(--grid-margin, ${tailwindConfig?.theme?.extend?.spacing?.containerMargin})`,
     });
-};
+}
