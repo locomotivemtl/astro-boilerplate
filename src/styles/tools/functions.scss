@@ -74,7 +74,7 @@
 // @return {function<number>}
 @function grid-space($number, $inset: 0) {
     @return calc(
-        #{$number} * (100vw - 2 * var(--grid-margin, 0px)) - (1 - #{$number}) * var(
+        #{$number} * (#{vw(100)} - 2 * var(--grid-margin, 0px)) - (1 - #{$number}) * var(
                 --grid-gutter,
                 0px
             ) + #{$inset} * var(--grid-gutter, 0px)
