@@ -17,9 +17,9 @@ interface Seo {
             };
             description?: string;
         };
-    },
+    };
     advanced?: {
         robots?: string[];
         canonical?: string;
     };
-};
+}

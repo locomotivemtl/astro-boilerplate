@@ -22,28 +22,26 @@ export default defineConfig({
                 }
             },
             postcss: {
-                plugins: [
-                    postcssTailwindShortcuts(tailwindConfig.theme),
-                ],
+                plugins: [postcssTailwindShortcuts(tailwindConfig.theme)]
             }
         },
         esbuild: {
-            drop: isProd ? ['console', 'debugger'] : [],
+            drop: isProd ? ['console', 'debugger'] : []
         }
     },
     integrations: [
         tailwind({
-            applyBaseStyles: false,
+            applyBaseStyles: false
         }),
         svgSprite({
-            include: './src/assets/svgs',
-        }),
+            include: './src/assets/svgs'
+        })
     ],
     devToolbar: {
         enabled: false
     },
     image: {
         domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }],
+        remotePatterns: [{ protocol: 'https' }]
     }
 });

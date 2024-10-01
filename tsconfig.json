@@ -4,36 +4,16 @@
         "baseUrl": ".",
         "moduleResolution": "Bundler",
         "paths": {
-            "@root/*": [
-                "./*"
-            ],
-            "@src/*": [
-                "./src/*"
-            ],
-            "@components/*": [
-                "./src/components/*"
-            ],
-            "@layouts/*": [
-                "./src/layouts/*"
-            ],
-            "@images/*": [
-                "./src/assets/images/*"
-            ],
-            "@pages/*": [
-                "./src/pages/*"
-            ],
-            "@scripts/*": [
-                "./src/scripts/*"
-            ],
-            "@styles/*": [
-                "./src/styles/*"
-            ],
-            "@types/*": [
-                "types/*"
-            ],
-            "@data/*": [
-                "./src/data/*"
-            ]
+            "@root/*": ["./*"],
+            "@src/*": ["./src/*"],
+            "@components/*": ["./src/components/*"],
+            "@layouts/*": ["./src/layouts/*"],
+            "@images/*": ["./src/assets/images/*"],
+            "@pages/*": ["./src/pages/*"],
+            "@scripts/*": ["./src/scripts/*"],
+            "@styles/*": ["./src/styles/*"],
+            "@types/*": ["types/*"],
+            "@data/*": ["./src/data/*"]
         }
     },
     "exclude": ["dist", "node_modules"]

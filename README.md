@@ -8,19 +8,19 @@
 
 ## Features
 
-* [Sass] for a feature rich superset of CSS.
-* [Tailwind CSS] for a sane and scalable CSS architecture.
-* [Locomotive Scroll] for smooth scrolling with parallax effects.
-* [Swup] for versatile and extensible page transition.
-* [Prettier] for a formatted and easy to maintain codebase.
-* [Nanostores] as state manager.
+-   [Sass] for a feature rich superset of CSS.
+-   [Tailwind CSS] for a sane and scalable CSS architecture.
+-   [Locomotive Scroll] for smooth scrolling with parallax effects.
+-   [Swup] for versatile and extensible page transition.
+-   [Prettier] for a formatted and easy to maintain codebase.
+-   [Nanostores] as state manager.
 
 ## Getting started
 
 Make sure you have the following installed:
 
-* [Node] — at least 20.14, the latest LTS is recommended.
-* [NPM] — at least 8.0, the latest LTS is recommended.
+-   [Node] — at least 20.14, the latest LTS is recommended.
+-   [NPM] — at least 8.0, the latest LTS is recommended.
 
 > 💡 You can use [NVM] to install and use different versions of Node via the command-line.
 
@@ -95,20 +95,20 @@ All commands are run from the root of the project, from a terminal:
 
 ## Documentation
 
-* [Astro]
-* [Locomotive Scroll]
-* [Tailwind CSS]
-* [Swup]
-* [Prettier]
-* [Nanostores]
+-   [Astro]
+-   [Locomotive Scroll]
+-   [Tailwind CSS]
+-   [Swup]
+-   [Prettier]
+-   [Nanostores]
 
-[Astro]:             https://docs.astro.build/en/getting-started/
-[Tailwind CSS]:      https://tailwindcss.com/docs/installation
+[Astro]: https://docs.astro.build/en/getting-started/
+[Tailwind CSS]: https://tailwindcss.com/docs/installation
 [Locomotive Scroll]: https://scroll.locomotive.ca/docs
-[Sass]:              https://sass-lang.com/
-[Swup]:              https://swup.js.org/getting-started/
-[Node]:              https://nodejs.org/
-[NPM]:               https://npmjs.com/
-[NVM]:               https://github.com/nvm-sh/nvm
-[Prettier]:          https://prettier.io/
-[Nanostores]:        https://github.com/nanostores/nanostores
+[Sass]: https://sass-lang.com/
+[Swup]: https://swup.js.org/getting-started/
+[Node]: https://nodejs.org/
+[NPM]: https://npmjs.com/
+[NVM]: https://github.com/nvm-sh/nvm
+[Prettier]: https://prettier.io/
+[Nanostores]: https://github.com/nanostores/nanostores

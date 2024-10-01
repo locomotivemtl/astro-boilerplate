@@ -7,52 +7,46 @@ export default {
     content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
     prefix: 'u-',
     corePlugins: {
-        container: false,
+        container: false
     },
     theme: {
         extend: {
             fontFamily: {
-                serif: [
-                    'Times New Roman',
-                    ...defaultTheme.fontFamily.serif
-                ],
-                sans: [
-                    'Arial',
-                    ...defaultTheme.fontFamily.sans
-                ],
+                serif: ['Times New Roman', ...defaultTheme.fontFamily.serif],
+                sans: ['Arial', ...defaultTheme.fontFamily.sans]
             },
             fontSize: {
                 h1: utopiaClamp(60, 120),
                 h2: utopiaClamp(40, 80),
                 body: utopiaClamp(14, 16),
-                button: '14px',
+                button: '14px'
             },
             colors: {
-                black:      '#000000',
-                white:      '#ffffff',
-                primary:    '#312dfb',
+                black: '#000000',
+                white: '#ffffff',
+                primary: '#312dfb'
             },
             screens: {
-                'to-2xs':   { 'max': '339px' },
-                '2xs':      '340px',
-                'to-xs':    { 'max': '499px' },
-                'xs':       '500px',
-                'to-sm':    { 'max': '699px' },
-                'sm':       '700px',
-                'to-md':    { 'max': '999px' },
-                'md':       '1000px',
-                'to-lg':    { 'max': '1199px' },
-                'lg':       '1200px',
-                'to-xl':    { 'max': '1399px' },
-                'xl':       '1400px',
-                'to-2xl':   { 'max': '1599px' },
-                '2xl':      '1600px',
-                'to-3xl':   { 'max': '1799px' },
-                '3xl':      '1800px',
-                'to-4xl':   { 'max': '1999px' },
-                '4xl':      '2000px',
-                'to-5xl':   { 'max': '2399px' },
-                '5xl':      '2400px',
+                'to-2xs': { max: '339px' },
+                '2xs': '340px',
+                'to-xs': { max: '499px' },
+                xs: '500px',
+                'to-sm': { max: '699px' },
+                sm: '700px',
+                'to-md': { max: '999px' },
+                md: '1000px',
+                'to-lg': { max: '1199px' },
+                lg: '1200px',
+                'to-xl': { max: '1399px' },
+                xl: '1400px',
+                'to-2xl': { max: '1599px' },
+                '2xl': '1600px',
+                'to-3xl': { max: '1799px' },
+                '3xl': '1800px',
+                'to-4xl': { max: '1999px' },
+                '4xl': '2000px',
+                'to-5xl': { max: '2399px' },
+                '5xl': '2400px'
             },
             spacing: {
                 containerMargin: '20px',
@@ -64,22 +58,22 @@ export default {
                 'fluid-xl': utopiaClamp(40, 56),
                 'fluid-2xl': utopiaClamp(56, 80),
                 'fluid-3xl': utopiaClamp(80, 128),
-                'fluid-4xl': utopiaClamp(128, 160),
+                'fluid-4xl': utopiaClamp(128, 160)
             },
             gap: {
                 gutter: '20px',
                 gutterMobile: '10px'
             },
             transitionDuration: {
-                fast:       '0.2s',
-                default:    '0.4s',
-                slow:       '0.6s',
-                slower:     '0.8s',
-                slowest:    '1s',
+                fast: '0.2s',
+                default: '0.4s',
+                slow: '0.6s',
+                slower: '0.8s',
+                slowest: '1s'
             },
             transitionTimingFunction: {
                 // Smooth
-                default:        'cubic-bezier(0.380, 0.005, 0.215, 1)',
+                default: 'cubic-bezier(0.380, 0.005, 0.215, 1)'
 
                 // // Common easings
                 // power1: {
@@ -129,13 +123,13 @@ export default {
                 // smooth:         'cubic-bezier(0.380, 0.005, 0.215, 1)',
             },
             zIndex: {
-                modal:    '200',
-                header:   '100',
-                above:    '1',
-                default:  '0',
-                below:    '-1',
-            },
-        },
+                modal: '200',
+                header: '100',
+                above: '1',
+                default: '0',
+                below: '-1'
+            }
+        }
     },
-    plugins: [],
+    plugins: []
 } satisfies Config;
