@@ -1,14 +1,13 @@
 # Wysiwyg Component
 
-
 This component renders rich text content with a specified HTML tag, allowing for custom styling and flexibility and content as a `<slot>`.
 
 ## Property
 
-| Prop         | Type     | Required | Default | Description                                           |
-|--------------|----------|----------|---------|-------------------------------------------------------|
-| `tag`        | `string` | No       | `'div'` | The container tag.                                    |
-| `class`      | `string` | No       | None    | Additional class names to style the component.        |
+| Prop    | Type     | Required | Default | Description                                    |
+| ------- | -------- | -------- | ------- | ---------------------------------------------- |
+| `tag`   | `string` | No       | `'div'` | The container tag.                             |
+| `class` | `string` | No       | None    | Additional class names to style the component. |
 
 ## Example Usage
 
@@ -18,14 +17,15 @@ To use the Wysiwyg component, include it in your Astro project and pass the desi
 
 ```astro
 ---
-const rawHTMLString = 'Hello <strong>World</strong>'
+const rawHTMLString = 'Hello <strong>World</strong>';
 ---
 
 <Wysiwyg tag="article" class="c-custom-class">
-    <Fragment set:html={rawHTMLString}/>
-<Wysiwyg/>
+    <Fragment set:html={rawHTMLString} />
+    <Wysiwyg /></Wysiwyg
+>
 ```
 
 ## To Do
 
-- [ ] Add default styles
+-   [ ] Add default styles

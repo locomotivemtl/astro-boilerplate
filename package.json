@@ -17,12 +17,13 @@
         "homepage": "https://locomotive.ca"
     },
     "scripts": {
+        "prepare": "npx simple-git-hooks",
         "dev": "astro dev --host",
         "start": "astro dev --host",
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "prettier --write \"src/**/*.{astro,js,ts,css,scss}\""
+        "format": "npx prettier . --write"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.3",
@@ -45,6 +46,10 @@
         "@locomotivemtl/postcss-tailwind-shortcuts": "^1.0.0",
         "prettier": "^3.3.1",
         "prettier-plugin-astro": "^0.14.0",
-        "prettier-plugin-tailwindcss": "^0.6.1"
+        "prettier-plugin-tailwindcss": "^0.6.1",
+        "simple-git-hooks": "^2.11.1"
+    },
+    "simple-git-hooks": {
+        "pre-commit": "npm run format"
     }
 }
