@@ -3,6 +3,7 @@ import '@styles/main.scss';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
+import { getRelativeLocaleUrl } from 'astro:i18n';
 
 interface Props {
     title: string;
@@ -45,9 +46,12 @@ const FONTS: string[] = [
     <body>
         <div class="u-container">
             <nav class="u-flex u-gap-gutter u-py-fluid-md">
-                <a href="/">Index</a>
-                <a href="/about">About</a>
-                <a href="/post">The post</a>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , '/')}>Index</a>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , 'about')}>About</a>
+                <pre>
+                    {getRelativeLocaleUrl(Astro.currentLocale || 'en' , 'about')}
+                </pre>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , 'post')}>The post</a>
             </nav>
         </div>
 
@@ -63,8 +67,9 @@ const FONTS: string[] = [
             </div>
 
             <nav class="u-flex u-gap-gutter">
-                <a href="/">Index</a>
-                <a href="/about">About</a>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , '/')}>Index</a>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , 'about')}>About</a>
+                <a href={getRelativeLocaleUrl(Astro.currentLocale || 'en' , 'post')}>The post</a>
             </nav>
         </footer>
         <script src="../scripts/app.ts"></script>

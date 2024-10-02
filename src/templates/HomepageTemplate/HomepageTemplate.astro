@@ -1,0 +1,64 @@
+---
+import Button from '@components/Button/Button.astro';
+import Icon from '@components/Icon/Icon.astro';
+import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
+import Accordion from '@components/Accordion/Accordion.astro';
+
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout title="Welcome to the Locomotive Astro Boilerplate.">
+    <header class="u-container">
+        <Icon name="logo" />
+        <h1 class="u-heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
+
+        <button class="shortcut-functions">Test</button>
+    </header>
+
+    <div class="u-container u-mt-fluid-xl">
+        <div class="u-grid u-grid-cols-12 u-gap-gutter">
+            <div class="u-col-span-full u-text-body md:u-col-span-4">
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
+
+                <Button href="/about" class="u-mt-fluid-s"> Learn More </Button>
+            </div>
+
+            <div class="u-col-span-full u-text-body md:u-col-span-4">
+                <Wysiwyg tag="article">
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                    <Button href="https://google.ca" target="_blank" class="u-mt-fluid-s">
+                        Visit Us
+                    </Button>
+                </Wysiwyg>
+            </div>
+
+            <div class="u-col-span-full u-text-body md:u-col-span-4">
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
+            </div>
+
+            <div class="u-col-span-full u-text-body md:u-col-span-4">
+                <Accordion label="Accordion summary">
+                    <Wysiwyg>
+                        <Fragment
+                            set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                        />
+                    </Wysiwyg>
+                </Accordion>
+            </div>
+        </div>
+
+        <!-- Placeholder -->
+        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
+        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
+    </div>
+</Layout>
