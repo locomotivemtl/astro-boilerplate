@@ -3,15 +3,15 @@ import tailwind from '@astrojs/tailwind';
 import svgSprite from 'astro-svg-sprite';
 import tailwindConfig from './tailwind.config';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import vercelStatic from '@astrojs/vercel/static';
+import vercel from '@astrojs/vercel/static';
 
 const isProd = import.meta.env.PROD;
 
 // https://astro.build/config
 export default defineConfig({
-    site: 'https://locomotive-astro-boilerplate.vercel.app',
+    site: 'https://astro-boilerplate-git-feat-i18n-routing-locomotivemtl.vercel.app',
     output: 'static',
-    adapter: vercelStatic(),
+    adapter: vercel(),
     i18n: {
         defaultLocale: 'fr',
         locales: ['fr', 'en'],
