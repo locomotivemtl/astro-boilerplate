@@ -3,20 +3,20 @@ import tailwind from '@astrojs/tailwind';
 import svgSprite from 'astro-svg-sprite';
 import tailwindConfig from './tailwind.config';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import vercelServerless from '@astrojs/vercel/serverless';
+import vercelStatic from '@astrojs/vercel/static';
 
 const isProd = import.meta.env.PROD;
 
 // https://astro.build/config
 export default defineConfig({
     site: 'https://locomotive-astro-boilerplate.vercel.app',
-    output: 'hybrid',
-    adapter: vercelServerless(),
+    output: 'static',
+    adapter: vercelStatic(),
     i18n: {
         defaultLocale: 'fr',
         locales: ['fr', 'en'],
         routing: {
-            prefixDefaultLocale: false,
+            prefixDefaultLocale: true,
             fallbackType: 'redirect'
         }
     },
