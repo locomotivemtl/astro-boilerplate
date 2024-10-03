@@ -13,6 +13,7 @@ export default defineConfig({
         css: {
             preprocessorOptions: {
                 scss: {
+                    api: 'modern-compiler',
                     additionalData: `
                         @use "sass:math";
                         @use "sass:list";
@@ -22,7 +23,7 @@ export default defineConfig({
                 }
             },
             postcss: {
-                plugins: [postcssTailwindShortcuts(tailwindConfig.theme)]
+                plugins: [postcssTailwindShortcuts(tailwindConfig.theme, { prefix: 'theme' })]
             }
         },
         esbuild: {
