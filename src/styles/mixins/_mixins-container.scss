@@ -2,7 +2,7 @@
 // MIXINS / CONTAINERS
 // ==========================================================================
 @mixin -container {
-    --container-margin: spacing('containerMarginMobile');
+    --container-margin: theme-spacing('containerMarginMobile');
 
     margin-right: auto;
     margin-left: auto;
@@ -10,6 +10,6 @@
     padding-right: var(--container-margin);
 
     @media (screen(sm)) {
-        --container-margin: spacing('containerMargin');
+        --container-margin: theme-spacing('containerMargin');
     }
 }
