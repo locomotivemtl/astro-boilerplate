@@ -26,7 +26,7 @@ export default defineConfig({
             postcss: {
                 plugins: [
                     postcssTailwindShortcuts(tailwindConfig.theme, { prefix: 'theme' }),
-                    removeDoubleParentheses(),
+                    removeDoubleParentheses()
                 ]
             }
         },
