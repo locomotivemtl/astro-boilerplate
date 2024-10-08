@@ -1,6 +1,11 @@
-// ==========================================================================
-// Tailwind CSS
-// ==========================================================================
+@import "locomotive-scroll/dist/locomotive-scroll";
+@import "mixins/mixins-container";
+@import "utils/container";
+
+/**
+* Tailwind CSS
+*/
+
 /**
 * This injects Tailwind's base styles and any base styles registered by
 * plugins.
@@ -19,41 +24,41 @@
 */
 @tailwind utilities;
 
-// ==========================================================================
-// Fonts imports
-// ==========================================================================
+/**
+* Fonts
+*/
 @layer base {
-    // @font-face {
-    //     font-family: 'IBM Plex Mono';
-    //     src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
-    //     font-weight: normal;
-    //     font-style: normal;
-    //     font-display: swap;
-    // }
+    /* @font-face {
+        font-family: 'IBM Plex Mono';
+        src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    } */
 }
 
-// ==========================================================================
-// Vendors
-// ==========================================================================
-@import 'locomotive-scroll/dist/locomotive-scroll';
+/**
+* Vendors
+*/
 
-// ==========================================================================
-// Local files imports
-// ==========================================================================
-@import 'tools/maths';
+
+/**
+* Imports
+*/
+/* @import 'tools/maths';
 @import 'tools/functions';
 
-@import 'mixins/mixins-container';
+
 @import 'mixins/mixins-text';
 @import 'mixins/mixins-heading';
 
 @import 'utils/container';
 @import 'utils/text';
-@import 'utils/heading';
+@import 'utils/heading'; */
 
-// ==========================================================================
-// Global styles
-// ==========================================================================
+/**
+* Global styles
+*/
 :root {
     --color-primary: color('black');
     --color-secondary: color('white');

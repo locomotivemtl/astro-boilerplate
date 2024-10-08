@@ -1,0 +1,5 @@
+@layer utilities {
+    .u-container {
+        @mixin container;
+    }
+}

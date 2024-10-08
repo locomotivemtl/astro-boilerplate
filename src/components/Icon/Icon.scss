@@ -18,5 +18,5 @@
 
 .svg-logo {
     --_icon-width: 32px;
-    --icon-ratio: #{math.div(925, 302)};
+    --icon-ratio: calc(925 / 302);
 }
