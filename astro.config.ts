@@ -19,7 +19,7 @@ export default defineConfig({
                     postcssTailwindShortcuts(tailwindConfig.theme),
                     postcssNested,
                     postcssSimpleVars(),
-                    postcssMixins,
+                    postcssMixins
                 ]
             }
         },

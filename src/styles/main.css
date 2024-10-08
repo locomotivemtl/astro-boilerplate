@@ -1,6 +1,6 @@
-@import "locomotive-scroll/dist/locomotive-scroll";
-@import "mixins/mixins-container";
-@import "utils/container";
+@import 'locomotive-scroll/dist/locomotive-scroll';
+@import 'mixins/mixins-container';
+@import 'utils/container';
 
 /**
 * Tailwind CSS
@@ -40,7 +40,6 @@
 /**
 * Vendors
 */
-
 
 /**
 * Imports
