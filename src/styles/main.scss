@@ -55,8 +55,8 @@
 // Global styles
 // ==========================================================================
 :root {
-    --color-primary: color('black');
-    --color-secondary: color('white');
+    --color-primary: theme-color('black');
+    --color-secondary: theme-color('white');
 
     --grid-columns: 4;
     --grid-gutter: theme('gap.2');
@@ -94,11 +94,11 @@ html.is-animating .transition-fade {
 }
 
 .shortcut-functions {
-    background-color: color('primary');
+    background-color: theme-color('primary');
     transition:
-        opacity speed(fast) ease() speed(fast),
-        opacity speed(fast) ease() speed(slow);
-    transition-duration: speed(slow);
-    padding: spacing('fluid-sm');
-    z-index: z();
+        opacity theme-speed(fast) theme-ease() theme-speed(fast),
+        opacity theme-speed(fast) theme-ease() theme-speed(slow);
+    transition-duration: theme-speed(slow);
+    padding: theme-spacing('fluid-sm');
+    z-index: theme-z();
 }

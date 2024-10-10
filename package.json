@@ -44,7 +44,8 @@
         "typescript": "^5.4.5"
     },
     "devDependencies": {
-        "@locomotivemtl/postcss-tailwind-shortcuts": "^1.0.0",
+        "@locomotivemtl/postcss-remove-double-parentheses": "^1.0.0",
+        "@locomotivemtl/postcss-tailwind-shortcuts": "^1.0.5",
         "prettier": "^3.3.1",
         "prettier-plugin-astro": "^0.14.0",
         "prettier-plugin-tailwindcss": "^0.6.1",

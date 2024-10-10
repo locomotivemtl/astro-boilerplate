@@ -3,6 +3,7 @@ import tailwind from '@astrojs/tailwind';
 import svgSprite from 'astro-svg-sprite';
 import tailwindConfig from './tailwind.config';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
+import removeDoubleParentheses from '@locomotivemtl/postcss-remove-double-parentheses';
 import vercel from '@astrojs/vercel/static';
 
 const isProd = import.meta.env.PROD;
@@ -27,6 +28,7 @@ export default defineConfig({
         css: {
             preprocessorOptions: {
                 scss: {
+                    api: 'modern-compiler',
                     additionalData: `
                         @use "sass:math";
                         @use "sass:list";
@@ -36,7 +38,10 @@ export default defineConfig({
                 }
             },
             postcss: {
-                plugins: [postcssTailwindShortcuts(tailwindConfig.theme)]
+                plugins: [
+                    postcssTailwindShortcuts(tailwindConfig.theme, { prefix: 'theme' }),
+                    removeDoubleParentheses()
+                ]
             }
         },
         esbuild: {
