@@ -18,7 +18,7 @@ const getPreferredLanguage = (languages: any) => {
         })
         .find((lang: string) => supportedLanguages.includes(lang)); // Find the first supported language
 
-    // Default to 'en' if no match
+    // Default to defaultLocale if no match
     return preferredLanguage || defaultLocale;
 };
 
