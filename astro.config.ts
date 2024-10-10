@@ -7,16 +7,19 @@ import vercel from '@astrojs/vercel/static';
 
 const isProd = import.meta.env.PROD;
 
+import { defaultLocale, locales } from './src/scripts/utils/i18n';
+
 // https://astro.build/config
 export default defineConfig({
     site: 'https://astro-boilerplate-git-feat-i18n-routing-locomotivemtl.vercel.app',
     output: 'static',
     adapter: vercel(),
     i18n: {
-        defaultLocale: 'fr',
-        locales: ['fr', 'en'],
+        defaultLocale: defaultLocale,
+        locales: locales,
         routing: {
             prefixDefaultLocale: true,
+            redirectToDefaultLocale: false,
             fallbackType: 'redirect'
         }
     },

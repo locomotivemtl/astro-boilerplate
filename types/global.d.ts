@@ -23,3 +23,5 @@ interface Seo {
         canonical?: string;
     };
 }
+
+type Locale = 'en' | 'fr';
