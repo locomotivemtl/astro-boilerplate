@@ -23,12 +23,12 @@ const getPreferredLanguage = (languages: any) => {
 };
 
 export const onRequest = defineMiddleware(async (context, next) => {
-    console.log('onRequest middleware');
+    const { redirect, request } = context;
 
     // Only run the middleware on the home page
-    if (context.request.url.endsWith('/')) {
+    if (request.url.endsWith('/')) {
         // Get the user's preferred language
-        const userLanguages = context.request.headers.get('accept-language');
+        const userLanguages = request.headers.get('accept-language');
         const userLanguagesArray = userLanguages?.split(',') || [];
 
         const preferredLocale = getPreferredLanguage(userLanguagesArray);
@@ -37,12 +37,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
         const newPath = `/${preferredLocale}`;
 
         // Redirect to the new path
-        return new Response(null, {
-            status: 302,
-            headers: {
-                Location: newPath
-            }
-        });
+        return redirect(newPath);
     }
 
     return next();
