@@ -1,5 +1,5 @@
-import { defineMiddleware } from "astro:middleware";
-import { defaultLocale } from "./scripts/utils/i18n";
+import { defineMiddleware } from 'astro:middleware';
+import { defaultLocale } from './scripts/utils/i18n';
 
 const supportedLanguages = ['en', 'fr'];
 
@@ -7,15 +7,16 @@ const getPreferredLanguage = (languages: any) => {
     // Get preferred languages
     const userLanguages = languages;
 
-    const preferredLanguage = userLanguages.map((lang: string) => {
+    const preferredLanguage = userLanguages
+        .map((lang: string) => {
             // Check if the language has a quality value
             if (lang.includes(';')) {
                 return lang.split(';')[0];
             }
 
             return new Intl.Locale(lang).language || lang;
-        }) .find((lang: string) => supportedLanguages.includes(lang)); // Find the first supported language
-
+        })
+        .find((lang: string) => supportedLanguages.includes(lang)); // Find the first supported language
 
     // Default to 'en' if no match
     return preferredLanguage || defaultLocale;
@@ -39,8 +40,8 @@ export const onRequest = defineMiddleware(async (context, next) => {
         return new Response(null, {
             status: 302,
             headers: {
-                Location: newPath,
-            },
+                Location: newPath
+            }
         });
     }
 
