@@ -36,9 +36,13 @@ export const onRequest = defineMiddleware(async (context, next) => {
         // Rewrite the path to the localized page (e.g., /en)
         const newPath = `/${preferredLocale}`;
 
+        console.log(`Redirecting to ${newPath}`);
+
         // Redirect to the new path
         return redirect(newPath);
     }
+
+    console.log(`No redirect needed`);
 
     return next();
 });
