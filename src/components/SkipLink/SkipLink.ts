@@ -36,7 +36,7 @@ export default class SkipLink extends HTMLElement {
         e.preventDefault();
 
         const $mainContent = document.querySelector(
-            this.getAttribute('target') ?? '#main-content'
+            this.getAttribute('target') ?? 'main[tabindex]'
         ) as HTMLElement;
 
         if ($mainContent) {
