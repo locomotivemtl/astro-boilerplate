@@ -12,8 +12,8 @@ const { label = 'Skip to main content', target, class: propsClass, ...rest } = A
 const classes = ['c-skip-link', propsClass];
 ---
 
-<c-skip-link class:list={classes} target={target} {...rest}>
-    <Button>{label}</Button>
+<c-skip-link class:list={classes} {...rest} data-no-swup>
+    <Button href="#main">{label}</Button>
 </c-skip-link>
 
 <style is:global>

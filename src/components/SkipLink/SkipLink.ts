@@ -1,5 +1,5 @@
 export default class SkipLink extends HTMLElement {
-    private $button: ChildNode | null;
+    private $link: HTMLLinkElement | null;
 
     constructor() {
         super();
@@ -8,7 +8,7 @@ export default class SkipLink extends HTMLElement {
         this.onClick = this.onClick.bind(this);
 
         // UI
-        this.$button = this.firstElementChild;
+        this.$link = this.firstElementChild as HTMLLinkElement;
     }
 
     // =============================================================================
@@ -26,13 +26,13 @@ export default class SkipLink extends HTMLElement {
     // Events
     // =============================================================================
     bindEvents() {
-        if (this.$button) {
-            this.$button.addEventListener('click', this.onClick);
+        if (this.$link) {
+            this.$link.addEventListener('click', this.onClick);
         }
     }
     unbindEvents() {
-        if (this.$button) {
-            this.$button.removeEventListener('click', this.onClick);
+        if (this.$link) {
+            this.$link.removeEventListener('click', this.onClick);
         }
     }
 
@@ -42,32 +42,29 @@ export default class SkipLink extends HTMLElement {
     onClick(e: Event) {
         e.preventDefault();
 
-        const $mainContent = document.querySelector(
-            this.parentElement?.getAttribute('target') ?? 'main[tabindex]'
+        const $target = document.querySelector(
+            this.$link?.getAttribute('href') ?? 'main'
         ) as HTMLElement;
 
-        if (!$mainContent) {
+        if (!$target) {
             return;
         }
 
-        $mainContent.scrollIntoView({
+        $target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
-        $mainContent.focus();
 
-        if (document.activeElement === $mainContent) {
+        $target.focus();
+
+        if (document.activeElement === $target) {
             return;
         }
 
-        $mainContent.setAttribute('tabindex', '-1');
-        $mainContent.focus();
+        $target.setAttribute('tabindex', '-1');
+        $target.focus();
 
-        $mainContent.addEventListener(
-            'blur',
-            () => $mainContent.removeAttribute('tabindex'),
-            { once: true }
-        );
+        $target.addEventListener('blur', () => $target.removeAttribute('tabindex'), { once: true });
     }
 }
 
