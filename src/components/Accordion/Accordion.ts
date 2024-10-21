@@ -1,4 +1,4 @@
-import { $componentsManager, ComponentElement } from '@root/src/scripts/stores/componentManager';
+import { ComponentElement } from '@root/src/scripts/stores/componentManager';
 
 export default class Accordion extends ComponentElement {
     static readonly DURATION = 300;
@@ -28,7 +28,6 @@ export default class Accordion extends ComponentElement {
         this.animation = null;
         this.isClosing = false;
         this.isExpanding = false;
-        this.uid = 'accordion-' + this.uid;
     }
 
     // =============================================================================
@@ -66,12 +65,6 @@ export default class Accordion extends ComponentElement {
 
         if (this.isClosing || !this.$root.open) {
             this.start();
-            $componentsManager.get().forEach((component) => {
-                if (component.name === 'Accordion' && component.uid !== this.uid) {
-                    const $target = component.instance as Accordion;
-                    $target.shrink();
-                }
-            });
         } else if (this.isExpanding || this.$root.open) {
             this.shrink();
         }
