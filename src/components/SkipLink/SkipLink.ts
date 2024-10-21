@@ -47,7 +47,6 @@ export default class SkipLink extends HTMLElement {
         const $mainContent = document.querySelector(
             this.parentElement?.getAttribute('target') ?? 'main[tabindex]'
         ) as HTMLElement;
-        console.log($mainContent);
 
         if ($mainContent) {
             $mainContent.scrollIntoView({
