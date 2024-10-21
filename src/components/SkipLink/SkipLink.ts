@@ -46,26 +46,28 @@ export default class SkipLink extends HTMLElement {
             this.parentElement?.getAttribute('target') ?? 'main[tabindex]'
         ) as HTMLElement;
 
-        if ($mainContent) {
-            $mainContent.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-            $mainContent.focus();
-
-            if (document.activeElement != $mainContent) {
-                $mainContent.setAttribute('tabindex', '-1');
-                $mainContent.focus();
-
-                $mainContent.addEventListener(
-                    'blur',
-                    () => {
-                        $mainContent.removeAttribute('tabindex');
-                    },
-                    { once: true }
-                );
-            }
+        if (!$mainContent) {
+            return;
         }
+
+        $mainContent.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+        $mainContent.focus();
+
+        if (document.activeElement === $mainContent) {
+            return;
+        }
+
+        $mainContent.setAttribute('tabindex', '-1');
+        $mainContent.focus();
+
+        $mainContent.addEventListener(
+            'blur',
+            () => $mainContent.removeAttribute('tabindex'),
+            { once: true }
+        );
     }
 }
 
