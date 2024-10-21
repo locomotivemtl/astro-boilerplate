@@ -1,11 +1,14 @@
 export default class SkipLink extends HTMLElement {
-    private onClickBind: (e: Event) => void;
+    private $button: ChildNode | null;
 
     constructor() {
         super();
 
         // Binding
-        this.onClickBind = this.onClick.bind(this);
+        this.onClick = this.onClick.bind(this);
+
+        // UI
+        this.$button = this.firstElementChild;
     }
 
     // =============================================================================
@@ -23,10 +26,16 @@ export default class SkipLink extends HTMLElement {
     // Events
     // =============================================================================
     bindEvents() {
-        this.addEventListener('click', this.onClickBind);
+        console.log(this.$button);
+
+        if (this.$button) {
+            this.$button.addEventListener('click', this.onClick);
+        }
     }
     unbindEvents() {
-        this.removeEventListener('click', this.onClickBind);
+        if (this.$button) {
+            this.$button.removeEventListener('click', this.onClick);
+        }
     }
 
     // =============================================================================
@@ -36,8 +45,9 @@ export default class SkipLink extends HTMLElement {
         e.preventDefault();
 
         const $mainContent = document.querySelector(
-            this.getAttribute('target') ?? 'main[tabindex]'
+            this.parentElement?.getAttribute('target') ?? 'main[tabindex]'
         ) as HTMLElement;
+        console.log($mainContent);
 
         if ($mainContent) {
             $mainContent.scrollIntoView({
