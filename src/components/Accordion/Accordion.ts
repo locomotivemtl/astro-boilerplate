@@ -1,4 +1,4 @@
-import { $componentsManager, ComponentElement } from "@root/src/scripts/stores/componentManager";
+import { $componentsManager, ComponentElement } from '@root/src/scripts/stores/componentManager';
 
 export default class Accordion extends ComponentElement {
     static readonly DURATION = 300;
@@ -28,14 +28,14 @@ export default class Accordion extends ComponentElement {
         this.animation = null;
         this.isClosing = false;
         this.isExpanding = false;
-        this.uid = "accordion-" + this.uid;
+        this.uid = 'accordion-' + this.uid;
     }
 
     // =============================================================================
     // Lifecycle
     // =============================================================================
     connectedCallback() {
-        super.connectedCallback();        
+        super.connectedCallback();
 
         this.bindEvents();
     }
@@ -68,7 +68,7 @@ export default class Accordion extends ComponentElement {
             this.start();
             $componentsManager.get().forEach((component) => {
                 if (component.name === 'Accordion' && component.uid !== this.uid) {
-                    const $target = component.instance as Accordion
+                    const $target = component.instance as Accordion;
                     $target.shrink();
                 }
             });
