@@ -224,9 +224,9 @@ When a Web Component extends the `ComponentElement` class, it is automatically r
 
 Each component in `$componentsManager` is stored as an object with the following structure:
 
-- `uid`: A unique identifier generated for each component (can be overridden in the constructor).
-- `name`: The constructor name of the component.
-- `instance`: The actual component instance, allowing access to its methods and properties.
+-   `uid`: A unique identifier generated for each component (can be overridden in the constructor).
+-   `name`: The constructor name of the component.
+-   `instance`: The actual component instance, allowing access to its methods and properties.
 
 #### Example
 
@@ -238,17 +238,17 @@ Here’s a simple example demonstrating how components are registered and how yo
 import { ComponentElement } from '@root/src/scripts/stores/componentManager';
 
 class Foo extends ComponentElement {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 
-  connectedCallback() {
-    super.connectedCallback();
-  }
+    connectedCallback() {
+        super.connectedCallback();
+    }
 
-  disconnectedCallback() {
-    super.disconnectedCallback();
-  }
+    disconnectedCallback() {
+        super.disconnectedCallback();
+    }
 }
 
 customElements.define('c-foo', Foo);
@@ -258,41 +258,41 @@ customElements.define('c-foo', Foo);
 
 You can use `$componentsManager.get()` to retrieve the current list of components and interact with them.
 
-- **Access all components of a specific type:**
+-   **Access all components of a specific type:**
 
 ```ts
 import { $componentsManager } from '@root/src/scripts/stores/componentManager';
 
 $componentsManager.get().forEach((component) => {
-  if (component.name === 'Foo') {
-    const $foo = component.instance as Foo;
-    $foo.doSomething(); // Call method on each Foo instance
-  }
+    if (component.name === 'Foo') {
+        const $foo = component.instance as Foo;
+        $foo.doSomething(); // Call method on each Foo instance
+    }
 });
 ```
 
-- **Access a specific component by its `uid`:**
+-   **Access a specific component by its `uid`:**
 
 ```ts
 const $foo = $componentsManager.get().find((component) => component.uid === 'foo') as Foo;
 if ($foo) {
-  $foo.doSomething(); // Call method on the Foo instance
+    $foo.doSomething(); // Call method on the Foo instance
 }
 ```
 
-- **Exclude the current instance:**
+-   **Exclude the current instance:**
 
 ```ts
 $componentsManager.get().forEach((component) => {
-  if (component.name === 'Foo' && component.uid !== this.uid) {
-    const $foo = component.instance as Foo;
-    $foo.doSomething(); // Call method on each Foo instance
-  }
+    if (component.name === 'Foo' && component.uid !== this.uid) {
+        const $foo = component.instance as Foo;
+        $foo.doSomething(); // Call method on each Foo instance
+    }
 });
 ```
 
 ### Best Practices
 
-- **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
-- Use `uid`s to uniquely identify components and interact with specific instances.
-- Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.
+-   **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
+-   Use `uid`s to uniquely identify components and interact with specific instances.
+-   Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.
