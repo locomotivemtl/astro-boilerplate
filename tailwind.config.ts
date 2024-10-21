@@ -123,6 +123,7 @@ export default {
                 // smooth:         'cubic-bezier(0.380, 0.005, 0.215, 1)',
             },
             zIndex: {
+                skip: '300',
                 modal: '200',
                 header: '100',
                 above: '1',
