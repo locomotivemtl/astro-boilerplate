@@ -26,8 +26,6 @@ export default class SkipLink extends HTMLElement {
     // Events
     // =============================================================================
     bindEvents() {
-        console.log(this.$button);
-
         if (this.$button) {
             this.$button.addEventListener('click', this.onClick);
         }
