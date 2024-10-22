@@ -1,20 +1,14 @@
 import { atom } from 'nanostores';
 
-export type ComponentElementInstance = {
-    uid: string;
-    name: string;
-    instance: ComponentElement;
-};
-
 export class ComponentElement extends HTMLElement {
-    public uid: string;
-
     constructor() {
         super();
-        this.uid = (() => {
-            $componentsManagerIncrement.set($componentsManagerIncrement.get() + 1);
-            return $componentsManagerIncrement.get().toString();
-        })();
+
+        if (this.id === '') {
+            const index = $componentsManagerIncrement.get() + 1;
+            $componentsManagerIncrement.set(index);
+            this.id = `${this.constructor.name.toLowerCase()}-${index}`;
+        }
     }
 
     // =============================================================================
@@ -34,19 +28,15 @@ export class ComponentElement extends HTMLElement {
     register() {
         $componentsManager.set([
             ...$componentsManager.get(),
-            {
-                uid: this.uid,
-                name: this.constructor.name,
-                instance: this
-            }
+            this
         ]);
     }
     unregister() {
         $componentsManager.set(
-            $componentsManager.get().filter((component) => component.uid !== this.uid)
+            $componentsManager.get().filter((component) => component.id !== this.id)
         );
     }
 }
 
 export const $componentsManagerIncrement = atom<number>(0);
-export const $componentsManager = atom<ComponentElementInstance[]>([]);
+export const $componentsManager = atom<HTMLElement[]>([]);
