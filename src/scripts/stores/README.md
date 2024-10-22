@@ -214,19 +214,11 @@ Be mindful of this difference and choose the appropriate method based on your re
 
 ## Components Manager
 
-The `$componentsManager` is a global store for managing custom Web Component instances. It allows developers to register, track, and interact with all Web Components that extend the `ComponentElement` class. This store, powered by `nanostores`, provides a centralized way to access component instances by their `uid`, `name`, or other criteria, enabling cross-component communication.
+The `$componentsManager` is a global store for managing custom Web Component instances. It allows developers to register, track, and interact with all Web Components that extend the `ComponentElement` class. This store provides a centralized way to access component instances by their `id`, `prototype`, or other criteria, enabling cross-component communication.
 
 ### How It Works
 
 When a Web Component extends the `ComponentElement` class, it is automatically registered in the `$componentsManager` store when connected to the DOM. Similarly, the component is unregistered when disconnected.
-
-#### Component Structure in the Store
-
-Each component in `$componentsManager` is stored as an object with the following structure:
-
--   `uid`: A unique identifier generated for each component (can be overridden in the constructor).
--   `name`: The constructor name of the component.
--   `instance`: The actual component instance, allowing access to its methods and properties.
 
 #### Example
 
@@ -263,18 +255,18 @@ You can use `$componentsManager.get()` to retrieve the current list of component
 ```ts
 import { $componentsManager } from '@root/src/scripts/stores/componentManager';
 
-$componentsManager.get().forEach((component) => {
-    if (component.name === 'Foo') {
-        const $foo = component.instance as Foo;
+$componentsManager.get().forEach(($component) => {
+    if ($component instanceof Foo) {
+        const $foo = $component as Foo;
         $foo.doSomething(); // Call method on each Foo instance
     }
 });
 ```
 
--   **Access a specific component by its `uid`:**
+-   **Access a specific component by its `id`:**
 
 ```ts
-const $foo = $componentsManager.get().find((component) => component.uid === 'foo') as Foo;
+const $foo = $componentsManager.get().find(($component) => $component.id === 'foo') as Foo;
 if ($foo) {
     $foo.doSomething(); // Call method on the Foo instance
 }
@@ -283,9 +275,9 @@ if ($foo) {
 -   **Exclude the current instance:**
 
 ```ts
-$componentsManager.get().forEach((component) => {
-    if (component.name === 'Foo' && component.uid !== this.uid) {
-        const $foo = component.instance as Foo;
+$componentsManager.get().forEach(($component) => {
+    if ($component instanceof Foo && $component.id !== this.id) {
+        const $foo = $component as Foo;
         $foo.doSomething(); // Call method on each Foo instance
     }
 });
@@ -294,5 +286,5 @@ $componentsManager.get().forEach((component) => {
 ### Best Practices
 
 -   **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
--   Use `uid`s to uniquely identify components and interact with specific instances.
+-   Use `id`s to uniquely identify components and interact with specific instances.
 -   Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.

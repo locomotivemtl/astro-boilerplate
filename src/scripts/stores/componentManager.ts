@@ -26,10 +26,7 @@ export class ComponentElement extends HTMLElement {
     // Methods
     // =============================================================================
     register() {
-        $componentsManager.set([
-            ...$componentsManager.get(),
-            this
-        ]);
+        $componentsManager.set([...$componentsManager.get(), this]);
     }
     unregister() {
         $componentsManager.set(
