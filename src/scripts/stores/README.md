@@ -248,38 +248,38 @@ customElements.define('c-foo', Foo);
 
 2. **Access component instances from `$componentsManager`:**
 
-You can use `$componentsManager.get()` to retrieve the current list of components and interact with them.
+You can use `$componentsManager.get()` or one of the following helpers `getComponentsByPrototype()` and `getComponentsById()` to retrieve the current list of components and interact with them.
 
--   **Access all components of a specific type:**
+-   **Access all components of a specific prototype:**
 
 ```ts
-import { $componentsManager } from '@root/src/scripts/stores/componentManager';
+import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
 
-$componentsManager.get().forEach(($component) => {
-    if ($component instanceof Foo) {
-        const $foo = $component as Foo;
-        $foo.doSomething(); // Call method on each Foo instance
-    }
+const $allFoo = getComponentsByPrototype(Foo);
+$allFoo.forEach(($foo) => {
+    $foo.doSomething(); // Call method on each Foo instance
 });
 ```
 
 -   **Access a specific component by its `id`:**
 
 ```ts
-const $foo = $componentsManager.get().find(($component) => $component.id === 'foo') as Foo;
+import { getComponentsById } from '@root/src/scripts/stores/componentManager';
+
+const $foo = getComponentsById('foo-1');
 if ($foo) {
-    $foo.doSomething(); // Call method on the Foo instance
+    $foo.doSomething(); // Call method on each Foo instance
 }
 ```
 
 -   **Exclude the current instance:**
 
 ```ts
-$componentsManager.get().forEach(($component) => {
-    if ($component instanceof Foo && $component.id !== this.id) {
-        const $foo = $component as Foo;
-        $foo.doSomething(); // Call method on each Foo instance
-    }
+import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
+
+const $allFoo = getComponentsByPrototype(Foo, this);
+$allFoo.forEach(($foo) => {
+    $foo.doSomething(); // Call method on each Foo instance
 });
 ```
 
