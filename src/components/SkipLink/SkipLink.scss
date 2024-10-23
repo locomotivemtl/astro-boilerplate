@@ -1,0 +1,27 @@
+// ==========================================================================
+// Components / Skip Link Button
+// ==========================================================================
+
+.c-skip-link {
+    position: absolute;
+    top: theme-spacing('fluid-sm');
+    left: 50%;
+    opacity: 0;
+    transform: translate3d(-50%, -100%, 0);
+    z-index: theme-z('skip');
+    white-space: nowrap;
+    pointer-events: none;
+    transition:
+        opacity theme-speed() theme-ease(),
+        transform theme-speed() theme-ease();
+
+    @media (prefers-reduced-motion) {
+        transition: none;
+    }
+
+    &:focus-within {
+        pointer-events: all;
+        opacity: 1;
+        transform: translate3d(-50%, 0, 0);
+    }
+}
