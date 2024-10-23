@@ -211,3 +211,80 @@ export default class Example {
 -   `Store#listen(cb)`, on the other hand, only triggers the callback function on the next store change.
 
 Be mindful of this difference and choose the appropriate method based on your requirements to ensure the expected behavior in your application.
+
+## Components Manager
+
+The `$componentsManager` is a global store for managing custom Web Component instances. It allows developers to register, track, and interact with all Web Components that extend the `ComponentElement` class. This store provides a centralized way to access component instances by their `id`, `prototype`, or other criteria, enabling cross-component communication.
+
+### How It Works
+
+When a Web Component extends the `ComponentElement` class, it is automatically registered in the `$componentsManager` store when connected to the DOM. Similarly, the component is unregistered when disconnected.
+
+#### Example
+
+Here’s a simple example demonstrating how components are registered and how you can interact with them using `$componentsManager`.
+
+1. **Create your component by extending `ComponentElement`:**
+
+```ts
+import { ComponentElement } from '@root/src/scripts/stores/componentManager';
+
+class Foo extends ComponentElement {
+    constructor() {
+        super();
+    }
+
+    connectedCallback() {
+        super.connectedCallback();
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+    }
+}
+
+customElements.define('c-foo', Foo);
+```
+
+2. **Access component instances from `$componentsManager`:**
+
+You can use `$componentsManager.get()` or one of the following helpers `getComponentsByPrototype()` and `getComponentsById()` to retrieve the current list of components and interact with them.
+
+-   **Access all components of a specific prototype:**
+
+```ts
+import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
+
+const $allFoo = getComponentsByPrototype(Foo);
+$allFoo.forEach(($foo) => {
+    $foo.doSomething(); // Call method on each Foo instance
+});
+```
+
+-   **Access a specific component by its `id`:**
+
+```ts
+import { getComponentsById } from '@root/src/scripts/stores/componentManager';
+
+const $foo = getComponentsById('foo-1');
+if ($foo) {
+    $foo.doSomething(); // Call method on each Foo instance
+}
+```
+
+-   **Exclude the current instance:**
+
+```ts
+import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
+
+const $allFoo = getComponentsByPrototype(Foo, this);
+$allFoo.forEach(($foo) => {
+    $foo.doSomething(); // Call method on each Foo instance
+});
+```
+
+### Best Practices
+
+-   **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
+-   Use `id`s to uniquely identify components and interact with specific instances.
+-   Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.
