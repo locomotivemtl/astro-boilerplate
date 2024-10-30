@@ -1,3 +1,13 @@
 ---
-export const prerender = false;
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { defaultLocale } from '@scripts/utils/i18n';
+
+// Get the request's preferred language
+const preferredLocale = Astro.preferredLocale || defaultLocale;
+
+// Get the new path
+const newPath = getRelativeLocaleUrl(preferredLocale);
+
+// Redirect to the new path
+return Astro.redirect(newPath);
 ---
