@@ -1,0 +1,19 @@
+---
+import { locales, defaultLocale } from '@scripts/utils/i18n';
+const { pathname } = Astro.url;
+
+// Get the preferred locale
+let locale = Astro.preferredLocale || defaultLocale;
+
+// Get the current language from the path and supported locales
+const currentLangFromPath = locales.find((locale) => pathname.startsWith(`/${locale}`));
+
+// If the current language is supported, use it
+if (currentLangFromPath) {
+    locale = currentLangFromPath;
+}
+---
+
+<div>
+    404 page should display in the language: {locale}
+</div>
