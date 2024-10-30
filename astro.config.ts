@@ -13,7 +13,7 @@ import { defaultLocale, locales } from './src/scripts/utils/i18n';
 // https://astro.build/config
 export default defineConfig({
     site: 'https://astro-boilerplate-git-feat-i18n-routing-locomotivemtl.vercel.app',
-    output: 'hybrid',
+    output: 'server',
     adapter: vercel(),
     i18n: {
         defaultLocale: defaultLocale,
