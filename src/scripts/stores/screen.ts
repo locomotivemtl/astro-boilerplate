@@ -1,22 +1,22 @@
 import { map } from 'nanostores';
 import { debounce } from 'ts-debounce';
 
-export interface IScreenValues {
+export type ScreenValues = {
     width: number;
     height: number;
-}
+};
 
-export interface IScreenDebounceValues {
+export type ScreenDebounceValues = {
     width: number;
     height: number;
-}
+};
 
-export const $screen = map<IScreenValues>({
+export const $screen = map<ScreenValues>({
     width: window.innerWidth,
     height: window.innerHeight
 });
 
-export const $screenDebounce = map<IScreenDebounceValues>({
+export const $screenDebounce = map<ScreenDebounceValues>({
     width: window.innerWidth,
     height: window.innerHeight
 });

@@ -35,7 +35,7 @@
 // ==========================================================================
 // Vendors
 // ==========================================================================
-@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import 'locomotive-scroll/dist/locomotive-scroll';
 
 // ==========================================================================
 // Local files imports
@@ -55,8 +55,17 @@
 // Global styles
 // ==========================================================================
 :root {
-    --color-primary: color('black');
-    --color-secondary: color('white');
+    --color-primary: theme-color('black');
+    --color-secondary: theme-color('white');
+
+    --grid-columns: 4;
+    --grid-gutter: theme('gap.2');
+    --grid-margin: theme('margin.containerMargin');
+
+    @media (screen(sm)) {
+        --grid-columns: 12;
+        --grid-gutter: theme('gap.4');
+    }
 }
 
 html {
@@ -85,9 +94,11 @@ html.is-animating .transition-fade {
 }
 
 .shortcut-functions {
-    background-color: color('primary');
-    transition: opacity speed(fast) ease() speed(fast), opacity speed(fast) ease() speed(slow);
-    transition-duration: speed(slow);
-    padding: spacing('fluid-sm');
-    z-index: z();
+    background-color: theme-color('primary');
+    transition:
+        opacity theme-speed(fast) theme-ease() theme-speed(fast),
+        opacity theme-speed(fast) theme-ease() theme-speed(slow);
+    transition-duration: theme-speed(slow);
+    padding: theme-spacing('fluid-sm');
+    z-index: theme-z();
 }

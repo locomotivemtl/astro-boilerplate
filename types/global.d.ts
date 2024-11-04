@@ -1,4 +1,4 @@
-type Seo = {
+interface Seo {
     title?: string;
     description?: string;
     social?: {
@@ -17,9 +17,9 @@ type Seo = {
             };
             description?: string;
         };
-    },
+    };
     advanced?: {
         robots?: string[];
         canonical?: string;
     };
-};
+}

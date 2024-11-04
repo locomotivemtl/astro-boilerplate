@@ -4,23 +4,23 @@
     </a>
 </p>
 <h1 align="center">Locomotive Astro Boilerplate</h1>
-<p align="center">Front-end Astro boilerplate for projects by <a href="https://locomotive.ca/">Locomotive</a>.</p>
+<p align="center">Astro boilerplate for projects by <a href="https://locomotive.ca/">Locomotive</a>.</p>
 
 ## Features
 
-* Uses [Astro] for all-in-one web framework.
-* Uses [Sass] for a feature rich superset of CSS.
-* Uses [Tailwind CSS] for a sane and scalable CSS architecture.
-* Uses [Locomotive Scroll] for smooth scrolling with parallax effects.
-* Uses [Swup] for versatile and extensible page transition.
-* Uses [Prettier] for a formatted and easy to maintain codebase.
+-   [Sass] for a feature rich superset of CSS.
+-   [Tailwind CSS] for a sane and scalable CSS architecture.
+-   [Locomotive Scroll] for smooth scrolling with parallax effects.
+-   [Swup] for versatile and extensible page transition.
+-   [Prettier] for a formatted and easy to maintain codebase.
+-   [Nanostores] as state manager.
 
 ## Getting started
 
 Make sure you have the following installed:
 
-* [Node] — at least 20.14, the latest LTS is recommended.
-* [NPM] — at least 8.0, the latest LTS is recommended.
+-   [Node] — at least 20.14, the latest LTS is recommended.
+-   [NPM] — at least 8.0, the latest LTS is recommended.
 
 > 💡 You can use [NVM] to install and use different versions of Node via the command-line.
 
@@ -40,16 +40,6 @@ nvm use
 
 # Install dependencies from package.json
 npm install
-```
-
-## Development
-
-```sh
-# Start development server, watch for changes, and compile assets
-npm start
-
-# Compile and minify assets
-npm run build
 ```
 
 ## Project Structure
@@ -79,6 +69,16 @@ Inside of your project, you'll see the following folders and files:
 └── package.json
 ```
 
+## Development
+
+```sh
+# Start development server, watch for changes, and compile assets
+npm start
+
+# Compile and minify assets
+npm run build
+```
+
 ## Commands
 
 All commands are run from the root of the project, from a terminal:
@@ -95,18 +95,20 @@ All commands are run from the root of the project, from a terminal:
 
 ## Documentation
 
-* [Astro]
-* [Locomotive Scroll]
-* [Tailwind CSS]
-* [Swup]
-* [Prettier]
+-   [Astro]
+-   [Locomotive Scroll]
+-   [Tailwind CSS]
+-   [Swup]
+-   [Prettier]
+-   [Nanostores]
 
-[Astro]:             https://docs.astro.build/en/getting-started/
-[Tailwind CSS]:      https://tailwindcss.com/docs/installation
+[Astro]: https://docs.astro.build/en/getting-started/
+[Tailwind CSS]: https://tailwindcss.com/docs/installation
 [Locomotive Scroll]: https://scroll.locomotive.ca/docs
-[Sass]:              https://sass-lang.com/
-[Swup]:              https://swup.js.org/getting-started/
-[Node]:              https://nodejs.org/
-[NPM]:               https://npmjs.com/
-[NVM]:               https://github.com/nvm-sh/nvm
-[Prettier]:          https://prettier.io/
+[Sass]: https://sass-lang.com/
+[Swup]: https://swup.js.org/getting-started/
+[Node]: https://nodejs.org/
+[NPM]: https://npmjs.com/
+[NVM]: https://github.com/nvm-sh/nvm
+[Prettier]: https://prettier.io/
+[Nanostores]: https://github.com/nanostores/nanostores

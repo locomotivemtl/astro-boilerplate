@@ -2,7 +2,7 @@
 interface Props {
     href?: string;
     type?: 'button' | 'submit';
-    target?: string;
+    target?: '_blank' | '_self';
     class?: string;
     tabIndex?: string;
     isStatic?: boolean;
@@ -12,7 +12,7 @@ interface Props {
 const {
     href,
     type,
-    target,
+    target = '_self',
     class: propsClass,
     tabIndex,
     isStatic = false,
@@ -21,26 +21,29 @@ const {
 } = Astro.props;
 
 const Tag = isStatic ? 'div' : href ? 'a' : 'button';
-const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+const computedRel = target === '_blank' ? 'noopener noreferrer' : undefined;
 const computedHref = Tag === 'a' ? href : undefined;
 const computedType = Tag === 'button' ? type || 'button' : undefined;
 const computedTabIndex = tabIndex ?? undefined;
+const computedTarget = Tag === 'a' ? target : undefined;
+const computedAriaHidden = ariaHidden ? 'true' : undefined;
 ---
 
 <Tag
     class:list={['c-button', propsClass]}
     href={computedHref}
-    rel={rel}
+    rel={computedRel}
     type={computedType}
+    target={computedTarget}
     tabindex={computedTabIndex}
-    aria-hidden={ariaHidden}
+    aria-hidden={computedAriaHidden}
     {...rest}
 >
     <span class="c-button_inner">
         <span class="c-button_label">
             <slot />
         </span>
-        {Tag === 'a' && target === '_blank' && <span>&#x2197;</span>}
+        {Tag === 'a' && target === '_blank' && <span aria-hidden="true">&#x2197;</span>}
     </span>
 </Tag>
 

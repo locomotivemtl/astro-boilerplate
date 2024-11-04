@@ -1,4 +1,6 @@
-export default class Accordion extends HTMLElement {
+import { ComponentElement } from '@root/src/scripts/stores/componentManager';
+
+export default class Accordion extends ComponentElement {
     static readonly DURATION = 300;
     static readonly CLASS_OPEN = 'is-open';
     private onClickBind: any;
@@ -32,10 +34,14 @@ export default class Accordion extends HTMLElement {
     // Lifecycle
     // =============================================================================
     connectedCallback() {
+        super.connectedCallback();
+
         this.bindEvents();
     }
 
     disconnectedCallback() {
+        super.disconnectedCallback();
+
         this.unbindEvents();
     }
 
@@ -140,7 +146,6 @@ export default class Accordion extends HTMLElement {
 
     onAnimationFinish(open: boolean) {
         this.$root.open = open;
-        this.$root.setAttribute('aria-expanded', `${open}`);
 
         this.animation = null;
 
