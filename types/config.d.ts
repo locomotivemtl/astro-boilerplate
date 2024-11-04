@@ -6,4 +6,6 @@ type UtopiaConfig = {
 
 type Config = {
     utopia: UtopiaConfig;
+    IS_DEV: boolean;
+    IS_PROD: boolean;
 };
