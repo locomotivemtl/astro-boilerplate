@@ -7,17 +7,18 @@ interface Props {
     target?: string;
 }
 
-const { label = 'Skip to main content', target, class: propsClass, ...rest } = Astro.props;
+const {
+    label = 'Skip to main content',
+    target = '#page-heading',
+    class: propsClass,
+    ...rest
+} = Astro.props;
 
 const classes = ['c-skip-link', propsClass];
 ---
 
-<c-skip-link class:list={classes} {...rest} data-no-swup>
-    <Button href="#main">{label}</Button>
-</c-skip-link>
+<Button class:list={classes} href={target} {...rest}>{label}</Button>
 
 <style is:global>
     @import 'SkipLink.scss';
 </style>
-
-<script src="./SkipLink.ts"></script>
