@@ -1,10 +1,18 @@
 // ==========================================================================
 // Utilities / Headings
 // ==========================================================================
-.u-heading-h1 {
-    @include -h1;
-}
 
-.u-heading-h2 {
-    @include -h2;
+@layer utilities {
+
+    .u-heading-h1 {
+        @apply u-font-serif;
+        @apply u-text-h1;
+        line-height: 0.85;
+    }
+
+    .u-heading-h2 {
+        @apply u-font-serif;
+        @apply u-text-h2;
+        line-height: 1;
+    }
 }
