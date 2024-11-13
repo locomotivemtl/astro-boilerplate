@@ -23,7 +23,7 @@
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "npx prettier . --write"
+        "format": "npx lint-staged"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.4",
@@ -35,6 +35,7 @@
         "astro": "^4.16.8",
         "astro-seo": "^0.8.4",
         "astro-svg-sprite": "^1.1.0",
+        "lint-staged": "^15.2.10",
         "locomotive-scroll": "^5.0.0-beta.21",
         "nanostores": "^0.11.3",
         "sass": "^1.77.4",
@@ -52,5 +53,8 @@
     },
     "simple-git-hooks": {
         "pre-commit": "npm run format"
+    },
+    "lint-staged": {
+        "*": "prettier --write"
     }
 }
