@@ -1,4 +1,5 @@
 import { toDash } from '@scripts/utils/string';
+import SwupA11yPlugin from '@swup/a11y-plugin';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupScriptsPlugin from '@swup/scripts-plugin';
@@ -55,7 +56,8 @@ export class Transitions {
                     preloadHoveredLinks: true,
                     preloadInitialPage: !import.meta.env.DEV
                 }),
-                new SwupScriptsPlugin()
+                new SwupScriptsPlugin(),
+                new SwupA11yPlugin()
             ]
         });
 
@@ -105,9 +107,18 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#visit-start
      * @param visit: VisitType
      */
-    onVisitStart() {
+    onVisitStart(visit: VisitType) {
         document.documentElement.classList.add(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.remove(Transitions.READY_CLASS);
+
+        if (visit.a11y) {
+            visit.a11y.focus = 'h1#page-heading';
+
+            // Best not to assume where to move the focus on fragment visits
+            if (visit.fragmentVisit) {
+                visit.a11y.focus = false;
+            }
+        }
     }
 
     /**

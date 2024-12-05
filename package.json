@@ -29,6 +29,7 @@
         "@astrojs/check": "^0.9.4",
         "@astrojs/tailwind": "^5.1.2",
         "@locomotivemtl/grid-helper": "^1.0.0",
+        "@swup/a11y-plugin": "^5.0.0",
         "@swup/head-plugin": "^2.2.0",
         "@swup/preload-plugin": "^3.2.10",
         "@swup/scripts-plugin": "^2.1.0",
