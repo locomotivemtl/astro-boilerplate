@@ -3,6 +3,7 @@ import '@styles/main.scss';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
+import SkipLink from '@components/SkipLink/SkipLink.astro';
 
 interface Props {
     title: string;
@@ -43,6 +44,8 @@ const FONTS: string[] = [
         }
     </head>
     <body>
+        <SkipLink />
+
         <div class="u-container">
             <nav class="u-flex u-gap-gutter u-py-fluid-md">
                 <a href="/">Index</a>
@@ -52,7 +55,7 @@ const FONTS: string[] = [
         </div>
 
         <main id="swup" class="transition-fade">
-            <div id="content">
+            <div id="main">
                 <slot />
             </div>
         </main>

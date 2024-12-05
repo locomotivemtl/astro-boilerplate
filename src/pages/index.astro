@@ -3,6 +3,7 @@ import Button from '@components/Button/Button.astro';
 import Icon from '@components/Icon/Icon.astro';
 import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 import Accordion from '@components/Accordion/Accordion.astro';
+import SkipLink from '@components/SkipLink/SkipLink.astro';
 
 import Layout from '../layouts/Layout.astro';
 ---
@@ -10,7 +11,7 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="Welcome to the Locomotive Astro Boilerplate.">
     <header class="u-container">
         <Icon name="logo" />
-        <h1 class="u-heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
+        <h1 id="page-heading" class="u-heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
 
         <button class="shortcut-functions">Test</button>
     </header>
@@ -46,21 +47,21 @@ import Layout from '../layouts/Layout.astro';
                 </Wysiwyg>
             </div>
 
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
-                <Accordion label="Accordion summary">
-                    <Wysiwyg>
-                        <Fragment
-                            set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
-                        />
-                    </Wysiwyg>
-                </Accordion>
-                <Accordion label="Accordion summary">
-                    <Wysiwyg>
-                        <Fragment
-                            set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
-                        />
-                    </Wysiwyg>
-                </Accordion>
+            <div class="u-relative u-col-span-full u-text-body md:u-col-span-4">
+                <SkipLink target="#accordions-end" label="Skip accordions list" />
+                {
+                    [...Array(5)].map(() => (
+                        <Accordion label="Accordion summary">
+                            <Wysiwyg>
+                                <Fragment
+                                    set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                                />
+                            </Wysiwyg>
+                        </Accordion>
+                    ))
+                }
+                <span id="accordions-end" class="u-sr-only" aria-label="End of accordions list"
+                ></span>
             </div>
         </div>
 

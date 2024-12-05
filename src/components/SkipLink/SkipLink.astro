@@ -1,0 +1,24 @@
+---
+import Button from '@components/Button/Button.astro';
+
+interface Props {
+    label?: string;
+    class?: string;
+    target?: string;
+}
+
+const {
+    label = 'Skip to main content',
+    target = '#page-heading',
+    class: propsClass,
+    ...rest
+} = Astro.props;
+
+const classes = ['c-skip-link', propsClass];
+---
+
+<Button class:list={classes} href={target} {...rest}>{label}</Button>
+
+<style is:global>
+    @import 'SkipLink.scss';
+</style>
