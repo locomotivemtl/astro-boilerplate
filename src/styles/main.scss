@@ -1,3 +1,4 @@
+@use 'sass:meta';
 // ==========================================================================
 // Tailwind CSS
 // ==========================================================================
@@ -35,21 +36,17 @@
 // ==========================================================================
 // Vendors
 // ==========================================================================
-@import 'locomotive-scroll/dist/locomotive-scroll';
+@include meta.load-css('locomotive-scroll/dist/locomotive-scroll');
 
 // ==========================================================================
 // Local files imports
 // ==========================================================================
-@import 'tools/maths';
-@import 'tools/functions';
+@include meta.load-css('tools/maths');
+@include meta.load-css('tools/functions');
 
-@import 'mixins/mixins-container';
-@import 'mixins/mixins-text';
-@import 'mixins/mixins-heading';
-
-@import 'utils/container';
-@import 'utils/text';
-@import 'utils/heading';
+@include meta.load-css('utils/container');
+@include meta.load-css('utils/text');
+@include meta.load-css('utils/heading');
 
 // ==========================================================================
 // Global styles

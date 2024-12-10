@@ -1,3 +1,5 @@
+@use 'sass:math';
+@use 'sass:meta';
 // ==========================================================================
 // Tools / Maths
 // ==========================================================================
@@ -7,9 +9,9 @@
 // @param {Number} $number Number to remove unit from
 // @return {function<number>}
 @function strip-unit($value) {
-    @if type-of($value) != 'number' {
-        @error "Invalid `#{type-of($value)}` type. Choose a number type instead.";
-    } @else if type-of($value) == 'number' and not is-unitless($value) {
+    @if meta.type-of($value) != 'number' {
+        @error "Invalid `#{meta.type-of($value)}` type. Choose a number type instead.";
+    } @else if meta.type-of($value) == 'number' and not is-unitless($value) {
         @return math.div($value, $value * 0 + 1);
     }
 
@@ -26,7 +28,7 @@
     $value: $x;
 
     @for $i from 1 through 10 {
-        $value: $x - math.div(($x * $x - abs($number)), (2 * $x));
+        $value: $x - math.div(($x * $x - math.abs($number)), (2 * $x));
         $x: $value;
     }
 
@@ -88,7 +90,7 @@
 //                          Otherwise, the unitless value of $angle is returned.
 
 @function rad($angle) {
-    $unit: unit($angle);
+    $unit: math.unit($angle);
     $angle: strip-units($angle);
 
     // If the angle has `deg` as unit, convert to radians.

@@ -1,12 +1,14 @@
 // ==========================================================================
 // Utilities / Texts
 // ==========================================================================
+
 @layer utilities {
     .u-text-body {
-        @include -body;
+        font-weight: normal;
+        line-height: 1.35em;
     }
 
     .u-text-subtitle {
-        @include -subtitle;
+        text-transform: uppercase;
     }
 }
