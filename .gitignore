@@ -1,5 +1,6 @@
 # build output
 dist/
+.vercel/
 
 # SVG sprite
 public/assets/images/sprite.svg
