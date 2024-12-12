@@ -12,6 +12,7 @@
             "@pages/*": ["./src/pages/*"],
             "@scripts/*": ["./src/scripts/*"],
             "@styles/*": ["./src/styles/*"],
+            "@templates/*": ["./src/templates/*"],
             "@types/*": ["types/*"],
             "@data/*": ["./src/data/*"]
         }
