@@ -1,79 +1,25 @@
-@import 'locomotive-scroll/dist/locomotive-scroll';
-@import 'mixins/mixins-container';
-@import 'utils/container';
+/* Vendors */
+@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
 
-/**
-* Tailwind CSS
-*/
+/* tailwind */
+@import './tailwind.css';
 
-/**
-* This injects Tailwind's base styles and any base styles registered by
-* plugins.
-*/
-@tailwind base;
+/* utilities */
+@import './utilities.css';
+@import './typography.css';
 
-/**
-* This injects Tailwind's component classes and any component classes
-* registered by plugins.
-*/
-@tailwind components;
+/* Fonts imports */
+@import './fonts.css';
 
-/**
-* This injects Tailwind's utility classes and any utility classes registered
-* by plugins.
-*/
-@tailwind utilities;
-
-/**
-* Fonts
-*/
-@layer base {
-    /* @font-face {
-        font-family: 'IBM Plex Mono';
-        src: url('/fonts/IBMPlexMono-Regular.woff2') format('woff2');
-        font-weight: normal;
-        font-style: normal;
-        font-display: swap;
-    } */
-}
-
-/**
-* Vendors
-*/
-
-/**
-* Imports
-*/
-/* @import 'tools/maths';
-@import 'tools/functions';
-
-
-@import 'mixins/mixins-text';
-@import 'mixins/mixins-heading';
-
-@import 'utils/container';
-@import 'utils/text';
-@import 'utils/heading'; */
-
-/**
-* Global styles
-*/
+/* Global styles */
 :root {
-    --color-primary: color('black');
-    --color-secondary: color('white');
-
-    --grid-columns: 4;
-    --grid-gutter: theme('gap.2');
-    --grid-margin: theme('margin.containerMargin');
-
-    @media (screen(sm)) {
-        --grid-columns: 12;
-        --grid-gutter: theme('gap.4');
-    }
+    --color-primary: color('lime');
+    --color-secondary: color('charcoal');
 }
 
 html {
     font-family: theme('fontFamily.sans');
+    font-weight: 500;
 }
 
 body {
@@ -98,7 +44,7 @@ html.is-animating .transition-fade {
 }
 
 .shortcut-functions {
-    background-color: color('primary');
+    background-color: color('lime');
     transition:
         opacity speed(fast) ease() speed(fast),
         opacity speed(fast) ease() speed(slow);

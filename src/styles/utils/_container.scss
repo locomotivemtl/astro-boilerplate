@@ -1,0 +1,18 @@
+// ==========================================================================
+// Utilities / Container
+// ==========================================================================
+
+@layer utilities {
+    .u-container {
+        --container-margin: theme-spacing('containerMarginMobile');
+
+        margin-right: auto;
+        margin-left: auto;
+        padding-left: var(--container-margin);
+        padding-right: var(--container-margin);
+
+        @media (screen(sm)) {
+            --container-margin: theme-spacing('containerMargin');
+        }
+    }
+}
