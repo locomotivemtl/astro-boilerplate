@@ -8,7 +8,7 @@
 
 ## Features
 
--   [Sass] for a feature rich superset of CSS.
+-   [PostCSS] for a feature rich superset of CSS.
 -   [Tailwind CSS] for a sane and scalable CSS architecture.
 -   [Locomotive Scroll] for smooth scrolling with parallax effects.
 -   [Swup] for versatile and extensible page transition.
@@ -54,13 +54,13 @@ Inside of your project, you'll see the following folders and files:
 │   ├── components/
 │   │   └── Card/
 │   │       ├── Card.astro
-│   │       └── Card.scss
+│   │       └── Card.css
 │   ├── layouts/
 │   │   └── Layout.astro
 │   ├── pages/
 │   │   └── index.astro
 │   ├── styles/
-│   │   └── main.scss
+│   │   └── main.css
 │   └── scripts/
 │       ├── components/
 │       ├── utils/

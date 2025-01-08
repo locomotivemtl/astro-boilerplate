@@ -13,8 +13,8 @@
 
 /* Global styles */
 :root {
-    --color-primary: color('lime');
-    --color-secondary: color('charcoal');
+    --color-primary: theme-color('primary');
+    --color-secondary: theme-color('secondary');
 }
 
 html {
@@ -44,11 +44,12 @@ html.is-animating .transition-fade {
 }
 
 .shortcut-functions {
-    background-color: color('lime');
+    background-color: theme-color('primary');
+    color: theme-color('secondary');
     transition:
-        opacity speed(fast) ease() speed(fast),
-        opacity speed(fast) ease() speed(slow);
-    transition-duration: speed(slow);
-    padding: spacing('fluid-sm');
-    z-index: z();
+        opacity theme-speed(fast) theme-ease() theme-speed(fast),
+        opacity theme-speed(fast) theme-ease() theme-speed(slow);
+    transition-duration: theme-speed(slow);
+    padding: theme-spacing('fluid-sm');
+    z-index: theme-z();
 }

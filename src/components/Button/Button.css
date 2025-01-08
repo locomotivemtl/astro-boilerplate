@@ -1,27 +1,24 @@
-// ===================================================================
-// Global Variables for button styles
-// ===================================================================
 :root {
-    // Metrics
+    /* Metrics */
     --button-height: auto;
     --button-width: auto;
     --button-radius: 0px;
-    --button-font-size: #{theme('fontSize.button')};
+    --button-font-size: theme('fontSize.button');
     --button-padding: 15px 28px;
     --button-gap: 25px;
 
-    // Idle state - Default styles
-    --button-color: #{theme-color('white')};
-    --button-background: #{theme-color('black')};
+    /* Idle state - Default styles */
+    --button-color: theme-color('white');
+    --button-background: theme-color('black');
     --button-stroke-color: transparent;
 
-    // Hover state - Default styles
-    --button-color-hover: #{theme-color('white')};
+    /* Hover state - Default styles */
+    --button-color-hover: theme-color('white');
     --button-background-hover: grey;
 
-    // Active state - Default styles
-    --button-color-active: #{theme-color('black')};
-    --button-background-active: #{theme-color('white')};
+    /* Active state - Default styles */
+    --button-color-active: theme-color('black');
+    --button-background-active: theme-color('white');
 }
 
 .c-button {
@@ -38,7 +35,7 @@
     border: 1px solid var(--button-stroke-color);
     transition: background-color theme-speed() theme-ease();
 
-    // Hover
+    /* Hover */
     @media (hover: hover) {
         .u-button-hover:hover &,
         &:hover {

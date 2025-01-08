@@ -24,7 +24,8 @@ export default {
             colors: {
                 black: '#000000',
                 white: '#ffffff',
-                primary: '#312dfb'
+                primary: '#000000',
+                secondary: '#ffffff'
             },
             screens: {
                 'to-2xs': { max: '339px' },

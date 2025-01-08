@@ -1,0 +1,10 @@
+@layer utilities {
+    .u-container {
+        --container-margin: theme-spacing('containerMarginMobile');
+        @apply u-mx-auto u-px-[var(--container-margin)];
+
+        @media screen(sm) {
+            --container-margin: theme-spacing('containerMargin');
+        }
+    }
+}
