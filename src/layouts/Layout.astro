@@ -3,6 +3,7 @@ import '@styles/main.scss';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
+import Icon from '../components/Icon/Icon.astro';
 
 interface Props {
     title: string;
@@ -43,8 +44,11 @@ const FONTS: string[] = [
         }
     </head>
     <body>
-        <div class="u-container">
-            <nav class="u-flex u-gap-gutter u-py-fluid-md">
+        <div class="u-container u-grid u-grid-cols-2 u-py-fluid-md">
+            <div class="">
+                <Icon name="logo" />
+            </div>
+            <nav class="u-flex u-gap-gutter u-justify-self-end">
                 <a href="/">Index</a>
                 <a href="/about">About</a>
                 <a href="/post">The post</a>

@@ -1,6 +1,6 @@
 import { defineConfig } from 'astro/config';
+import icon from 'astro-icon';
 import tailwind from '@astrojs/tailwind';
-import svgSprite from 'astro-svg-sprite';
 import tailwindConfig from './tailwind.config';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 import removeDoubleParentheses from '@locomotivemtl/postcss-remove-double-parentheses';
@@ -38,8 +38,8 @@ export default defineConfig({
         tailwind({
             applyBaseStyles: false
         }),
-        svgSprite({
-            include: './src/assets/svgs'
+        icon({
+            iconDir: './src/assets/svgs'
         })
     ],
     devToolbar: {
