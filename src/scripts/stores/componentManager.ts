@@ -1,8 +1,12 @@
 import { atom } from 'nanostores';
 
 export class ComponentElement extends HTMLElement {
+    prototypeType: string;
+
     constructor() {
         super();
+
+        this.prototypeType = this.constructor.name;
 
         if (this.id === '') {
             const index = $componentsManagerIncrement.get() + 1;
@@ -36,15 +40,15 @@ export class ComponentElement extends HTMLElement {
 }
 
 export const $componentsManagerIncrement = atom<number>(0);
-export const $componentsManager = atom<HTMLElement[]>([]);
+export const $componentsManager = atom<ComponentElement[]>([]);
 
 export const getComponentById = (id: string) => {
     return $componentsManager.get().find(($component) => $component.id === id);
 };
 
 export const getComponentsByPrototype = (
-    prototype: any,
-    selectorsToExclude: string[] | string | HTMLElement = []
+    prototype: string,
+    selectorsToExclude: string[] | string | HTMLElement | ComponentElement = []
 ) => {
     let excludedSelectors: string[] = [];
 
@@ -56,10 +60,12 @@ export const getComponentsByPrototype = (
         excludedSelectors = [`#${selectorsToExclude.id}`];
     }
 
-    return $componentsManager.get().filter(($component) => {
-        return (
-            $component instanceof prototype &&
-            !excludedSelectors.some((selector: string) => $component.matches(selector))
-        );
-    });
+    return ($componentsManager.get() as ComponentElement[]).filter(
+        ($component: ComponentElement) => {
+            return (
+                prototype === $component.prototypeType &&
+                !excludedSelectors.some((selector: string) => $component.matches(selector))
+            );
+        }
+    );
 };
