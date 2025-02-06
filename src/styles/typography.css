@@ -1,17 +1,20 @@
-@layer utilities {
-    .u-heading-h1 {
-        @apply u-font-serif u-text-h1 u-font-normal u-leading-[0.85];
-    }
+/* Note on @utility coloring syntax https://github.com/tailwindlabs/tailwindcss-intellisense/issues/1146#issuecomment-2637758061 */
+@utility heading-xl {
+    font-size: var(--text-heading-xl);
+    font-family: var(--font-serif);
+    font-style: normal;
+    line-height: 0.85;
+}
 
-    .u-heading-h2 {
-        @apply u-font-serif u-text-h2 u-font-normal u-leading-none;
-    }
+@utility heading-h2 {
+    font-size: var(--text-heading-lg);
+    font-family: var(--font-serif);
+    font-style: normal;
+    line-height: 1;
+}
 
-    .u-text-body {
-        @apply u-font-normal u-leading-snug;
-    }
-
-    .u-text-subtitle {
-        @apply u-text-uppercase;
-    }
+@utility text-body {
+    font-size: var(--text-body-sm);
+    font-style: normal;
+    line-height: 1.35;
 }

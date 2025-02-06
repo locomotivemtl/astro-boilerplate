@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: theme('gap.gutter');
+    gap: var(--spacing-gutter);
     padding: 12px 0;
     user-select: none;
     cursor: pointer;

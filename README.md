@@ -42,33 +42,6 @@ nvm use
 npm install
 ```
 
-## Project Structure
-
-Inside of your project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card/
-│   │       ├── Card.astro
-│   │       └── Card.css
-│   ├── layouts/
-│   │   └── Layout.astro
-│   ├── pages/
-│   │   └── index.astro
-│   ├── styles/
-│   │   └── main.css
-│   └── scripts/
-│       ├── components/
-│       ├── utils/
-│       ├── app.ts
-│       └── config.ts
-└── package.json
-```
-
 ## Development
 
 ```sh

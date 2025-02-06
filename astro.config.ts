@@ -1,8 +1,7 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 import svgSprite from 'astro-svg-sprite';
-import tailwindConfig from './tailwind.config';
-import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
+import tailwindcss from '@tailwindcss/vite';
+import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 
 const isProd = import.meta.env.PROD;
@@ -13,21 +12,15 @@ export default defineConfig({
     vite: {
         css: {
             postcss: {
-                plugins: [
-                    postcssTailwindShortcuts(tailwindConfig.theme, { prefix: 'theme' }),
-                    postcssHelpersFunctions()
-                ]
+                plugins: [postcssUtopia(), postcssHelpersFunctions()]
             }
         },
         esbuild: {
             drop: isProd ? ['console', 'debugger'] : []
-        }
+        },
+        plugins: [tailwindcss()]
     },
     integrations: [
-        tailwind({
-            applyBaseStyles: false,
-            nesting: true
-        }),
         svgSprite({
             include: './src/assets/svgs'
         })

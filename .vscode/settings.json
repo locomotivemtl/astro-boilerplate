@@ -1,4 +1,6 @@
 {
-    "css.customData": [".vscode/tailwind.json"],
-    "scss.lint.unknownAtRules": "ignore"
+    "tailwindCSS.experimental.configFile": "./src/styles/main.css",
+    "files.associations": {
+        "*.css": "tailwindcss"
+    }
 }

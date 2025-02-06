@@ -1,10 +1,5 @@
 import { map } from 'nanostores';
 
-import resolveConfig from 'tailwindcss/resolveConfig';
-import tailwindConfig from '@root/tailwind.config.ts';
-
-const fullConfig = resolveConfig(tailwindConfig);
-
 // =============================================================================
 // Breakpoints
 // =============================================================================
@@ -12,8 +7,11 @@ export type Breakpoints = {
     sm: string;
 };
 
+const root = document.documentElement;
+const breakpointSm = getComputedStyle(root).getPropertyValue('--breakpoint-sm').trim();
+
 export const $breakpoints = map<Breakpoints>({
-    sm: fullConfig.theme.screens.sm
+    sm: breakpointSm
 });
 
 // =============================================================================
@@ -28,7 +26,7 @@ export type MediaQueries = {
 export const $mediaQueries = map<MediaQueries>({
     reducedMotion: `(prefers-reduced-motion: reduce)`,
     touchScreen: `(hover: none)`,
-    touchOrSmall: `(max-width: ${Number($breakpoints.value?.sm.replace('px', '')) - 1}px), (hover: none)`
+    touchOrSmall: `(max-width: ${$breakpoints.value?.sm}), (hover: none)`
 });
 
 // =============================================================================

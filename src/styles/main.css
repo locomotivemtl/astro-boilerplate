@@ -1,5 +1,5 @@
 /* Vendors */
-@import 'node_modules/locomotive-scroll/dist/locomotive-scroll';
+@import '../../node_modules/locomotive-scroll/dist/locomotive-scroll';
 
 /* tailwind */
 @import './tailwind.css';
@@ -41,15 +41,4 @@ html.is-changing .transition-fade {
 /* Define the styles for the unloaded pages */
 html.is-animating .transition-fade {
     opacity: 0;
-}
-
-.shortcut-functions {
-    background-color: theme-color('primary');
-    color: theme-color('secondary');
-    transition:
-        opacity theme-speed(fast) theme-ease() theme-speed(fast),
-        opacity theme-speed(fast) theme-ease() theme-speed(slow);
-    transition-duration: theme-speed(slow);
-    padding: theme-spacing('fluid-sm');
-    z-index: theme-z();
 }
