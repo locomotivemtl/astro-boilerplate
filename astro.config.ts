@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import svgSprite from 'astro-svg-sprite';
+import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
@@ -21,8 +21,8 @@ export default defineConfig({
         plugins: [tailwindcss()]
     },
     integrations: [
-        svgSprite({
-            include: './src/assets/svgs'
+        icon({
+            iconDir: './src/assets/svgs'
         })
     ],
     devToolbar: {

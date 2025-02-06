@@ -1,4 +1,6 @@
 ---
+import { Icon as AstroIcon } from 'astro-icon/components';
+
 interface Props {
     name: string;
     class?: string;
@@ -18,14 +20,13 @@ const link = `/assets/images/sprite.svg#${name}`;
 ---
 
 <span class:list={classes} {...rest}>
-    <svg
+    <AstroIcon
+        name={name}
         class={svgClassName}
         aria-label={computedAriaLabel}
         aria-hidden={computedArialHidden}
         focusable={computedFocusable}
-    >
-        <use href={link}></use>
-    </svg>
+    />
 </span>
 
 <style>
