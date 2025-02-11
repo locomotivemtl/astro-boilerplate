@@ -23,11 +23,14 @@
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "npx lint-staged"
+        "format": "npx lint-staged",
+        "storyblok:components": "dotenv -c -- bash -c 'storyblok pull-components --space $STORYBLOK_SPACE_ID --path ./src/storyblok/'",
+        "storyblok:types": "storyblok generate-typescript-typedefs --sourceFilePaths ./components.SPACE_ID.json --destinationFilePath ./component-types-sb.d.ts"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.4",
         "@locomotivemtl/grid-helper": "^1.0.0",
+        "@storyblok/astro": "^6.0.1",
         "@swup/head-plugin": "^2.2.0",
         "@swup/preload-plugin": "^3.2.10",
         "@swup/scripts-plugin": "^2.1.0",
@@ -45,11 +48,14 @@
     "devDependencies": {
         "@locomotivemtl/postcss-helpers-functions": "^1.0.2",
         "@tailwindcss/vite": "^4.0.3",
+        "@vitejs/plugin-basic-ssl": "^1.2.0",
+        "dotenv-cli": "^8.0.0",
         "postcss-utopia": "^1.1.0",
         "prettier": "^3.3.1",
         "prettier-plugin-astro": "^0.14.0",
         "prettier-plugin-tailwindcss": "^0.6.1",
-        "simple-git-hooks": "^2.11.1"
+        "simple-git-hooks": "^2.11.1",
+        "storyblok": "^3.35.2"
     },
     "simple-git-hooks": {
         "pre-commit": "npm run format"

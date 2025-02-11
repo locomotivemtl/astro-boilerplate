@@ -1,8 +1,12 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, envField } from 'astro/config';
+import { loadEnv } from 'vite';
 import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
+import { storyblok } from '@storyblok/astro';
+import basicSsl from '@vitejs/plugin-basic-ssl';
+const { STORYBLOK_ACCESS_TOKEN } = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
 
 const isProd = import.meta.env.PROD;
 
@@ -18,18 +22,33 @@ export default defineConfig({
         esbuild: {
             drop: isProd ? ['console', 'debugger'] : []
         },
-        plugins: [tailwindcss()]
+        plugins: [tailwindcss(), basicSsl()]
     },
+    output: 'server',
     integrations: [
         icon({
             iconDir: './src/assets/svgs'
+        }),
+        storyblok({
+            accessToken: STORYBLOK_ACCESS_TOKEN,
+            apiOptions: {
+                region: 'us'
+            },
+            components: {
+                page: 'storyblok/Page',
+                feature: 'storyblok/Feature',
+                grid: 'storyblok/Grid',
+                teaser: 'storyblok/Teaser'
+            }
         })
     ],
     devToolbar: {
         enabled: false
     },
-    image: {
-        domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }]
+    env: {
+        schema: {
+            STORYBLOK_ACCESS_TOKEN: envField.string({ context: 'server', access: 'secret' }),
+            STORYBLOK_SPACE_ID: envField.string({ context: 'server', access: 'secret' })
+        }
     }
 });

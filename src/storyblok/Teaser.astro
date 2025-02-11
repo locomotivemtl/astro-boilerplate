@@ -1,0 +1,11 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+    <h3 class="py-32 text-center text-6xl font-bold text-[#50b0ae]">
+        {blok.headline}
+    </h3>
+</div>

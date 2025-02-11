@@ -1,0 +1,16 @@
+---
+import { storyblokEditable } from '@storyblok/astro';
+import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+
+const { blok } = Astro.props;
+---
+
+<div {...storyblokEditable(blok)}>
+    <div class="container mx-auto my-12 grid place-items-center gap-12 md:grid-cols-3">
+        {
+            blok.columns?.map((blok) => {
+                return <StoryblokComponent blok={blok} />;
+            })
+        }
+    </div>
+</div>
