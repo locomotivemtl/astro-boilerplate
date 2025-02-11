@@ -25,13 +25,13 @@
                 opacity theme-speed(slow) theme-ease();
         }
 
-        // Image is loaded
+        /* Image is loaded */
         .c-image:not([data-scroll]).is-loaded & {
             opacity: 1;
             transform: scale(1, 1);
         }
 
-        // Image is loaded and respond to locomotive-scroll in-view class
+        /* Image is loaded and respond to locomotive-scroll in-view class */
         .c-image[data-scroll].is-loaded.is-inview & {
             opacity: 1;
             transform: scale(1, 1);

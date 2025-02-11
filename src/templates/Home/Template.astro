@@ -6,36 +6,34 @@ import Accordion from '@components/Accordion/Accordion.astro';
 ---
 
 <Layout title="Welcome to the Locomotive Astro Boilerplate.">
-    <header class="u-container">
-        <h1 class="u-heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
-
-        <button class="shortcut-functions">Test</button>
+    <header class="container">
+        <h1 class="heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
     </header>
 
-    <div class="u-container u-mt-fluid-xl">
-        <div class="u-grid u-grid-cols-12 u-gap-gutter">
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
+    <div class="mt-fluid-xl container">
+        <div class="gap-gutter grid grid-cols-12">
+            <div class="text-body col-span-full md:col-span-4">
                 <Wysiwyg>
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
                     />
                 </Wysiwyg>
 
-                <Button href="/about" class="u-mt-fluid-s"> Learn More </Button>
+                <Button href="/about" class="mt-fluid-sm"> Learn More </Button>
             </div>
 
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
+            <div class="text-body-sm col-span-full md:col-span-4">
                 <Wysiwyg tag="article">
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
                     />
-                    <Button href="https://google.ca" target="_blank" class="u-mt-fluid-s">
+                    <Button href="https://google.ca" target="_blank" class="mt-fluid-sm">
                         Visit Us
                     </Button>
                 </Wysiwyg>
             </div>
 
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
+            <div class="text-body-sm col-span-full md:col-span-4">
                 <Wysiwyg>
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
@@ -43,7 +41,7 @@ import Accordion from '@components/Accordion/Accordion.astro';
                 </Wysiwyg>
             </div>
 
-            <div class="u-col-span-full u-text-body md:u-col-span-4">
+            <div class="text-body-sm col-span-full md:col-span-4">
                 <Accordion label="Accordion summary">
                     <Wysiwyg>
                         <Fragment
@@ -62,7 +60,7 @@ import Accordion from '@components/Accordion/Accordion.astro';
         </div>
 
         <!-- Placeholder -->
-        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-black u-opacity-50"></div>
-        <div class="w-full u-mt-fluid-xl u-h-[50vh] u-bg-primary"></div>
+        <div class="mt-fluid-xl h-[50vh] w-full bg-black opacity-50"></div>
+        <div class="mt-fluid-xl bg-grey h-[50vh] w-full"></div>
     </div>
 </Layout>

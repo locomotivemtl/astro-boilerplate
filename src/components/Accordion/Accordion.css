@@ -1,10 +1,3 @@
-// ===================================================================
-// Component — Accordion
-// ===================================================================
-
-$accordion-summary-padding-x: 0;
-$accordion-summary-padding-y: 12px;
-
 .c-accordion {
     position: relative;
 }
@@ -14,8 +7,8 @@ $accordion-summary-padding-y: 12px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: theme('gap.gutter');
-    padding: $accordion-summary-padding-y $accordion-summary-padding-x;
+    gap: var(--spacing-gutter);
+    padding: 12px 0;
     user-select: none;
     cursor: pointer;
     transition: opacity theme-speed() theme-ease();

@@ -1,0 +1,23 @@
+.c-icon {
+    display: inline-block;
+    vertical-align: middle;
+
+    svg {
+        --icon-height: calc(var(--icon-width) * (1 / (var(--icon-ratio))));
+
+        display: block;
+        width: var(--icon-width);
+        height: var(--icon-height);
+        fill: currentColor;
+    }
+}
+
+:root {
+    --icon-width-logo: 50px;
+    --icon-ratio-logo: 32/20;
+}
+
+.svg-logo {
+    --icon-width: var(--icon-width-logo);
+    --icon-ratio: var(--icon-ratio-logo);
+}

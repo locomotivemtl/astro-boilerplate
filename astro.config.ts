@@ -1,9 +1,8 @@
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
-import tailwind from '@astrojs/tailwind';
-import tailwindConfig from './tailwind.config';
-import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import removeDoubleParentheses from '@locomotivemtl/postcss-remove-double-parentheses';
+import tailwindcss from '@tailwindcss/vite';
+import postcssUtopia from 'postcss-utopia';
+import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 
 const isProd = import.meta.env.PROD;
 
@@ -12,32 +11,16 @@ export default defineConfig({
     site: 'https://locomotive-astro-boilerplate.vercel.app',
     vite: {
         css: {
-            preprocessorOptions: {
-                scss: {
-                    api: 'modern-compiler',
-                    additionalData: `
-                        @use "sass:math";
-                        @use "sass:list";
-                        @use "@styles/tools/maths" as *;
-                        @use "@styles/tools/functions" as *;
-                    `
-                }
-            },
             postcss: {
-                plugins: [
-                    postcssTailwindShortcuts(tailwindConfig.theme, { prefix: 'theme' }),
-                    removeDoubleParentheses()
-                ]
+                plugins: [postcssUtopia(), postcssHelpersFunctions()]
             }
         },
         esbuild: {
             drop: isProd ? ['console', 'debugger'] : []
-        }
+        },
+        plugins: [tailwindcss()]
     },
     integrations: [
-        tailwind({
-            applyBaseStyles: false
-        }),
         icon({
             iconDir: './src/assets/svgs'
         })

@@ -75,7 +75,7 @@ Sets specific width and height for the image, ensuring it maintains these dimens
 
 ### Lazy Loading
 
-Uses lazy loading to defer the loading of the image until it is near the viewport, improving initial page load performance. When loaded, the `.c-image` element has the state class `is-loaded` added, allowing for styling based on state. See [Image.scss](Image.scss).
+Uses lazy loading to defer the loading of the image until it is near the viewport, improving initial page load performance. When loaded, the `.c-image` element has the state class `is-loaded` added, allowing for styling based on state. See [Image.css](Image.css).
 
 ```astro
 <Image src={import('@images/printer.jpg')} alt="A beautiful scenery" loading="lazy" />

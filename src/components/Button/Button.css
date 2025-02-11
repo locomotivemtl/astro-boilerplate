@@ -1,27 +1,24 @@
-// ===================================================================
-// Global Variables for button styles
-// ===================================================================
 :root {
-    // Metrics
+    /* Metrics */
     --button-height: auto;
     --button-width: auto;
     --button-radius: 0px;
-    --button-font-size: #{theme('fontSize.button')};
+    --button-font-size: var(--text-button);
     --button-padding: 15px 28px;
     --button-gap: 25px;
 
-    // Idle state - Default styles
-    --button-color: #{theme-color('white')};
-    --button-background: #{theme-color('black')};
+    /* Idle state - Default styles */
+    --button-color: var(--color-white);
+    --button-background: var(--color-black);
     --button-stroke-color: transparent;
 
-    // Hover state - Default styles
-    --button-color-hover: #{theme-color('white')};
+    /* Hover state - Default styles */
+    --button-color-hover: var(--color-white);
     --button-background-hover: grey;
 
-    // Active state - Default styles
-    --button-color-active: #{theme-color('black')};
-    --button-background-active: #{theme-color('white')};
+    /* Active state - Default styles */
+    --button-color-active: var(--color-black);
+    --button-background-active: var(--color-white);
 }
 
 .c-button {
@@ -36,11 +33,11 @@
     font-size: var(--button-font-size);
     background-color: var(--button-background);
     border: 1px solid var(--button-stroke-color);
-    transition: background-color theme-speed() theme-ease();
+    transition: background-color var(--duration) var(--ease);
 
-    // Hover
+    /* Hover */
     @media (hover: hover) {
-        .u-button-hover:hover &,
+        .button-hover:hover &,
         &:hover {
             background-color: var(--button-background-hover);
             color: var(--button-color-hover);
