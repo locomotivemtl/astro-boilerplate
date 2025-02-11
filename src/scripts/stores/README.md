@@ -255,7 +255,7 @@ You can use `$componentsManager.get()` or one of the following helpers `getCompo
 ```ts
 import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
 
-const $allFoo = getComponentsByPrototype(Foo);
+const $allFoo = getComponentsByPrototype('Foo'); // Use the class name as a string
 $allFoo.forEach(($foo) => {
     $foo.doSomething(); // Call method on each Foo instance
 });
@@ -277,10 +277,15 @@ if ($foo) {
 ```ts
 import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
 
-const $allFoo = getComponentsByPrototype(Foo, this);
+// Exclude the current instance by passing it as the second argument
+const $allFoo = getComponentsByPrototype('Foo', this);
+
 $allFoo.forEach(($foo) => {
-    $foo.doSomething(); // Call method on each Foo instance
+    $foo.doSomething(); // Call method on each Foo instance except the current one
 });
+
+// You can also exclude components by passing a selector string or an array of selectors
+const $filteredComponents = getComponentsByPrototype('Bar', ['#exclude-me', '.ignore-this']);
 ```
 
 ### Best Practices
