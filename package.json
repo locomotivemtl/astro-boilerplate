@@ -17,7 +17,7 @@
         "homepage": "https://locomotive.ca"
     },
     "scripts": {
-        "prepare": "npx simple-git-hooks",
+        "prepare": "npx simple-git-hooks && npm run storyblok:components && npm run storyblok:types",
         "dev": "astro dev --host",
         "start": "astro dev --host",
         "build": "astro check && astro build",
@@ -25,7 +25,7 @@
         "astro": "astro",
         "format": "npx lint-staged",
         "storyblok:components": "dotenv -c -- bash -c 'storyblok pull-components --space $STORYBLOK_SPACE_ID --path ./src/storyblok/'",
-        "storyblok:types": "storyblok generate-typescript-typedefs --sourceFilePaths ./components.SPACE_ID.json --destinationFilePath ./component-types-sb.d.ts"
+        "storyblok:types": "dotenv -c -- bash -c 'storyblok generate-typescript-typedefs --sourceFilePaths ./src/storyblok/components.$STORYBLOK_SPACE_ID.json --destinationFilePath ./types/component-types-sb.d.ts'"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.4",
