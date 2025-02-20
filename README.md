@@ -32,6 +32,27 @@ git clone https://github.com/locomotivemtl/astro-boilerplate.git my-new-project
 cd my-new-project
 ```
 
+## Setting up Storyblok
+
+Install the Storyblok CLI globally
+
+```bash
+npm i storyblok -g
+```
+
+Authenticate to Storyblok using
+
+```bash
+storyblok login
+```
+
+Go to your account to get your `SPACE_ID` and your `ACCESS_TOKEN`. Then create a `.env` file in the root directory of the project:
+
+```bash
+STORYBLOK_ACCESS_TOKEN=`<your-token>`
+STORYBLOK_SPACE_ID=`<your-space-id>`
+```
+
 ## Installation
 
 ```sh
