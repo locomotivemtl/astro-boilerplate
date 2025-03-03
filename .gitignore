@@ -26,7 +26,3 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
-
-# storyblok
-src/storyblok/components.*.json
-types/component-types-sb.d.ts

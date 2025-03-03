@@ -1,6 +1,11 @@
 ---
 import { storyblokEditable } from '@storyblok/astro';
 import StoryblokComponent from '@storyblok/astro/StoryblokComponent.astro';
+import type { PageStoryblok } from 'component-types-sb';
+
+interface Props {
+    blok: PageStoryblok;
+}
 
 const { blok } = Astro.props;
 ---
