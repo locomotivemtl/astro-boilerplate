@@ -6,7 +6,12 @@ import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import { storyblok } from '@storyblok/astro';
 import basicSsl from '@vitejs/plugin-basic-ssl';
-const { STORYBLOK_ACCESS_TOKEN } = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
+
+const { STORYBLOK_ACCESS_TOKEN, STORYBLOK_SERVER_LOCATION } = loadEnv(
+    process.env.NODE_ENV as string,
+    process.cwd(),
+    ''
+);
 
 const isProd = import.meta.env.PROD;
 
@@ -32,8 +37,9 @@ export default defineConfig({
         storyblok({
             accessToken: STORYBLOK_ACCESS_TOKEN,
             apiOptions: {
-                region: 'us'
+                region: STORYBLOK_SERVER_LOCATION
             },
+            livePreview: true,
             components: {
                 page: 'storyblok/Page',
                 feature: 'storyblok/Feature',
@@ -48,7 +54,8 @@ export default defineConfig({
     env: {
         schema: {
             STORYBLOK_ACCESS_TOKEN: envField.string({ context: 'server', access: 'secret' }),
-            STORYBLOK_SPACE_ID: envField.string({ context: 'server', access: 'secret' })
+            STORYBLOK_SPACE_ID: envField.string({ context: 'server', access: 'secret' }),
+            STORYBLOK_SERVER_LOCATION: envField.string({ context: 'server', access: 'secret' })
         }
     }
 });
