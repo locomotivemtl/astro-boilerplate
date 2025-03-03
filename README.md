@@ -46,11 +46,12 @@ Authenticate to Storyblok using
 storyblok login
 ```
 
-Go to your account to get your `SPACE_ID` and your `ACCESS_TOKEN`. Then create a `.env` file in the root directory of the project:
+Go to your account to get your `SPACE_ID`, `ACCESS_TOKEN` and `SERVER_LOCATION`. Then create a `.env` file in the root directory of the project:
 
 ```bash
 STORYBLOK_ACCESS_TOKEN=`<your-token>`
 STORYBLOK_SPACE_ID=`<your-space-id>`
+STORYBLOK_SERVER_LOCATION=`<your-server-location>`
 ```
 
 ## Installation
@@ -67,7 +68,7 @@ npm install
 
 ```sh
 # Start development server, watch for changes, and compile assets
-npm start
+npm run dev
 
 # Compile and minify assets
 npm run build
@@ -86,6 +87,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run format`          | Format files using prettier                      |
+| `npm run generate`        | Generate types                                   |
 
 ## Documentation
 
@@ -97,6 +99,7 @@ All commands are run from the root of the project, from a terminal:
 - [Nanostores]
 
 [Astro]: https://docs.astro.build/en/getting-started/
+[PostCSS]: https://postcss.org/
 [Tailwind CSS]: https://tailwindcss.com/docs/installation
 [Locomotive Scroll]: https://scroll.locomotive.ca/docs
 [Swup]: https://swup.js.org/getting-started/
