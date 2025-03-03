@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import '../../node_modules/tailwindcss';
 
 :root {
     --unit-sm: 10px;
