@@ -8,6 +8,9 @@
 @import './utilities.css';
 @import './typography.css';
 
+/* components */
+@import './image.css';
+
 /* Fonts imports */
 @import './fonts.css';
 

@@ -1,0 +1,82 @@
+---
+import { buildSrcSet } from './buildSrcSet';
+import { getDimensions } from './dimensions';
+import type { AssetStoryblok } from 'component-types-sb';
+
+interface Props {
+    data: AssetStoryblok | null;
+    width?: number;
+    height?: number;
+    sizes?: string;
+    srcSetCandidates?: number[];
+    priority?: 'high' | 'low' | 'auto';
+    loading?: HTMLImageElement['loading'];
+    class?: string;
+}
+
+const {
+    data,
+    width: customWidth,
+    height: customHeight,
+    sizes = '100vw',
+    srcSetCandidates = [0.25, 0.5, 0.75, 1, 1.5, 2],
+    loading = 'lazy',
+    priority = 'auto',
+    class: propsClass,
+    ...rest
+} = Astro.props;
+
+if (!data || !data.filename) {
+    return null;
+}
+
+// Get original dimensions
+const { width: originalWidth, height: originalHeight } = getDimensions(data.filename);
+
+// Use custom width/height if provided, otherwise fallback to original
+const width = customWidth ?? originalWidth;
+const height =
+    customHeight ??
+    (customWidth ? Math.round((customWidth / originalWidth) * originalHeight) : originalHeight);
+
+// Build the srcset based on the provided candidates for responsive images
+const srcSetOptions = {
+    src: data.filename,
+    width: width,
+    height: height,
+    candidates: srcSetCandidates
+};
+
+const srcSet = buildSrcSet(srcSetOptions);
+
+// Build the src based on the provided width and height
+const src = `${data.filename}/m/${width}x${height}/filters:format(auto):no_upscale()`;
+
+// Set the onload event based on the loading prop
+const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');`;
+
+const classes = [
+    'c-image',
+    width && height && '-cover',
+    loading === 'lazy' && '-lazy-load',
+    propsClass
+];
+---
+
+<div class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
+    <picture class="c-image_inner">
+        <source srcset={srcSet} sizes={sizes} />
+
+        <img
+            src={src}
+            alt={data.alt ?? ''}
+            title={data.title ?? null}
+            fetchpriority={priority}
+            loading={loading}
+            class="c-image_img"
+            onload={onLoad}
+            width={width}
+            height={height}
+        />
+    </picture>
+</div>
