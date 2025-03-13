@@ -1,4 +1,4 @@
-import { ComponentElement } from '@root/src/scripts/stores/componentManager';
+import { ComponentElement } from '@scripts/stores/componentManager';
 
 export default class Accordion extends ComponentElement {
     static readonly DURATION = 300;
