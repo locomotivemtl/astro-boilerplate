@@ -3,14 +3,14 @@
 A tiny state manager.
 It uses **many atomic stores** and direct manipulation.
 
--   **Small.** Between 286 and 818 bytes (minified and brotlied).
-    Zero dependencies. It uses [Size Limit] to control size.
--   **Fast.** With small atomic and derived stores, you do not need to call
-    the selector function for all components on every store change.
--   **Tree Shakable.** A chunk contains only stores used by components
-    in the chunk.
--   Designed to move logic from components to stores.
--   Good **TypeScript** support.
+- **Small.** Between 286 and 818 bytes (minified and brotlied).
+  Zero dependencies. It uses [Size Limit] to control size.
+- **Fast.** With small atomic and derived stores, you do not need to call
+  the selector function for all components on every store change.
+- **Tree Shakable.** A chunk contains only stores used by components
+  in the chunk.
+- Designed to move logic from components to stores.
+- Good **TypeScript** support.
 
 ## Screen
 
@@ -207,50 +207,71 @@ export default class Example {
 
 > ⚠️ **Warning**: When working with the store, it's important to understand the distinction between `Store#subscribe()` and `Store#listen(cb)` methods.
 
--   `Store#subscribe()` immediately calls the callback function and subscribes to store changes. It passes the store's current value to the callback upon subscription.
--   `Store#listen(cb)`, on the other hand, only triggers the callback function on the next store change.
+- `Store#subscribe()` immediately calls the callback function and subscribes to store changes. It passes the store's current value to the callback upon subscription.
+- `Store#listen(cb)`, on the other hand, only triggers the callback function on the next store change.
 
 Be mindful of this difference and choose the appropriate method based on your requirements to ensure the expected behavior in your application.
 
 ## Components Manager
 
-The `$componentsManager` is a global store for managing custom Web Component instances. It allows developers to register, track, and interact with all Web Components that extend the `ComponentElement` class. This store provides a centralized way to access component instances by their `id`, `prototype`, or other criteria, enabling cross-component communication.
+The `$componentsManager` is a global store that **tracks and manages** custom Web Component instances. It provides a structured way to register, access, and interact with Web Components dynamically.
 
-### How It Works
+With the updated architecture, **any custom component that extends a native HTML element** can now integrate seamlessly into the component manager.
 
-When a Web Component extends the `ComponentElement` class, it is automatically registered in the `$componentsManager` store when connected to the DOM. Similarly, the component is unregistered when disconnected.
+---
 
-#### Example
+### ✨ How It Works
 
-Here’s a simple example demonstrating how components are registered and how you can interact with them using `$componentsManager`.
+When a Web Component is enhanced with `ComponentElement`, it is:
 
-1. **Create your component by extending `ComponentElement`:**
+- ✅ **Automatically registered** in `$componentsManager` when added to the DOM.
+- ✅ **Assigned a unique ID** based on its component type (e.g., `accordion-1`, `dialog-2`).
+- ✅ **Automatically unregistered** when removed from the DOM.
+
+This allows **global tracking, retrieval, and communication** between Web Components.
+
+---
+
+### 🚀 Example Usage
+
+1. **Create a Custom Component Using `ComponentElement:**
 
 ```ts
 import { ComponentElement } from '@root/src/scripts/stores/componentManager';
 
-class Foo extends ComponentElement {
+class Foo extends HTMLElement {
     constructor() {
         super();
     }
+}
 
-    connectedCallback() {
-        super.connectedCallback();
-    }
+customElements.define('c-foo', ComponentElement(Foo));
+```
 
-    disconnectedCallback() {
-        super.disconnectedCallback();
+You can extend classes other than `HTMLElement` to gain more specific attributes and behaviors. For example, extending `HTMLDetailsElement` allows you to create a custom `<details>` component while preserving its native functionality. This is made possible using the [is attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is), which enables custom elements to extend built-in ones.
+
+```ts
+class Accordion extends HTMLDetailsElement {
+    constructor() {
+        super();
     }
 }
 
-customElements.define('c-foo', Foo);
+customElements.define('c-accordion', ComponentElement(Accordion), { extends: 'details' });
+```
+
+```html
+<details is="c-accordion">
+    <summary>Click me</summary>
+    <p>This is an accordion content!</p>
+</details>
 ```
 
 2. **Access component instances from `$componentsManager`:**
 
 You can use `$componentsManager.get()` or one of the following helpers `getComponentsByPrototype()` and `getComponentsById()` to retrieve the current list of components and interact with them.
 
--   **Access all components of a specific prototype:**
+- **Access all components of a specific prototype:**
 
 ```ts
 import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
@@ -261,7 +282,11 @@ $allFoo.forEach(($foo) => {
 });
 ```
 
--   **Access a specific component by its `id`:**
+- **Access a specific component by its `id`:**
+
+```html
+<c-foo id="foo-1"></c-foo>
+```
 
 ```ts
 import { getComponentsById } from '@root/src/scripts/stores/componentManager';
@@ -272,7 +297,7 @@ if ($foo) {
 }
 ```
 
--   **Exclude the current instance:**
+- **Exclude the current instance:**
 
 ```ts
 import { getComponentsByPrototype } from '@root/src/scripts/stores/componentManager';
@@ -290,6 +315,6 @@ const $filteredComponents = getComponentsByPrototype('Bar', ['#exclude-me', '.ig
 
 ### Best Practices
 
--   **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
--   Use `id`s to uniquely identify components and interact with specific instances.
--   Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.
+- **Always call `super.connectedCallback()` and `super.disconnectedCallback()`** in your component’s lifecycle methods to ensure proper registration/unregistration.
+- Use `id`s to uniquely identify components and interact with specific instances.
+- Take advantage of the `$componentsManager.get()` method to manage and control components centrally, especially when multiple instances of the same component type are involved.
