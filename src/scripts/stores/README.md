@@ -245,7 +245,7 @@ class Foo extends HTMLElement {
     }
 }
 
-customElements.define('c-foo', ComponentElement(Foo));
+customElements.define('c-foo', ComponentElement(Foo, 'Foo'));
 ```
 
 You can extend classes other than `HTMLElement` to gain more specific attributes and behaviors. For example, extending `HTMLDetailsElement` allows you to create a custom `<details>` component while preserving its native functionality. This is made possible using the [is attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/is), which enables custom elements to extend built-in ones.
@@ -257,7 +257,9 @@ class Accordion extends HTMLDetailsElement {
     }
 }
 
-customElements.define('c-accordion', ComponentElement(Accordion), { extends: 'details' });
+customElements.define('c-accordion', ComponentElement(Accordion, 'Accordion'), {
+    extends: 'details'
+});
 ```
 
 ```html

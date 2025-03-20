@@ -1,18 +1,21 @@
 import { atom } from 'nanostores';
 
-export const ComponentElement = <BaseClass extends CustomElementConstructor>(Base: BaseClass) => {
+export const ComponentElement = <BaseClass extends CustomElementConstructor>(
+    Base: BaseClass,
+    className: string
+) => {
     return class extends Base {
         prototypeType: string;
 
         constructor(...args: any[]) {
             super(...args);
 
-            this.prototypeType = Base.name;
+            this.prototypeType = className;
 
             if (!this.id) {
                 const index = $componentsManagerIncrement.get() + 1;
                 $componentsManagerIncrement.set(index);
-                this.id = `${Base.name.toLowerCase()}-${index}`;
+                this.id = `${this.prototypeType.toLowerCase()}-${index}`;
             }
         }
 

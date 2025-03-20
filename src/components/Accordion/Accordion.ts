@@ -150,4 +150,6 @@ export default class Accordion extends HTMLDetailsElement {
     }
 }
 
-customElements.define('c-accordion', ComponentElement(Accordion), { extends: 'details' });
+customElements.define('c-accordion', ComponentElement(Accordion, 'Accordion'), {
+    extends: 'details'
+});
