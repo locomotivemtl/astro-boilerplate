@@ -31,7 +31,7 @@
         "@swup/head-plugin": "^2.3.1",
         "@swup/preload-plugin": "^3.2.11",
         "@swup/scripts-plugin": "^2.1.0",
-        "astro": "^5.7.5",
+        "astro": "^5.7.13",
         "astro-icon": "^1.1.5",
         "astro-seo": "^0.8.4",
         "lint-staged": "^15.5.1",
