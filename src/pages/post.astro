@@ -1,5 +1,45 @@
 ---
-import { PostTemplate } from '@templates/Post';
+import Layout from '@layouts/Layout.astro';
+import Icon from '@components/Icon/Icon.astro';
+import Blocks from '@components/Blocks/Blocks.astro';
+
+// Define the blocks for this post. This could be fetched from a CMS.
+const blocks = [
+    {
+        type: 'text',
+        data: {
+            body: `<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`
+        }
+    },
+    {
+        type: 'image',
+        data: {
+            src: 'https://locomotive.ca/uploads/careers/fullscreen-image-2000w.jpg',
+            alt: 'An image',
+            caption: 'Image caption'
+        }
+    },
+    { type: 'text', data: { body: '<p>This a content block</p>' } },
+    {
+        type: 'text',
+        data: {
+            body: `<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`
+        }
+    }
+];
 ---
 
-<PostTemplate />
+<Layout title="Post title">
+    <header class="container">
+        <Icon name="logo" />
+        <h1 class="heading-h1">Post title</h1>
+    </header>
+
+    <div class="mt-fluid-xl container">
+        <Blocks blocks={blocks} />
+
+        <!-- Placeholder -->
+        <div class="mt-fluid-xl h-[50vh] w-full bg-black opacity-50"></div>
+        <div class="mt-fluid-xl bg-primary h-[50vh] w-full"></div>
+    </div>
+</Layout>

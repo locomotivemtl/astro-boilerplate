@@ -1,5 +1,71 @@
 ---
-import { AboutTemplate } from '@templates/About';
+import Layout from '@layouts/Layout.astro';
+import Image from '@components/Image/Image.astro';
+import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 ---
 
-<AboutTemplate />
+<Layout title="About">
+    <header class="container">
+        <h1 class="heading-h1">About</h1>
+    </header>
+
+    <div class="mt-fluid-xl h-[20vh] w-full bg-black"></div>
+
+    <div class="mt-fluid-xl container">
+        <div>
+            <Image
+                src={import('@images/printer.jpg')}
+                alt="Placeholder alt"
+                caption="Static image & Loading eager"
+                loading="eager"
+                width={500}
+                height={200}
+            />
+        </div>
+        <div class="gap-gutter grid grid-cols-2">
+            <div>
+                <Image
+                    src="https://locomotive.ca/uploads/careers/pltropics-2000w.jpg"
+                    alt="Placeholder alt"
+                    caption="Loading lazy native"
+                    loading="lazy"
+                    width={500}
+                    height={500}
+                />
+            </div>
+            <div>
+                <Image
+                    src="https://locomotive.ca/uploads/careers/fullscreen-image-2000w.jpg"
+                    alt="Placeholder alt"
+                    caption="Loading lazy native + locomotive-scroll inview anim"
+                    loading="lazy"
+                    width={500}
+                    height={500}
+                    data-scroll
+                    data-scroll-repeat
+                />
+            </div>
+        </div>
+        <div class="gap-gutter grid grid-cols-12">
+            <div class="text-body-sm col-span-full md:col-span-6">
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
+            </div>
+
+            <div class="text-body-sm col-span-full md:col-span-6">
+                <Wysiwyg>
+                    <Fragment
+                        set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
+                    />
+                </Wysiwyg>
+            </div>
+        </div>
+
+        <!-- Placeholder -->
+        <div class="mt-fluid-xl h-[50vh] w-full bg-black opacity-50"></div>
+        <div class="mt-fluid-xl h-[50vh] w-full bg-gray-200"></div>
+    </div>
+</Layout>
