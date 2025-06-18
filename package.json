@@ -32,6 +32,7 @@
         "@astrojs/check": "^0.9.4",
         "@locomotivemtl/component-manager": "^1.0.1",
         "@locomotivemtl/grid-helper": "^1.0.0",
+        "@storyblok/astro": "^7.0.0",
         "@swup/head-plugin": "^2.3.1",
         "@swup/preload-plugin": "^3.2.11",
         "@swup/scripts-plugin": "^2.1.0",
