@@ -29,7 +29,7 @@
     transform: rotateX(0);
     transition: transform theme-speed() theme-ease();
 
-    .c-accordion_details[open] & {
+    .c-accordion[open] & {
         transform: rotateX(180deg);
     }
 }

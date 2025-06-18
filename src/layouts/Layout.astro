@@ -44,8 +44,10 @@ const FONTS: string[] = [
         }
     </head>
     <body>
+        <script src="../scripts/app.ts"></script>
+
         <div class="py-fluid-md container grid grid-cols-2">
-            <div class="">
+            <div>
                 <Icon name="logo" />
             </div>
             <nav class="gap-gutter flex justify-self-end">
@@ -71,7 +73,7 @@ const FONTS: string[] = [
                 <a href="/about">About</a>
             </nav>
         </footer>
-        <script src="../scripts/app.ts"></script>
+
         <script>
             import { setViewportSize } from '@scripts/utils/setViewportSize';
             import { $screenDebounce } from '@scripts/stores/screen';

@@ -22,12 +22,16 @@ export const $screenDebounce = map<ScreenDebounceValues>({
 });
 
 window.addEventListener('resize', () => {
-    $screen.setKey('width', window.innerWidth);
-    $screen.setKey('height', window.innerHeight);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    $screen.set({ width, height });
 });
 
 const debouncedFunction: any = () => {
-    $screenDebounce.setKey('width', window.innerWidth);
-    $screenDebounce.setKey('height', window.innerHeight);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    $screenDebounce.set({ width, height });
 };
 window.addEventListener('resize', debounce(debouncedFunction, 200));
