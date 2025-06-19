@@ -1,155 +1,215 @@
 import { ComponentElement } from '@locomotivemtl/component-manager';
 
-export default class Accordion extends HTMLDetailsElement {
-    static readonly DURATION = 300;
-    static readonly CLASS_OPEN = 'is-open';
-    private onClickBind: any;
-    private $summary: HTMLElement;
-    private $content: HTMLElement;
-    private $parent: HTMLElement | null;
-    private animation: Animation | null;
-    private isClosing: boolean;
-    private isExpanding: boolean;
+export class Accordion extends HTMLElement {
+    static CLASS_ACTIVE = 'is-active';
+    static EASING = 'cubic-bezier(0.33, 1, 0.68, 1)';
+    static DURATION = 300;
+
+    private $summary: HTMLElement | null = null;
+    private $content: HTMLElement | null = null;
+    private $details: HTMLDetailsElement | null = null;
+    private animation: Animation | null = null;
+    private isClosing: boolean = false;
+    private isExpanding: boolean = false;
 
     constructor() {
         super();
 
-        // Binding
-        this.onClickBind = this.onClick.bind(this);
-
-        // UI
-        this.$summary = this.querySelector('summary.c-accordion_summary')!;
-        this.$content = this.querySelector('.c-accordion_content')!;
-        this.$parent = this.closest('[data-accordion-parent]') || null;
-
-        // Data
-        this.animation = null;
-        this.isClosing = false;
-        this.isExpanding = false;
+        this.$summary = this.querySelector('summary');
+        this.$details = this.querySelector('details');
+        this.$content = this.querySelector('[data-accordion="content"]');
     }
 
     // =============================================================================
     // Lifecycle
     // =============================================================================
     connectedCallback() {
+        if (!this.validateElements()) return;
         this.bindEvents();
     }
 
     disconnectedCallback() {
         this.unbindEvents();
+        this.cancelAnimation();
     }
 
     // =============================================================================
     // Events
     // =============================================================================
-    bindEvents() {
-        this.$summary.addEventListener('click', this.onClickBind);
+    private bindEvents(): void {
+        this.$summary?.addEventListener('click', this.onClick);
     }
-    unbindEvents() {
-        this.$summary.removeEventListener('click', this.onClickBind);
+
+    private unbindEvents(): void {
+        this.$summary?.removeEventListener('click', this.onClick);
     }
 
     // =============================================================================
     // Callbacks
     // =============================================================================
-    onClick(e: Event) {
+    private onClick = (e: Event): void => {
         e.preventDefault();
 
-        this.style.overflow = 'hidden';
+        if (this.isAnimating()) return;
 
-        if (this.isClosing || !this.open) {
-            this.start();
-        } else if (this.isExpanding || this.open) {
-            this.shrink();
+        if (this.isOpen()) {
+            this.close();
+        } else {
+            this.open();
         }
+    };
+
+    // =============================================================================
+    // Animation Methods
+    // =============================================================================
+    private cancelAnimation(): void {
+        if (this.animation) {
+            this.animation.cancel();
+            this.animation = null;
+        }
+    }
+
+    private createAnimation(startHeight: string, endHeight: string): Animation {
+        this.cancelAnimation();
+
+        return this.animate(
+            { height: [startHeight, endHeight] },
+            {
+                duration: Accordion.DURATION,
+                easing: Accordion.EASING
+            }
+        );
+    }
+
+    private prepareForAnimation(): void {
+        this.style.overflow = 'hidden';
+    }
+
+    private cleanupAfterAnimation(): void {
+        this.animation = null;
+        this.isClosing = false;
+        this.isExpanding = false;
+        this.$details!.style.height = '';
+        this.style.overflow = '';
     }
 
     // =============================================================================
     // Methods
     // =============================================================================
-    shrink() {
+    private close(): void {
         this.isClosing = true;
-        this.classList.remove(Accordion.CLASS_OPEN);
+        this.$details!.classList.remove(Accordion.CLASS_ACTIVE);
+        this.prepareForAnimation();
 
-        if (this.$parent) this.$parent.classList.remove(Accordion.CLASS_OPEN);
+        const startHeight = `${this.$details!.offsetHeight}px`;
+        const endHeight = `${this.$summary!.offsetHeight}px`;
 
-        const startHeight = `${this.offsetHeight}px`;
-        const endHeight = `${this.$summary.offsetHeight}px`;
+        this.animation = this.createAnimation(startHeight, endHeight);
+        this.animation.onfinish = () => this.onAnimationFinish(false);
+        this.animation.oncancel = () => this.onCloseCancel();
 
-        if (this.animation) {
-            this.animation.cancel();
-        }
-
-        this.animation = this.animate(
-            {
-                height: [startHeight, endHeight]
-            },
-            {
-                duration: Accordion.DURATION,
-
-                easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)'
-            }
-        );
-
-        if (this.animation) {
-            this.animation.onfinish = () => this.onAnimationFinish(false);
-            this.animation.oncancel = () => {
-                this.isClosing = false;
-                this.classList.add(Accordion.CLASS_OPEN);
-            };
-        }
+        this.dispatchCustomEvent('accordion-closed');
     }
 
-    start() {
-        this.style.height = `${this.offsetHeight}px`;
-
-        window.requestAnimationFrame(() => this.expand());
-    }
-
-    expand() {
+    private open(): void {
         this.isExpanding = true;
-        this.classList.add(Accordion.CLASS_OPEN);
+        this.$details!.style.height = `${this.offsetHeight}px`;
+        this.$details!.setAttribute('open', '');
+        this.$details!.classList.add(Accordion.CLASS_ACTIVE);
+        this.prepareForAnimation();
 
-        if (this.$parent) this.$parent.classList.add(Accordion.CLASS_OPEN);
+        window.requestAnimationFrame(() => {
+            const startHeight = `${this.$details!.offsetHeight}px`;
+            const endHeight = `${this.$summary!.offsetHeight + this.$content!.offsetHeight}px`;
 
-        const startHeight = `${this.offsetHeight}px`;
-        const endHeight = `${this.$summary.offsetHeight + this.$content.offsetHeight}px`;
+            this.animation = this.createAnimation(startHeight, endHeight);
+            this.animation.onfinish = () => this.onAnimationFinish(true);
+            this.animation.oncancel = () => this.onExpandCancel();
+        });
 
-        if (this.animation) {
-            this.animation?.cancel();
+        this.dispatchCustomEvent('accordion-opened');
+    }
+
+    // =============================================================================
+    // Animation Callbacks
+    // =============================================================================
+    private onAnimationFinish(open: boolean): void {
+        if (open) {
+            this.$details!.setAttribute('open', '');
+        } else {
+            this.$details!.removeAttribute('open');
         }
 
-        this.animation = this.animate(
-            {
-                height: [startHeight, endHeight]
-            },
-            {
-                duration: Accordion.DURATION,
-                easing: 'linear'
-            }
-        );
+        this.cleanupAfterAnimation();
 
-        if (this.animation) {
-            this.animation.onfinish = () => this.onAnimationFinish(true);
-            this.animation.oncancel = () => {
-                this.isExpanding = false;
-                this.classList.remove(Accordion.CLASS_OPEN);
-            };
+        this.dispatchCustomEvent('accordion-animation-finished', {
+            isOpen: open
+        });
+    }
+
+    private onCloseCancel(): void {
+        this.isClosing = false;
+        this.$details!.classList.add(Accordion.CLASS_ACTIVE);
+    }
+
+    private onExpandCancel(): void {
+        this.isExpanding = false;
+        this.$details!.classList.remove(Accordion.CLASS_ACTIVE);
+    }
+
+    // =============================================================================
+    // Utilities
+    // =============================================================================
+    private dispatchCustomEvent(eventName: string, detail: any = {}): void {
+        this.dispatchEvent(
+            new CustomEvent(eventName, {
+                detail: { target: this, ...detail },
+                bubbles: true
+            })
+        );
+    }
+
+    private validateElements(): boolean {
+        if (!this.$summary || !this.$details || !this.$content) {
+            console.warn('Accordion: Missing required elements (summary, details, or content)');
+            return false;
+        }
+        return true;
+    }
+
+    // =============================================================================
+    // Public API
+    // =============================================================================
+    public toggle(): void {
+        if (this.isAnimating()) return;
+
+        if (this.isOpen()) {
+            this.close();
+        } else {
+            this.openAccordion();
         }
     }
 
-    onAnimationFinish(open: boolean) {
-        this.open = open;
+    public openAccordion(): void {
+        if (!this.isOpen() && !this.isAnimating()) {
+            this.open();
+        }
+    }
 
-        this.animation = null;
+    public closeAccordion(): void {
+        if (this.isOpen() && !this.isAnimating()) {
+            this.close();
+        }
+    }
 
-        this.isClosing = false;
-        this.isExpanding = false;
+    public isOpen(): boolean {
+        return this.$details?.hasAttribute('open') ?? false;
+    }
 
-        this.style.height = this.style.overflow = '';
+    public isAnimating(): boolean {
+        return this.isClosing || this.isExpanding;
     }
 }
 
-customElements.define('c-accordion', ComponentElement(Accordion, 'Accordion'), {
-    extends: 'details'
-});
+// Register the custom element
+customElements.define('c-accordion', ComponentElement(Accordion, 'Accordion'));

@@ -1,5 +1,6 @@
 .c-accordion {
     position: relative;
+    display: block;
 }
 
 .c-accordion_summary {
@@ -11,7 +12,7 @@
     padding: 12px 0;
     user-select: none;
     cursor: pointer;
-    transition: opacity theme-speed() theme-ease();
+    transition: opacity var(--transition-duration) var(--ease);
 
     &::marker {
         display: none;
@@ -27,9 +28,9 @@
 .c-accordion_icon {
     flex-shrink: 0;
     transform: rotateX(0);
-    transition: transform theme-speed() theme-ease();
+    transition: transform var(--transition-duration) var(--ease);
 
-    .c-accordion[open] & {
+    .c-accordion_details.is-active & {
         transform: rotateX(180deg);
     }
 }
