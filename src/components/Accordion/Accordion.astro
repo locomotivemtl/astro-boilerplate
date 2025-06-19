@@ -10,15 +10,17 @@ const { label, name, class: propsClass, ...rest } = Astro.props;
 const classes = ['c-accordion', propsClass];
 ---
 
-<details class:list={classes} name={name} {...rest} is="c-accordion">
-    <summary class="c-accordion_summary">
-        <span>{label}</span>
-        <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
-    </summary>
-    <div class="c-accordion_content">
-        <slot />
-    </div>
-</details>
+<c-accordion class:list={classes} {...rest}>
+    <details class="c-accordion_details" name={name}>
+        <summary class="c-accordion_summary">
+            <span>{label}</span>
+            <span class="c-accordion_icon" aria-hidden="true">&darr;</span>
+        </summary>
+        <div class="c-accordion_content" data-accordion="content">
+            <slot />
+        </div>
+    </details>
+</c-accordion>
 
 <style>
     @import 'Accordion.css';
