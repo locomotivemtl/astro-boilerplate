@@ -23,7 +23,9 @@
         "build": "astro check && astro build",
         "preview": "astro preview",
         "astro": "astro",
-        "format": "npx lint-staged"
+        "format": "lint-staged",
+        "lint": "eslint .",
+        "lint:fix": "eslint . --fix"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.4",
