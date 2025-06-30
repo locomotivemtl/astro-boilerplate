@@ -10,7 +10,7 @@ const { body } = Astro.props;
 
 {
     body && (
-        <Wysiwyg class="my-fluid-xl mx-auto max-w-3xl">
+        <Wysiwyg class="mx-auto my-fluid-xl max-w-3xl">
             <Fragment set:html={body} />
         </Wysiwyg>
     )
