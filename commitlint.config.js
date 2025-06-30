@@ -6,7 +6,7 @@ export default {
         'subject-min-word-count': [2, 'always', 3],
         // Subject must be reasonable in length
         'subject-min-length': [2, 'always', 5],
-        'subject-max-length': [1, 'always', 100],
+        'subject-max-length': [2, 'always', 100],
         'subject-full-stop': [2, 'never', '.'],
 
         // Optional body formatting
