@@ -3,6 +3,7 @@ import icon from 'astro-icon';
 import tailwindcss from '@tailwindcss/vite';
 import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
+import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 
 const isProd = import.meta.env.PROD;
 
@@ -12,7 +13,7 @@ export default defineConfig({
     vite: {
         css: {
             postcss: {
-                plugins: [postcssUtopia(), postcssHelpersFunctions()]
+                plugins: [postcssUtopia(), postcssHelpersFunctions(), postcssTailwindShortcuts()]
             }
         },
         esbuild: {
