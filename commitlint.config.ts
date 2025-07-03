@@ -25,7 +25,11 @@ export default {
     plugins: [
         {
             rules: {
-                'subject-min-word-count': ({ header }, _when = 'always', value = 3) => {
+                'subject-min-word-count': (
+                    { header }: { header: string },
+                    _when = 'always',
+                    value = 3
+                ) => {
                     const wordCount = header.trim().split(/\s+/).length;
                     const pass = wordCount >= value;
                     return [pass, `subject must contain at least ${value} words`];
