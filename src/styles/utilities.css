@@ -1,6 +1,6 @@
 /* Note on @utility coloring syntax https://github.com/tailwindlabs/tailwindcss-intellisense/issues/1146#issuecomment-2637758061 */
 /* Fix issue of tailwind container injecting max-w */
 @utility container {
-    @apply px-unit-md mx-auto w-full;
+    @apply mx-auto w-full px-unit-md;
     @apply max-w-none;
 }
