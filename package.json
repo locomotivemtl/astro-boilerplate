@@ -44,6 +44,7 @@
         "typescript": "^5.8.3"
     },
     "devDependencies": {
+        "@commitlint/cli": "^19.8.1",
         "@locomotivemtl/postcss-helpers-functions": "^1.0.2",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.1.4",
@@ -54,7 +55,8 @@
         "simple-git-hooks": "^2.13.0"
     },
     "simple-git-hooks": {
-        "pre-commit": "npm run format"
+        "pre-commit": "npm run format",
+        "commit-msg": "npx commitlint --edit"
     },
     "lint-staged": {
         "*": "prettier --write --ignore-unknown"
