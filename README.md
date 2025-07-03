@@ -12,8 +12,9 @@
 - [Tailwind CSS] for a sane and scalable CSS architecture.
 - [Locomotive Scroll] for smooth scrolling with parallax effects.
 - [Swup] for versatile and extensible page transition.
-- [Prettier] for a formatted and easy to maintain codebase.
 - [Nanostores] as state manager.
+- [Prettier] for a formatted and easy to maintain codebase.
+- [ESLint] for code quality, bug prevention, and consistent standards.
 
 ## Getting started
 
@@ -65,6 +66,8 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run format`          | Format files using prettier                      |
+| `npm run lint`            | Lint project files using ESLint                  |
+| `npm run lint:fix`        | Lint and auto-fix files using ESLint             |
 
 ## Documentation
 
@@ -74,6 +77,7 @@ All commands are run from the root of the project, from a terminal:
 - [Swup]
 - [Prettier]
 - [Nanostores]
+- [ESLint]
 
 [Astro]: https://docs.astro.build/en/getting-started/
 [Tailwind CSS]: https://tailwindcss.com/docs/installation
@@ -85,3 +89,4 @@ All commands are run from the root of the project, from a terminal:
 [Prettier]: https://prettier.io/
 [Nanostores]: https://github.com/nanostores/nanostores
 [PostCSS]: https://postcss.org/
+[ESLint]: https://eslint.org/
