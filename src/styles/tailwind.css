@@ -5,7 +5,7 @@
     --unit-md: 20px;
 }
 
-@theme {
+@theme static {
     --font-serif: 'Times New Roman', serif;
     --font-sans: 'Arial', sans-serif;
 

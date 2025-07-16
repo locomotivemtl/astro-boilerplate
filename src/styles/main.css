@@ -13,12 +13,12 @@
 
 /* Global styles */
 :root {
-    --color-primary: theme-color('primary');
-    --color-secondary: theme-color('secondary');
+    --color-primary: colorCode('black');
+    --color-secondary: colorCode('white');
 }
 
 html {
-    font-family: theme('fontFamily.sans');
+    font-family: var(--font-sans);
     font-weight: 500;
 }
 

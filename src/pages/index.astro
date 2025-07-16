@@ -10,8 +10,8 @@ import Accordion from '@components/Accordion/Accordion.astro';
         <h1 class="heading-h1">Welcome to the Locomotive Astro Boilerplate.</h1>
     </header>
 
-    <div class="mt-fluid-xl container">
-        <div class="gap-gutter grid grid-cols-12">
+    <div class="container mt-fluid-xl">
+        <div class="grid grid-cols-12 gap-gutter">
             <div class="text-body col-span-full md:col-span-4">
                 <Wysiwyg>
                     <Fragment
@@ -22,7 +22,7 @@ import Accordion from '@components/Accordion/Accordion.astro';
                 <Button href="/about" class="mt-fluid-sm"> Learn More </Button>
             </div>
 
-            <div class="text-body-sm col-span-full md:col-span-4">
+            <div class="col-span-full text-body-sm md:col-span-4">
                 <Wysiwyg tag="article">
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
@@ -33,7 +33,7 @@ import Accordion from '@components/Accordion/Accordion.astro';
                 </Wysiwyg>
             </div>
 
-            <div class="text-body-sm col-span-full md:col-span-4">
+            <div class="col-span-full text-body-sm md:col-span-4">
                 <Wysiwyg>
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
@@ -41,7 +41,7 @@ import Accordion from '@components/Accordion/Accordion.astro';
                 </Wysiwyg>
             </div>
 
-            <div class="text-body-sm col-span-full md:col-span-4">
+            <div class="col-span-full text-body-sm md:col-span-4">
                 <Accordion label="Accordion summary">
                     <Wysiwyg>
                         <Fragment
@@ -61,6 +61,6 @@ import Accordion from '@components/Accordion/Accordion.astro';
 
         <!-- Placeholder -->
         <div class="mt-fluid-xl h-[50vh] w-full bg-black opacity-50"></div>
-        <div class="mt-fluid-xl bg-grey h-[50vh] w-full"></div>
+        <div class="bg-grey mt-fluid-xl h-[50vh] w-full"></div>
     </div>
 </Layout>
