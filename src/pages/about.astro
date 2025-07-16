@@ -11,7 +11,7 @@ import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
 
     <div class="mt-fluid-xl h-[20vh] w-full bg-black"></div>
 
-    <div class="mt-fluid-xl container">
+    <div class="container mt-fluid-xl">
         <div>
             <Image
                 src={import('@images/printer.jpg')}
@@ -22,7 +22,7 @@ import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
                 height={200}
             />
         </div>
-        <div class="gap-gutter grid grid-cols-2">
+        <div class="grid grid-cols-2 gap-gutter">
             <div>
                 <Image
                     src="https://locomotive.ca/uploads/careers/pltropics-2000w.jpg"
@@ -46,8 +46,8 @@ import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
                 />
             </div>
         </div>
-        <div class="gap-gutter grid grid-cols-12">
-            <div class="text-body-sm col-span-full md:col-span-6">
+        <div class="grid grid-cols-12 gap-gutter">
+            <div class="col-span-full text-body-sm md:col-span-6">
                 <Wysiwyg>
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
@@ -55,7 +55,7 @@ import Wysiwyg from '@components/Wysiwyg/Wysiwyg.astro';
                 </Wysiwyg>
             </div>
 
-            <div class="text-body-sm col-span-full md:col-span-6">
+            <div class="col-span-full text-body-sm md:col-span-6">
                 <Wysiwyg>
                     <Fragment
                         set:html={`<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque quam, nam omnis sunt laudantium tenetur obcaecati? Inventore eos vitae id repellat cum possimus voluptates nam voluptatum, assumenda, atque nesciunt debitis?</p>`}
