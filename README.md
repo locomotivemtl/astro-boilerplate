@@ -19,7 +19,7 @@
 
 Make sure you have the following installed:
 
-- [Node] — at least 20.14, the latest LTS is recommended.
+- [Node] — at least 22.0, the latest LTS is recommended.
 - [NPM] — at least 8.0, the latest LTS is recommended.
 
 > 💡 You can use [NVM] to install and use different versions of Node via the command-line.
