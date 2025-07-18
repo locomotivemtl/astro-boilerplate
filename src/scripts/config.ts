@@ -4,13 +4,9 @@ const config: Config = Object.freeze({
         minViewport: 320,
         maxViewport: 1440,
         rootSize: 16
-    }
+    },
+    IS_DEV: import.meta.env.DEV,
+    IS_PROD: import.meta.env.PROD
 });
 
-const CUSTOM_EVENTS: {
-    RESIZE_END: string;
-} = Object.freeze({
-    RESIZE_END: 'loco.resizeEnd'
-});
-
-export { config, CUSTOM_EVENTS };
+export { config };
