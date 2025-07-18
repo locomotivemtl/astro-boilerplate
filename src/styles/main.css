@@ -8,9 +8,6 @@
 @import './utilities.css';
 @import './typography.css';
 
-/* Fonts imports */
-@import './fonts.css';
-
 /* Global styles */
 :root {
     --color-primary: colorCode('black');
