@@ -7,38 +7,6 @@ import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts'
 
 const isProd = import.meta.env.PROD;
 
-const FONTS_FALLBACKS = {
-    SANS: [
-        '-apple-system',
-        'BlinkMacSystemFont',
-        'avenir next',
-        'avenir',
-        'segoe ui',
-        'helvetica neue',
-        'helvetica',
-        'Cantarell',
-        'Ubuntu',
-        'roboto',
-        'noto',
-        'arial',
-        'sans-serif'
-    ],
-    SERIF: [
-        'Iowan Old Style',
-        'Apple Garamond',
-        'Baskerville',
-        'Times New Roman',
-        'Droid Serif',
-        'Times',
-        'Source Serif Pro',
-        'serif',
-        'Apple Color Emoji',
-        'Segoe UI Emoji',
-        'Segoe UI Symbol'
-    ],
-    MONO: ['Menlo', 'Consolas', 'Monaco', 'Liberation Mono', 'Lucida Console', 'monospace']
-};
-
 // https://astro.build/config
 export default defineConfig({
     site: 'https://locomotive-astro-boilerplate.vercel.app',
@@ -60,7 +28,7 @@ export default defineConfig({
                 provider: 'local',
                 name: 'Source Sans Pro',
                 cssVariable: '--custom-font-sans',
-                fallbacks: FONTS_FALLBACKS.SANS,
+                fallbacks: ['sans-serif'],
                 variants: [
                     {
                         weight: 400,
@@ -76,34 +44,6 @@ export default defineConfig({
                     }
                 ]
             }
-            // {
-            //     provider: 'local',
-            //     name: '[FONT SERIF NAME]',
-            //     cssVariable: '--custom-font-serif',
-            //     fallbacks: FONTS_FALLBACKS.SERIF,
-            //     variants: [
-            //         {
-            //             weight: 400,
-            //             style: 'normal',
-            //             display: 'swap',
-            //             src: ['./src/assets/fonts/[filename].woff2']
-            //         },
-            //     ]
-            // },
-            // {
-            //     provider: 'local',
-            //     name: '[FONT MONO NAME]',
-            //     cssVariable: '--custom-font-mono',
-            //     fallbacks: FONTS_FALLBACKS.MONO,
-            //     variants: [
-            //         {
-            //             weight: 400,
-            //             style: 'normal',
-            //             display: 'swap',
-            //             src: ['./src/assets/fonts/[filename].woff2']
-            //         },
-            //     ]
-            // },
         ]
     },
     integrations: [

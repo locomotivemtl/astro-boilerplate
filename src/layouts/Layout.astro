@@ -1,6 +1,6 @@
 ---
 import '@styles/main.css';
-import { Font } from 'astro:assets';
+import { Font, type FontFamily } from 'astro:assets';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
@@ -16,11 +16,7 @@ const { title, seo = {} } = Astro.props;
 const seoData = getSeo(seo, defaultSeo, title);
 
 // Constants
-const FONTS: string[] = [
-    '--custom-font-sans'
-    // '--custom-font-serif',
-    // '--custom-font-mono',
-];
+const FONTS: FontFamily[] = ['--custom-font-sans'];
 ---
 
 <!doctype html>
@@ -33,7 +29,7 @@ const FONTS: string[] = [
 
         <SEO {...seoData} />
 
-        {FONTS.map((font) => <Font cssVariable={font as any} preload />)}
+        {FONTS.map((font) => <Font cssVariable={font} preload />)}
     </head>
     <body>
         <script src="../scripts/app.ts"></script>

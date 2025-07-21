@@ -7,8 +7,6 @@
 
 @theme static {
     --font-sans: var(--custom-font-sans);
-    /* --font-serif: var(--custom-font-serif); */
-    /* --font-mono: var(--custom-font-mono); */
 
     --text-heading-xl: utopia.clamp(60, 120);
     --text-heading-lg: utopia.clamp(48, 80);
