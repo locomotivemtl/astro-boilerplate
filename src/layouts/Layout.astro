@@ -1,5 +1,6 @@
 ---
 import '@styles/main.css';
+import { Font, type FontFamily } from 'astro:assets';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
@@ -14,10 +15,8 @@ const { title, seo = {} } = Astro.props;
 
 const seoData = getSeo(seo, defaultSeo, title);
 
-const FONTS: string[] = [
-    // 'WebfontRegular.woff2',
-    // 'WebfontBold.woff2',
-];
+// Constants
+const FONTS: FontFamily[] = ['--custom-font-sans'];
 ---
 
 <!doctype html>
@@ -30,18 +29,7 @@ const FONTS: string[] = [
 
         <SEO {...seoData} />
 
-        <!-- Fonts -->
-        {
-            FONTS.map((font) => (
-                <link
-                    rel="preload"
-                    href={`/fonts/${font}`}
-                    as="font"
-                    type="font/woff2"
-                    crossorigin
-                />
-            ))
-        }
+        {FONTS.map((font) => <Font cssVariable={font} preload />)}
     </head>
     <body>
         <script src="../scripts/app.ts"></script>
