@@ -21,7 +21,18 @@ export default defineConfig({
         },
         plugins: [tailwindcss()]
     },
-
+    integrations: [
+        icon({
+            iconDir: './src/assets/svgs'
+        })
+    ],
+    devToolbar: {
+        enabled: false
+    },
+    image: {
+        domains: ['locomotive.ca'],
+        remotePatterns: [{ protocol: 'https' }]
+    },
     experimental: {
         fonts: [
             {
@@ -45,17 +56,5 @@ export default defineConfig({
                 ]
             }
         ]
-    },
-    integrations: [
-        icon({
-            iconDir: './src/assets/svgs'
-        })
-    ],
-    devToolbar: {
-        enabled: false
-    },
-    image: {
-        domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }]
     }
 });
