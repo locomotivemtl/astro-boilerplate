@@ -11,7 +11,7 @@
 - [PostCSS] for a feature rich superset of CSS.
 - [Tailwind CSS] for a sane and scalable CSS architecture.
 - [Locomotive Scroll] for smooth scrolling with parallax effects.
-- [Swup] for versatile and extensible page transition.
+- [Swup] for versatile and extensible page transitions.
 - [Prettier] for a formatted and easy to maintain codebase.
 - [Nanostores] as state manager.
 
