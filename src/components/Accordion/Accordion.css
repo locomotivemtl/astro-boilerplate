@@ -1,39 +1,41 @@
-.c-accordion {
-    position: relative;
-    display: block;
-}
-
-.c-accordion_summary {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-gutter);
-    padding: 12px 0;
-    user-select: none;
-    cursor: pointer;
-    transition: opacity var(--transition-duration) var(--ease);
-
-    &::marker {
-        display: none;
+@layer components {
+    .c-accordion {
+        position: relative;
+        display: block;
     }
 
-    @media (hover: hover) {
-        &:hover {
-            opacity: 0.7;
+    .c-accordion_summary {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--spacing-gutter);
+        padding: 12px 0;
+        user-select: none;
+        cursor: pointer;
+        transition: opacity var(--transition-duration) var(--ease);
+
+        &::marker {
+            display: none;
+        }
+
+        @media (hover: hover) {
+            &:hover {
+                opacity: 0.7;
+            }
         }
     }
-}
 
-.c-accordion_icon {
-    flex-shrink: 0;
-    transform: rotateX(0);
-    transition: transform var(--transition-duration) var(--ease);
+    .c-accordion_icon {
+        flex-shrink: 0;
+        transform: rotateX(0);
+        transition: transform var(--transition-duration) var(--ease);
 
-    .c-accordion_details.is-active & {
-        transform: rotateX(180deg);
+        .c-accordion_details.is-active & {
+            transform: rotateX(180deg);
+        }
     }
-}
 
-.c-accordion_content {
+    .c-accordion_content {
+    }
 }

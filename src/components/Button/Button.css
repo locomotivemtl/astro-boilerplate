@@ -1,46 +1,48 @@
-:root {
-    /* Metrics */
-    --button-height: auto;
-    --button-width: auto;
-    --button-radius: 0px;
-    --button-font-size: var(--text-button);
-    --button-padding: 15px 28px;
-    --button-gap: 25px;
+@layer components {
+    :root {
+        /* Metrics */
+        --button-height: auto;
+        --button-width: auto;
+        --button-radius: 0px;
+        --button-font-size: var(--text-button);
+        --button-padding: 15px 28px;
+        --button-gap: 25px;
 
-    /* Idle state - Default styles */
-    --button-color: var(--color-white);
-    --button-background: var(--color-black);
-    --button-stroke-color: transparent;
+        /* Idle state - Default styles */
+        --button-color: var(--color-white);
+        --button-background: var(--color-black);
+        --button-stroke-color: transparent;
 
-    /* Hover state - Default styles */
-    --button-color-hover: var(--color-white);
-    --button-background-hover: grey;
+        /* Hover state - Default styles */
+        --button-color-hover: var(--color-white);
+        --button-background-hover: grey;
 
-    /* Active state - Default styles */
-    --button-color-active: var(--color-black);
-    --button-background-active: var(--color-white);
-}
+        /* Active state - Default styles */
+        --button-color-active: var(--color-black);
+        --button-background-active: var(--color-white);
+    }
 
-.c-button {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    min-height: var(--button-height);
-    width: var(--button-width);
-    color: var(--button-color);
-    border-radius: var(--button-radius);
-    padding: var(--button-padding);
-    font-size: var(--button-font-size);
-    background-color: var(--button-background);
-    border: 1px solid var(--button-stroke-color);
-    transition: background-color var(--duration) var(--ease);
+    .c-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        min-height: var(--button-height);
+        width: var(--button-width);
+        color: var(--button-color);
+        border-radius: var(--button-radius);
+        padding: var(--button-padding);
+        font-size: var(--button-font-size);
+        background-color: var(--button-background);
+        border: 1px solid var(--button-stroke-color);
+        transition: background-color var(--duration) var(--ease);
 
-    /* Hover */
-    @media (hover: hover) {
-        .button-hover:hover &,
-        &:hover {
-            background-color: var(--button-background-hover);
-            color: var(--button-color-hover);
+        /* Hover */
+        @media (hover: hover) {
+            .button-hover:hover &,
+            &:hover {
+                background-color: var(--button-background-hover);
+                color: var(--button-color-hover);
+            }
         }
     }
 }
