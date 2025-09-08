@@ -1,4 +1,6 @@
 {
+    "useTabs": false,
+    "tabWidth": 4,
     "singleQuote": true,
     "trailingComma": "none",
     "semi": true,
@@ -10,6 +12,12 @@
             "files": "*.astro",
             "options": {
                 "parser": "astro"
+            }
+        },
+        {
+            "files": ["*.yaml", "*.yml"],
+            "options": {
+                "tabWidth": 2
             }
         }
     ]
