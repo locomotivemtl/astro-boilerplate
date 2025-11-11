@@ -1,3 +1,5 @@
+@reference '../../styles/main.css';
+
 @layer components {
     :root {
         /* Metrics */
@@ -35,14 +37,6 @@
         background-color: var(--button-background);
         border: 1px solid var(--button-stroke-color);
         transition: background-color var(--duration) var(--ease);
-
-        /* Hover */
-        @media (hover: hover) {
-            .button-hover:hover &,
-            &:hover {
-                background-color: var(--button-background-hover);
-                color: var(--button-color-hover);
-            }
-        }
+        @apply hover:bg-red-500 hover:text-(--button-color-hover);
     }
 }
