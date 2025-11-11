@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import icon from 'astro-icon';
-import tailwindcss from '@tailwindcss/vite';
 import postcssUtopia from 'postcss-utopia';
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
+import tailwindcss from '@tailwindcss/postcss';
 
 const isProd = import.meta.env.PROD;
 
@@ -13,13 +13,17 @@ export default defineConfig({
     vite: {
         css: {
             postcss: {
-                plugins: [postcssUtopia(), postcssHelpersFunctions(), postcssTailwindShortcuts()]
+                plugins: [
+                    tailwindcss(),
+                    postcssUtopia(),
+                    postcssHelpersFunctions(),
+                    postcssTailwindShortcuts()
+                ]
             }
         },
         esbuild: {
             drop: isProd ? ['console', 'debugger'] : []
-        },
-        plugins: [tailwindcss()]
+        }
     },
     integrations: [
         icon({
