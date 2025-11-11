@@ -1,6 +1,6 @@
 ---
 import '@styles/main.css';
-import { Font, type FontFamily } from 'astro:assets';
+import { Font, type CssVariable } from 'astro:assets';
 import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
@@ -16,7 +16,7 @@ const { title, seo = {} } = Astro.props;
 const seoData = getSeo(seo, defaultSeo, title);
 
 // Constants
-const FONTS: FontFamily[] = ['--custom-font-sans'];
+const FONTS: CssVariable[] = ['--custom-font-sans'];
 ---
 
 <!doctype html>
