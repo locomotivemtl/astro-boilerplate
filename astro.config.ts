@@ -20,9 +20,6 @@ export default defineConfig({
                     postcssTailwindShortcuts()
                 ]
             }
-        },
-        esbuild: {
-            drop: isProd ? ['console', 'debugger'] : []
         }
     },
     integrations: [
