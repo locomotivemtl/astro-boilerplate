@@ -5,9 +5,11 @@
 /* Hover + Focus
    ========================================================================== */
 
+/*
+TODO: Fix - not working as expected
 @custom-variant hocus {
     &:hover,
     &:focus {
         @slot;
     }
-}
+} */
