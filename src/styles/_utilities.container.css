@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Utilities / Container
+   ========================================================================== */
+
+@utility container {
+    width: var(--container-width);
+    max-width: unset;
+    margin-inline: auto;
+}

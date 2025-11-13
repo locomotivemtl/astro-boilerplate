@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Utilities / Helpers
+   ========================================================================== */
+
+/* Absolute link overlay
+   ========================================================================== */
+
+@utility absolute-link {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border-radius: inherit;
+}
+
+/* Safari border radius + overflow fix
+   ========================================================================== */
+
+@utility safari-radius-overflow-fix {
+    -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+/* Focus visible helper
+   ========================================================================== */
+
+@utility focus-visible {
+    outline-color: var(--focus-visible-color);
+    outline-style: var(--focus-visible-style);
+    outline-width: var(--focus-visible-width);
+    outline-offset: var(--focus-visible-offset);
+}
+
+/* Focus within helper
+   ========================================================================== */
+
+@utility focus-within {
+    &:focus-within {
+        @apply focus-visible;
+    }
+}

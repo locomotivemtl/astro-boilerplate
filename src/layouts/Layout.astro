@@ -34,14 +34,14 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
     <body>
         <script src="../scripts/app.ts"></script>
 
-        <div class="container grid grid-cols-2 py-fluid-md">
-            <div>
-                <Icon name="logo" />
-            </div>
-            <nav class="flex gap-gutter justify-self-end">
-                <a href="/">Index</a>
-                <a href="/about">About</a>
-                <a href="/post">The post</a>
+        <div class="py-fluid-md container grid grid-cols-2">
+            <a href="/">
+                <Icon name="logo" class="link" />
+            </a>
+            <nav class="gap-gutter flex justify-self-end">
+                <a href="/" class="link">Index</a>
+                <a href="/about" class="link">About</a>
+                <a href="/post" class="link">The post</a>
             </nav>
         </div>
 
@@ -51,12 +51,12 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
             </div>
         </main>
 
-        <footer class="container flex justify-between py-fluid-xs">
+        <footer class="py-fluid-xs container flex justify-between">
             <div>
                 &copy;{new Date().getFullYear()}
             </div>
 
-            <nav class="flex gap-gutter">
+            <nav class="gap-gutter flex">
                 <a href="/">Index</a>
                 <a href="/about">About</a>
             </nav>
