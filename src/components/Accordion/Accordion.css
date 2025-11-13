@@ -9,7 +9,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: var(--spacing-gutter);
+        gap: var(--grid-gutter);
         padding: 12px 0;
         user-select: none;
         cursor: pointer;

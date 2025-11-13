@@ -14,8 +14,8 @@ if (import.meta.env.MODE === 'development') {
         .then(({ default: GridHelper }) => {
             new GridHelper({
                 columns: 'var(--grid-columns)',
-                gutterWidth: `var(--spacing-gutter)`,
-                marginWidth: `var(--spacing-gutter)`
+                gutterWidth: `var(--grid-gutter)`,
+                marginWidth: `var(--grid-margin)`
             });
         })
         .catch((error) => {
