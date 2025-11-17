@@ -35,23 +35,23 @@
         "astro": "^5.15.5",
         "astro-icon": "^1.1.5",
         "astro-seo": "^0.8.4",
-        "lint-staged": "^16.1.2",
+        "lint-staged": "^16.2.6",
         "locomotive-scroll": "^5.0.0-beta.21",
         "nanostores": "^1.0.1",
         "swup": "^4.8.1",
         "tailwindcss": "^4.1.17",
         "ts-debounce": "^4.0.0",
-        "typescript": "^5.8.3"
+        "typescript": "^5.9.3"
     },
     "devDependencies": {
-        "@locomotivemtl/postcss-helpers-functions": "^1.0.2",
+        "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/postcss": "^4.1.17",
         "postcss-utopia": "^1.1.0",
         "prettier": "^3.6.2",
         "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-tailwindcss": "^0.6.14",
-        "simple-git-hooks": "^2.13.0"
+        "prettier-plugin-tailwindcss": "^0.7.1",
+        "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
         "pre-commit": "npm run format"
