@@ -1,0 +1,26 @@
+/* ==========================================================================
+   Global reset
+   ========================================================================== */
+
+abbr {
+    text-decoration: unset;
+}
+
+legend {
+    /* display: table; */
+    float: left;
+    /* margin: 0; */
+    /* padding: 0; */
+    width: 100%;
+
+    + * {
+        clear: both;
+    }
+}
+
+fieldset {
+    /* border: 0; */
+    /* padding: 0; */
+    /* margin: 0; */
+    min-width: 0;
+}

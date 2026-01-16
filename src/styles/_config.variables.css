@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Config / Variables (CSS custom properties)
+   ========================================================================== */
+
+:root {
+    /* Units */
+    --unit-sm: 10px;
+    --unit-md: 20px;
+
+    /* Grid */
+    --grid-columns: 4;
+    --grid-gutter: --spacing(3); /* 12px */
+    --grid-margin: --spacing(6); /* 24px */
+    --container-width: calc(calc(100 * var(--vw, 1vw)) - 2 * var(--grid-margin));
+
+    /* Focus visible */
+    --focus-visible-color: currentColor;
+    --focus-visible-style: solid;
+    --focus-visible-width: 2px;
+    --focus-visible-offset: 2px;
+
+    @variant sm {
+        --grid-columns: 12;
+        --grid-gutter: --spacing(5); /* 20px */
+        --grid-margin: --spacing(10); /* 40px */
+    }
+}
