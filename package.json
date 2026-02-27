@@ -26,13 +26,13 @@
         "format": "npx lint-staged"
     },
     "dependencies": {
-        "@astrojs/check": "^0.9.5",
+        "@astrojs/check": "^0.9.6",
         "@locomotivemtl/component-manager": "^1.1.0",
         "@locomotivemtl/grid-helper": "^1.0.0",
         "@swup/head-plugin": "^2.3.1",
         "@swup/preload-plugin": "^3.2.11",
         "@swup/scripts-plugin": "^2.1.0",
-        "astro": "^5.15.5",
+        "astro": "^5.18.0",
         "astro-icon": "^1.1.5",
         "astro-seo": "^0.8.4",
         "lint-staged": "^16.2.6",
