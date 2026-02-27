@@ -10,8 +10,8 @@
 
 /* Global styles */
 :root {
-    --color-primary: colorCode('black');
-    --color-secondary: colorCode('white');
+    --color-primary: var(--color-black);
+    --color-secondary: var(--color-white);
 }
 
 html {
