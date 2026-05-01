@@ -32,30 +32,28 @@ export default defineConfig({
         domains: ['locomotive.ca'],
         remotePatterns: [{ protocol: 'https' }]
     },
-    experimental: {
-        fonts: [
-            {
-                provider: fontProviders.local(),
-                name: 'Source Sans Pro',
-                cssVariable: '--custom-font-sans',
-                fallbacks: ['sans-serif'],
-                options: {
-                    variants: [
-                        {
-                            weight: 400,
-                            style: 'normal',
-                            display: 'swap',
-                            src: ['./src/assets/fonts/SourceSans3-Regular.woff2']
-                        },
-                        {
-                            weight: 700,
-                            style: 'normal',
-                            display: 'swap',
-                            src: ['./src/assets/fonts/SourceSans3-Bold.woff2']
-                        }
-                    ]
-                }
+    fonts: [
+        {
+            provider: fontProviders.local(),
+            name: 'Source Sans Pro',
+            cssVariable: '--custom-font-sans',
+            fallbacks: ['sans-serif'],
+            options: {
+                variants: [
+                    {
+                        weight: 400,
+                        style: 'normal',
+                        display: 'swap',
+                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2']
+                    },
+                    {
+                        weight: 700,
+                        style: 'normal',
+                        display: 'swap',
+                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2']
+                    }
+                ]
             }
-        ]
-    }
+        }
+    ]
 });
