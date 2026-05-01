@@ -39,7 +39,6 @@ export default defineConfig({
                 '@swup/preload-plugin',
                 '@swup/scripts-plugin',
                 'swup',
-                'focus-trap',
                 'nanostores'
             ]
         },
