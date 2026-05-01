@@ -1,4 +1,4 @@
-import { $scroll } from '@scripts/stores/scroll';
+import { $scroll } from '#scripts/stores/scroll';
 
 import LocomotiveScroll, {
     type lenisTargetScrollTo,

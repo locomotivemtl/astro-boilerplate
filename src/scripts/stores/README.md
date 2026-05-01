@@ -121,7 +121,7 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 
 ```ts
 import { subscribeKeys } from 'nanostores';
-import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus';
+import { $mediaStatus, type MediaStatus } from '#scripts/stores/deviceStatus';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);

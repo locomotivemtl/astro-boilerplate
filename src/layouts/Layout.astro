@@ -1,9 +1,9 @@
 ---
-import '@styles/main.css';
+import '#styles/main.css';
 import { Font, type CssVariable } from 'astro:assets';
 import { SEO } from 'astro-seo';
-import { defaultSeo } from '@data/seo';
-import { getSeo } from '@scripts/utils/seo';
+import { defaultSeo } from '#data/seo';
+import { getSeo } from '#scripts/utils/seo';
 import Icon from '../components/Icon/Icon.astro';
 
 interface Props {
@@ -63,8 +63,8 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
         </footer>
 
         <script>
-            import { setViewportSize } from '@scripts/utils/setViewportSize';
-            import { $screenDebounce } from '@scripts/stores/screen';
+            import { setViewportSize } from '#scripts/utils/setViewportSize';
+            import { $screenDebounce } from '#scripts/stores/screen';
 
             // Set viewport size
             $screenDebounce.subscribe(() => {

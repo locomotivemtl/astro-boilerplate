@@ -1,20 +1,24 @@
 {
     "extends": "astro/tsconfigs/strict",
     "compilerOptions": {
-        "baseUrl": ".",
         "moduleResolution": "Bundler",
+        "allowImportingTsExtensions": true,
         "paths": {
-            "@root/*": ["./*"],
-            "@src/*": ["./src/*"],
-            "@components/*": ["./src/components/*"],
-            "@layouts/*": ["./src/layouts/*"],
-            "@images/*": ["./src/assets/images/*"],
-            "@pages/*": ["./src/pages/*"],
-            "@scripts/*": ["./src/scripts/*"],
-            "@styles/*": ["./src/styles/*"],
-            "@templates/*": ["./src/templates/*"],
-            "@types/*": ["types/*"],
-            "@data/*": ["./src/data/*"]
+            "#assets/*": ["./src/assets/*"],
+            "#components/*": ["./src/components/*"],
+            "#data/*": ["./src/data/*"],
+            "#layouts/*": ["./src/layouts/*"],
+            "#pages/*": ["./src/pages/*"],
+
+            "#classes/*": ["./src/scripts/classes/*"],
+            "#utils/*": ["./src/scripts/utils/*"],
+            "#stores/*": ["./src/scripts/stores/*"],
+            "#scripts/*": ["./src/scripts/*"],
+
+            "#styles/*": ["./src/styles/*"],
+            "#src/*": ["./src/*"],
+            "#config/*": ["./config/*"],
+            "#root/*": ["./*"]
         }
     },
     "exclude": ["dist", "node_modules"]
