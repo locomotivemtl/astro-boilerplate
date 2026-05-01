@@ -8,7 +8,7 @@ transitions.init();
 // Initialize the Scroll class
 Scroll.init();
 
-if (import.meta.env.MODE === 'development') {
+if (__IS_DEV__) {
     // Dynamically import the grid-helper only in development mode
     import('@locomotivemtl/grid-helper')
         .then(({ default: GridHelper }) => {
