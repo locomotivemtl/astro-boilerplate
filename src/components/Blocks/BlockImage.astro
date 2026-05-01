@@ -2,9 +2,8 @@
 import Image from '@components/Image/Image.astro';
 import type { Props as ImageProps } from '@components/Image/Image.astro';
 
-interface Props extends ImageProps {
-    // imported from Image.astro
-}
+// eslint-disable-next-line
+interface Props extends ImageProps {}
 
 const { src = '', caption, alt, width, height } = Astro.props;
 ---
