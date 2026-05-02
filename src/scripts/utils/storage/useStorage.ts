@@ -16,6 +16,8 @@ export const hash = (str: string): string => {
 const IS_PROD = (typeof __IS_PROD__ !== 'undefined' && __IS_PROD__) || false;
 // @ts-ignore
 const TIMESTAMP = (typeof __TIMESTAMP__ !== 'undefined' && __TIMESTAMP__) || '';
+// @ts-ignore
+const DEBUG = !!(typeof __DEBUG__ !== 'undefined' && __DEBUG__);
 
 const list = new Map();
 const p = JSON.parse;
@@ -126,7 +128,7 @@ function createStorage(id: string, storage = localStorage, encode = s, decode = 
                 ddv(datas, childId);
                 _storage.setItem(_id, encode(datas));
             } catch (e) {
-                if (typeof __DEBUG__ !== 'undefined' && __DEBUG__) {
+                if (typeof DEBUG !== 'undefined' && DEBUG) {
                     console.error(e);
                 }
             }
