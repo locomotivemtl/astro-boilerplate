@@ -1,4 +1,5 @@
-import { $html } from '@scripts/utils/dom/dom.ts';
+// import { $html } from '@scripts/utils/dom/dom.ts';
+const $html = document.documentElement;
 import { setViewportSize } from '@scripts/utils/setViewportSize.ts';
 import { atom } from 'nanostores';
 
