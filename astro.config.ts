@@ -9,6 +9,7 @@ import postcssUtopia from 'postcss-utopia';
 
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
+import postCssProcessorsHelpersIntegration from './config/postcss-helpers/postCssProcessorsHelpersIntegration';
 
 /* Get server allowed hosts from .env */
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
@@ -47,6 +48,7 @@ export default defineConfig({
         }
     },
     integrations: [
+        postCssProcessorsHelpersIntegration(),
         icon({
             iconDir: './src/assets/svgs'
         })
