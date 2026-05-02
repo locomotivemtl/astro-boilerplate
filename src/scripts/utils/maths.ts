@@ -2,7 +2,7 @@ const mapRange = (min: number, max: number, nmin: number, nmax: number, value: n
     return ((value - min) / (max - min)) * (nmax - nmin) + nmin;
 };
 
-const clamp = (min: number, max: number, value: number) => {
+const clamp = (value: number, min: number = 0, max: number = 1) => {
     return Math.max(min, Math.min(value, max));
 };
 

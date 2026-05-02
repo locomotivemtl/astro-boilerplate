@@ -21,6 +21,8 @@ export interface Logger {
     clear: () => void;
 }
 
+const __DEBUG__ = import.meta.env.MODE === 'development';
+
 const PREDEFINED_COLORS_LIGHT = {
     error: '#ff3333',
     warn: '#ffaa00',
