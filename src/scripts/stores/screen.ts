@@ -1,5 +1,5 @@
 import { map } from 'nanostores';
-import { debounce } from 'ts-debounce';
+import { debounce } from '@scripts/utils/async';
 
 export type ScreenValues = {
     width: number;
