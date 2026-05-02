@@ -1,7 +1,4 @@
-/* import { persistentAtom } from "@nanostores/persistent";
+import { useLocalStorage } from '@scripts/utils/storage/useStorage.ts';
 
-export const $locomotiveLocalStorage = persistentAtom<any[]>("locomotive", [], {
-    encode: JSON.stringify,
-    decode: JSON.parse,
-});
- */
+const PROJECT_NAME = (typeof __PROJECT_NAME__ !== 'undefined' && __PROJECT_NAME__) || 'finalfinal';
+export const $storage = useLocalStorage(PROJECT_NAME);
