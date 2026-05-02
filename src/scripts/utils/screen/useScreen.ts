@@ -1,4 +1,27 @@
-import { debounce } from '@scripts/utils/async/debounce.ts';
+// import { debounce } from '@scripts/utils/async/debounce.ts';
+
+/* Hotfix for the PR */
+/* Will be imported from '@scripts/utils/async/debounce.ts' */
+export type Debounce<T extends (...args: any[]) => void> = ((...args: Parameters<T>) => void) & {
+    cancel: () => void;
+};
+export const debounce = <T extends (...args: any[]) => void>(fn: T, ms: number): Debounce<T> => {
+    let timer: ReturnType<typeof setTimeout> | null = null;
+
+    const debounced = (...args: Parameters<T>) => {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(() => fn(...args), ms);
+    };
+
+    debounced.cancel = () => {
+        if (timer) {
+            clearTimeout(timer);
+            timer = null;
+        }
+    };
+
+    return debounced;
+};
 
 export interface UseScreenInstance {
     width: number;
