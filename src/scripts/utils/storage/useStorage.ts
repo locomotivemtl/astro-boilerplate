@@ -13,6 +13,7 @@ export const hash = (str: string): string => {
     return hash.toString(16);
 };
 
+// @ts-ignore
 const IS_PROD = (typeof __IS_PROD__ !== 'undefined' && __IS_PROD__) || false;
 // @ts-ignore
 const TIMESTAMP = (typeof __TIMESTAMP__ !== 'undefined' && __TIMESTAMP__) || '';
