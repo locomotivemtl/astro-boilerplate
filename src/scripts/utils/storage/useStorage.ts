@@ -1,6 +1,17 @@
 import { ddv, dlv, dsv } from '@scripts/utils/object.ts';
-import { hash } from '@scripts/utils/string.ts';
+// import { hash } from '@scripts/utils/string.ts';
 import { atom, type WritableAtom } from 'nanostores';
+
+/* Hotfix for the PR */
+/* Will be imported from '@scripts/utils/string.ts' */
+export const hash = (str: string): string => {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        hash = (hash << 5) - hash + str.charCodeAt(i);
+        hash |= 0; // Convert to 32bit integer
+    }
+    return hash.toString(16);
+};
 
 const IS_PROD = (typeof __IS_PROD__ !== 'undefined' && __IS_PROD__) || false;
 // @ts-ignore
