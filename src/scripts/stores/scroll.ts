@@ -1,5 +1,6 @@
 import { $screen } from '@scripts/stores/screen.ts';
-import { $html } from '@scripts/utils/dom/dom.ts';
+// import { $html } from '@scripts/utils/dom/dom.ts';
+const $html = document.documentElement;
 import { atom, computed, map, subscribeKeys } from 'nanostores';
 
 export type ScrollValues = {
