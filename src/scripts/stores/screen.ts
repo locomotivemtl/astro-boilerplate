@@ -1,37 +1,41 @@
 import { map } from 'nanostores';
-import { debounce } from 'ts-debounce';
+import { useScreen } from '@scripts/utils/screen/useScreen.ts';
 
 export type ScreenValues = {
     width: number;
     height: number;
-};
-
-export type ScreenDebounceValues = {
-    width: number;
-    height: number;
+    dpr: number;
+    ratio: number;
 };
 
 export const $screen = map<ScreenValues>({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
+    dpr: window.devicePixelRatio || 1,
+    ratio: window.innerWidth / window.innerHeight
 });
 
-export const $screenDebounce = map<ScreenDebounceValues>({
-    width: window.innerWidth,
-    height: window.innerHeight
+export const $screenDebounce = map<ScreenValues>({
+    ...$screen.get()
 });
 
-window.addEventListener('resize', () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    $screen.set({ width, height });
+// Use useScreen hook to watch for screen changes
+useScreen({
+    onUpdate: (api) => {
+        $screen.set({
+            width: api.width,
+            height: api.height,
+            dpr: api.dpr,
+            ratio: api.ratio
+        });
+    },
+    onDebouncedUpdate: (api) => {
+        $screenDebounce.set({
+            width: api.width,
+            height: api.height,
+            dpr: api.dpr,
+            ratio: api.ratio
+        });
+    },
+    debounceTime: 200
 });
-
-const debouncedFunction: any = () => {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-
-    $screenDebounce.set({ width, height });
-};
-window.addEventListener('resize', debounce(debouncedFunction, 200));
