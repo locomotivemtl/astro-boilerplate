@@ -1,9 +1,18 @@
 import { defineConfig, fontProviders } from 'astro/config';
-import icon from 'astro-icon';
-import postcssUtopia from 'postcss-utopia';
+import { loadEnv } from 'vite';
+
+/* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 import tailwindcss from '@tailwindcss/postcss';
+import postcssUtopia from 'postcss-utopia';
+
+/* Astro Integrations / Plugins */
+import icon from 'astro-icon';
+
+/* Get server allowed hosts from .env */
+const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
+const SERVER_ALLOWED_HOSTS = (ENVS?.SERVER_ALLOWED_HOSTS || '').split(',') || [];
 
 // https://astro.build/config
 export default defineConfig({
@@ -12,12 +21,29 @@ export default defineConfig({
         css: {
             postcss: {
                 plugins: [
-                    tailwindcss(),
+                    // Orders matter here
+                    // Tailwindcss plugin should call after postcss helpers
                     postcssUtopia(),
                     postcssHelpersFunctions(),
                     postcssTailwindShortcuts(),
+                    tailwindcss(),
                 ],
             },
+        },
+        optimizeDeps: {
+            include: [
+                '@locomotivemtl/grid-helper',
+                '@locomotivemtl/component-manager',
+                'locomotive-scroll',
+                '@swup/head-plugin',
+                '@swup/preload-plugin',
+                '@swup/scripts-plugin',
+                'swup',
+                'nanostores',
+            ],
+        },
+        build: {
+            chunkSizeWarningLimit: 1000,
         },
     },
     integrations: [
@@ -25,6 +51,9 @@ export default defineConfig({
             iconDir: './src/assets/svgs',
         }),
     ],
+    server: {
+        allowedHosts: SERVER_ALLOWED_HOSTS,
+    },
     devToolbar: {
         enabled: false,
     },
