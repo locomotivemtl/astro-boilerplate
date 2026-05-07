@@ -1,5 +1,5 @@
-import { Transitions } from '#scripts/classes/Transitions';
-import { Scroll } from '#scripts/classes/Scroll';
+import { Scroll } from '#classes/Scroll.ts';
+import { Transitions } from '#classes/Transitions.ts';
 
 // Initialize the Transitions class
 const transitions = new Transitions();
