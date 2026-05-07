@@ -53,6 +53,21 @@
         "prettier-plugin-tailwindcss": "^0.7.2",
         "simple-git-hooks": "^2.13.1"
     },
+    "imports": {
+        "#assets/*": "./src/assets/*",
+        "#classes/*": "./src/scripts/classes/*",
+        "#components/*": "./src/components/*",
+        "#config/*": "./config/*",
+        "#data/*": "./src/data/*",
+        "#layouts/*": "./src/layouts/*",
+        "#pages/*": "./src/pages/*",
+        "#root/*": "./*",
+        "#scripts/*": "./src/scripts/*",
+        "#src/*": "./src/*",
+        "#stores/*": "./src/scripts/stores/*",
+        "#styles/*": "./src/styles/*",
+        "#utils/*": "./src/scripts/utils/*"
+    },
     "simple-git-hooks": {
         "pre-commit": "npm run format"
     },
