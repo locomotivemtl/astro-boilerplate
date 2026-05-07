@@ -15,22 +15,22 @@ export default defineConfig({
                     tailwindcss(),
                     postcssUtopia(),
                     postcssHelpersFunctions(),
-                    postcssTailwindShortcuts()
-                ]
-            }
-        }
+                    postcssTailwindShortcuts(),
+                ],
+            },
+        },
     },
     integrations: [
         icon({
-            iconDir: './src/assets/svgs'
-        })
+            iconDir: './src/assets/svgs',
+        }),
     ],
     devToolbar: {
-        enabled: false
+        enabled: false,
     },
     image: {
         domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }]
+        remotePatterns: [{ protocol: 'https' }],
     },
     fonts: [
         {
@@ -44,16 +44,16 @@ export default defineConfig({
                         weight: 400,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2']
+                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2'],
                     },
                     {
                         weight: 700,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2']
-                    }
-                ]
-            }
-        }
-    ]
+                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2'],
+                    },
+                ],
+            },
+        },
+    ],
 });
