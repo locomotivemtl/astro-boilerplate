@@ -4,20 +4,23 @@
         "moduleResolution": "Bundler",
         "allowImportingTsExtensions": true,
         "paths": {
+            /* scripts/ folder */
+            "#classes/*": ["./src/scripts/classes/*"],
+            "#stores/*": ["./src/scripts/stores/*"],
+            "#utils/*": ["./src/scripts/utils/*"],
+
+            /* src/ folder */
             "#assets/*": ["./src/assets/*"],
             "#components/*": ["./src/components/*"],
             "#data/*": ["./src/data/*"],
             "#layouts/*": ["./src/layouts/*"],
             "#pages/*": ["./src/pages/*"],
-
-            "#classes/*": ["./src/scripts/classes/*"],
-            "#utils/*": ["./src/scripts/utils/*"],
-            "#stores/*": ["./src/scripts/stores/*"],
             "#scripts/*": ["./src/scripts/*"],
-
             "#styles/*": ["./src/styles/*"],
-            "#src/*": ["./src/*"],
+
+            /* root folder */
             "#config/*": ["./config/*"],
+            "#src/*": ["./src/*"],
             "#root/*": ["./*"]
         }
     },

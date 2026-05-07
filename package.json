@@ -54,18 +54,18 @@
         "simple-git-hooks": "^2.13.1"
     },
     "imports": {
+        "#classes/*": "./src/scripts/classes/*",
+        "#stores/*": "./src/scripts/stores/*",
+        "#utils/*": "./src/scripts/utils/*",
         "#assets/*": "./src/assets/*",
         "#components/*": "./src/components/*",
         "#data/*": "./src/data/*",
         "#layouts/*": "./src/layouts/*",
         "#pages/*": "./src/pages/*",
-        "#classes/*": "./src/scripts/classes/*",
-        "#utils/*": "./src/scripts/utils/*",
-        "#stores/*": "./src/scripts/stores/*",
         "#scripts/*": "./src/scripts/*",
         "#styles/*": "./src/styles/*",
-        "#src/*": "./src/*",
         "#config/*": "./config/*",
+        "#src/*": "./src/*",
         "#root/*": "./*"
     },
     "simple-git-hooks": {
