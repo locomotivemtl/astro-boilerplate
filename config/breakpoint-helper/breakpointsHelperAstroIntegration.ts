@@ -63,7 +63,9 @@ function readAndGenerateTypes(
         const breakpoints = extractBreakpoints(cssContent);
 
         breakpointToType(breakpoints);
-        logger.info(`Generated types/gen-breakpoints.d.ts (${breakpoints.length} breakpoints)`);
+        logger.info(
+            `Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`
+        );
 
         return breakpoints;
     } catch {

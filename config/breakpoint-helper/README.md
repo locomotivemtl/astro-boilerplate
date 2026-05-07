@@ -46,7 +46,7 @@ const isMobile = window.innerWidth < breakpoints.md;
 
 ## TypeScript
 
-Types for the virtual module are auto-generated into `types/gen-breakpoints.d.ts` on integration setup. Each breakpoint name is documented with its `px` value in the union type for autocomplete:
+Types for the virtual module are auto-generated into `types/generated/breakpoints.d.ts` on integration setup. Each breakpoint name is documented with its `px` value in the union type for autocomplete:
 
 ```ts
 declare module 'virtual:breakpoints' {
@@ -68,7 +68,7 @@ declare module 'virtual:breakpoints' {
 At config setup:
 
 1. The CSS entry file is read and all `--breakpoint-<name>: <value>px` declarations are extracted and sorted by value ascending.
-2. `breakpointToType` writes the typed `virtual:breakpoints` declaration to `types/gen-breakpoints.d.ts`.
+2. `breakpointToType` writes the typed `virtual:breakpoints` declaration to `types/generated/breakpoints.d.ts`.
 3. A Vite virtual module plugin resolves `virtual:breakpoints` to a generated JS module exporting the `breakpoints` record and `BREAKPOINT_NAMES` array.
 
 ## Standalone Vite plugin
@@ -80,4 +80,4 @@ The integration is a thin Astro wrapper. To use in a plain Vite project, extract
 | File                                   | Purpose                                               |
 | -------------------------------------- | ----------------------------------------------------- |
 | `breakpointsHelperAstroIntegration.ts` | Entry point — CSS parsing, virtual module, Astro hook |
-| `breakpointToType.ts`                  | Generates `types/gen-breakpoints.d.ts`                |
+| `breakpointToType.ts`                  | Generates `types/generated/breakpoints.d.ts`          |

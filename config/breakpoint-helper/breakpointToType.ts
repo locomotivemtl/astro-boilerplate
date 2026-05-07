@@ -19,15 +19,13 @@ export function breakpointToType(breakpoints: BreakpointEntry[]): string {
 
 declare module 'virtual:breakpoints' {
     export type BreakpointName =${documentedUnion};
-
     export type BreakpointValues = Record<BreakpointName, number>;
-
     export const breakpoints: BreakpointValues;
     export const BREAKPOINT_NAMES: BreakpointName[];
 }
 `;
 
-    const filePath = path.join(process.cwd(), 'types/gen-breakpoints.d.ts');
+    const filePath = path.join(process.cwd(), 'types/generated/breakpoints.d.ts');
     const typesDir = path.dirname(filePath);
 
     if (!fs.existsSync(typesDir)) {
