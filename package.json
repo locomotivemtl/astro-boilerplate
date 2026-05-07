@@ -54,19 +54,19 @@
         "simple-git-hooks": "^2.13.1"
     },
     "imports": {
-        "#classes/*": "./src/scripts/classes/*",
-        "#stores/*": "./src/scripts/stores/*",
-        "#utils/*": "./src/scripts/utils/*",
         "#assets/*": "./src/assets/*",
+        "#classes/*": "./src/scripts/classes/*",
         "#components/*": "./src/components/*",
+        "#config/*": "./config/*",
         "#data/*": "./src/data/*",
         "#layouts/*": "./src/layouts/*",
         "#pages/*": "./src/pages/*",
+        "#root/*": "./*",
         "#scripts/*": "./src/scripts/*",
-        "#styles/*": "./src/styles/*",
-        "#config/*": "./config/*",
         "#src/*": "./src/*",
-        "#root/*": "./*"
+        "#stores/*": "./src/scripts/stores/*",
+        "#styles/*": "./src/styles/*",
+        "#utils/*": "./src/scripts/utils/*"
     },
     "simple-git-hooks": {
         "pre-commit": "npm run format"
