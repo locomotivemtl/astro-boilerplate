@@ -66,9 +66,9 @@ export default [
         },
         rules: {
             /**
-             * ! Estlint consider imports prefixed by @ as external deps, not internal (scoped npm package pattern)
-             * ! so it puts them before imports prefixed by # (which are internal deps)
-             * ! Consider this, this rule doesn't apply for now but will work with PR #58 (https://github.com/locomotivemtl/astro-boilerplate/pull/58)
+             * ESLint consider imports prefixed by @ as external deps, not internal (scoped npm package pattern)
+             * so it puts them before imports prefixed by # (which are internal deps)
+             * Consider this, this rule doesn't apply for now but will work with PR #58 (https://github.com/locomotivemtl/astro-boilerplate/pull/58)
              */
 
             // Enforce a specific order for imports in Astro page components
