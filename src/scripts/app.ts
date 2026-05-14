@@ -15,7 +15,7 @@ if (import.meta.env.MODE === 'development') {
             new GridHelper({
                 columns: 'var(--grid-columns)',
                 gutterWidth: `var(--spacing-gutter)`,
-                marginWidth: `var(--spacing-gutter)`
+                marginWidth: `var(--spacing-gutter)`,
             });
         })
         .catch((error) => {

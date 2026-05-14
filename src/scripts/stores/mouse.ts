@@ -24,7 +24,7 @@ export const $mouse = map<MouseState>({
     x: HALF_SCREEN_WIDTH,
     y: HALF_SCREEN_HEIGHT,
     normalizedX: 0,
-    normalizedY: 0
+    normalizedY: 0,
 });
 
 export const $smoothMouse = map<SmoothMouseState>({
@@ -32,7 +32,7 @@ export const $smoothMouse = map<SmoothMouseState>({
     smoothY: HALF_SCREEN_HEIGHT,
     smoothNormalizedX: 0,
     smoothNormalizedY: 0,
-    lerp: 0.08
+    lerp: 0.08,
 });
 
 let isPlaying = false;

@@ -13,12 +13,12 @@ export type ScreenDebounceValues = {
 
 export const $screen = map<ScreenValues>({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
 });
 
 export const $screenDebounce = map<ScreenDebounceValues>({
     width: window.innerWidth,
-    height: window.innerHeight
+    height: window.innerHeight,
 });
 
 window.addEventListener('resize', () => {

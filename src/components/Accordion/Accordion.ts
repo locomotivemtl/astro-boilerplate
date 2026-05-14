@@ -76,8 +76,8 @@ export class Accordion extends HTMLElement {
             { height: [startHeight, endHeight] },
             {
                 duration: Accordion.DURATION,
-                easing: Accordion.EASING
-            }
+                easing: Accordion.EASING,
+            },
         );
     }
 
@@ -143,7 +143,7 @@ export class Accordion extends HTMLElement {
         this.cleanupAfterAnimation();
 
         this.dispatchCustomEvent('accordion-animation-finished', {
-            isOpen: open
+            isOpen: open,
         });
     }
 
@@ -164,8 +164,8 @@ export class Accordion extends HTMLElement {
         this.dispatchEvent(
             new CustomEvent(eventName, {
                 detail: { target: this, ...detail },
-                bubbles: true
-            })
+                bubbles: true,
+            }),
         );
     }
 
