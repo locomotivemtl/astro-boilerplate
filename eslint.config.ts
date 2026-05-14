@@ -65,10 +65,11 @@ export default [
             import: eslintPluginImport,
         },
         rules: {
-            // @mcaskill
-            // !! Estlint consider imports prefixed by @ as external deps, not internal (scoped npm package pattern)
-            // !! so ESLint puts it before #layouts (which is internal)
-            // !! Consider this, this rule doesn't apply for now but will work with PR #58 (https://github.com/locomotivemtl/astro-boilerplate/pull/58)
+            /**
+             * ! Estlint consider imports prefixed by @ as external deps, not internal (scoped npm package pattern)
+             * ! so it puts them before imports prefixed by # (which are internal deps)
+             * ! Consider this, this rule doesn't apply for now but will work with PR #58 (https://github.com/locomotivemtl/astro-boilerplate/pull/58)
+             */
 
             // Enforce a specific order for imports in Astro page components
             // Prevent css styles being imported after components, which can cause issues with style application
@@ -78,7 +79,8 @@ export default [
                     groups: ['builtin', 'external', 'internal', ['parent', 'sibling'], 'index'],
                     pathGroups: [
                         {
-                            pattern: '@layouts/**', // => Will be updated to #layouts/* when PR #58 will be approved
+                            // TODO: Switch '@layouts/**' to '#layouts/**' when PR #58 is approved
+                            pattern: '@layouts/**',
                             group: 'internal',
                             position: 'before',
                         },
