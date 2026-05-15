@@ -4,8 +4,11 @@ import { breakpoints, BREAKPOINT_NAMES, type BreakpointName } from 'virtual:brea
 // Re-export so we can import everything from this file instead of two sources.
 export * from 'virtual:breakpoints';
 
+const isBrowser = typeof window !== 'undefined';
+
 function getCurrentBreakpoint(): BreakpointName {
     let current: BreakpointName = BREAKPOINT_NAMES[0];
+    if (!isBrowser) return current;
 
     const width = window.innerWidth;
     for (const name of BREAKPOINT_NAMES) {
@@ -57,4 +60,4 @@ export function getBreakpointValue(name: BreakpointName): number {
     return breakpoints[name];
 }
 
-setupMediaQueryListeners();
+if (isBrowser) setupMediaQueryListeners();
