@@ -3,7 +3,7 @@ import { loadEnv } from 'vite';
 
 import { defineToType } from './defineToType.ts';
 
-export type DefineValue = string | boolean;
+export type Defines = Record<string, any>;
 
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
 const IS_PROD =
@@ -13,11 +13,11 @@ const IS_PROD =
     ENVS?.VERCEL_ENV === 'production' || // Vercel env var
     ENVS?.CONTEXT === 'production'; // Netlify env var
 
-const DEFAULT_DEFINES: Record<string, DefineValue> = {
+const DEFAULT_DEFINES: Defines = {
     __IS_DEV__: !IS_PROD
 };
 
-function stringifyDefines(defines: Record<string, DefineValue>): Record<string, string> {
+function stringifyDefines(defines: Defines): Record<string, string> {
     return Object.fromEntries(
         Object.entries(defines).map(([key, value]) => [
             key,
@@ -26,9 +26,7 @@ function stringifyDefines(defines: Record<string, DefineValue>): Record<string, 
     );
 }
 
-export default function definesAstroIntegration(
-    defines: Record<string, DefineValue> = {}
-): AstroIntegration {
+export default function definesAstroIntegration(defines: Defines = {}): AstroIntegration {
     return {
         name: 'defines-astro-integration',
         hooks: {

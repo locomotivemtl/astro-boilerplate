@@ -1,9 +1,9 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-import type { DefineValue } from './definesAstroIntegration';
+import type { Defines } from './definesAstroIntegration';
 
-export function defineToType(defines: Record<string, DefineValue>): string {
+export function defineToType(defines: Defines): string {
     const declarations = Object.entries(defines)
         .map(([key, value]) => `declare const ${key}: ${typeof value};`)
         .join('\n');
