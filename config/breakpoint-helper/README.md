@@ -1,83 +1,64 @@
 # breakpoint-helper
 
-Astro integration that reads `--breakpoint-*` CSS custom properties from Tailwind CSS and exposes them at runtime via a virtual module, with auto-generated TypeScript types.
+Astro integration exposing Tailwind's `--breakpoint-*` CSS variables at runtime via a virtual module, with auto-generated types.
 
 ## Setup
 
 ```ts
 // astro.config.ts
-import breakpointsIntegration from '#config/breakpoint-helper/breakpointsHelperAstroIntegration.ts';
+// TODO: switch back to `#config/...` once PR#58 is merged
+import breakpointsIntegration from '@config/breakpoint-helper/breakpointsHelperAstroIntegration.ts';
 
 export default defineConfig({
     integrations: [breakpointsIntegration()]
 });
 ```
 
-### Options
+**Options**
 
-| Option             | Type     | Default                   | Description                                      |
-| ------------------ | -------- | ------------------------- | ------------------------------------------------ |
-| `breakpointsEntry` | `string` | `src/styles/tailwind.css` | CSS file to read `--breakpoint-*` variables from |
+| Option             | Type     | Default                   |
+| ------------------ | -------- | ------------------------- |
+| `breakpointsEntry` | `string` | `src/styles/tailwind.css` |
 
 ## Source format
 
-Breakpoints are declared as CSS custom properties using the `--breakpoint-<name>` convention in pixels:
+Declare breakpoints as `--breakpoint-<name>: <value>px` in the CSS entry (root or `@theme`):
 
 ```css
-/* src/styles/tailwind.css */
-:root {
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
+@theme static {
+    --breakpoint-2xs: 340px;
+    --breakpoint-xs: 500px;
+    --breakpoint-sm: 700px;
+    --breakpoint-md: 1000px;
+    --breakpoint-lg: 1200px;
+    --breakpoint-xl: 1400px;
+    --breakpoint-2xl: 1600px;
 }
 ```
+
+> Changes require a dev server restart — generation runs at `astro:config:setup`.
 
 ## Usage
 
 ```ts
-import { breakpoints, BREAKPOINT_NAMES } from 'virtual:breakpoints';
+import {
+    $currentBreakpoint,
+    BREAKPOINT_NAMES,
+    breakpoints,
+    isBelowBreakpoint
+} from '@scripts/stores/breakpoints.ts';
+import { computed } from 'nanostores';
 
-// breakpoints.md === 768
-// BREAKPOINT_NAMES === ['sm', 'md', 'lg', 'xl']
+console.log(breakpoints.md); // 1000
+console.log(BREAKPOINT_NAMES); // ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
+console.log(isBelowBreakpoint('sm')); // Boolean true/false
+console.log($currentBreakpoint.get()); // current BreakpointName
 
-const isMobile = window.innerWidth < breakpoints.md;
+// React to breakpoint changes without listening to screen resize event
+const isMobile = computed($currentBreakpoint, () => isBelowBreakpoint('sm'));
+isMobile.subscribe((v) => console.log(v));
 ```
 
-## TypeScript
+## Generated Types
 
-Types for the virtual module are auto-generated into `types/generated/breakpoints.d.ts` on integration setup. Each breakpoint name is documented with its `px` value in the union type for autocomplete:
-
-```ts
-declare module 'virtual:breakpoints' {
-    export type BreakpointName =
-        | 'sm' /** 640px */
-        | 'md' /** 768px */
-        | 'lg' /** 1024px */
-        | 'xl' /** 1280px */;
-
-    export type BreakpointValues = Record<BreakpointName, number>;
-
-    export const breakpoints: BreakpointValues;
-    export const BREAKPOINT_NAMES: BreakpointName[];
-}
-```
-
-## How it works
-
-At config setup:
-
-1. The CSS entry file is read and all `--breakpoint-<name>: <value>px` declarations are extracted and sorted by value ascending.
-2. `breakpointToType` writes the typed `virtual:breakpoints` declaration to `types/generated/breakpoints.d.ts`.
-3. A Vite virtual module plugin resolves `virtual:breakpoints` to a generated JS module exporting the `breakpoints` record and `BREAKPOINT_NAMES` array.
-
-## Standalone Vite plugin
-
-The integration is a thin Astro wrapper. To use in a plain Vite project, extract the inline virtual module plugin into a factory and call it from `vite.config.ts`. The core helpers — `extractBreakpoints`, `generateVirtualModule`, and `breakpointToType` — contain no Astro-specific dependencies; only the hook wiring needs adjustment.
-
-## Files
-
-| File                                   | Purpose                                               |
-| -------------------------------------- | ----------------------------------------------------- |
-| `breakpointsHelperAstroIntegration.ts` | Entry point — CSS parsing, virtual module, Astro hook |
-| `breakpointToType.ts`                  | Generates `types/generated/breakpoints.d.ts`          |
+Types are written to `types/generated/breakpoints.d.ts` on setup. Each name in the `BreakpointName` union is documented with its `px` value for autocomplete.
