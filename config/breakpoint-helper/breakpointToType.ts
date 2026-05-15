@@ -21,7 +21,7 @@ declare module 'virtual:breakpoints' {
     export type BreakpointName =${documentedUnion};
     export type BreakpointValues = Record<BreakpointName, number>;
     export const breakpoints: BreakpointValues;
-    export const BREAKPOINT_NAMES: BreakpointName[];
+    export const BREAKPOINT_NAMES: readonly BreakpointName[];
 }
 `;
 

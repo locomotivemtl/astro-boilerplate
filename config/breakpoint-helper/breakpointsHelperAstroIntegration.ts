@@ -51,9 +51,11 @@ function generateVirtualModule(breakpoints: BreakpointEntry[]): string {
  * This is a virtual module - import from 'virtual:breakpoints'
  */
 
-export const breakpoints = {${entries}};
+export const breakpoints = Object.freeze({
+${entries}
+});
 
-export const BREAKPOINT_NAMES = [${names}];
+export const BREAKPOINT_NAMES = Object.freeze([${names}]);
 `;
 }
 
