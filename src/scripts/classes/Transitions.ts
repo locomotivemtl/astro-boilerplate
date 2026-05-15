@@ -53,7 +53,7 @@ export class Transitions {
                 }),
                 new SwupPreloadPlugin({
                     preloadHoveredLinks: true,
-                    preloadInitialPage: !import.meta.env.DEV
+                    preloadInitialPage: !__IS_DEV__
                 }),
                 new SwupScriptsPlugin()
             ]
