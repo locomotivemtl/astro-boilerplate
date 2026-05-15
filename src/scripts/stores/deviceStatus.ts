@@ -1,18 +1,5 @@
 import { map } from 'nanostores';
-
-// =============================================================================
-// Breakpoints
-// =============================================================================
-export type Breakpoints = {
-    sm: string;
-};
-
-const root = document.documentElement;
-const breakpointSm = getComputedStyle(root).getPropertyValue('--breakpoint-sm').trim();
-
-export const $breakpoints = map<Breakpoints>({
-    sm: breakpointSm
-});
+import { breakpoints } from './breakpoints.ts';
 
 // =============================================================================
 // MediaQueries
@@ -26,7 +13,7 @@ export type MediaQueries = {
 export const $mediaQueries = map<MediaQueries>({
     reducedMotion: `(prefers-reduced-motion: reduce)`,
     touchScreen: `(hover: none)`,
-    touchOrSmall: `(max-width: ${$breakpoints.value?.sm}), (hover: none)`
+    touchOrSmall: `(max-width: ${breakpoints.sm}px), (hover: none)`
 });
 
 // =============================================================================
