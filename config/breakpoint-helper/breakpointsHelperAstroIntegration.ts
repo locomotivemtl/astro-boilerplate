@@ -11,19 +11,29 @@ const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 type BreakpointEntry = { name: string; value: number };
 
 /**
- * Extract breakpoints with their values from tailwind.css CSS custom properties
+ * Extract breakpoints with their values from tailwind.css CSS custom properties.
+ * Warns on `--breakpoint-*` declarations that are not integer-px (e.g. `1rem`,`1.5px`)
+ * since the runtime relies on integer-px values.
  */
-function extractBreakpoints(cssContent: string): BreakpointEntry[] {
-    const breakpointRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*(\d+)px/g;
+function extractBreakpoints(cssContent: string, logger: AstroIntegrationLogger): BreakpointEntry[] {
+    const declarationRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*([^;]+);/g;
+    const integerPxRegex = /^(\d+)px$/;
     const breakpoints: BreakpointEntry[] = [];
     let match: RegExpExecArray | null;
 
-    while ((match = breakpointRegex.exec(cssContent)) !== null) {
+    while ((match = declarationRegex.exec(cssContent)) !== null) {
         const name = match[1];
-        const value = parseInt(match[2], 10);
-        if (!breakpoints.some((bp) => bp.name === name)) {
-            breakpoints.push({ name, value });
+        const rawValue = match[2].trim();
+        const pxMatch = rawValue.match(integerPxRegex);
+
+        if (!pxMatch) {
+            logger.warn(
+                `Skipping --breakpoint-${name}: "${rawValue}" — expected an integer-px value (e.g. "700px").`
+            );
+            continue;
         }
+
+        breakpoints.push({ name, value: parseInt(pxMatch[1], 10) });
     }
     // Sort by value ascending
     return breakpoints.sort((a, b) => a.value - b.value);
@@ -41,9 +51,7 @@ function generateVirtualModule(breakpoints: BreakpointEntry[]): string {
  * This is a virtual module - import from 'virtual:breakpoints'
  */
 
-export const breakpoints = {
-${entries}
-};
+export const breakpoints = {${entries}};
 
 export const BREAKPOINT_NAMES = [${names}];
 `;
@@ -60,7 +68,7 @@ function readAndGenerateTypes(
     const cssPath = path.join(rootDir, breakpointsEntry);
     try {
         const cssContent = fs.readFileSync(cssPath, 'utf-8');
-        const breakpoints = extractBreakpoints(cssContent);
+        const breakpoints = extractBreakpoints(cssContent, logger);
 
         breakpointToType(breakpoints);
         logger.info(
@@ -68,8 +76,9 @@ function readAndGenerateTypes(
         );
 
         return breakpoints;
-    } catch {
-        logger.warn('Failed to read or generate breakpoints from tailwind.css');
+    } catch (err) {
+        const message = err instanceof Error ? err.message : String(err);
+        logger.warn(`Failed to read or generate breakpoints from ${cssPath}: ${message}`);
         return [];
     }
 }
@@ -86,7 +95,7 @@ export default function breakpointsHelperAstroIntegration(
     let rootDir: string;
 
     return {
-        name: 'breakpoints-helper-astro-integration',
+        name: 'breakpoints-helper',
         hooks: {
             'astro:config:setup': ({ config, updateConfig, logger }) => {
                 rootDir = config.root.pathname;
