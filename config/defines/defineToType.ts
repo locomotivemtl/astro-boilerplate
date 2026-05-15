@@ -1,28 +1,28 @@
 import fs from 'node:fs';
+import path from 'node:path';
 
-let uid = 0;
+import type { DefineValue } from './definesAstroIntegration';
 
-/**
- * Get TypeScript type from a JSON stringified value
+export function defineToType(defines: Record<string, DefineValue>): string {
+    const declarations = Object.entries(defines)
+        .map(([key, value]) => `declare const ${key}: ${typeof value};`)
+        .join('\n');
+
+    const typeString = `/**
+ * Auto-generated types for Vite defines
+ * DO NOT EDIT MANUALLY - Run \`npm run dev\` or \`npm run build\` to regenerate
  */
-function getTypeFromValue(value: string): string {
-    try {
-        const parsed = JSON.parse(value);
-        return typeof parsed;
-    } catch {
-        // If it's not valid JSON, treat as string
-        return 'string';
-    }
-}
 
-export function defineToType(
-    defines: Record<string, string> = {},
-    filename: string = `gen-types-${uid++}`
-): string {
-    const typeString = `${Object.entries(defines)
-        .map(([key, value]) => `declare const ${key}: ${getTypeFromValue(value)};`)
-        .join('\n')}`;
-    const path = `types/gen-${filename}.d.ts`;
-    fs.writeFileSync(path, typeString);
+${declarations}
+`;
+
+    const filePath = path.join(process.cwd(), 'types/generated/', `defines.d.ts`);
+    const typesDir = path.dirname(filePath);
+
+    if (!fs.existsSync(typesDir)) {
+        fs.mkdirSync(typesDir, { recursive: true });
+    }
+
+    fs.writeFileSync(filePath, typeString);
     return typeString;
 }

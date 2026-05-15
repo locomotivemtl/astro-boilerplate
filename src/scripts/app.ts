@@ -22,3 +22,11 @@ if (__IS_DEV__) {
             console.error('Failed to load the grid helper:', error);
         });
 }
+
+if (__IS_DEV__) {
+    console.log('is dev');
+}
+
+if (!__IS_DEV__) {
+    console.log('not dev');
+}
