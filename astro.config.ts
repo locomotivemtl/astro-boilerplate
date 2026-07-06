@@ -4,7 +4,7 @@ import { loadEnv } from 'vite';
 /* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import tailwindcss from '@tailwindcss/postcss';
+import tailwindcss from '@tailwindcss/vite';
 import postcssUtopia from 'postcss-utopia';
 
 /* Astro Integrations / Plugins */
@@ -18,15 +18,15 @@ const SERVER_ALLOWED_HOSTS = (ENVS?.SERVER_ALLOWED_HOSTS || '').split(',') || []
 export default defineConfig({
     site: 'https://locomotive-astro-boilerplate.vercel.app',
     vite: {
+        plugins: [tailwindcss()],
         css: {
             postcss: {
                 plugins: [
                     // Orders matter here
-                    // Tailwindcss plugin should call after postcss helpers
+                    // Tailwind shortcuts should run before Tailwind processes @theme
                     postcssUtopia(),
                     postcssHelpersFunctions(),
-                    postcssTailwindShortcuts(),
-                    tailwindcss()
+                    postcssTailwindShortcuts()
                 ]
             }
         },
