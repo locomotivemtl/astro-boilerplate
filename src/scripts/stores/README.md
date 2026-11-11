@@ -83,7 +83,7 @@ import { $smoothMouse, type ISmoothMouseState } from './stores/mouse';
 $smoothMouse.listen(
     ({ smoothX, smoothY, smoothNormalizedX, smoothNormalizedY }: ISmoothMouseState) => {
         console.log('SmoothMouse:', { smoothX, smoothY, smoothNormalizedX, smoothNormalizedY });
-    }
+    },
 );
 ```
 

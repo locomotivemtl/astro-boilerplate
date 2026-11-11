@@ -28,7 +28,7 @@ import BlockImage from './BlockImage.astro';
 
 const blocks = [
     { type: 'text', data: { content: 'This is a text block' } },
-    { type: 'image', data: { src: '/path/to/image.jpg', alt: 'Image description' } }
+    { type: 'image', data: { src: '/path/to/image.jpg', alt: 'Image description' } },
 ];
 ---
 

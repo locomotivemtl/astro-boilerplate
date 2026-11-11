@@ -1,7 +1,7 @@
 import { $scroll } from '@scripts/stores/scroll';
 import LocomotiveScroll, {
     type lenisTargetScrollTo,
-    type ILenisScrollToOptions
+    type ILenisScrollToOptions,
 } from 'locomotive-scroll';
 
 export class Scroll {
@@ -18,9 +18,9 @@ export class Scroll {
                     limit,
                     velocity,
                     direction,
-                    progress
+                    progress,
                 });
-            }
+            },
         });
     }
 

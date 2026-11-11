@@ -24,7 +24,7 @@ export const $mouse = map<MouseState>({
     x: HALF_SCREEN_WIDTH,
     y: HALF_SCREEN_HEIGHT,
     normalizedX: 0,
-    normalizedY: 0
+    normalizedY: 0,
 });
 
 export const $smoothMouse = map<SmoothMouseState>({
@@ -32,7 +32,7 @@ export const $smoothMouse = map<SmoothMouseState>({
     smoothY: HALF_SCREEN_HEIGHT,
     smoothNormalizedX: 0,
     smoothNormalizedY: 0,
-    lerp: 0.08
+    lerp: 0.08,
 });
 
 let isPlaying = false;
@@ -74,7 +74,9 @@ const onUpdate = (): void => {
 };
 
 const play = (): void => {
-    if (isPlaying || RAF) return;
+    if (isPlaying || RAF) {
+        return;
+    }
     // Use GSAP ticker instead of RAF
     // gsap.ticker.add(onUpdate);
     onUpdate();
@@ -82,7 +84,9 @@ const play = (): void => {
 };
 
 const pause = (): void => {
-    if (!isPlaying || !RAF) return;
+    if (!isPlaying || !RAF) {
+        return;
+    }
     // Use GSAP ticker instead of RAF
     // gsap.ticker.remove(onUpdate);
     cancelAnimationFrame(RAF);

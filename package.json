@@ -1,21 +1,16 @@
 {
     "name": "@locomotivemtl/astro-boilerplate",
-    "title": "Locomotive Boilerplate",
-    "type": "module",
     "version": "1.0.0",
-    "engines": {
-        "node": "24.x",
-        "npm": ">=8.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/locomotivemtl/astro-boilerplate.git"
-    },
     "author": {
         "name": "Locomotive",
         "email": "info@locomotive.ca",
         "homepage": "https://locomotive.ca"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/locomotivemtl/astro-boilerplate.git"
+    },
+    "type": "module",
     "scripts": {
         "prepare": "npx simple-git-hooks",
         "dev": "astro dev --host",
@@ -50,17 +45,24 @@
     "devDependencies": {
         "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
+        "@tailwindcss/vite": "^4.2.4",
         "oxfmt": "^0.78.0",
         "oxlint": "^1.93.0",
-        "@tailwindcss/vite": "^4.2.4",
         "postcss-utopia": "^1.1.0",
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
-        "pre-commit": "npx lint-staged --concurrent false"
+        "pre-commit": "npx lint-staged"
     },
     "lint-staged": {
-        "*.{js,mjs,cjs,ts,astro}": "oxlint --fix",
-        "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,astro,json,jsonc,json5,md,mdx,css,scss,less,html,vue,yml,yaml,toml,graphql}": "oxfmt --no-error-on-unmatched-pattern"
-    }
+        "*": [
+            "oxlint --fix --no-error-on-unmatched-pattern",
+            "oxfmt --no-error-on-unmatched-pattern"
+        ]
+    },
+    "engines": {
+        "node": "24.x",
+        "npm": ">=8.0"
+    },
+    "title": "Locomotive Boilerplate"
 }

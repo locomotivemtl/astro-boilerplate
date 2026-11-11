@@ -20,8 +20,8 @@ export const getSeo = (seo: Seo, defaultSeo: Seo, pageTitle: string | null = nul
                 image:
                     seo?.social?.facebook?.image?.url ||
                     defaultSeo.social?.facebook?.image?.url ||
-                    ''
-            }
+                    '',
+            },
         },
         twitter: {
             creator: seo?.social?.twitter?.creator || defaultSeo.social?.twitter?.creator,
@@ -30,7 +30,7 @@ export const getSeo = (seo: Seo, defaultSeo: Seo, pageTitle: string | null = nul
             description:
                 seo?.social?.twitter?.description ||
                 defaultSeo.social?.twitter?.description ||
-                description
+                description,
         },
         canonical: seo?.advanced?.canonical || defaultSeo.advanced?.canonical,
         noindex:
@@ -44,9 +44,9 @@ export const getSeo = (seo: Seo, defaultSeo: Seo, pageTitle: string | null = nul
                 {
                     name: 'robots',
                     content:
-                        seo?.advanced?.robots?.join(',') || defaultSeo.advanced?.robots?.join(',')
-                }
-            ]
-        }
+                        seo?.advanced?.robots?.join(',') || defaultSeo.advanced?.robots?.join(','),
+                },
+            ],
+        },
     };
 };

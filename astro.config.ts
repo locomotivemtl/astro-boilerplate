@@ -23,9 +23,9 @@ export default defineConfig({
                     // Run after @tailwindcss/vite, which transforms CSS in a `pre` hook
                     postcssUtopia(),
                     postcssHelpersFunctions(),
-                    postcssTailwindShortcuts()
-                ]
-            }
+                    postcssTailwindShortcuts(),
+                ],
+            },
         },
         plugins: [tailwindcss()],
         optimizeDeps: {
@@ -37,27 +37,27 @@ export default defineConfig({
                 '@swup/preload-plugin',
                 '@swup/scripts-plugin',
                 'swup',
-                'nanostores'
-            ]
+                'nanostores',
+            ],
         },
         build: {
-            chunkSizeWarningLimit: 1000
-        }
+            chunkSizeWarningLimit: 1000,
+        },
     },
     integrations: [
         icon({
-            iconDir: './src/assets/svgs'
-        })
+            iconDir: './src/assets/svgs',
+        }),
     ],
     server: {
-        allowedHosts: SERVER_ALLOWED_HOSTS
+        allowedHosts: SERVER_ALLOWED_HOSTS,
     },
     devToolbar: {
-        enabled: false
+        enabled: false,
     },
     image: {
         domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }]
+        remotePatterns: [{ protocol: 'https' }],
     },
     fonts: [
         {
@@ -71,16 +71,16 @@ export default defineConfig({
                         weight: 400,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2']
+                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2'],
                     },
                     {
                         weight: 700,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2']
-                    }
-                ]
-            }
-        }
-    ]
+                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2'],
+                    },
+                ],
+            },
+        },
+    ],
 });
