@@ -1,9 +1,9 @@
+import { Scroll } from '@scripts/classes/Scroll';
 import { toDash } from '@scripts/utils/string';
 import SwupHeadPlugin from '@swup/head-plugin';
 import SwupPreloadPlugin from '@swup/preload-plugin';
 import SwupScriptsPlugin from '@swup/scripts-plugin';
 import Swup from 'swup';
-import { Scroll } from '@scripts/classes/Scroll';
 
 export class Transitions {
     static readonly READY_CLASS = 'is-ready';

@@ -120,8 +120,8 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 | `isTouchOrSmall`  | `boolean` | Returns `true` if the condition match with the touchscreen or small screen mediaquery, otherwise returns `false` |
 
 ```ts
-import { subscribeKeys } from 'nanostores';
 import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus';
+import { subscribeKeys } from 'nanostores';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);

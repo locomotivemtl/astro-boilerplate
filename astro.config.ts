@@ -1,14 +1,10 @@
-import { defineConfig, fontProviders } from 'astro/config';
-import { loadEnv } from 'vite';
-
-/* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
 import tailwindcss from '@tailwindcss/postcss';
-import postcssUtopia from 'postcss-utopia';
-
-/* Astro Integrations / Plugins */
 import icon from 'astro-icon';
+import { defineConfig, fontProviders } from 'astro/config';
+import postcssUtopia from 'postcss-utopia';
+import { loadEnv } from 'vite';
 
 /* Get server allowed hosts from .env */
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');

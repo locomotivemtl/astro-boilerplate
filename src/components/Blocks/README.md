@@ -12,8 +12,8 @@ This component renders a series of content blocks. The component uses a switch s
 
 Each block object in the `blocks` array should have the following structure:
 
--   `type`: A string that specifies the type of block (e.g., `'text'` or `'image'`).
--   `data`: An object containing the data needed to render the block. The structure of this object varies depending on the block type.
+- `type`: A string that specifies the type of block (e.g., `'text'` or `'image'`).
+- `data`: An object containing the data needed to render the block. The structure of this object varies depending on the block type.
 
 ## Example Usage
 

@@ -20,10 +20,12 @@
         "prepare": "npx simple-git-hooks",
         "dev": "astro dev --host",
         "start": "astro dev --host",
-        "build": "astro check && astro build",
+        "build": "npm run check && astro build",
+        "check": "astro check && oxfmt --check",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check",
         "preview": "astro preview",
-        "astro": "astro",
-        "format": "npx lint-staged"
+        "astro": "astro"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.12",
@@ -47,16 +49,14 @@
         "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/postcss": "^4.2.1",
+        "oxfmt": "^0.78.0",
         "postcss-utopia": "^1.1.0",
-        "prettier": "^3.6.2",
-        "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-tailwindcss": "^0.7.2",
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
-        "pre-commit": "npm run format"
+        "pre-commit": "npx lint-staged"
     },
     "lint-staged": {
-        "*": "prettier --write --ignore-unknown"
+        "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,astro,json,jsonc,json5,md,mdx,css,scss,less,html,vue,yml,yaml,toml,graphql}": "oxfmt --no-error-on-unmatched-pattern"
     }
 }

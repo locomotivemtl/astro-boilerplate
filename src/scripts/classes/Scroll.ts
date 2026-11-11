@@ -1,5 +1,4 @@
 import { $scroll } from '@scripts/stores/scroll';
-
 import LocomotiveScroll, {
     type lenisTargetScrollTo,
     type ILenisScrollToOptions

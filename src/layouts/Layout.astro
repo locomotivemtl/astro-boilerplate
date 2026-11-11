@@ -1,9 +1,10 @@
 ---
 import '@styles/main.css';
-import { Font, type CssVariable } from 'astro:assets';
-import { SEO } from 'astro-seo';
 import { defaultSeo } from '@data/seo';
 import { getSeo } from '@scripts/utils/seo';
+import { SEO } from 'astro-seo';
+import { Font, type CssVariable } from 'astro:assets';
+
 import Icon from '../components/Icon/Icon.astro';
 
 interface Props {
@@ -29,7 +30,9 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
 
         <SEO {...seoData} />
 
-        {FONTS.map((font) => <Font cssVariable={font} preload />)}
+        {FONTS.map((font) => (
+            <Font cssVariable={font} preload />
+        ))}
     </head>
     <body>
         <script src="../scripts/app.ts"></script>
@@ -52,9 +55,7 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
         </main>
 
         <footer class="container flex justify-between py-fluid-xs">
-            <div>
-                &copy;{new Date().getFullYear()}
-            </div>
+            <div>&copy;{new Date().getFullYear()}</div>
 
             <nav class="flex gap-gutter">
                 <a href="/">Index</a>
@@ -63,8 +64,8 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
         </footer>
 
         <script>
-            import { setViewportSize } from '@scripts/utils/setViewportSize';
             import { $screenDebounce } from '@scripts/stores/screen';
+            import { setViewportSize } from '@scripts/utils/setViewportSize';
 
             // Set viewport size
             $screenDebounce.subscribe(() => {
