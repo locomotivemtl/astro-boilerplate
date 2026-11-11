@@ -7,7 +7,7 @@ import { SEO } from 'astro-seo';
 import { defaultSeo } from '#data/seo.ts';
 import { getSeo } from '#utils/seo.ts';
 
-import Icon from '../components/Icon/Icon.astro';
+import Icon from '#components/Icon/Icon.astro';
 
 interface Props {
     title: string;
@@ -66,8 +66,8 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
         </footer>
 
         <script>
-            import { setViewportSize } from '#utils/setViewportSize';
-            import { $screenDebounce } from '#stores/screen';
+            import { setViewportSize } from '#utils/setViewportSize.ts';
+            import { $screenDebounce } from '#stores/screen.ts';
             $screenDebounce.subscribe(setViewportSize);
         </script>
     </body>

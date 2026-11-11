@@ -22,7 +22,7 @@ It uses **many atomic stores** and direct manipulation.
 | `height` | `number` | Updated window inner height |
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
+import { $screen, type IScreenValues } from '#stores/screen.ts';
 
 $screen.listen(({ width, height }: IScreenDebounceValues) => {
     console.log('Screen:', { width, height });
@@ -39,7 +39,7 @@ This one use a debounce of 200ms by default
 | `height` | `number` | Updated window inner height |
 
 ```ts
-import { $screenDebounce, type IScreenDebounceValues } from './stores/screen';
+import { $screenDebounce, type IScreenDebounceValues } from '#stores/screen.ts';
 
 $screenDebounce.listen(({ width, height }: IScreenDebounceValues) => {
     console.log('Screen Debounce:', { width, height });
@@ -58,7 +58,7 @@ $screenDebounce.listen(({ width, height }: IScreenDebounceValues) => {
 | `normalizedY` | `number` | The y-coordinate position of the cursor on the window, between 0 and 1. |
 
 ```ts
-import { $mouse, type IMouseState } from './stores/mouse';
+import { $mouse, type IMouseState } from '#stores/mouse.ts';
 
 $mouse.listen(({ x, y, normalizedX, normalizedY }: IMouseState) => {
     console.log('Mouse:', { x, y, normalizedX, normalizedY });
@@ -78,7 +78,7 @@ This script utilizes a default lerp value of 0.8. Notably, the RAF (RequestAnima
 | `lerp`              | `number` | The lerp value (.8 by default)                                                 |
 
 ```ts
-import { $smoothMouse, type ISmoothMouseState } from './stores/mouse';
+import { $smoothMouse, type ISmoothMouseState } from '#stores/mouse.ts';
 
 $smoothMouse.listen(
     ({ smoothX, smoothY, smoothNormalizedX, smoothNormalizedY }: ISmoothMouseState) => {
@@ -102,7 +102,7 @@ To access scroll values from the Locomotive Scroll instance.
 | `progress`  | `number` | Normalized scroll progress between 0 and 1      |
 
 ```ts
-import { $scroll, type IScrollValues } from './stores/scroll';
+import { $scroll, type IScrollValues } from '#stores/scroll.ts';
 
 $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues) => {
     console.log('Scroll:', { scroll, limit, velocity, direction, progress });
@@ -121,7 +121,7 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 
 ```ts
 import { subscribeKeys } from 'nanostores';
-import { $mediaStatus, type MediaStatus } from '#stores/deviceStatus';
+import { $mediaStatus, type MediaStatus } from '#stores/deviceStatus.ts';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);
@@ -156,8 +156,8 @@ $localStorage.listen((values) => {
 In the following example, we store the event listener in a variable, which returns a function capable of unbinding the event when called. This technique provides a convenient way to manage event listeners and efficiently remove them when necessary. Here's how it works:
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
-import { $mouse, type IMouseState } from './stores/mouse';
+import { $screen, type IScreenValues } from '#stores/screen.ts';
+import { $mouse, type IMouseState } from '#stores/mouse.ts';
 
 export default class Example {
     unbindScreenListener: () => void;
