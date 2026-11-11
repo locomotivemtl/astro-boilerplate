@@ -42,10 +42,6 @@ export default defineConfig({
         },
         build: {
             chunkSizeWarningLimit: 1000
-        },
-        environments: {
-            // Vite 8 externalizes bare CSS @imports in Astro's prerender env (ENOENT on `@import 'tailwindcss'`). See TODO.md
-            prerender: { resolve: { noExternal: ['tailwindcss'] } }
         }
     },
     integrations: [
