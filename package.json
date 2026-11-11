@@ -44,6 +44,7 @@
         "typescript": "^5.9.3"
     },
     "devDependencies": {
+        "@commitlint/cli": "^21.2.4",
         "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.2.4",
@@ -54,6 +55,7 @@
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
+        "commit-msg": "npx --no -- commitlint --edit \"$1\"",
         "pre-commit": "npm run format"
     },
     "lint-staged": {
