@@ -3,6 +3,7 @@
     "compilerOptions": {
         "moduleResolution": "Bundler",
         "allowImportingTsExtensions": true,
+        "noFallthroughCasesInSwitch": true,
         "paths": {
             /* scripts/ folder */
             "#classes/*": ["./src/scripts/classes/*"],
