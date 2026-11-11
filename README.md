@@ -12,7 +12,7 @@
 - [Tailwind CSS] for a sane and scalable CSS architecture.
 - [Locomotive Scroll] for smooth scrolling with parallax effects.
 - [Swup] for versatile and extensible page transitions.
-- [Oxfmt] for a formatted and easy to maintain codebase.
+- [Oxlint] and [Oxfmt] for a linted, formatted and easy to maintain codebase.
 - [Nanostores] as state manager.
 
 ## Getting started
@@ -64,7 +64,9 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run check`           | Type check and check formatting                  |
+| `npm run check`           | Type check, lint and check formatting            |
+| `npm run lint`            | Lint files using Oxlint                          |
+| `npm run lint:fix`        | Lint files and apply safe fixes                  |
 | `npm run format`          | Format files using Oxfmt                         |
 | `npm run format:check`    | Check formatting without writing                 |
 
@@ -74,6 +76,7 @@ All commands are run from the root of the project, from a terminal:
 - [Locomotive Scroll]
 - [Tailwind CSS]
 - [Swup]
+- [Oxlint]
 - [Oxfmt]
 - [Nanostores]
 
@@ -84,6 +87,7 @@ All commands are run from the root of the project, from a terminal:
 [Node]: https://nodejs.org/
 [NPM]: https://npmjs.com/
 [NVM]: https://github.com/nvm-sh/nvm
+[Oxlint]: https://oxc.rs/docs/guide/usage/linter.html
 [Oxfmt]: https://oxc.rs/docs/guide/usage/formatter.html
 [Nanostores]: https://github.com/nanostores/nanostores
 [PostCSS]: https://postcss.org/

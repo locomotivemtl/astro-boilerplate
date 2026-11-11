@@ -21,7 +21,9 @@
         "dev": "astro dev --host",
         "start": "astro dev --host",
         "build": "npm run check && astro build",
-        "check": "astro check && oxfmt --check",
+        "check": "astro check && oxlint && oxfmt --check",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix",
         "format": "oxfmt",
         "format:check": "oxfmt --check",
         "preview": "astro preview",
@@ -50,13 +52,15 @@
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/postcss": "^4.2.1",
         "oxfmt": "^0.78.0",
+        "oxlint": "^1.93.0",
         "postcss-utopia": "^1.1.0",
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
-        "pre-commit": "npx lint-staged"
+        "pre-commit": "npx lint-staged --concurrent false"
     },
     "lint-staged": {
+        "*.{js,mjs,cjs,ts,astro}": "oxlint --fix",
         "*.{js,mjs,cjs,ts,mts,cts,jsx,tsx,astro,json,jsonc,json5,md,mdx,css,scss,less,html,vue,yml,yaml,toml,graphql}": "oxfmt --no-error-on-unmatched-pattern"
     }
 }
