@@ -1,13 +1,18 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-type BreakpointEntry = { name: string; value: number };
+export type BreakpointEntry = { name: string; value: number };
 
 /**
- * Generate TypeScript declaration file for virtual:breakpoints module
+ * Write the type declarations for the `virtual:breakpoints` module.
+ *
+ * Each name carries its pixel value as a doc comment, so the editor shows the actual
+ * breakpoint while autocompleting.
  */
-export function breakpointToType(breakpoints: BreakpointEntry[]): string {
-    // Generate documented union type with values shown in autocomplete
+export function breakpointToType(
+    breakpoints: BreakpointEntry[],
+    rootDir: string = process.cwd()
+): string {
     const documentedUnion = breakpoints
         .map((bp) => `\n        '${bp.name}' /** ${bp.value}px */ `)
         .join('|');
@@ -25,13 +30,9 @@ declare module 'virtual:breakpoints' {
 }
 `;
 
-    const filePath = path.join(process.cwd(), 'types/generated/breakpoints.d.ts');
-    const typesDir = path.dirname(filePath);
+    const filePath = path.join(rootDir, 'types', 'generated', 'breakpoints.d.ts');
 
-    if (!fs.existsSync(typesDir)) {
-        fs.mkdirSync(typesDir, { recursive: true });
-    }
-
+    fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, typeString);
     return typeString;
 }

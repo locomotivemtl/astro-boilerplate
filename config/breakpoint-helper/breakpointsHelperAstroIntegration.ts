@@ -1,22 +1,27 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
-import { breakpointToType } from './breakpointToType.ts';
+import { breakpointToType, type BreakpointEntry } from './breakpointToType.ts';
 
 const BREAKPOINTS_ENTRY_PATH = 'src/styles/tailwind.css';
 const VIRTUAL_MODULE_ID = 'virtual:breakpoints';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
-type BreakpointEntry = { name: string; value: number };
+// The hook runs once per environment per save, regenerate only once
+let lastHotUpdateTimestamp = 0;
 
 /**
  * Extract breakpoints with their values from tailwind.css CSS custom properties.
  * Warns on `--breakpoint-*` declarations that are not integer-px (e.g. `1rem`,`1.5px`)
  * since the runtime relies on integer-px values.
  */
-function extractBreakpoints(cssContent: string, logger: AstroIntegrationLogger): BreakpointEntry[] {
-    const declarationRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*([^;]+);/g;
+export function extractBreakpoints(
+    cssContent: string,
+    logger: AstroIntegrationLogger
+): BreakpointEntry[] {
+    const declarationRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*([^;}]+?)\s*(?:[;}]|$)/g;
     const integerPxRegex = /^(\d+)px$/;
     const breakpoints: BreakpointEntry[] = [];
     let match: RegExpExecArray | null;
@@ -33,7 +38,16 @@ function extractBreakpoints(cssContent: string, logger: AstroIntegrationLogger):
             continue;
         }
 
-        breakpoints.push({ name, value: parseInt(pxMatch[1], 10) });
+        const value = parseInt(pxMatch[1], 10);
+        const existing = breakpoints.find((bp) => bp.name === name);
+
+        if (existing) {
+            logger.warn(`Duplicate --breakpoint-${name}: keeping the last value (${value}px).`);
+            existing.value = value;
+            continue;
+        }
+
+        breakpoints.push({ name, value });
     }
     // Sort by value ascending
     return breakpoints.sort((a, b) => a.value - b.value);
@@ -63,16 +77,15 @@ export const BREAKPOINT_NAMES = Object.freeze([${names}]);
  * Read CSS and extract breakpoints, generate type declaration file
  */
 function readAndGenerateTypes(
+    cssPath: string,
     rootDir: string,
-    breakpointsEntry: string,
     logger: AstroIntegrationLogger
-): BreakpointEntry[] {
-    const cssPath = path.join(rootDir, breakpointsEntry);
+): BreakpointEntry[] | null {
     try {
         const cssContent = fs.readFileSync(cssPath, 'utf-8');
         const breakpoints = extractBreakpoints(cssContent, logger);
 
-        breakpointToType(breakpoints);
+        breakpointToType(breakpoints, rootDir);
         logger.info(
             `Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`
         );
@@ -81,29 +94,34 @@ function readAndGenerateTypes(
     } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
         logger.warn(`Failed to read or generate breakpoints from ${cssPath}: ${message}`);
-        return [];
+        return null;
     }
 }
 
 /**
  * Astro integration for breakpoint types and virtual module.
- * - Generates types/virtual-breakpoints.d.ts on dev server start and build
+ * - Generates types/generated/breakpoints.d.ts on dev server start and build
  * - Provides virtual:breakpoints module for runtime access to breakpoint values
+ * - Re-reads the stylesheet when it changes in dev
  */
 export default function breakpointsHelperAstroIntegration(
     breakpointsEntry: string = BREAKPOINTS_ENTRY_PATH
 ): AstroIntegration {
     let breakpoints: BreakpointEntry[] = [];
     let rootDir: string;
+    let cssPath: string;
+    let logger: AstroIntegrationLogger;
 
     return {
         name: 'breakpoints-helper',
         hooks: {
-            'astro:config:setup': ({ config, updateConfig, logger }) => {
-                rootDir = config.root.pathname;
+            'astro:config:setup': ({ config, updateConfig, logger: setupLogger }) => {
+                rootDir = fileURLToPath(config.root);
+                cssPath = path.join(rootDir, breakpointsEntry);
+                logger = setupLogger;
 
                 // Generate types and extract breakpoints
-                breakpoints = readAndGenerateTypes(rootDir, breakpointsEntry, logger);
+                breakpoints = readAndGenerateTypes(cssPath, rootDir, logger) ?? [];
 
                 // Add minimal Vite plugin for virtual module resolution
                 updateConfig({
@@ -120,6 +138,27 @@ export default function breakpointsHelperAstroIntegration(
                                     if (id === RESOLVED_VIRTUAL_MODULE_ID) {
                                         return generateVirtualModule(breakpoints);
                                     }
+                                },
+                                // Keeps script values in sync with the stylesheet in dev
+                                hotUpdate({ file, timestamp }) {
+                                    if (path.normalize(file) !== path.normalize(cssPath)) return;
+
+                                    if (timestamp !== lastHotUpdateTimestamp) {
+                                        lastHotUpdateTimestamp = timestamp;
+
+                                        const next = readAndGenerateTypes(cssPath, rootDir, logger);
+                                        // A transient read failure (editor atomic save) must not wipe good values
+                                        if (!next) return;
+                                        breakpoints = next;
+                                    }
+
+                                    const mod = this.environment.moduleGraph.getModuleById(
+                                        RESOLVED_VIRTUAL_MODULE_ID
+                                    );
+                                    if (!mod) return;
+
+                                    this.environment.moduleGraph.invalidateModule(mod);
+                                    this.environment.hot.send({ type: 'full-reload' });
                                 }
                             }
                         ]
