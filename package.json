@@ -1,15 +1,10 @@
 {
     "name": "@locomotivemtl/astro-boilerplate",
-    "title": "Locomotive Boilerplate",
     "version": "1.0.0",
     "author": {
         "name": "Locomotive",
         "email": "info@locomotive.ca",
         "homepage": "https://locomotive.ca"
-    },
-    "engines": {
-        "node": "24.x",
-        "npm": ">=8.0"
     },
     "repository": {
         "type": "git",
@@ -52,9 +47,9 @@
         "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.2.4",
+        "@types/node": "^26.6.6",
         "oxfmt": "^0.78.0",
         "oxlint": "^1.93.0",
-        "@types/node": "^26.6.6",
         "postcss-utopia": "^1.1.0",
         "simple-git-hooks": "^2.13.1"
     },
@@ -68,9 +63,14 @@
             "oxfmt --no-error-on-unmatched-pattern"
         ]
     },
+    "engines": {
+        "node": "24.x",
+        "npm": ">=8.0"
+    },
     "allowScripts": {
         "fsevents": true,
         "simple-git-hooks": true,
         "swup": true
-    }
+    },
+    "title": "Locomotive Boilerplate"
 }
