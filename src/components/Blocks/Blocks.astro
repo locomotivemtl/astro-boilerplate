@@ -1,6 +1,6 @@
 ---
-import BlockText from './BlockText.astro';
 import BlockImage from './BlockImage.astro';
+import BlockText from './BlockText.astro';
 
 export interface Block {
     type: string;
@@ -15,16 +15,14 @@ const { blocks } = Astro.props;
 ---
 
 <div>
-    {
-        blocks.map((block) => {
-            switch (block.type) {
-                case 'text':
-                    return <BlockText {...block.data} />;
-                case 'image':
-                    return <BlockImage {...block.data} />;
-                default:
-                    return null;
-            }
-        })
-    }
+    {blocks.map((block) => {
+        switch (block.type) {
+            case 'text':
+                return <BlockText {...block.data} />;
+            case 'image':
+                return <BlockImage {...block.data} />;
+            default:
+                return null;
+        }
+    })}
 </div>

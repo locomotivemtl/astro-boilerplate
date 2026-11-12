@@ -1,29 +1,28 @@
 {
     "name": "@locomotivemtl/astro-boilerplate",
-    "title": "Locomotive Boilerplate",
-    "type": "module",
     "version": "1.0.0",
-    "engines": {
-        "node": "24.x",
-        "npm": ">=8.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/locomotivemtl/astro-boilerplate.git"
-    },
     "author": {
         "name": "Locomotive",
         "email": "info@locomotive.ca",
         "homepage": "https://locomotive.ca"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/locomotivemtl/astro-boilerplate.git"
+    },
+    "type": "module",
     "scripts": {
         "prepare": "npx simple-git-hooks",
         "dev": "astro dev --host",
         "start": "astro dev --host",
-        "build": "astro check && astro build",
+        "build": "npm run check && astro build",
+        "check": "astro check && oxlint && oxfmt --check",
+        "lint": "oxlint",
+        "lint:fix": "oxlint --fix",
+        "format": "oxfmt",
+        "format:check": "oxfmt --check",
         "preview": "astro preview",
-        "astro": "astro",
-        "format": "npx lint-staged"
+        "astro": "astro"
     },
     "dependencies": {
         "@astrojs/check": "^0.9.12",
@@ -49,10 +48,9 @@
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.2.4",
         "@types/node": "^26.6.6",
+        "oxfmt": "^0.78.0",
+        "oxlint": "^1.93.0",
         "postcss-utopia": "^1.1.0",
-        "prettier": "^3.6.2",
-        "prettier-plugin-astro": "^0.14.1",
-        "prettier-plugin-tailwindcss": "^0.7.2",
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
@@ -60,11 +58,19 @@
         "pre-commit": "npm run format"
     },
     "lint-staged": {
-        "*": "prettier --write --ignore-unknown"
+        "*": [
+            "oxlint --fix --no-error-on-unmatched-pattern",
+            "oxfmt --no-error-on-unmatched-pattern"
+        ]
+    },
+    "engines": {
+        "node": "24.x",
+        "npm": ">=8.0"
     },
     "allowScripts": {
         "fsevents": true,
         "simple-git-hooks": true,
         "swup": true
-    }
+    },
+    "title": "Locomotive Boilerplate"
 }

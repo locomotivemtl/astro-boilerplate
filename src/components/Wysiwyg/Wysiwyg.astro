@@ -9,13 +9,9 @@ const { tag = 'div', class: propsClass, ...rest } = Astro.props;
 const Tag = tag || 'div';
 ---
 
-{
-    Astro.slots.has('default') && (
-        <Tag class:list={['c-wysiwyg', propsClass]} {...rest}>
-            <slot />
-        </Tag>
-    )
-}
+{Astro.slots.has('default') && <Tag class:list={['c-wysiwyg', propsClass]} {...rest}>
+    <slot />
+</Tag>}
 
 <style>
     @import 'Wysiwyg.css';

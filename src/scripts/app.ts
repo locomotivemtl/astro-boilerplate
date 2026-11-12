@@ -1,5 +1,5 @@
-import { Transitions } from '@scripts/classes/Transitions';
 import { Scroll } from '@scripts/classes/Scroll';
+import { Transitions } from '@scripts/classes/Transitions';
 
 // Initialize the Transitions class
 const transitions = new Transitions();
@@ -15,7 +15,7 @@ if (import.meta.env.MODE === 'development') {
             new GridHelper({
                 columns: 'var(--grid-columns)',
                 gutterWidth: `var(--spacing-gutter)`,
-                marginWidth: `var(--spacing-gutter)`
+                marginWidth: `var(--spacing-gutter)`,
             });
         })
         .catch((error) => {

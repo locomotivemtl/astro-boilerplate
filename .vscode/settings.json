@@ -2,5 +2,13 @@
     "tailwindCSS.experimental.configFile": "./src/styles/main.css",
     "files.associations": {
         "*.css": "tailwindcss"
+    },
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "always"
+    },
+    "[astro]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     }
 }
