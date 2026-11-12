@@ -37,3 +37,7 @@ pnpm-debug.log*
 .cursor/*
 !.cursor/plans/
 !.cursor/plans/**
+
+.claude
+!.claude/skills/*
+!.claude/settings.json

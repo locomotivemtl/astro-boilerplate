@@ -4,8 +4,10 @@ import { loadEnv } from 'vite';
 /* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import tailwindcss from '@tailwindcss/postcss';
 import postcssUtopia from 'postcss-utopia';
+
+/* Vite plugins */
+import tailwindcss from '@tailwindcss/vite';
 
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
@@ -22,15 +24,14 @@ export default defineConfig({
         css: {
             postcss: {
                 plugins: [
-                    // Orders matter here
-                    // Tailwindcss plugin should call after postcss helpers
+                    // Run after @tailwindcss/vite, which transforms CSS in a `pre` hook
                     postcssUtopia(),
                     postcssHelpersFunctions(),
-                    postcssTailwindShortcuts(),
-                    tailwindcss()
+                    postcssTailwindShortcuts()
                 ]
             }
         },
+        plugins: [tailwindcss()],
         optimizeDeps: {
             include: [
                 '@locomotivemtl/grid-helper',
