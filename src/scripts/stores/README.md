@@ -14,77 +14,30 @@ It uses **many atomic stores** and direct manipulation.
 
 ## Screen
 
-### $screen
+### $screen / $screenDebounce
 
-| Prop     | Type     | Description                 |
-| -------- | -------- | --------------------------- |
-| `width`  | `number` | Updated window inner width  |
-| `height` | `number` | Updated window inner height |
+| Prop     | Type     | Description                         |
+| -------- | -------- | ----------------------------------- |
+| `width`  | `number` | Updated window inner width          |
+| `height` | `number` | Updated window inner height         |
+| `dpr`    | `number` | Device pixel ratio of the window    |
+| `ratio`  | `number` | Width to height ratio of the window |
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
+import { $screen, type ScreenValues } from './stores/screen.ts';
 
-$screen.listen(({ width, height }: IScreenDebounceValues) => {
-    console.log('Screen:', { width, height });
+$screen.listen(({ width, height, dpr, ratio }: ScreenValues) => {
+    console.log('Screen:', { width, height, dpr, ratio });
 });
 ```
 
-### $screenDebounce
-
-This one use a debounce of 200ms by default
-
-| Prop     | Type     | Description                 |
-| -------- | -------- | --------------------------- |
-| `width`  | `number` | Updated window inner width  |
-| `height` | `number` | Updated window inner height |
-
 ```ts
-import { $screenDebounce, type IScreenDebounceValues } from './stores/screen';
+import { $screenDebounce, type ScreenValues } from './stores/screen.ts';
 
-$screenDebounce.listen(({ width, height }: IScreenDebounceValues) => {
-    console.log('Screen Debounce:', { width, height });
+// This one use a debounce of 200ms by default
+$screenDebounce.listen(({ width, height, dpr, ratio }: ScreenValues) => {
+    console.log('Screen Debounce:', { width, height, dpr, ratio });
 });
-```
-
-## Mouse
-
-### $mouse
-
-| Prop          | Type     | Description                                                             |
-| ------------- | -------- | ----------------------------------------------------------------------- |
-| `x`           | `number` | The x-coordinate position of the cursor on the window, in pixels.       |
-| `y`           | `number` | The y-coordinate position of the cursor on the window, in pixels.       |
-| `normalizedX` | `number` | The x-coordinate position of the cursor on the window, between 0 and 1. |
-| `normalizedY` | `number` | The y-coordinate position of the cursor on the window, between 0 and 1. |
-
-```ts
-import { $mouse, type IMouseState } from './stores/mouse';
-
-$mouse.listen(({ x, y, normalizedX, normalizedY }: IMouseState) => {
-    console.log('Mouse:', { x, y, normalizedX, normalizedY });
-});
-```
-
-### $smoothMouse
-
-This script utilizes a default lerp value of 0.8. Notably, the RAF (RequestAnimationFrame) stops when there's no mouse movement detected. If you're incorporating GSAP (GreenSock Animation Platform), it's recommended to utilize gsap.ticker instead of a custom RequestAnimationFrame implementation for optimal performance.
-
-| Prop                | Type     | Description                                                                    |
-| ------------------- | -------- | ------------------------------------------------------------------------------ |
-| `smoothX`           | `number` | The lerped x-coordinate position of the cursor on the window, in pixels.       |
-| `smoothY`           | `number` | The lerped y-coordinate position of the cursor on the window, in pixels.       |
-| `smoothNormalizedX` | `number` | The lerped x-coordinate position of the cursor on the window, between 0 and 1. |
-| `smoothNormalizedY` | `number` | The lerped y-coordinate position of the cursor on the window, between 0 and 1. |
-| `lerp`              | `number` | The lerp value (.8 by default)                                                 |
-
-```ts
-import { $smoothMouse, type ISmoothMouseState } from './stores/mouse';
-
-$smoothMouse.listen(
-    ({ smoothX, smoothY, smoothNormalizedX, smoothNormalizedY }: ISmoothMouseState) => {
-        console.log('SmoothMouse:', { smoothX, smoothY, smoothNormalizedX, smoothNormalizedY });
-    }
-);
 ```
 
 ## Scroll
@@ -102,7 +55,7 @@ To access scroll values from the Locomotive Scroll instance.
 | `progress`  | `number` | Normalized scroll progress between 0 and 1      |
 
 ```ts
-import { $scroll, type IScrollValues } from './stores/scroll';
+import { $scroll, type IScrollValues } from './stores/scroll.ts';
 
 $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues) => {
     console.log('Scroll:', { scroll, limit, velocity, direction, progress });
@@ -121,31 +74,10 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 
 ```ts
 import { subscribeKeys } from 'nanostores';
-import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus';
+import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus.ts';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);
-});
-```
-
-## Local Storage
-
-[Persistent](https://github.com/nanostores/persistent) store to save data to `localStorage` and synchronize changes between browser tabs.
-
-### $locomotiveLocalStorage
-
-This is an example of a usage of persistent to save values in your localStorage with the key `locomotive`
-
-```ts
-/* Set a value to the localStorage */
-$localStorage.set([new Date().toISOString()]);
-
-/* Get a value to the localStorage */
-console.log('Local storage:', $localStorage.get());
-
-/* Listen changes */
-$localStorage.listen((values) => {
-    console.log('Local storage:', values);
 });
 ```
 
@@ -156,17 +88,10 @@ $localStorage.listen((values) => {
 In the following example, we store the event listener in a variable, which returns a function capable of unbinding the event when called. This technique provides a convenient way to manage event listeners and efficiently remove them when necessary. Here's how it works:
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
-import { $mouse, type IMouseState } from './stores/mouse';
+import { $screen, type ScreenValues } from './stores/screen.ts';
 
-export default class Example {
-    unbindScreenListener: () => void;
-    unbindMouseListener: () => void;
-
-    constructor() {
-        this.onResize = this.onResize.bind(this)
-        this.onMouseChange = this.onMouseChange.bind(this)
-    }
+export class Example {
+    private unbindScreenListener?: (() => void) | undefined
 
     // =============================================================================
     // Lifecycle
@@ -184,23 +109,17 @@ export default class Example {
     // =============================================================================
     bindEvents() {
         this.unbindScreenListener = $screen.listen(this.onResize);
-        this.unbindMouseListener = $mouse.subscribe(this.onMouseChange);
     }
 
     unbindEvents() {
         this.unbindScreenListener?.();
-        this.unbindMouseListener?.();
     }
 
     // =============================================================================
     // Callbacks
     // =============================================================================
-    onResize({ width, height }: IScreenDebounceValues) {
-        console.log('Screen:', { width, height });
-    })
-
-    onMouseChange({x, y, normalizedX, normalizedY}: IMouseState) {
-        console.log('Mouse:', { x, y, normalizedX, normalizedY });
+    private onResize = ({ width, height, dpr, ratio }: ScreenValues) => {
+        console.log('Screen:', { width, height, dpr, ratio });
     })
 }
 ```
