@@ -61,5 +61,10 @@
     },
     "lint-staged": {
         "*": "prettier --write --ignore-unknown"
+    },
+    "allowScripts": {
+        "fsevents": true,
+        "simple-git-hooks": true,
+        "swup": true
     }
 }
