@@ -109,22 +109,32 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 });
 ```
 
-## Device Status
+## Media Queries
 
-### $mediaStatus
+### $mediaQueries
 
-| Prop              | Type      | Description                                                                                                      |
-| ----------------- | --------- | ---------------------------------------------------------------------------------------------------------------- |
-| `isReducedMotion` | `boolean` | Returns `true` if the user has enabled reduced motion preferences, otherwise returns `false`                     |
-| `isTouchScreen`   | `boolean` | Returns `true` if the condition match with the touchscreen mediaquery, otherwise returns `false`                 |
-| `isTouchOrSmall`  | `boolean` | Returns `true` if the condition match with the touchscreen or small screen mediaquery, otherwise returns `false` |
+Whether each media query the site reacts to currently matches. Values update when a query starts or stops matching.
+
+| Prop              | Type      | Description                                                                          |
+| ----------------- | --------- | ------------------------------------------------------------------------------------ |
+| `canHover`        | `boolean` | Whether the primary pointer can hover (`(hover: hover)`)                             |
+| `isReducedMotion` | `boolean` | Whether the visitor asked for reduced motion                                         |
+| `isTouchScreen`   | `boolean` | Whether the primary pointer cannot hover (`(hover: none)`)                           |
+| `isTouchOrSmall`  | `boolean` | Whether the pointer cannot hover, or the viewport is narrower than `--breakpoint-sm` |
+| `isPortrait`      | `boolean` | Whether the viewport is taller than wide                                             |
 
 ```ts
 import { subscribeKeys } from 'nanostores';
-import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus';
+import { $mediaQueries, type MediaQueries } from '@scripts/stores/mediaQueries';
 
-subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
-    console.log(value);
+/* Read once */
+if ($mediaQueries.get().isReducedMotion) {
+    // …
+}
+
+/* React to changes */
+subscribeKeys($mediaQueries, ['isTouchOrSmall'], ({ isTouchOrSmall }: MediaQueries) => {
+    console.log(isTouchOrSmall);
 });
 ```
 
