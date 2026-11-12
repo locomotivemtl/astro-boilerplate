@@ -11,7 +11,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
-import definesAstroIntegration from './config/defines/definesAstroIntegration';
+import defineAstroIntegration from './config/define/defineAstroIntegration.ts';
 
 /* Get server allowed hosts from .env */
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
@@ -49,7 +49,7 @@ export default defineConfig({
         }
     },
     integrations: [
-        definesAstroIntegration(),
+        defineAstroIntegration(),
         icon({
             iconDir: './src/assets/svgs'
         })
