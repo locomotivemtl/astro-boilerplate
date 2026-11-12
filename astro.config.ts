@@ -11,6 +11,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
+import breakpointsHelperAstroIntegration from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
 
 /* Get server allowed hosts from .env */
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
@@ -48,6 +49,7 @@ export default defineConfig({
         }
     },
     integrations: [
+        breakpointsHelperAstroIntegration(),
         icon({
             iconDir: './src/assets/svgs'
         })
