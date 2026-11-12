@@ -1,10 +1,15 @@
 {
     "name": "@locomotivemtl/astro-boilerplate",
+    "title": "Locomotive Boilerplate",
     "version": "1.0.0",
     "author": {
         "name": "Locomotive",
         "email": "info@locomotive.ca",
         "homepage": "https://locomotive.ca"
+    },
+    "engines": {
+        "node": "24.x",
+        "npm": ">=8.0"
     },
     "repository": {
         "type": "git",
@@ -32,7 +37,7 @@
         "@swup/preload-plugin": "^3.2.11",
         "@swup/scripts-plugin": "^2.1.0",
         "astro": "^7.4.11",
-        "astro-icon": "^1.1.5",
+        "astro-icon": "^1.2.0",
         "astro-seo": "^0.8.4",
         "lint-staged": "^16.2.6",
         "locomotive-scroll": "^5.0.1",
@@ -43,16 +48,19 @@
         "typescript": "^5.9.3"
     },
     "devDependencies": {
+        "@commitlint/cli": "^21.2.4",
         "@locomotivemtl/postcss-helpers-functions": "^1.0.4",
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.2.4",
         "oxfmt": "^0.78.0",
         "oxlint": "^1.93.0",
+        "@types/node": "^26.6.6",
         "postcss-utopia": "^1.1.0",
         "simple-git-hooks": "^2.13.1"
     },
     "simple-git-hooks": {
-        "pre-commit": "npx lint-staged"
+        "commit-msg": "npx --no -- commitlint --edit \"$1\"",
+        "pre-commit": "npm run format"
     },
     "lint-staged": {
         "*": [
@@ -60,9 +68,9 @@
             "oxfmt --no-error-on-unmatched-pattern"
         ]
     },
-    "engines": {
-        "node": "24.x",
-        "npm": ">=8.0"
-    },
-    "title": "Locomotive Boilerplate"
+    "allowScripts": {
+        "fsevents": true,
+        "simple-git-hooks": true,
+        "swup": true
+    }
 }
