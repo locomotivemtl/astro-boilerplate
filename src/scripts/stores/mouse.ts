@@ -1,6 +1,7 @@
 import { map } from 'nanostores';
-import { $screen } from '@scripts/stores/screen';
-import { normalize, roundToDecimals } from '@scripts/utils/maths';
+
+import { $screen } from '#stores/screen.ts';
+import { normalize, roundToDecimals } from '#utils/maths.ts';
 
 export type MouseState = {
     x: number;

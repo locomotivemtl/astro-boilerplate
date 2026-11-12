@@ -24,7 +24,7 @@ The Image component extends Astro’s built-in [`<Image />` (`astro:assets`)](ht
 Image will render with its original ratio and take the full width of the parent.
 
 ```astro
-<Image src={import('@images/printer.jpg')} alt="A beautiful scenery" />
+<Image src={import('#assets/images/printer.jpg')} alt="A beautiful scenery" />
 ```
 
 ### Using a Figure Tag with Caption
@@ -33,7 +33,7 @@ Wraps the image in a `<figure>` tag and includes a caption(`<figcaption>`) below
 
 ```astro
 <Image
-    src={import('@images/printer.jpg')}
+    src={import('#assets/images/printer.jpg')}
     alt="A beautiful scenery"
     tag="figure"
     caption="This is a beautiful scenery"
@@ -46,7 +46,7 @@ Specifies custom [sizes and widths](https://docs.astro.build/en/guides/images/#w
 
 ```astro
 <Image
-    src={import('@images/printer.jpg')}
+    src={import('#assets/images/printer.jpg')}
     alt="A beautiful scenery"
     sizes="(max-width: 800px) 100vw, 800px"
     widths={[400, 800, 1200]}
@@ -59,7 +59,7 @@ Adds custom CSS classes to the image component for additional styling, concatena
 
 ```astro
 <Image
-    src={import('@images/printer.jpg')}
+    src={import('#assets/images/printer.jpg')}
     alt="A beautiful scenery"
     class="c-custom-class -a-modifier"
 />
@@ -70,7 +70,12 @@ Adds custom CSS classes to the image component for additional styling, concatena
 Sets specific width and height for the image, ensuring it maintains these dimensions. Will force render the image in `object-fit: cover` based on the ratio dimension provided. You must specifiy both `width` and `height`.
 
 ```astro
-<Image src={import('@images/printer.jpg')} alt="A beautiful scenery" width="800" height="600" />
+<Image
+    src={import('#assets/images/printer.jpg')}
+    alt="A beautiful scenery"
+    width="800"
+    height="600"
+/>
 ```
 
 ### Lazy Loading
@@ -78,7 +83,7 @@ Sets specific width and height for the image, ensuring it maintains these dimens
 Uses lazy loading to defer the loading of the image until it is near the viewport, improving initial page load performance. When loaded, the `.c-image` element has the state class `is-loaded` added, allowing for styling based on state. See [Image.css](Image.css).
 
 ```astro
-<Image src={import('@images/printer.jpg')} alt="A beautiful scenery" loading="lazy" />
+<Image src={import('#assets/images/printer.jpg')} alt="A beautiful scenery" loading="lazy" />
 ```
 
 ### Locomotive Scroll
@@ -86,16 +91,16 @@ Uses lazy loading to defer the loading of the image until it is near the viewpor
 Integrates the image with Locomotive Scroll, providing smooth scrolling effects.
 
 ```astro
-<Image src={import('@images/printer.jpg')} alt="A beautiful scenery" data-scroll />
+<Image src={import('#assets/images/printer.jpg')} alt="A beautiful scenery" data-scroll />
 ```
 
 ### Static images
 
-Use this approach to include static images in your project. Images are imported with JavaScript using and import alias (`@images`). KWe recommend that local images are kept in src/ when possible so that Astro can transform, optimize and bundle them. Files in the /public directory are always served or copied into the build folder as-is, with no processing.
+Use this approach to include static images in your project. Images are imported with JavaScript using and import alias (`#images`). KWe recommend that local images are kept in src/ when possible so that Astro can transform, optimize and bundle them. Files in the /public directory are always served or copied into the build folder as-is, with no processing.
 
 ```astro
 <Image
-    src={import('@images/printer.jpg')}
+    src={import('#assets/images/printer.jpg')}
     alt="Placeholder alt"
     caption="Static image & Loading eager"
     loading="eager"

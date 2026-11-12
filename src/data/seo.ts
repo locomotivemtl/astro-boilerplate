@@ -1,4 +1,4 @@
-import metaImage from '@images/meta.png';
+import metaImage from '#assets/images/meta.png';
 
 export const defaultSeo: Seo = {
     title: 'Astro boilerplate',
