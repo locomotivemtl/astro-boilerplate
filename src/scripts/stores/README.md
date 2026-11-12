@@ -14,35 +14,29 @@ It uses **many atomic stores** and direct manipulation.
 
 ## Screen
 
-### $screen
+### $screen / $screenDebounce
 
-| Prop     | Type     | Description                 |
-| -------- | -------- | --------------------------- |
-| `width`  | `number` | Updated window inner width  |
-| `height` | `number` | Updated window inner height |
+| Prop     | Type     | Description                         |
+| -------- | -------- | ----------------------------------- |
+| `width`  | `number` | Updated window inner width          |
+| `height` | `number` | Updated window inner height         |
+| `dpr`    | `number` | Device pixel ratio of the window    |
+| `ratio`  | `number` | Width to height ratio of the window |
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
+import { $screen, type ScreenValues } from './stores/screen.ts';
 
-$screen.listen(({ width, height }: IScreenDebounceValues) => {
-    console.log('Screen:', { width, height });
+$screen.listen(({ width, height, dpr, ratio }: ScreenValues) => {
+    console.log('Screen:', { width, height, dpr, ratio });
 });
 ```
 
-### $screenDebounce
-
-This one use a debounce of 200ms by default
-
-| Prop     | Type     | Description                 |
-| -------- | -------- | --------------------------- |
-| `width`  | `number` | Updated window inner width  |
-| `height` | `number` | Updated window inner height |
-
 ```ts
-import { $screenDebounce, type IScreenDebounceValues } from './stores/screen';
+import { $screenDebounce, type ScreenValues } from './stores/screen.ts';
 
-$screenDebounce.listen(({ width, height }: IScreenDebounceValues) => {
-    console.log('Screen Debounce:', { width, height });
+// This one use a debounce of 200ms by default
+$screenDebounce.listen(({ width, height, dpr, ratio }: ScreenValues) => {
+    console.log('Screen Debounce:', { width, height, dpr, ratio });
 });
 ```
 
@@ -61,7 +55,7 @@ To access scroll values from the Locomotive Scroll instance.
 | `progress`  | `number` | Normalized scroll progress between 0 and 1      |
 
 ```ts
-import { $scroll, type IScrollValues } from './stores/scroll';
+import { $scroll, type IScrollValues } from './stores/scroll.ts';
 
 $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues) => {
     console.log('Scroll:', { scroll, limit, velocity, direction, progress });
@@ -80,7 +74,7 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 
 ```ts
 import { subscribeKeys } from 'nanostores';
-import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus';
+import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus.ts';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);
@@ -94,14 +88,10 @@ subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
 In the following example, we store the event listener in a variable, which returns a function capable of unbinding the event when called. This technique provides a convenient way to manage event listeners and efficiently remove them when necessary. Here's how it works:
 
 ```ts
-import { $screen, type IScreenValues } from './stores/screen';
+import { $screen, type ScreenValues } from './stores/screen.ts';
 
-export default class Example {
-    unbindScreenListener: () => void;
-
-    constructor() {
-        this.onResize = this.onResize.bind(this)
-    }
+export class Example {
+    private unbindScreenListener?: (() => void) | undefined
 
     // =============================================================================
     // Lifecycle
@@ -128,8 +118,8 @@ export default class Example {
     // =============================================================================
     // Callbacks
     // =============================================================================
-    onResize({ width, height }: IScreenDebounceValues) {
-        console.log('Screen:', { width, height });
+    private onResize = ({ width, height, dpr, ratio }: ScreenValues) => {
+        console.log('Screen:', { width, height, dpr, ratio });
     })
 }
 ```
