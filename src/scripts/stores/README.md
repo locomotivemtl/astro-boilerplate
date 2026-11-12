@@ -46,47 +46,6 @@ $screenDebounce.listen(({ width, height }: IScreenDebounceValues) => {
 });
 ```
 
-## Mouse
-
-### $mouse
-
-| Prop          | Type     | Description                                                             |
-| ------------- | -------- | ----------------------------------------------------------------------- |
-| `x`           | `number` | The x-coordinate position of the cursor on the window, in pixels.       |
-| `y`           | `number` | The y-coordinate position of the cursor on the window, in pixels.       |
-| `normalizedX` | `number` | The x-coordinate position of the cursor on the window, between 0 and 1. |
-| `normalizedY` | `number` | The y-coordinate position of the cursor on the window, between 0 and 1. |
-
-```ts
-import { $mouse, type IMouseState } from './stores/mouse';
-
-$mouse.listen(({ x, y, normalizedX, normalizedY }: IMouseState) => {
-    console.log('Mouse:', { x, y, normalizedX, normalizedY });
-});
-```
-
-### $smoothMouse
-
-This script utilizes a default lerp value of 0.8. Notably, the RAF (RequestAnimationFrame) stops when there's no mouse movement detected. If you're incorporating GSAP (GreenSock Animation Platform), it's recommended to utilize gsap.ticker instead of a custom RequestAnimationFrame implementation for optimal performance.
-
-| Prop                | Type     | Description                                                                    |
-| ------------------- | -------- | ------------------------------------------------------------------------------ |
-| `smoothX`           | `number` | The lerped x-coordinate position of the cursor on the window, in pixels.       |
-| `smoothY`           | `number` | The lerped y-coordinate position of the cursor on the window, in pixels.       |
-| `smoothNormalizedX` | `number` | The lerped x-coordinate position of the cursor on the window, between 0 and 1. |
-| `smoothNormalizedY` | `number` | The lerped y-coordinate position of the cursor on the window, between 0 and 1. |
-| `lerp`              | `number` | The lerp value (.8 by default)                                                 |
-
-```ts
-import { $smoothMouse, type ISmoothMouseState } from './stores/mouse';
-
-$smoothMouse.listen(
-    ({ smoothX, smoothY, smoothNormalizedX, smoothNormalizedY }: ISmoothMouseState) => {
-        console.log('SmoothMouse:', { smoothX, smoothY, smoothNormalizedX, smoothNormalizedY });
-    }
-);
-```
-
 ## Scroll
 
 ### $scroll
@@ -128,27 +87,6 @@ subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
 });
 ```
 
-## Local Storage
-
-[Persistent](https://github.com/nanostores/persistent) store to save data to `localStorage` and synchronize changes between browser tabs.
-
-### $locomotiveLocalStorage
-
-This is an example of a usage of persistent to save values in your localStorage with the key `locomotive`
-
-```ts
-/* Set a value to the localStorage */
-$localStorage.set([new Date().toISOString()]);
-
-/* Get a value to the localStorage */
-console.log('Local storage:', $localStorage.get());
-
-/* Listen changes */
-$localStorage.listen((values) => {
-    console.log('Local storage:', values);
-});
-```
-
 ## Example Usage
 
 ### In our component
@@ -157,15 +95,12 @@ In the following example, we store the event listener in a variable, which retur
 
 ```ts
 import { $screen, type IScreenValues } from './stores/screen';
-import { $mouse, type IMouseState } from './stores/mouse';
 
 export default class Example {
     unbindScreenListener: () => void;
-    unbindMouseListener: () => void;
 
     constructor() {
         this.onResize = this.onResize.bind(this)
-        this.onMouseChange = this.onMouseChange.bind(this)
     }
 
     // =============================================================================
@@ -184,12 +119,10 @@ export default class Example {
     // =============================================================================
     bindEvents() {
         this.unbindScreenListener = $screen.listen(this.onResize);
-        this.unbindMouseListener = $mouse.subscribe(this.onMouseChange);
     }
 
     unbindEvents() {
         this.unbindScreenListener?.();
-        this.unbindMouseListener?.();
     }
 
     // =============================================================================
@@ -197,10 +130,6 @@ export default class Example {
     // =============================================================================
     onResize({ width, height }: IScreenDebounceValues) {
         console.log('Screen:', { width, height });
-    })
-
-    onMouseChange({x, y, normalizedX, normalizedY}: IMouseState) {
-        console.log('Mouse:', { x, y, normalizedX, normalizedY });
     })
 }
 ```
