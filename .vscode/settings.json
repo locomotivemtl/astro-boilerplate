@@ -1,6 +1,24 @@
 {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "prettier.documentSelectors": ["**/*.astro", "**/*.css"],
+    "[astro]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    "js/ts.tsdk.promptToUseWorkspaceVersion": true,
     "tailwindCSS.experimental.configFile": "./src/styles/main.css",
     "files.associations": {
         "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "search.exclude": {
+        "**/dist": true,
+        "**/node_modules": true,
+        "**/.vercel": true,
+        "**/.astro": true,
+        "package-lock.json": true
     }
 }
