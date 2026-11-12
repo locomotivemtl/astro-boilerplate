@@ -66,6 +66,19 @@ All commands are run from the root of the project, from a terminal:
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
 | `npm run format`          | Format files using prettier                      |
 
+## Commit messages
+
+A `commit-msg` hook runs [commitlint] on every commit. The rules are lenient on purpose: no Conventional Commits types, only a clear subject line.
+
+| Rule                                | Level   |
+| ----------------------------------- | ------- |
+| Subject has at least 2 words        | Error   |
+| Subject is 5 to 100 characters      | Error   |
+| Subject doesn't end with a period   | Error   |
+| Blank line between subject and body | Warning |
+
+If 100 characters isn't enough, keep the subject short and explain in the body.
+
 ## Documentation
 
 - [Astro]
@@ -74,6 +87,7 @@ All commands are run from the root of the project, from a terminal:
 - [Swup]
 - [Prettier]
 - [Nanostores]
+- [commitlint]
 
 [Astro]: https://docs.astro.build/en/getting-started/
 [Tailwind CSS]: https://tailwindcss.com/docs/installation
@@ -85,3 +99,4 @@ All commands are run from the root of the project, from a terminal:
 [Prettier]: https://prettier.io/
 [Nanostores]: https://github.com/nanostores/nanostores
 [PostCSS]: https://postcss.org/
+[commitlint]: https://commitlint.js.org/
