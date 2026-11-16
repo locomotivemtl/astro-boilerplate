@@ -65,7 +65,7 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
 
         <script>
             import { $screenDebounce } from '#stores/screen.ts';
-            import { setViewportSize } from '#utils/setViewportSize.ts';
+            import { setViewportSize } from '#utils/dom/index.ts';
             $screenDebounce.subscribe(setViewportSize);
         </script>
     </body>

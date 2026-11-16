@@ -1,8 +1,7 @@
 import { computed, map } from 'nanostores';
 
 import { $screen } from '#stores/screen.ts';
-
-const $html = document.documentElement;
+import { $html } from '#utils/dom/index.ts';
 
 export type ScrollValues = {
     scroll: number;
