@@ -12,6 +12,8 @@ const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
 // The hook runs once per environment per save, regenerate only once
 let lastHotUpdateTimestamp = 0;
+// Every environment of a save reuses the verdict of the first one
+let lastHotUpdateChanged = false;
 
 /**
  * Extract breakpoints with their values from tailwind.css CSS custom properties.
@@ -22,12 +24,13 @@ export function extractBreakpoints(
     cssContent: string,
     logger: AstroIntegrationLogger,
 ): BreakpointEntry[] {
-    const declarationRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*([^;}]+?)\s*(?:[;}]|$)/g;
+    const declarationRegex = /--breakpoint-([\w-]+)\s*:\s*([^;}]+?)\s*(?:[;}]|$)/g;
     const integerPxRegex = /^(\d+)px$/;
     const breakpoints: BreakpointEntry[] = [];
+    const css = cssContent.replace(/\/\*[\s\S]*?\*\//g, '');
     let match: RegExpExecArray | null;
 
-    while ((match = declarationRegex.exec(cssContent)) !== null) {
+    while ((match = declarationRegex.exec(css)) !== null) {
         const name = match[1];
         const rawValue = match[2].trim();
         const pxMatch = rawValue.match(integerPxRegex);
@@ -75,28 +78,37 @@ export const BREAKPOINT_NAMES = Object.freeze([${names}]);
 }
 
 /**
- * Read CSS and extract breakpoints, generate type declaration file
+ * Read the CSS file and extract its breakpoints, or null when the file can't be read.
  */
-function readAndGenerateTypes(
+function readBreakpoints(
     cssPath: string,
-    rootDir: string,
     logger: AstroIntegrationLogger,
 ): BreakpointEntry[] | null {
     try {
         const cssContent = fs.readFileSync(cssPath, 'utf-8');
         const breakpoints = extractBreakpoints(cssContent, logger);
 
-        breakpointToType(breakpoints, rootDir);
-        logger.info(
-            `Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`,
-        );
+        if (breakpoints.length === 0) {
+            logger.error(
+                `No integer-px --breakpoint-* declarations found in ${cssPath} (rem is not supported yet).`,
+            );
+        }
 
         return breakpoints;
     } catch (err) {
         const message = err instanceof Error ? err.message : String(err);
-        logger.warn(`Failed to read or generate breakpoints from ${cssPath}: ${message}`);
+        logger.warn(`Failed to read breakpoints from ${cssPath}: ${message}`);
         return null;
     }
+}
+
+function writeTypes(
+    breakpoints: BreakpointEntry[],
+    rootDir: string,
+    logger: AstroIntegrationLogger,
+): void {
+    breakpointToType(breakpoints, rootDir);
+    logger.info(`Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`);
 }
 
 /**
@@ -122,7 +134,8 @@ export default function breakpointsHelperAstroIntegration(
                 logger = setupLogger;
 
                 // Generate types and extract breakpoints
-                breakpoints = readAndGenerateTypes(cssPath, rootDir, logger) ?? [];
+                breakpoints = readBreakpoints(cssPath, logger) ?? [];
+                writeTypes(breakpoints, rootDir, logger);
 
                 // Add minimal Vite plugin for virtual module resolution
                 updateConfig({
@@ -149,12 +162,21 @@ export default function breakpointsHelperAstroIntegration(
                                     if (timestamp !== lastHotUpdateTimestamp) {
                                         lastHotUpdateTimestamp = timestamp;
 
-                                        const next = readAndGenerateTypes(cssPath, rootDir, logger);
                                         // A transient read failure (editor atomic save) must not wipe good values
-                                        if (!next) {
-                                            return;
+                                        const next = readBreakpoints(cssPath, logger);
+                                        lastHotUpdateChanged =
+                                            next !== null &&
+                                            JSON.stringify(next) !== JSON.stringify(breakpoints);
+
+                                        if (next && lastHotUpdateChanged) {
+                                            breakpoints = next;
+                                            writeTypes(breakpoints, rootDir, logger);
                                         }
-                                        breakpoints = next;
+                                    }
+
+                                    // Style-only saves keep CSS HMR
+                                    if (!lastHotUpdateChanged) {
+                                        return;
                                     }
 
                                     const mod = this.environment.moduleGraph.getModuleById(

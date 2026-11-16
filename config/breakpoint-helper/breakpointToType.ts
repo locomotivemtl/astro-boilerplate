@@ -13,9 +13,10 @@ export function breakpointToType(
     breakpoints: BreakpointEntry[],
     rootDir: string = process.cwd(),
 ): string {
-    const documentedUnion = breakpoints
-        .map((bp) => `\n        '${bp.name}' /** ${bp.value}px */ `)
-        .join('|');
+    const documentedUnion =
+        breakpoints.length === 0
+            ? ' never'
+            : breakpoints.map((bp) => `\n        '${bp.name}' /** ${bp.value}px */ `).join('|');
 
     const typeString = `/**
  * Auto-generated types for virtual:breakpoints module
@@ -31,6 +32,11 @@ declare module 'virtual:breakpoints' {
 `;
 
     const filePath = path.join(rootDir, 'types', 'generated', 'breakpoints.d.ts');
+
+    // An identical rewrite still makes the TS server reload the file
+    if (fs.existsSync(filePath) && fs.readFileSync(filePath, 'utf-8') === typeString) {
+        return typeString;
+    }
 
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, typeString);
