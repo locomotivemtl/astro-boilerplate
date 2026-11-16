@@ -9,6 +9,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 import postcssUtopia from 'postcss-utopia';
 import { loadEnv } from 'vite';
 
+import defineAstroIntegration from './config/define/defineAstroIntegration.ts';
+
 /* Get server allowed hosts from .env */
 const ENVS = loadEnv(process.env.NODE_ENV as string, process.cwd(), '');
 const SERVER_ALLOWED_HOSTS = (ENVS?.SERVER_ALLOWED_HOSTS || '').split(',') || [];
@@ -45,6 +47,7 @@ export default defineConfig({
         },
     },
     integrations: [
+        defineAstroIntegration(),
         icon({
             iconDir: './src/assets/svgs',
         }),
