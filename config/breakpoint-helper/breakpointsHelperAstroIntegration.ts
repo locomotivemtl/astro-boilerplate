@@ -6,7 +6,7 @@ import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
 
 import { breakpointToType, type BreakpointEntry } from './breakpointToType.ts';
 
-const BREAKPOINTS_ENTRY_PATH = 'src/styles/tailwind.css';
+const BREAKPOINTS_ENTRY_PATH = 'src/styles/breakpoints.css';
 const VIRTUAL_MODULE_ID = 'virtual:breakpoints';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
@@ -16,7 +16,7 @@ let lastHotUpdateTimestamp = 0;
 let lastHotUpdateChanged = false;
 
 /**
- * Extract breakpoints with their values from tailwind.css CSS custom properties.
+ * Extract breakpoints with their values from the breakpoints stylesheet's CSS custom properties.
  * Warns on `--breakpoint-*` declarations that are not integer-px (e.g. `1rem`,`1.5px`)
  * since the runtime relies on integer-px values.
  */
@@ -65,7 +65,7 @@ function generateVirtualModule(breakpoints: BreakpointEntry[]): string {
     const names = breakpoints.map((bp) => `'${bp.name}'`).join(', ');
 
     return `/**
- * Auto-generated breakpoint values from tailwind.css
+ * Auto-generated breakpoint values from breakpoints.css
  * This is a virtual module - import from 'virtual:breakpoints'
  */
 

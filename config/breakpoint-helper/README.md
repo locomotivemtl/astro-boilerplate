@@ -17,13 +17,13 @@ export default defineConfig({
 
 The integration takes one optional positional argument, not an options object: `breakpointsHelperAstroIntegration('path/to/entry.css')`.
 
-| Argument           | Type     | Default                   |
-| ------------------ | -------- | ------------------------- |
-| `breakpointsEntry` | `string` | `src/styles/tailwind.css` |
+| Argument           | Type     | Default                      |
+| ------------------ | -------- | ---------------------------- |
+| `breakpointsEntry` | `string` | `src/styles/breakpoints.css` |
 
 ## Source format
 
-Declare breakpoints as `--breakpoint-<name>: <value>px` in the CSS entry (root or `@theme`):
+Declare breakpoints as `--breakpoint-<name>: <value>px` in `src/styles/breakpoints.css` (root or `@theme`). `tailwind.css` imports it, so Tailwind's responsive variants use the same values:
 
 ```css
 @theme static {
