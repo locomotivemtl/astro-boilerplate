@@ -12,7 +12,7 @@
 - [Tailwind CSS] for a sane and scalable CSS architecture.
 - [Locomotive Scroll] for smooth scrolling with parallax effects.
 - [Swup] for versatile and extensible page transitions.
-- [Prettier] for a formatted and easy to maintain codebase.
+- [Oxlint] and [Oxfmt] for a linted, formatted and easy to maintain codebase.
 - [Nanostores] as state manager.
 
 ## Getting started
@@ -64,7 +64,11 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-| `npm run format`          | Format files using prettier                      |
+| `npm run check`           | Type check, lint and check formatting            |
+| `npm run lint`            | Lint files using Oxlint                          |
+| `npm run lint:fix`        | Lint files and apply safe fixes                  |
+| `npm run format`          | Format files using Oxfmt                         |
+| `npm run format:check`    | Check formatting without writing                 |
 
 ## Commit messages
 
@@ -85,7 +89,8 @@ If 100 characters isn't enough, keep the subject short and explain in the body.
 - [Locomotive Scroll]
 - [Tailwind CSS]
 - [Swup]
-- [Prettier]
+- [Oxlint]
+- [Oxfmt]
 - [Nanostores]
 - [commitlint]
 
@@ -96,7 +101,8 @@ If 100 characters isn't enough, keep the subject short and explain in the body.
 [Node]: https://nodejs.org/
 [NPM]: https://npmjs.com/
 [NVM]: https://github.com/nvm-sh/nvm
-[Prettier]: https://prettier.io/
+[Oxlint]: https://oxc.rs/docs/guide/usage/linter.html
+[Oxfmt]: https://oxc.rs/docs/guide/usage/formatter.html
 [Nanostores]: https://github.com/nanostores/nanostores
 [PostCSS]: https://postcss.org/
 [commitlint]: https://commitlint.js.org/

@@ -1,6 +1,6 @@
 type VisitType = {
-    fragmentVisit: any;
+    fragmentVisit?: unknown;
     to: {
-        html: string;
+        html?: string;
     };
 };

@@ -1,6 +1,22 @@
 {
+    "js/ts.tsdk.path": "node_modules/typescript/lib",
+    "js/ts.tsdk.promptToUseWorkspaceVersion": true,
     "tailwindCSS.experimental.configFile": "./src/styles/main.css",
     "files.associations": {
         "*.css": "tailwindcss"
+    },
+    "editor.quickSuggestions": {
+        "strings": "on"
+    },
+    "search.exclude": {
+        "package-lock.json": true
+    },
+    "editor.defaultFormatter": "oxc.oxc-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.oxc": "always"
+    },
+    "[astro]": {
+        "editor.defaultFormatter": "oxc.oxc-vscode"
     }
 }

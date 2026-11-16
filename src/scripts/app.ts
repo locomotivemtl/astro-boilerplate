@@ -1,5 +1,5 @@
-import { Transitions } from '@scripts/classes/Transitions';
-import { Scroll } from '@scripts/classes/Scroll';
+import { Scroll } from '#classes/Scroll.ts';
+import { Transitions } from '#classes/Transitions.ts';
 
 // Initialize the Transitions class
 const transitions = new Transitions();
@@ -8,14 +8,14 @@ transitions.init();
 // Initialize the Scroll class
 Scroll.init();
 
-if (import.meta.env.MODE === 'development') {
+if (!__IS_PROD__) {
     // Dynamically import the grid-helper only in development mode
     import('@locomotivemtl/grid-helper')
         .then(({ default: GridHelper }) => {
             new GridHelper({
                 columns: 'var(--grid-columns)',
                 gutterWidth: `var(--spacing-gutter)`,
-                marginWidth: `var(--spacing-gutter)`
+                marginWidth: `var(--spacing-gutter)`,
             });
         })
         .catch((error) => {
