@@ -9,6 +9,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 import postcssUtopia from 'postcss-utopia';
 import { loadEnv } from 'vite';
 
+import breakpointsHelperAstroIntegration from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
 import defineAstroIntegration from './config/define/defineAstroIntegration.ts';
 
 /* Get server allowed hosts from .env */
@@ -47,6 +48,7 @@ export default defineConfig({
         },
     },
     integrations: [
+        breakpointsHelperAstroIntegration(),
         defineAstroIntegration(),
         icon({
             iconDir: './src/assets/svgs',
