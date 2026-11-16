@@ -4,14 +4,12 @@ import { fileURLToPath } from 'node:url';
 
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
 
+import { writeGeneratedTypes } from '../utils/writeGeneratedTypes.ts';
 import { breakpointToType, type BreakpointEntry } from './breakpointToType.ts';
 
 const BREAKPOINTS_ENTRY_PATH = 'src/styles/breakpoints.css';
 const VIRTUAL_MODULE_ID = 'virtual:breakpoints';
 const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
-
-// The hook runs once per environment per save, regenerate only once
-let lastHotUpdateTimestamp = 0;
 
 /**
  * Extract breakpoints with their values from the breakpoints stylesheet's CSS custom properties.
@@ -51,7 +49,7 @@ export function extractBreakpoints(
 
         breakpoints.push({ name, value });
     }
-    // Sort by value ascending
+
     return breakpoints.toSorted((a, b) => a.value - b.value);
 }
 
@@ -105,8 +103,13 @@ function writeTypes(
     rootDir: string,
     logger: AstroIntegrationLogger,
 ): void {
-    breakpointToType(breakpoints, rootDir);
-    logger.info(`Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`);
+    const file = writeGeneratedTypes(
+        rootDir,
+        'breakpoints.d.ts',
+        'types for the `virtual:breakpoints` module',
+        breakpointToType(breakpoints),
+    );
+    logger.info(`Generated ${file} (${breakpoints.length} breakpoints)`);
 }
 
 /**
@@ -115,27 +118,27 @@ function writeTypes(
  * - Provides virtual:breakpoints module for runtime access to breakpoint values
  * - Re-reads the stylesheet when it changes in dev
  */
-export default function breakpointsHelperAstroIntegration(
+export default function breakpointHelperAstroIntegration(
     breakpointsEntry: string = BREAKPOINTS_ENTRY_PATH,
 ): AstroIntegration {
     let breakpoints: BreakpointEntry[] = [];
     let rootDir: string;
     let cssPath: string;
     let logger: AstroIntegrationLogger;
+    // The hook runs once per environment per save, regenerate only once
+    let lastHotUpdateTimestamp = 0;
 
     return {
-        name: 'breakpoints-helper',
+        name: 'breakpoint-helper',
         hooks: {
             'astro:config:setup': ({ config, updateConfig, logger: setupLogger }) => {
                 rootDir = fileURLToPath(config.root);
                 cssPath = path.join(rootDir, breakpointsEntry);
                 logger = setupLogger;
 
-                // Generate types and extract breakpoints
                 breakpoints = readBreakpoints(cssPath, logger) ?? [];
                 writeTypes(breakpoints, rootDir, logger);
 
-                // Add minimal Vite plugin for virtual module resolution
                 updateConfig({
                     vite: {
                         plugins: [

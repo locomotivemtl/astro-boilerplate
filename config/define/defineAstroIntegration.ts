@@ -1,5 +1,8 @@
+import { fileURLToPath } from 'node:url';
+
 import type { AstroIntegration } from 'astro';
 
+import { writeGeneratedTypes } from '../utils/writeGeneratedTypes.ts';
 import { defineToType } from './defineToType.ts';
 
 export type Define = Record<string, unknown>;
@@ -27,11 +30,17 @@ function getTimestamp(): string {
     return `${date}T${time}`;
 }
 
+/**
+ * Astro integration that fills Vite's `define` option with compile-time constants.
+ * - Provides `__IS_PROD__` and `__TIMESTAMP__`, merged with any constants passed in
+ * - Generates types/generated/define.d.ts on dev server start and build
+ */
 export default function defineAstroIntegration(define: Define = {}): AstroIntegration {
     return {
-        name: 'define-astro-integration',
+        name: 'define',
         hooks: {
-            'astro:config:setup': ({ command, updateConfig, logger }) => {
+            'astro:config:setup': ({ command, config, updateConfig, logger }) => {
+                const rootDir = fileURLToPath(config.root);
                 // `NODE_ENV=development astro build` still produces a debug build
                 const isProd = command === 'build' && process.env.NODE_ENV !== 'development';
                 const mergedDefine: Define = {
@@ -39,9 +48,14 @@ export default function defineAstroIntegration(define: Define = {}): AstroIntegr
                     __TIMESTAMP__: JSON.stringify(getTimestamp()),
                     ...define,
                 };
-                defineToType(mergedDefine);
 
-                logger.info('Generated types/generated/define.d.ts');
+                const file = writeGeneratedTypes(
+                    rootDir,
+                    'define.d.ts',
+                    "types for Vite's `define` option",
+                    defineToType(mergedDefine),
+                );
+                logger.info(`Generated ${file} (${Object.keys(mergedDefine).length} constants)`);
 
                 updateConfig({
                     vite: {

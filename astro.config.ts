@@ -10,7 +10,7 @@ import tailwindcss from '@tailwindcss/vite';
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
 
-import breakpointsHelper from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
+import breakpointsHelper from './config/breakpoint-helper/breakpointHelperAstroIntegration.ts';
 import define from './config/define/defineAstroIntegration.ts';
 
 /* Get server allowed hosts from .env */

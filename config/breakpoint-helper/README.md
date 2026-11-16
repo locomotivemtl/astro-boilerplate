@@ -6,16 +6,16 @@ Astro integration exposing Tailwind's `--breakpoint-*` CSS variables at runtime 
 
 ```ts
 // astro.config.ts
-import breakpointsHelperAstroIntegration from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
+import breakpointHelperAstroIntegration from './config/breakpoint-helper/breakpointHelperAstroIntegration.ts';
 
 export default defineConfig({
-    integrations: [breakpointsHelperAstroIntegration()],
+    integrations: [breakpointHelperAstroIntegration()],
 });
 ```
 
 **Argument**
 
-The integration takes one optional positional argument, not an options object: `breakpointsHelperAstroIntegration('path/to/entry.css')`.
+The integration takes one optional positional argument, not an options object: `breakpointHelperAstroIntegration('path/to/entry.css')`.
 
 | Argument           | Type     | Default                      |
 | ------------------ | -------- | ---------------------------- |
@@ -37,7 +37,7 @@ Declare breakpoints as `--breakpoint-<name>: <value>px` in `src/styles/breakpoin
 }
 ```
 
-Values must be integer px for now (`700px`, not `43.75rem`);
+Values must be integer px for now (`700px`, not `43.75rem`).
 
 > In dev, saving the CSS entry reloads the page and regenerates the types. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
 
@@ -67,4 +67,4 @@ isMobile.subscribe((v) => console.log(v));
 
 ## Generated Types
 
-Types are written to `types/generated/breakpoints.d.ts` on setup. Each name in the `BreakpointName` union is documented with its `px` value for autocomplete.
+Types are written to `types/generated/breakpoints.d.ts` on setup, under the shared header from `config/utils/writeGeneratedTypes.ts`. The file is only rewritten when its content changes. Each name in the `BreakpointName` union is documented with its `px` value for autocomplete.

@@ -18,7 +18,7 @@ export default defineConfig({
 | Constant        | Type      | Value                                              |
 | --------------- | --------- | -------------------------------------------------- |
 | `__IS_PROD__`   | `boolean` | `true` for `astro build`                           |
-| `__TIMESTAMP__` | `string`  | Build time as `YYYY-MM-DD_HH:MM:SS`, in local time |
+| `__TIMESTAMP__` | `string`  | Build time as `YYYY-MM-DDTHH:MM:SS`, in local time |
 
 Production means `astro build`. `astro dev`, `astro check` and `astro sync` are not production. Set `NODE_ENV=development` on `astro build` to get a debug build with dev-only code kept.
 
@@ -50,7 +50,7 @@ if (!__IS_PROD__) {
 
 ## TypeScript
 
-Global declarations are auto-generated into `types/generated/define.d.ts` on integration setup. Types are inferred per value. Booleans and numbers use `typeof`. Strings are raw JS expressions, so a JSON literal gets its own type (`JSON.stringify('x')` gives `string`, `'42'` gives `number`) and anything else (`'window.foo'`) is typed `any`:
+Global declarations are auto-generated into `types/generated/define.d.ts` under the project root (`config.root`) on integration setup, with the shared header from `config/utils/writeGeneratedTypes.ts`. The file is only rewritten when its content changes. Types are inferred per value. Booleans and numbers use `typeof`. Strings are raw JS expressions, so a JSON literal gets its own type (`JSON.stringify('x')` gives `string`, `'42'` gives `number`) and anything else (`'window.foo'`) is typed `any`:
 
 ```ts
 declare const __IS_PROD__: boolean;
