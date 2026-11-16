@@ -8,7 +8,7 @@ public/assets/images/sprite.svg
 .vercel/
 .netlify/
 .astro/
-types/gen-*
+types/generated/
 
 # virtual module bridge files (Node.js bridge)
 .virtual/

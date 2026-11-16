@@ -24,7 +24,10 @@ export class Accordion extends HTMLElement {
     // Lifecycle
     // =============================================================================
     connectedCallback() {
-        if (!this.validateElements()) return;
+        if (!this.validateElements()) {
+            return;
+        }
+
         this.bindEvents();
     }
 
@@ -50,7 +53,9 @@ export class Accordion extends HTMLElement {
     private onClick = (e: Event): void => {
         e.preventDefault();
 
-        if (this.isAnimating()) return;
+        if (this.isAnimating()) {
+            return;
+        }
 
         if (this.isOpen()) {
             this.close();
@@ -76,8 +81,8 @@ export class Accordion extends HTMLElement {
             { height: [startHeight, endHeight] },
             {
                 duration: Accordion.DURATION,
-                easing: Accordion.EASING
-            }
+                easing: Accordion.EASING,
+            },
         );
     }
 
@@ -85,7 +90,18 @@ export class Accordion extends HTMLElement {
         this.style.overflow = 'hidden';
     }
 
+    private removeAnimationListeners(animation: Animation): void {
+        animation.removeEventListener('finish', this.onCloseFinish);
+        animation.removeEventListener('finish', this.onExpandFinish);
+        animation.removeEventListener('cancel', this.onCloseCancel);
+        animation.removeEventListener('cancel', this.onExpandCancel);
+    }
+
     private cleanupAfterAnimation(): void {
+        if (this.animation) {
+            this.removeAnimationListeners(this.animation);
+        }
+
         this.animation = null;
         this.isClosing = false;
         this.isExpanding = false;
@@ -105,8 +121,8 @@ export class Accordion extends HTMLElement {
         const endHeight = `${this.$summary!.offsetHeight}px`;
 
         this.animation = this.createAnimation(startHeight, endHeight);
-        this.animation.onfinish = () => this.onAnimationFinish(false);
-        this.animation.oncancel = () => this.onCloseCancel();
+        this.animation.addEventListener('finish', this.onCloseFinish);
+        this.animation.addEventListener('cancel', this.onCloseCancel);
 
         this.dispatchCustomEvent('accordion-closed');
     }
@@ -123,8 +139,8 @@ export class Accordion extends HTMLElement {
             const endHeight = `${this.$summary!.offsetHeight + this.$content!.offsetHeight}px`;
 
             this.animation = this.createAnimation(startHeight, endHeight);
-            this.animation.onfinish = () => this.onAnimationFinish(true);
-            this.animation.oncancel = () => this.onExpandCancel();
+            this.animation.addEventListener('finish', this.onExpandFinish);
+            this.animation.addEventListener('cancel', this.onExpandCancel);
         });
 
         this.dispatchCustomEvent('accordion-opened');
@@ -143,29 +159,39 @@ export class Accordion extends HTMLElement {
         this.cleanupAfterAnimation();
 
         this.dispatchCustomEvent('accordion-animation-finished', {
-            isOpen: open
+            isOpen: open,
         });
     }
 
-    private onCloseCancel(): void {
+    private onCloseFinish = (): void => {
+        this.onAnimationFinish(false);
+    };
+
+    private onExpandFinish = (): void => {
+        this.onAnimationFinish(true);
+    };
+
+    private onCloseCancel = (e: Event): void => {
+        this.removeAnimationListeners(e.target as Animation);
         this.isClosing = false;
         this.$details!.classList.add(Accordion.CLASS_ACTIVE);
-    }
+    };
 
-    private onExpandCancel(): void {
+    private onExpandCancel = (e: Event): void => {
+        this.removeAnimationListeners(e.target as Animation);
         this.isExpanding = false;
         this.$details!.classList.remove(Accordion.CLASS_ACTIVE);
-    }
+    };
 
     // =============================================================================
     // Utilities
     // =============================================================================
-    private dispatchCustomEvent(eventName: string, detail: any = {}): void {
+    private dispatchCustomEvent(eventName: string, detail: Record<string, unknown> = {}): void {
         this.dispatchEvent(
             new CustomEvent(eventName, {
                 detail: { target: this, ...detail },
-                bubbles: true
-            })
+                bubbles: true,
+            }),
         );
     }
 
@@ -181,7 +207,9 @@ export class Accordion extends HTMLElement {
     // Public API
     // =============================================================================
     public toggle(): void {
-        if (this.isAnimating()) return;
+        if (this.isAnimating()) {
+            return;
+        }
 
         if (this.isOpen()) {
             this.close();

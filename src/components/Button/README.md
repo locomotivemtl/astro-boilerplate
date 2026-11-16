@@ -51,7 +51,7 @@ The following example demonstrates a technique to provide users with advanced wa
 
 ## To Do
 
--   [ ] Integrate icons
--   [ ] Separate logic of "external" VS "\_blank".
+- [ ] Integrate icons
+- [ ] Separate logic of "external" VS "\_blank".
 
 [WCAG 2.2 G201]: https://www.w3.org/WAI/WCAG22/Techniques/general/G201

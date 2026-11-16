@@ -11,7 +11,7 @@ const root = document.documentElement;
 const breakpointSm = getComputedStyle(root).getPropertyValue('--breakpoint-sm').trim();
 
 export const $breakpoints = map<Breakpoints>({
-    sm: breakpointSm
+    sm: breakpointSm,
 });
 
 // =============================================================================
@@ -26,7 +26,7 @@ export type MediaQueries = {
 export const $mediaQueries = map<MediaQueries>({
     reducedMotion: `(prefers-reduced-motion: reduce)`,
     touchScreen: `(hover: none)`,
-    touchOrSmall: `(max-width: ${$breakpoints.value?.sm}), (hover: none)`
+    touchOrSmall: `(max-width: ${$breakpoints.value?.sm}), (hover: none)`,
 });
 
 // =============================================================================
@@ -41,7 +41,7 @@ type MediaStatusQueries = {
 const mediaStatusQueries = {
     reducedMotion: matchMedia($mediaQueries.value?.reducedMotion || ''),
     touchScreen: matchMedia($mediaQueries.value?.touchScreen || ''),
-    touchOrSmall: matchMedia($mediaQueries.value?.touchOrSmall || '')
+    touchOrSmall: matchMedia($mediaQueries.value?.touchOrSmall || ''),
 };
 
 export type MediaStatus = {
@@ -53,7 +53,7 @@ export type MediaStatus = {
 export const $mediaStatus = map<MediaStatus>({
     isReducedMotion: mediaStatusQueries.reducedMotion.matches,
     isTouchScreen: mediaStatusQueries.touchScreen.matches,
-    isTouchOrSmall: mediaStatusQueries.touchOrSmall.matches
+    isTouchOrSmall: mediaStatusQueries.touchOrSmall.matches,
 });
 
 for (const mediaQuery in mediaStatusQueries) {
@@ -61,7 +61,7 @@ for (const mediaQuery in mediaStatusQueries) {
         const property = `is${mediaQuery.charAt(0).toUpperCase() + mediaQuery.slice(1)}`;
         $mediaStatus.setKey(
             property as keyof MediaStatus,
-            mediaStatusQueries[mediaQuery as keyof MediaStatusQueries].matches
+            mediaStatusQueries[mediaQuery as keyof MediaStatusQueries].matches,
         );
     });
 }

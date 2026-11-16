@@ -1,4 +1,7 @@
-import { map } from 'nanostores';
+import { computed, map } from 'nanostores';
+
+import { $screen } from '#stores/screen.ts';
+import { $html } from '#utils/dom/index.ts';
 
 export type ScrollValues = {
     scroll: number;
@@ -13,5 +16,17 @@ export const $scroll = map<ScrollValues>({
     limit: 0,
     velocity: 0,
     direction: 0,
-    progress: 0
+    progress: 0,
+});
+
+export const $hasPassedFold = computed($scroll, (store) => {
+    return store.scroll > $screen.get().height;
+});
+
+export const hasScrolledBeyond = (value: number) => {
+    return $scroll.get().scroll > value;
+};
+
+$hasPassedFold.subscribe((hasPassedFold) => {
+    $html.classList.toggle('has-passed-fold', hasPassedFold);
 });
