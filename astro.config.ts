@@ -1,16 +1,14 @@
-import { defineConfig, fontProviders } from 'astro/config';
-import { loadEnv } from 'vite';
-
 /* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
-import postcssUtopia from 'postcss-utopia';
-
 /* Vite plugins */
 import tailwindcss from '@tailwindcss/vite';
-
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
+import { defineConfig, fontProviders } from 'astro/config';
+import postcssUtopia from 'postcss-utopia';
+import { loadEnv } from 'vite';
+
 import defineAstroIntegration from './config/define/defineAstroIntegration.ts';
 
 /* Get server allowed hosts from .env */
@@ -27,9 +25,9 @@ export default defineConfig({
                     // Run after @tailwindcss/vite, which transforms CSS in a `pre` hook
                     postcssUtopia(),
                     postcssHelpersFunctions(),
-                    postcssTailwindShortcuts()
-                ]
-            }
+                    postcssTailwindShortcuts(),
+                ],
+            },
         },
         plugins: [tailwindcss()],
         optimizeDeps: {
@@ -41,28 +39,28 @@ export default defineConfig({
                 '@swup/preload-plugin',
                 '@swup/scripts-plugin',
                 'swup',
-                'nanostores'
-            ]
+                'nanostores',
+            ],
         },
         build: {
-            chunkSizeWarningLimit: 1000
-        }
+            chunkSizeWarningLimit: 1000,
+        },
     },
     integrations: [
         defineAstroIntegration(),
         icon({
-            iconDir: './src/assets/svgs'
-        })
+            iconDir: './src/assets/svgs',
+        }),
     ],
     server: {
-        allowedHosts: SERVER_ALLOWED_HOSTS
+        allowedHosts: SERVER_ALLOWED_HOSTS,
     },
     devToolbar: {
-        enabled: false
+        enabled: false,
     },
     image: {
         domains: ['locomotive.ca'],
-        remotePatterns: [{ protocol: 'https' }]
+        remotePatterns: [{ protocol: 'https' }],
     },
     fonts: [
         {
@@ -76,16 +74,16 @@ export default defineConfig({
                         weight: 400,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2']
+                        src: ['./src/assets/fonts/SourceSans3-Regular.woff2'],
                     },
                     {
                         weight: 700,
                         style: 'normal',
                         display: 'swap',
-                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2']
-                    }
-                ]
-            }
-        }
-    ]
+                        src: ['./src/assets/fonts/SourceSans3-Bold.woff2'],
+                    },
+                ],
+            },
+        },
+    ],
 });

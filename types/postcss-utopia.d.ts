@@ -1,4 +1,4 @@
 declare module 'postcss-utopia' {
-    const postcssUtopia: any;
+    const postcssUtopia: import('postcss').PluginCreator<unknown>;
     export default postcssUtopia;
 }
