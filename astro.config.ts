@@ -1,13 +1,14 @@
+import { defineConfig, fontProviders } from 'astro/config';
+import { loadEnv } from 'vite';
+
 /* PostCSS plugins */
 import postcssHelpersFunctions from '@locomotivemtl/postcss-helpers-functions';
 import postcssTailwindShortcuts from '@locomotivemtl/postcss-tailwind-shortcuts';
+import postcssUtopia from 'postcss-utopia';
 /* Vite plugins */
 import tailwindcss from '@tailwindcss/vite';
 /* Astro Integrations / Plugins */
 import icon from 'astro-icon';
-import { defineConfig, fontProviders } from 'astro/config';
-import postcssUtopia from 'postcss-utopia';
-import { loadEnv } from 'vite';
 
 import breakpointsHelper from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
 import define from './config/define/defineAstroIntegration.ts';

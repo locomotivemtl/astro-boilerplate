@@ -8,12 +8,13 @@ export default defineConfig({
     astro: { compressHTML: 'html' },
     sortTailwindcss: { stylesheet: './src/styles/tailwind.css' },
     sortImports: {
+        /* A comment between imports starts a new block; imports never move across it */
+        partitionByComment: true,
         /* Layout first: it imports the global CSS, so the cascade breaks if a component loads before it */
         customGroups: [
             {
                 groupName: 'layouts',
-                /* TODO: Remove '@layouts/**' once PR #58 moves the aliases to '#' */
-                elementNamePattern: ['#layouts/**', '@layouts/**'],
+                elementNamePattern: ['#layouts/**'],
             },
         ],
         groups: [
