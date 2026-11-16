@@ -4,7 +4,6 @@ import SwupScriptsPlugin from '@swup/scripts-plugin';
 import Swup from 'swup';
 
 import { Scroll } from '#classes/Scroll.ts';
-import { toDash } from '#utils/string.ts';
 
 export class Transitions {
     static readonly READY_CLASS = 'is-ready';
@@ -77,7 +76,7 @@ export class Transitions {
         };
 
         Object.entries(newDataset).forEach(([key, val]) => {
-            document.documentElement.setAttribute(`data-${toDash(key)}`, val ?? '');
+            document.documentElement.dataset[key] = val ?? '';
         });
     }
 
