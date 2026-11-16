@@ -9,7 +9,7 @@ Astro integration exposing Tailwind's `--breakpoint-*` CSS variables at runtime 
 import breakpointsHelperAstroIntegration from './config/breakpoint-helper/breakpointsHelperAstroIntegration';
 
 export default defineConfig({
-    integrations: [breakpointsHelperAstroIntegration()]
+    integrations: [breakpointsHelperAstroIntegration()],
 });
 ```
 
@@ -46,7 +46,7 @@ import {
     $currentBreakpoint,
     BREAKPOINT_NAMES,
     breakpoints,
-    isBelowBreakpoint
+    isBelowBreakpoint,
 } from '@scripts/stores/breakpoints.ts';
 import { computed } from 'nanostores';
 

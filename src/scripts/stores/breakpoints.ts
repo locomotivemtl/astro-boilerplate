@@ -8,11 +8,15 @@ const isBrowser = typeof window !== 'undefined';
 
 function getCurrentBreakpoint(): BreakpointName {
     let current: BreakpointName = BREAKPOINT_NAMES[0];
-    if (!isBrowser) return current;
+    if (!isBrowser) {
+        return current;
+    }
 
     const width = window.innerWidth;
     for (const name of BREAKPOINT_NAMES) {
-        if (width >= breakpoints[name]) current = name;
+        if (width >= breakpoints[name]) {
+            current = name;
+        }
     }
 
     return current;
@@ -60,4 +64,6 @@ export function getBreakpointValue(name: BreakpointName): number {
     return breakpoints[name];
 }
 
-if (isBrowser) setupMediaQueryListeners();
+if (isBrowser) {
+    setupMediaQueryListeners();
+}

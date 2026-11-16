@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { AstroIntegration, AstroIntegrationLogger } from 'astro';
+
 import { breakpointToType, type BreakpointEntry } from './breakpointToType.ts';
 
 const BREAKPOINTS_ENTRY_PATH = 'src/styles/tailwind.css';
@@ -19,7 +20,7 @@ let lastHotUpdateTimestamp = 0;
  */
 export function extractBreakpoints(
     cssContent: string,
-    logger: AstroIntegrationLogger
+    logger: AstroIntegrationLogger,
 ): BreakpointEntry[] {
     const declarationRegex = /--breakpoint-([a-zA-Z0-9-]+)\s*:\s*([^;}]+?)\s*(?:[;}]|$)/g;
     const integerPxRegex = /^(\d+)px$/;
@@ -33,7 +34,7 @@ export function extractBreakpoints(
 
         if (!pxMatch) {
             logger.warn(
-                `Skipping --breakpoint-${name}: "${rawValue}" — expected an integer-px value (e.g. "700px").`
+                `Skipping --breakpoint-${name}: "${rawValue}" — expected an integer-px value (e.g. "700px").`,
             );
             continue;
         }
@@ -50,7 +51,7 @@ export function extractBreakpoints(
         breakpoints.push({ name, value });
     }
     // Sort by value ascending
-    return breakpoints.sort((a, b) => a.value - b.value);
+    return breakpoints.toSorted((a, b) => a.value - b.value);
 }
 
 /**
@@ -79,7 +80,7 @@ export const BREAKPOINT_NAMES = Object.freeze([${names}]);
 function readAndGenerateTypes(
     cssPath: string,
     rootDir: string,
-    logger: AstroIntegrationLogger
+    logger: AstroIntegrationLogger,
 ): BreakpointEntry[] | null {
     try {
         const cssContent = fs.readFileSync(cssPath, 'utf-8');
@@ -87,7 +88,7 @@ function readAndGenerateTypes(
 
         breakpointToType(breakpoints, rootDir);
         logger.info(
-            `Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`
+            `Generated types/generated/breakpoints.d.ts (${breakpoints.length} breakpoints)`,
         );
 
         return breakpoints;
@@ -105,7 +106,7 @@ function readAndGenerateTypes(
  * - Re-reads the stylesheet when it changes in dev
  */
 export default function breakpointsHelperAstroIntegration(
-    breakpointsEntry: string = BREAKPOINTS_ENTRY_PATH
+    breakpointsEntry: string = BREAKPOINTS_ENTRY_PATH,
 ): AstroIntegration {
     let breakpoints: BreakpointEntry[] = [];
     let rootDir: string;
@@ -141,30 +142,36 @@ export default function breakpointsHelperAstroIntegration(
                                 },
                                 // Keeps script values in sync with the stylesheet in dev
                                 hotUpdate({ file, timestamp }) {
-                                    if (path.normalize(file) !== path.normalize(cssPath)) return;
+                                    if (path.normalize(file) !== path.normalize(cssPath)) {
+                                        return;
+                                    }
 
                                     if (timestamp !== lastHotUpdateTimestamp) {
                                         lastHotUpdateTimestamp = timestamp;
 
                                         const next = readAndGenerateTypes(cssPath, rootDir, logger);
                                         // A transient read failure (editor atomic save) must not wipe good values
-                                        if (!next) return;
+                                        if (!next) {
+                                            return;
+                                        }
                                         breakpoints = next;
                                     }
 
                                     const mod = this.environment.moduleGraph.getModuleById(
-                                        RESOLVED_VIRTUAL_MODULE_ID
+                                        RESOLVED_VIRTUAL_MODULE_ID,
                                     );
-                                    if (!mod) return;
+                                    if (!mod) {
+                                        return;
+                                    }
 
                                     this.environment.moduleGraph.invalidateModule(mod);
                                     this.environment.hot.send({ type: 'full-reload' });
-                                }
-                            }
-                        ]
-                    }
+                                },
+                            },
+                        ],
+                    },
                 });
-            }
-        }
+            },
+        },
     };
 }

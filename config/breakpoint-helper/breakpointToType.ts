@@ -11,7 +11,7 @@ export type BreakpointEntry = { name: string; value: number };
  */
 export function breakpointToType(
     breakpoints: BreakpointEntry[],
-    rootDir: string = process.cwd()
+    rootDir: string = process.cwd(),
 ): string {
     const documentedUnion = breakpoints
         .map((bp) => `\n        '${bp.name}' /** ${bp.value}px */ `)
