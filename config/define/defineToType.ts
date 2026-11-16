@@ -5,7 +5,9 @@ import type { Define } from './defineAstroIntegration.ts';
 
 /** Strings are raw JS expressions, so only a JSON literal gets a precise type. */
 function getType(value: unknown): string {
-    if (typeof value !== 'string') return typeof value;
+    if (typeof value !== 'string') {
+        return typeof value;
+    }
 
     try {
         return typeof JSON.parse(value);

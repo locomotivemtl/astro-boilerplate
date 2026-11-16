@@ -2,20 +2,23 @@ import type { AstroIntegration } from 'astro';
 
 import { defineToType } from './defineToType.ts';
 
-export type Define = Record<string, any>;
+export type Define = Record<string, unknown>;
 
 function stringifyDefine(define: Define): Record<string, string> {
     return Object.fromEntries(
         Object.entries(define).map(([key, value]) => [
             key,
-            typeof value === 'string' ? value : JSON.stringify(value)
-        ])
+            typeof value === 'string' ? value : JSON.stringify(value),
+        ]),
     );
+}
+
+function pad(value: number): string {
+    return String(value).padStart(2, '0');
 }
 
 /** Build time as `YYYY-MM-DDTHH:MM:SS`, in local time. */
 function getTimestamp(): string {
-    const pad = (value: number) => String(value).padStart(2, '0');
     const now = new Date();
 
     const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
@@ -34,7 +37,7 @@ export default function defineAstroIntegration(define: Define = {}): AstroIntegr
                 const mergedDefine: Define = {
                     __IS_PROD__: isProd,
                     __TIMESTAMP__: JSON.stringify(getTimestamp()),
-                    ...define
+                    ...define,
                 };
                 defineToType(mergedDefine);
 
@@ -42,10 +45,10 @@ export default function defineAstroIntegration(define: Define = {}): AstroIntegr
 
                 updateConfig({
                     vite: {
-                        define: stringifyDefine(mergedDefine)
-                    }
+                        define: stringifyDefine(mergedDefine),
+                    },
                 });
-            }
-        }
+            },
+        },
     };
 }

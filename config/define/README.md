@@ -9,7 +9,7 @@ Astro integration that fills Vite's `define` option with compile-time global con
 import defineAstroIntegration from './config/define/defineAstroIntegration.ts';
 
 export default defineConfig({
-    integrations: [defineAstroIntegration()]
+    integrations: [defineAstroIntegration()],
 });
 ```
 
@@ -33,7 +33,7 @@ defineAstroIntegration({
     __API_URL__: JSON.stringify('https://api.example.com'),
     __FEATURE_FLAG__: true,
     __MAX_ITEMS__: 12,
-    __GLOBAL_REF__: 'window.foo'
+    __GLOBAL_REF__: 'window.foo',
 });
 ```
 
