@@ -39,7 +39,7 @@ Declare breakpoints as `--breakpoint-<name>: <value>px` in `src/styles/breakpoin
 
 Values must be integer px for now (`700px`, not `43.75rem`); rem support is planned.
 
-> In dev, saving the CSS entry reloads the page only when a breakpoint changed, and regenerates the types then. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
+> In dev, saving the CSS entry reloads the page and regenerates the types. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
 
 ## Usage
 

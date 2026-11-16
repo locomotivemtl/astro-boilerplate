@@ -12,8 +12,6 @@ const RESOLVED_VIRTUAL_MODULE_ID = '\0' + VIRTUAL_MODULE_ID;
 
 // The hook runs once per environment per save, regenerate only once
 let lastHotUpdateTimestamp = 0;
-// Every environment of a save reuses the verdict of the first one
-let lastHotUpdateChanged = false;
 
 /**
  * Extract breakpoints with their values from the breakpoints stylesheet's CSS custom properties.
@@ -164,19 +162,10 @@ export default function breakpointsHelperAstroIntegration(
 
                                         // A transient read failure (editor atomic save) must not wipe good values
                                         const next = readBreakpoints(cssPath, logger);
-                                        lastHotUpdateChanged =
-                                            next !== null &&
-                                            JSON.stringify(next) !== JSON.stringify(breakpoints);
-
-                                        if (next && lastHotUpdateChanged) {
+                                        if (next) {
                                             breakpoints = next;
                                             writeTypes(breakpoints, rootDir, logger);
                                         }
-                                    }
-
-                                    // Style-only saves keep CSS HMR
-                                    if (!lastHotUpdateChanged) {
-                                        return;
                                     }
 
                                     const mod = this.environment.moduleGraph.getModuleById(
