@@ -17,6 +17,8 @@ export default defineConfig({
         'eslint/no-debugger': 'warn',
         'import/no-cycle': 'error',
         'import/no-duplicates': 'error',
+        /* Stylesheets are imported for their side effect */
+        'import/no-unassigned-import': ['warn', { allow: ['**/*.css'] }],
         /* Bans `@ts-ignore`; `@ts-expect-error` needs a description */
         'typescript/ban-ts-comment': 'error',
         'typescript/no-explicit-any': 'warn',
