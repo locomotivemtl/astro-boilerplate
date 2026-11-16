@@ -37,21 +37,24 @@ Declare breakpoints as `--breakpoint-<name>: <value>px` in the CSS entry (root o
 }
 ```
 
-> In dev, saving the CSS entry regenerates the types and full-reloads the page. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
+Values must be integer px for now (`700px`, not `43.75rem`); rem support is planned.
+
+> In dev, saving the CSS entry reloads the page only when a breakpoint changed, and regenerates the types then. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
 
 ## Usage
 
 ```ts
+import { computed } from 'nanostores';
+
 import {
     $currentBreakpoint,
     BREAKPOINT_NAMES,
     breakpoints,
     isBelowBreakpoint,
-} from '@scripts/stores/breakpoints.ts';
-import { computed } from 'nanostores';
+} from '#stores/breakpoints.ts';
 
 console.log(breakpoints.md); // 1000
-console.log(BREAKPOINT_NAMES); // ['2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl']
+console.log(BREAKPOINT_NAMES); // ['2xs', 'xs', 'sm', …]
 console.log(isBelowBreakpoint('sm')); // Boolean true/false
 console.log($currentBreakpoint.get()); // current BreakpointName
 
@@ -60,10 +63,15 @@ const isMobile = computed($currentBreakpoint, () => isBelowBreakpoint('sm'));
 isMobile.subscribe((v) => console.log(v));
 ```
 
+`$currentBreakpoint` is the largest breakpoint the viewport has reached, or the smallest one when below all of them. `isAboveBreakpoint`, `isBelowBreakpoint` and `isBetweenBreakpoints` take a breakpoint name or a width in px, and test the viewport the same way CSS `min-width` does. At a 900px window, `isAboveBreakpoint('md')` is `false`, `isAboveBreakpoint(750)` is `true` and `isBetweenBreakpoints('sm', 950)` is `true`.
+
 ## Generated Types
 
 Types are written to `types/generated/breakpoints.d.ts` on setup. Each name in the `BreakpointName` union is documented with its `px` value for autocomplete.
 
 ## Check
 
-Run `node config/breakpoint-helper/test.mjs` to check the CSS parsing (Node strips the types natively).
+Node strips the types natively, so both checks run as plain scripts:
+
+- `node config/breakpoint-helper/test.mjs` checks the CSS parsing, the generated types and the dev reload.
+- `node config/breakpoint-helper/test-store.mjs` checks the runtime store against a mocked `window`.
