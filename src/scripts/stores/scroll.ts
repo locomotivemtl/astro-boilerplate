@@ -1,5 +1,6 @@
-import { $screen } from '@scripts/stores/screen.ts';
 import { computed, map } from 'nanostores';
+
+import { $screen } from '#stores/screen.ts';
 
 const $html = document.documentElement;
 

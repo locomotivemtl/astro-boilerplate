@@ -24,7 +24,7 @@ It uses **many atomic stores** and direct manipulation.
 | `ratio`  | `number` | Width to height ratio of the window |
 
 ```ts
-import { $screen, type ScreenValues } from './stores/screen.ts';
+import { $screen, type ScreenValues } from '#stores/screen.ts';
 
 $screen.listen(({ width, height, dpr, ratio }: ScreenValues) => {
     console.log('Screen:', { width, height, dpr, ratio });
@@ -32,7 +32,7 @@ $screen.listen(({ width, height, dpr, ratio }: ScreenValues) => {
 ```
 
 ```ts
-import { $screenDebounce, type ScreenValues } from './stores/screen.ts';
+import { $screenDebounce, type ScreenValues } from '#stores/screen.ts';
 
 // This one use a debounce of 200ms by default
 $screenDebounce.listen(({ width, height, dpr, ratio }: ScreenValues) => {
@@ -55,7 +55,7 @@ To access scroll values from the Locomotive Scroll instance.
 | `progress`  | `number` | Normalized scroll progress between 0 and 1      |
 
 ```ts
-import { $scroll, type IScrollValues } from './stores/scroll.ts';
+import { $scroll, type IScrollValues } from '#stores/scroll.ts';
 
 $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues) => {
     console.log('Scroll:', { scroll, limit, velocity, direction, progress });
@@ -73,8 +73,9 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 | `isTouchOrSmall`  | `boolean` | Returns `true` if the condition match with the touchscreen or small screen mediaquery, otherwise returns `false` |
 
 ```ts
-import { $mediaStatus, type MediaStatus } from '@scripts/stores/deviceStatus.ts';
 import { subscribeKeys } from 'nanostores';
+
+import { $mediaStatus, type MediaStatus } from '#stores/deviceStatus.ts';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
     console.log(value);

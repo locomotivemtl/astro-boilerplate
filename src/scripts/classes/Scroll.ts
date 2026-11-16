@@ -1,8 +1,9 @@
-import { $scroll } from '@scripts/stores/scroll';
 import LocomotiveScroll, {
     type lenisTargetScrollTo,
     type ILenisScrollToOptions,
 } from 'locomotive-scroll';
+
+import { $scroll } from '#stores/scroll.ts';
 
 export class Scroll {
     static locomotiveScroll: LocomotiveScroll;

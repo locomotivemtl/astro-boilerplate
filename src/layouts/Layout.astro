@@ -1,11 +1,11 @@
 ---
-import '@styles/main.css';
-import { defaultSeo } from '@data/seo';
-import { getSeo } from '@scripts/utils/seo';
+import '#styles/main.css';
 import { SEO } from 'astro-seo';
 import { Font, type CssVariable } from 'astro:assets';
 
-import Icon from '../components/Icon/Icon.astro';
+import Icon from '#components/Icon/Icon.astro';
+import { defaultSeo } from '#data/seo.ts';
+import { getSeo } from '#utils/seo.ts';
 
 interface Props {
     title: string;
@@ -64,13 +64,9 @@ const FONTS: CssVariable[] = ['--custom-font-sans'];
         </footer>
 
         <script>
-            import { $screenDebounce } from '@scripts/stores/screen';
-            import { setViewportSize } from '@scripts/utils/setViewportSize';
-
-            // Set viewport size
-            $screenDebounce.subscribe(() => {
-                setViewportSize();
-            });
+            import { $screenDebounce } from '#stores/screen.ts';
+            import { setViewportSize } from '#utils/setViewportSize.ts';
+            $screenDebounce.subscribe(setViewportSize);
         </script>
     </body>
 </html>
