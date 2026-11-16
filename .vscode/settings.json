@@ -9,10 +9,6 @@
         "strings": "on"
     },
     "search.exclude": {
-        "**/dist": true,
-        "**/node_modules": true,
-        "**/.vercel": true,
-        "**/.astro": true,
         "package-lock.json": true
     },
     "editor.defaultFormatter": "oxc.oxc-vscode",
