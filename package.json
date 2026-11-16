@@ -34,7 +34,6 @@
         "astro": "^7.4.11",
         "astro-icon": "^1.2.0",
         "astro-seo": "^0.8.4",
-        "lint-staged": "^16.2.6",
         "locomotive-scroll": "^5.0.1",
         "nanostores": "^1.0.1",
         "swup": "^4.8.1",
@@ -48,6 +47,7 @@
         "@locomotivemtl/postcss-tailwind-shortcuts": "^2.0.1",
         "@tailwindcss/vite": "^4.2.4",
         "@types/node": "^26.6.6",
+        "lint-staged": "^16.2.6",
         "oxfmt": "^0.78.0",
         "oxlint": "^1.93.0",
         "postcss-utopia": "^1.1.0",
@@ -55,7 +55,7 @@
     },
     "simple-git-hooks": {
         "commit-msg": "npx --no -- commitlint --edit \"$1\"",
-        "pre-commit": "npm run format"
+        "pre-commit": "npx lint-staged"
     },
     "lint-staged": {
         "*": [
