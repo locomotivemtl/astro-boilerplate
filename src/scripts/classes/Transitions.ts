@@ -10,21 +10,7 @@ export class Transitions {
     static readonly READY_CLASS = 'is-ready';
     static readonly TRANSITION_CLASS = 'is-transitioning';
 
-    private onVisitStartBind: any;
-    private beforeContentReplaceBind: any;
-    private onContentReplaceBind: any;
-    private onAnimationInEndBind: any;
-    private onAnimationOutStartBind: any;
-
     private swup: Swup | undefined;
-
-    constructor() {
-        this.onVisitStartBind = this.onVisitStart.bind(this);
-        this.beforeContentReplaceBind = this.beforeContentReplace.bind(this);
-        this.onContentReplaceBind = this.onContentReplace.bind(this);
-        this.onAnimationInEndBind = this.onAnimationInEnd.bind(this);
-        this.onAnimationOutStartBind = this.onAnimationOutStart.bind(this);
-    }
 
     // =============================================================================
     // Lifecycle
@@ -60,19 +46,17 @@ export class Transitions {
             ],
         });
 
-        this.swup.hooks.on('visit:start', this.onVisitStartBind);
-        this.swup.hooks.before('content:replace', this.beforeContentReplaceBind);
-        this.swup.hooks.on('content:replace', this.onContentReplaceBind);
-        this.swup.hooks.on('animation:in:end', this.onAnimationInEndBind);
-        this.swup.hooks.on('animation:out:start', this.onAnimationOutStartBind);
+        this.swup.hooks.on('visit:start', this.onVisitStart);
+        this.swup.hooks.before('content:replace', this.beforeContentReplace);
+        this.swup.hooks.on('content:replace', this.onContentReplace);
+        this.swup.hooks.on('animation:in:end', this.onAnimationInEnd);
+        this.swup.hooks.on('animation:out:start', this.onAnimationOutStart);
 
         this.swup.hooks.on('fetch:error', (e) => {
             console.log('fetch:error:', e);
-            debugger;
         });
         this.swup.hooks.on('fetch:timeout', (e) => {
             console.log('fetch:timeout:', e);
-            debugger;
         });
     }
 
@@ -82,7 +66,7 @@ export class Transitions {
      * @param visit: VisitType
      */
     updateDocumentAttributes(visit: VisitType) {
-        if (visit.fragmentVisit) {
+        if (visit.fragmentVisit || !visit.to.html) {
             return;
         }
 
@@ -108,10 +92,10 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#visit-start
      * @param visit: VisitType
      */
-    onVisitStart() {
+    onVisitStart = (): void => {
         document.documentElement.classList.add(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.remove(Transitions.READY_CLASS);
-    }
+    };
 
     /**
      * On before:content:replace
@@ -120,9 +104,9 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#content-replace
      * @param visit: VisitType
      */
-    beforeContentReplace() {
+    beforeContentReplace = (): void => {
         Scroll?.destroy();
-    }
+    };
 
     /**
      * On content:replace
@@ -131,10 +115,10 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#content-replace
      * @param visit: VisitType
      */
-    onContentReplace(visit: VisitType) {
+    onContentReplace = (visit: VisitType): void => {
         Scroll?.init();
         this.updateDocumentAttributes(visit);
-    }
+    };
 
     /**
      * On animation:out:start
@@ -143,7 +127,7 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#animation-out-start
      * @param visit: VisitType
      */
-    onAnimationOutStart() {}
+    onAnimationOutStart = (): void => {};
 
     /**
      * On animation:in:end
@@ -152,8 +136,8 @@ export class Transitions {
      * @see https://swup.js.org/hooks/#animation-in-end
      * @param visit: VisitType
      */
-    onAnimationInEnd() {
+    onAnimationInEnd = (): void => {
         document.documentElement.classList.remove(Transitions.TRANSITION_CLASS);
         document.documentElement.classList.add(Transitions.READY_CLASS);
-    }
+    };
 }

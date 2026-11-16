@@ -1,11 +1,12 @@
 ---
 import BlockImage from './BlockImage.astro';
+import type { Props as BlockImageProps } from './BlockImage.astro';
 import BlockText from './BlockText.astro';
+import type { Props as BlockTextProps } from './BlockText.astro';
 
-export interface Block {
-    type: string;
-    data: any;
-}
+export type Block =
+    | { type: 'text'; data: BlockTextProps }
+    | { type: 'image'; data: BlockImageProps };
 
 export interface Props {
     blocks: Block[];

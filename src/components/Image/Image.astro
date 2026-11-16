@@ -2,7 +2,7 @@
 import { Image as AstroImage } from 'astro:assets';
 
 export interface Props {
-    src: any;
+    src: ImageMetadata | string | Promise<{ default: ImageMetadata }>;
     alt?: string;
     width?: number;
     height?: number;
@@ -35,6 +35,17 @@ const CaptionTag = tag === 'figure' ? 'figcaption' : 'div';
 // Set the onload event based on the loading prop
 const onLoad = `this.closest('.c-image')?.classList?.add('is-loaded');`;
 
+const imageProps = {
+    class: 'c-image_img',
+    widths,
+    sizes,
+    width,
+    height,
+    alt,
+    loading,
+    onload: onLoad,
+};
+
 const classes = [
     'c-image',
     width && height && '-cover',
@@ -45,18 +56,11 @@ const classes = [
 
 {src && <Tag class:list={classes} style={{ '--width': width, '--height': height }} {...rest}>
     <div class="c-image_inner">
-        <AstroImage
-            class="c-image_img"
-            inferSize={typeof src === 'string'}
-            src={src}
-            widths={widths}
-            sizes={sizes}
-            width={width}
-            height={height}
-            alt={alt}
-            loading={loading}
-            onload={onLoad}
-        />
+        {typeof src === 'string' ? (
+            <AstroImage {...imageProps} inferSize src={src} />
+        ) : (
+            <AstroImage {...imageProps} src={src} />
+        )}
     </div>
 
     {caption && <CaptionTag class="c-image_caption">{caption}</CaptionTag>}

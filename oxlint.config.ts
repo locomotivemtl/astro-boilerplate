@@ -12,6 +12,7 @@ export default defineConfig({
         reportUnusedDisableDirectives: 'error',
     },
     rules: {
+        'no-new': 'allow',
         /* Braces around every if/else/loop body, one-liners included */
         'eslint/curly': ['error', 'all'],
         'eslint/no-debugger': 'warn',
@@ -23,6 +24,7 @@ export default defineConfig({
         'typescript/ban-ts-comment': 'error',
         'typescript/no-explicit-any': 'warn',
         'typescript/no-unused-expressions': 'error',
+        'typescript/no-extraneous-class': 'off',
         /* Disable comments must name the rules they turn off */
         'unicorn/no-abusive-eslint-disable': 'error',
     },

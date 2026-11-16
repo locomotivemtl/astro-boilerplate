@@ -28,10 +28,11 @@ const updateScreen = () => {
     $screen.set({ width, height, dpr, ratio });
 };
 
-const updateScreenDebounce: any = () => {
+const updateScreenDebounce = () => {
     const { width, height, dpr, ratio } = $screen.get();
     $screenDebounce.set({ width, height, dpr, ratio });
 };
+const updateScreenDebounced = debounce(updateScreenDebounce, 200);
 
 window.addEventListener('resize', updateScreen);
-window.addEventListener('resize', debounce(updateScreenDebounce, 200));
+window.addEventListener('resize', () => updateScreenDebounced());
