@@ -13,7 +13,7 @@ function stringifyDefine(define: Define): Record<string, string> {
     );
 }
 
-/** Build time as `YYYY-MM-DD_HH:MM:SS`, in local time. */
+/** Build time as `YYYY-MM-DDTHH:MM:SS`, in local time. */
 function getTimestamp(): string {
     const pad = (value: number) => String(value).padStart(2, '0');
     const now = new Date();
@@ -21,7 +21,7 @@ function getTimestamp(): string {
     const date = `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}`;
     const time = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
 
-    return `${date}_${time}`;
+    return `${date}T${time}`;
 }
 
 export default function defineAstroIntegration(define: Define = {}): AstroIntegration {
