@@ -1,5 +1,7 @@
 import { map } from 'nanostores';
 
+import { getBreakpointValue } from './breakpoints';
+
 /** Whether each media query the site reacts to currently matches. */
 export type MediaQueries = {
     canHover: boolean;
@@ -9,17 +11,12 @@ export type MediaQueries = {
     isPortrait: boolean;
 };
 
-// TODO: read `sm` from the breakpoints store once https://github.com/locomotivemtl/astro-boilerplate/pull/60 lands
-const breakpointSm =
-    getComputedStyle(document.documentElement).getPropertyValue('--breakpoint-sm').trim() ||
-    '700px';
-
 // Keyed by the store property each query drives, so a query and its value cannot drift apart.
 const mediaQueryLists: Record<keyof MediaQueries, MediaQueryList> = {
     canHover: matchMedia('(hover: hover)'),
     isReducedMotion: matchMedia('(prefers-reduced-motion: reduce)'),
     isTouchScreen: matchMedia('(hover: none)'),
-    isTouchOrSmall: matchMedia(`(max-width: ${breakpointSm}), (hover: none)`),
+    isTouchOrSmall: matchMedia(`(width < ${getBreakpointValue('sm')}px), (hover: none)`),
     isPortrait: matchMedia('(orientation: portrait)'),
 };
 
