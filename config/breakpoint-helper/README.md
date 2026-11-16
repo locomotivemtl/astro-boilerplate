@@ -37,7 +37,7 @@ Declare breakpoints as `--breakpoint-<name>: <value>px` in `src/styles/breakpoin
 }
 ```
 
-Values must be integer px for now (`700px`, not `43.75rem`); rem support is planned.
+Values must be integer px for now (`700px`, not `43.75rem`);
 
 > In dev, saving the CSS entry reloads the page and regenerates the types. Renaming or adding a breakpoint may need the editor's TS server to pick up the new `.d.ts`.
 
@@ -68,10 +68,3 @@ isMobile.subscribe((v) => console.log(v));
 ## Generated Types
 
 Types are written to `types/generated/breakpoints.d.ts` on setup. Each name in the `BreakpointName` union is documented with its `px` value for autocomplete.
-
-## Check
-
-Node strips the types natively, so both checks run as plain scripts:
-
-- `node config/breakpoint-helper/test.mjs` checks the CSS parsing, the generated types and the dev reload.
-- `node config/breakpoint-helper/test-store.mjs` checks the runtime store against a mocked `window`.
