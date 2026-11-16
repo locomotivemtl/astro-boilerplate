@@ -8,10 +8,6 @@ interface Props {
 const { body } = Astro.props;
 ---
 
-{
-    body && (
-        <Wysiwyg class="mx-auto my-fluid-xl max-w-3xl">
-            <Fragment set:html={body} />
-        </Wysiwyg>
-    )
-}
+{body && <Wysiwyg class="mx-auto my-fluid-xl max-w-3xl">
+    <Fragment set:html={body} />
+</Wysiwyg>}

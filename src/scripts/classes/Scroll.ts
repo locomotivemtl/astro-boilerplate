@@ -1,9 +1,9 @@
-import { $scroll } from '#stores/scroll.ts';
-
 import LocomotiveScroll, {
     type lenisTargetScrollTo,
-    type ILenisScrollToOptions
+    type ILenisScrollToOptions,
 } from 'locomotive-scroll';
+
+import { $scroll } from '#stores/scroll.ts';
 
 export class Scroll {
     static locomotiveScroll: LocomotiveScroll;
@@ -19,9 +19,9 @@ export class Scroll {
                     limit,
                     velocity,
                     direction,
-                    progress
+                    progress,
                 });
-            }
+            },
         });
     }
 

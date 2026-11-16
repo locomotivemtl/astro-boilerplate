@@ -50,14 +50,14 @@ export class Transitions {
             plugins: [
                 new SwupHeadPlugin({
                     persistAssets: true,
-                    awaitAssets: true
+                    awaitAssets: true,
                 }),
                 new SwupPreloadPlugin({
                     preloadHoveredLinks: true,
-                    preloadInitialPage: !import.meta.env.DEV
+                    preloadInitialPage: !import.meta.env.DEV,
                 }),
-                new SwupScriptsPlugin()
-            ]
+                new SwupScriptsPlugin(),
+            ],
         });
 
         this.swup.hooks.on('visit:start', this.onVisitStartBind);
@@ -82,12 +82,14 @@ export class Transitions {
      * @param visit: VisitType
      */
     updateDocumentAttributes(visit: VisitType) {
-        if (visit.fragmentVisit) return;
+        if (visit.fragmentVisit) {
+            return;
+        }
 
         const parser = new DOMParser();
         const nextDOM = parser.parseFromString(visit.to.html, 'text/html');
         const newDataset = {
-            ...nextDOM.querySelector('html')?.dataset
+            ...nextDOM.querySelector('html')?.dataset,
         };
 
         Object.entries(newDataset).forEach(([key, val]) => {

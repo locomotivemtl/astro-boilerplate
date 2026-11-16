@@ -24,7 +24,9 @@ export class Accordion extends HTMLElement {
     // Lifecycle
     // =============================================================================
     connectedCallback() {
-        if (!this.validateElements()) return;
+        if (!this.validateElements()) {
+            return;
+        }
         this.bindEvents();
     }
 
@@ -50,7 +52,9 @@ export class Accordion extends HTMLElement {
     private onClick = (e: Event): void => {
         e.preventDefault();
 
-        if (this.isAnimating()) return;
+        if (this.isAnimating()) {
+            return;
+        }
 
         if (this.isOpen()) {
             this.close();
@@ -76,8 +80,8 @@ export class Accordion extends HTMLElement {
             { height: [startHeight, endHeight] },
             {
                 duration: Accordion.DURATION,
-                easing: Accordion.EASING
-            }
+                easing: Accordion.EASING,
+            },
         );
     }
 
@@ -143,7 +147,7 @@ export class Accordion extends HTMLElement {
         this.cleanupAfterAnimation();
 
         this.dispatchCustomEvent('accordion-animation-finished', {
-            isOpen: open
+            isOpen: open,
         });
     }
 
@@ -164,8 +168,8 @@ export class Accordion extends HTMLElement {
         this.dispatchEvent(
             new CustomEvent(eventName, {
                 detail: { target: this, ...detail },
-                bubbles: true
-            })
+                bubbles: true,
+            }),
         );
     }
 
@@ -181,7 +185,9 @@ export class Accordion extends HTMLElement {
     // Public API
     // =============================================================================
     public toggle(): void {
-        if (this.isAnimating()) return;
+        if (this.isAnimating()) {
+            return;
+        }
 
         if (this.isOpen()) {
             this.close();

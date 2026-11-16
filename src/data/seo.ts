@@ -7,21 +7,21 @@ export const defaultSeo: Seo = {
         facebook: {
             title: 'Astro boilerplate',
             image: {
-                url: metaImage.src
+                url: metaImage.src,
             },
-            description: 'Boilerplate for Astro'
+            description: 'Boilerplate for Astro',
         },
         twitter: {
             creator: '@LocomotiveMTL',
             title: 'Astro boilerplate',
             image: {
-                url: metaImage.src
+                url: metaImage.src,
             },
-            description: 'Boilerplate for Astro'
-        }
+            description: 'Boilerplate for Astro',
+        },
     },
     advanced: {
         robots: ['noindex', 'nofollow'],
-        canonical: 'https://locomotive.ca'
-    }
+        canonical: 'https://locomotive.ca',
+    },
 };

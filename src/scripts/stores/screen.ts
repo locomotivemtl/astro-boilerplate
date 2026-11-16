@@ -12,11 +12,11 @@ export const $screen = map<ScreenValues>({
     width: window.innerWidth,
     height: window.innerHeight,
     dpr: window.devicePixelRatio,
-    ratio: window.innerWidth / window.innerHeight
+    ratio: window.innerWidth / window.innerHeight,
 });
 
 export const $screenDebounce = map<ScreenValues>({
-    ...$screen.get()
+    ...$screen.get(),
 });
 
 const updateScreen = () => {

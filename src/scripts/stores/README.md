@@ -74,6 +74,7 @@ $scroll.listen(({ scroll, limit, velocity, direction, progress }: IScrollValues)
 
 ```ts
 import { subscribeKeys } from 'nanostores';
+
 import { $mediaStatus, type MediaStatus } from '#stores/deviceStatus.ts';
 
 subscribeKeys($mediaStatus, ['isTouchOrSmall'], (value: MediaStatus) => {
