@@ -1,5 +1,6 @@
 import { map } from 'nanostores';
-import { debounce } from 'ts-debounce';
+
+import { debounce } from '#utils/async/index.ts';
 
 export type ScreenValues = {
     width: number;
@@ -32,7 +33,6 @@ const updateScreenDebounce = () => {
     const { width, height, dpr, ratio } = $screen.get();
     $screenDebounce.set({ width, height, dpr, ratio });
 };
-const updateScreenDebounced = debounce(updateScreenDebounce, 200);
 
 window.addEventListener('resize', updateScreen);
-window.addEventListener('resize', () => updateScreenDebounced());
+window.addEventListener('resize', debounce(updateScreenDebounce, 200));
