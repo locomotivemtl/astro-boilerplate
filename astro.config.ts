@@ -46,6 +46,22 @@ export default defineConfig({
         },
         build: {
             chunkSizeWarningLimit: 1000,
+            rolldownOptions: {
+                output: {
+                    codeSplitting: {
+                        groups: [
+                            {
+                                name: 'swup',
+                                test: /node_modules[\\/](swup|@swup|delegate-it|path-to-regexp)[\\/]/,
+                            },
+                            {
+                                name: 'scroll',
+                                test: /node_modules[\\/](locomotive-scroll|lenis)[\\/]/,
+                            },
+                        ],
+                    },
+                },
+            },
         },
     },
     integrations: [
